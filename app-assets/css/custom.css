@@ -1,0 +1,166 @@
+body .custom {
+  font-family: "Kanit", sans-serif;
+}
+
+.listcontent-area.custom{
+    padding-left: 50px;
+}
+
+.item-box.custom{
+    margin:0px;
+}
+
+.form-wizard .nav-wizard.custom {
+    box-shadow: none !important;
+    margin-bottom: 2rem;
+}
+
+h4.custom {
+  font-weight: 400;
+}
+
+.table.custom thead th {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2f4cdd!important;
+    text-transform: none;
+}
+
+.form-wizard.custom .toolbar-bottom .btn.btn-primary {
+    background-color: #2781d5;
+    border-color: #2781d5;
+    padding: 0.75rem 1.125rem;
+}
+.form-wizard.custom .toolbar-bottom .btn.btn-success {
+    background-color: #2bc155;
+    border-color: #2bc155;
+    padding: 0.75rem 1.125rem;
+    margin-left:2rem;
+}
+
+.col-form-label.custom{
+    font-size: 1.3rem;
+}
+
+.select-custom select{
+    font-size: 1.2rem!important;
+}
+
+.form-custom input[type="text"]{
+    font-size: 1.2rem!important;
+}
+
+.search-input{
+	margin-right: -40px;
+}
+
+.label-custom{
+	padding-top: 1rem;
+}
+
+
+.search-area.custom input[type="text"]{
+    font-size: 1.2rem!important;
+}
+
+.badge.custom{
+    padding: 4px 6px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.sub-title.custom{
+    font-size: 3rem;
+}
+
+.media.custom{
+    position: relative;
+}
+
+.media-body.custom{
+    position: absolute;
+    left: 55%;
+    top: 10%;
+    min-height: 100px;
+    max-height: 180px;
+    overflow: hidden;
+    height: 185px;
+}
+
+.content-wrapper.custom{
+    padding-top: 0rem;
+}
+
+.items-table.custom tbody tr th, .items-table tbody tr td {
+    border: 0;
+    padding: 11px 8px;
+}
+.text-black.custom{
+    font-size: 1.3rem;
+}
+
+.media-footer.custom{
+    margin-top: 14rem;
+    font-size: 3rem;
+}
+
+.widget-stat.card.custom{
+    padding-left:0px;
+    padding-right:0px;
+}
+
+.form-check.custom{
+    margin: 21px 0px;
+}
+
+.form-check-label.custom{
+    font-size: 1.2rem;
+    padding-left: 2rem;
+    padding-top:4px;
+}
+
+.form-check-input.custom{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.pl-7{
+	padding-left: 7px;
+}
+
+.pr-7{
+	padding-right: 7px;
+}
+
+.ma-7{
+	margin: 7px;
+}
+
+.code-success {
+    word-break: break-word;
+    padding: 0.125rem 0.3125rem;
+    border-radius: 0.1875rem;
+    background: #e7faec;
+    color: #2bc155;
+}
+
+.code-info {
+    word-break: break-word;
+    padding: 0.125rem 0.3125rem;
+    border-radius: 0.1875rem;
+    background: #f0f6fc;
+    color: #2781d5;
+}
+
+.dropdown-menu.custom{
+    min-width: 20rem;
+}
+
+.badge.register-custom{
+    font-size: 0.9rem;
+    font-weight: 100;
+}
+
+textarea.custom{
+    font-size: 1.2rem!important;
+}
