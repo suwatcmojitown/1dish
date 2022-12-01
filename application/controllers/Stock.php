@@ -209,7 +209,12 @@ class Stock extends MY_Controller {
 		$temp = new stdClass(); 
 		
 		$temp->id = $_POST['uuid'];
+		$temp->note = $_POST['note'];
 		$result = $this->Stock_model->confirmImport($temp);
+		if($result==true){
+			unset($_SESSION['uuid']);
+			unset($_SESSION['document_no']);
+		}
 		//$result = true;
 		echo $result;
 	}
@@ -220,6 +225,10 @@ class Stock extends MY_Controller {
 		
 		$temp->id = $_POST['uuid'];
 		$result = $this->Stock_model->cancelImport($temp);
+		if($result==true){
+			unset($_SESSION['uuid']);
+			unset($_SESSION['document_no']);
+		}
 		//$result = true;
 		echo $result;
 	}
@@ -319,6 +328,7 @@ class Stock extends MY_Controller {
 				{
 					$data['itemList'] = $itemList->body;
 				}
+				//console($data);
 				$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
 				$this->template['content'] = $this->load->view ($this->middle = 'stock/export',$data, true);
 				$this->master_layout();
@@ -368,7 +378,12 @@ class Stock extends MY_Controller {
 		$temp = new stdClass(); 
 		
 		$temp->id = $_POST['uuid'];
+		$temp->note = $_POST['note'];
 		$result = $this->Stock_model->confirmExport($temp);
+		if($result==true){
+			unset($_SESSION['uuid']);
+			unset($_SESSION['document_no']);
+		}
 		//$result = true;
 		echo $result;
 	}
@@ -379,6 +394,10 @@ class Stock extends MY_Controller {
 		
 		$temp->id = $_POST['uuid'];
 		$result = $this->Stock_model->cancelExport($temp);
+		if($result==true){
+			unset($_SESSION['uuid']);
+			unset($_SESSION['document_no']);
+		}
 		//$result = true;
 		echo $result;
 	}

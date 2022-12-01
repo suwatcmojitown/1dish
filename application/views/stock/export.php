@@ -55,15 +55,16 @@
 
                                                         <!-- modal danger -->
                                                         <div class="modal fade modal-danger text-start" id="export_fail" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header" style="background: #f72b50;">
-                                                                    <h5 class="modal-title" id="myModalLabel120" style="color:white;">แจ้งเตือน#ไม่สามารถทำรายการได้</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    สินค้าที่ต้องการนำออก มีมากกว่าสินค้าที่เหลือในคลังสินค้า<br>
-                                                                    กรุณาตรวจสอบจำนวนและทำรายการใหม่อีกครั้ง
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header" style="background: #f72b50;">
+                                                                        <h5 class="modal-title" id="myModalLabel120" style="color:white;">แจ้งเตือน#ไม่สามารถทำรายการได้</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        สินค้าที่ต้องการนำออก มีมากกว่าสินค้าที่เหลือในคลังสินค้า<br>
+                                                                        กรุณาตรวจสอบจำนวนและทำรายการใหม่อีกครั้ง
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -122,7 +123,6 @@
     });
 
 </script>
-
                     <div class="col-8">
                         <div class="card">
                             <div class="card-header bg-info">

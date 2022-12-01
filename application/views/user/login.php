@@ -30,7 +30,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <div class="text-center mb-3">
-                                        <a href="index.html"><img src="<?php echo base_url()?>app-assets/images/logo-full.png" alt=""></a>
+                                        <a href="index.html"><img src="<?php echo base_url()?>app-assets/images/custom/logo.png" alt=""></a>
                                     </div>
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     <form action="<?php echo base_url('user/validlogin');?>" method="POST">

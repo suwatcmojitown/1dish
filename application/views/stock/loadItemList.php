@@ -67,6 +67,13 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                
+                                <div class="col-12">
+                                            <label class="text-info col-12 col-form-label col-form-label-lg label-custom">หมายเหตุ</label>
+                                            <div class="col-12">
+                                            <textarea class="form-control form-control-lg" rows="4" name="note"></textarea>
+                                            </div>
+                                </div>
                                 <div class="card-order-footer" style="margin-top: 4rem;bottom: 2rem;">
                                     <div class="amount-details pl-7 pr-7">
                                         <h5 class="d-flex text-right mb-3">

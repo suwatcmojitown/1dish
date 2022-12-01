@@ -68,7 +68,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="<?php echo base_url()?>app-assets/images/logo.png" alt="">
+                <img class="logo-abbr" src="<?php echo base_url()?>app-assets/images/custom/logo.png" alt="">
                 <img class="logo-compact" src="<?php echo base_url()?>app-assets/images/logo-text.png" alt="">
                 <img class="brand-title" src="<?php echo base_url()?>app-assets/images/logo-text.png" alt="">
             </a>
@@ -107,7 +107,7 @@
                                     <img src="<?php echo base_url()?>app-assets/images/profile/pic1.jpg" width="20" alt=""/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./page-login.html" class="dropdown-item ai-icon">
+                                    <a href="<?php echo base_url('logout')?>" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                         <span class="ms-2">Logout </span>
                                     </a>
@@ -128,133 +128,42 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a class="ai-icon" href="javascript:void()" >
                             <i class="flaticon-381-networking"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
+                    </li>
+                    <li><a class="ai-icon" href="<?php echo base_url('product');?>" >
+                            <i class="fa fa-coffee" aria-hidden="true"></i>
+                            <span class="nav-text">Product</span>
+                        </a>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="fas fa-car-alt"></i>
+                            <span class="nav-text">Tour</span>
+                        </a>
                         <ul aria-expanded="false">
-                            <li><a href="index.html">Dashboard</a></li>
-                            <li><a href="page-analytics.html">Analytics</a></li>
-                            <li><a href="page-review.html">Review</a></li>
-                            <li><a href="page-order.html">Order</a></li>
-                            <li><a href="page-order-list.html">Order List</a></li>
-                            <li><a href="page-general-customers.html">General Customers</a></li>
+                            <li><a href="<?php echo base_url('guide');?>">Guide</a></li>
+                            <li><a href="<?php echo base_url('company');?>">Company</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-381-networking"></i>
-                            <span class="nav-text">Frontend</span>
-                            <span class="badge badge-xs badge-danger">New</span>
+                            <i class="far fa-file"></i>
+                            <span class="nav-text">Stock</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="../frontend/front-home.html">POS</a></li>
-                            <li><a href="../frontend/front-dashboard.html">Dashboard</a></li>
-                            <li><a href="../frontend/front-authentication.html">Authentication</a></li>
-                            <li><a href="../frontend/front-booking.html">Booking</a></li>
-                            <li><a href="../frontend/front-food-items.html">Food Items</a></li>
-                            <li><a href="../frontend/front-orders_status.html">Orders Status</a></li>
-                            <li><a href="../frontend/front-people.html">People</a></li>
-                            <li><a href="../frontend/front-reviews.html">Reviews</a></li>
-                            <li><a href="../frontend/front-setting.html">Setting</a></li>
-                            <li><a href="../frontend/front-support.html">Support</a></li>
-                            <li><a href="../frontend/front-terms_conditions.html">Terms & Conditions</a></li>
-                            <li><a href="../frontend/front-transactions.html">Transactions</a></li>
-                            <li><a href="../frontend/front-upload_item.html">Upload Item</a></li>
-                            <li><a href="../frontend/front-wallet.html">Wallet</a></li>
-                            <li><a href="../frontend/front-login.html">Login</a></li>
+                            <li><a href="<?php echo base_url('stock/import');?>">Import</a></li>
+                            <li><a href="<?php echo base_url('stock/export');?>">Export</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-381-television"></i>
-                            <span class="nav-text">Apps</span>
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-text">Setting</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./post-details.html">Post Details</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./email-compose.html">Compose</a></li>
-                                    <li><a href="./email-inbox.html">Inbox</a></li>
-                                    <li><a href="./email-read.html">Read</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./app-calender.html">Calendar</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./ecom-product-grid.html">Product Grid</a></li>
-                                    <li><a href="./ecom-product-list.html">Product List</a></li>
-                                    <li><a href="./ecom-product-detail.html">Product Details</a></li>
-                                    <li><a href="./ecom-product-order.html">Order</a></li>
-                                    <li><a href="./ecom-checkout.html">Checkout</a></li>
-                                    <li><a href="./ecom-invoice.html">Invoice</a></li>
-                                    <li><a href="./ecom-customers.html">Customers</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-381-internet"></i>
-                            <span class="nav-text">Bootstrap</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-card.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-grid.html">Grid</a></li>
+                            <li><a href="<?php echo base_url('admin');?>">User</a></li>
+                            <li><a href="<?php echo base_url('product-category');?>">Product Category</a></li>
 
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-381-notepad"></i>
-                            <span class="nav-text">Forms</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./form-element.html">Form Elements</a></li>
-                            <li><a href="./form-wizard.html">Wizard</a></li>
-                            <li><a href="./form-ckeditor.html">Summernote</a></li>
-                            <li><a href="form-pickers.html">Pickers</a></li>
-                            <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-381-network"></i>
-                            <span class="nav-text">Table</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                            <li><a href="table-datatable-basic.html">Datatable</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="flaticon-381-layer-1"></i>
-                            <span class="nav-text">Pages</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./page-lock-screen.html">Lock Screen</a></li>
                         </ul>
                     </li>
                 </ul>
