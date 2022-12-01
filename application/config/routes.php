@@ -67,7 +67,7 @@ product category
 user
 */
 
-$route['default_controller'] = 'pos/opengroup';
+$route['default_controller'] = 'Product/list';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
