@@ -136,7 +136,7 @@ class User extends MY_Controller
 					  'system_at'    => $result->system_at,
 					  'username' => $result->username,
 			  ));
-			redirect(base_url().'admin/create');
+			redirect(base_url());
 		}	
 		else
 		{
