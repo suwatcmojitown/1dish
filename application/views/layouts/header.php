@@ -157,8 +157,10 @@
                             <span class="nav-text">Stock</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?php echo base_url('stock/import');?>">Import</a></li>
-                            <li><a href="<?php echo base_url('stock/export');?>">Export</a></li>
+                            <li><a href="<?php echo base_url('stock/report/import');?>">Report Import</a></li>
+                            <li><a href="<?php echo base_url('stock/report/export');?>">Report Export</a></li>
+                            <li><a href="<?php echo base_url('stock/import');?>">Import Product</a></li>
+                            <li><a href="<?php echo base_url('stock/export');?>">Export Product</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

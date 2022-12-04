@@ -331,6 +331,72 @@ class Stock_model extends CI_Model {
     }
 
 
+    public function getReportImportList($status='',$keysearch='',$active_page=1,$limit)
+    {
+                $temp = array();
+                $path = '';
+
+                if($status!='') $temp['status'] = $status;
+                if($keysearch!='') $temp['search'] = urlencode($keysearch);
+                if($active_page!='') $temp['page'] = $active_page;
+                if($limit!='') $temp['limit'] = $limit;
+
+                $i = 0;
+                foreach($temp as $key => $value)
+                {
+                        if($i==0)
+                        {
+                                $path = '?'.$key.'='.$value;
+                        }
+                        else $path = $path.'&'.$key.'='.$value;
+                        $i++;
+                }
+                
+                $result = json_decode(callAPI('GET',PATH_API.'backend/requisition-in'.$path.'',''));  
+                //echo PATH_API.'backend/requisition-in'.$path.'';
+                //console($result);
+                if($result->header->res_code=='200')
+                {
+                        $object = $result;
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
+    public function getReportExportList($status='',$keysearch='',$active_page=1,$limit)
+    {
+                $temp = array();
+                $path = '';
+
+                if($status!='') $temp['status'] = $status;
+                if($keysearch!='') $temp['search'] = urlencode($keysearch);
+                if($active_page!='') $temp['page'] = $active_page;
+                if($limit!='') $temp['limit'] = $limit;
+
+                $i = 0;
+                foreach($temp as $key => $value)
+                {
+                        if($i==0)
+                        {
+                                $path = '?'.$key.'='.$value;
+                        }
+                        else $path = $path.'&'.$key.'='.$value;
+                        $i++;
+                }
+                
+                $result = json_decode(callAPI('GET',PATH_API.'backend/requisition-out'.$path.'',''));  
+                //echo PATH_API.'backend/requisition-in'.$path.'';
+                //console($result);
+                if($result->header->res_code=='200')
+                {
+                        $object = $result;
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
 
 
     

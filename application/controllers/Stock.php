@@ -466,6 +466,96 @@ class Stock extends MY_Controller {
 		
 		$this->load->view('stock/loadExportProductStockList',$data);
 	}
+
+	public function reportImportList($active_page = 1)
+	{
+		$data['page'] = $active_page;
+		$data['keysearch'] = '';
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		//$status,$keysearch,$active_page,$limit
+		$resultList = $this->Stock_model->getReportImportList('','',$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+
+		//console($data);
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'stock/reportImportlist',$data, true);
+		$this->master_layout();
+		
+	}
+
+	public function loadReportImportList(){
+
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		$keysearch = $_POST['keysearch'];
+		$status = $_POST['status'];
+		$active_page = $_POST['page'];
+
+		$data['page'] = $active_page;
+
+		//$status,$keysearch,$active_page,$limit
+		$resultList = $this->Stock_model->getReportImportList($status,$keysearch,$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		
+		$this->load->view('stock/loadReportImportlist',$data);
+	}
+
+	public function reportExportList($active_page = 1)
+	{
+		$data['page'] = $active_page;
+		$data['keysearch'] = '';
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		//$status,$keysearch,$active_page,$limit
+		$resultList = $this->Stock_model->getReportExportList('','',$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+
+		//console($data);
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'stock/reportExportlist',$data, true);
+		$this->master_layout();
+		
+	}
+
+	public function loadReportExportList(){
+
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		$keysearch = $_POST['keysearch'];
+		$status = $_POST['status'];
+		$active_page = $_POST['page'];
+
+		$data['page'] = $active_page;
+
+		//$status,$keysearch,$active_page,$limit
+		$resultList = $this->Stock_model->getReportExportList($status,$keysearch,$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		
+		$this->load->view('stock/loadReportExportlist',$data);
+	}
 	
 
 }

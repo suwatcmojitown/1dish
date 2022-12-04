@@ -133,6 +133,11 @@ $route['stock/import/cancel'] = 'Stock/cancelImport';
 $route['stock/loadProductStockList'] = 'Stock/loadProductStockList';
 $route['stock/loadExportProductStockList'] = 'Stock/loadExportProductStockList';
 
+$route['stock/report/import'] = 'Stock/reportImportList';
+$route['stock/report/loadImportList'] = 'Stock/loadReportImportList';
+$route['stock/report/export'] = 'Stock/reportExportList';
+$route['stock/report/loadExportList'] = 'Stock/loadReportExportList';
+
 $route['stock/preview/(:num)'] = 'Stock/preview/$1';
 
 $route['stock/export'] = 'Stock/export';
