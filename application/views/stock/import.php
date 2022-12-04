@@ -10,7 +10,6 @@
                             <div class="card-body">
                                 <div class="basic-form">
                                     <form class="row" id="addForm">
-                                        <span id="result"></span>
                                         <input type="hidden" class="form-control form-control-lg" name="requisition_in_id" value="<?php echo $uuid;?>">
                                         <div class="mb-3 col-12">
                                             <label class="text-info form-label col-form-label-lg">สินค้า</label>
@@ -171,7 +170,7 @@
                                 <div class="col-12">
                                             <label class="text-info col-12 col-form-label col-form-label-lg label-custom">หมายเหตุ</label>
                                             <div class="col-12">
-                                            <textarea class="form-control form-control-lg" rows="4" name="note"></textarea>
+                                            <textarea class="form-control form-control-lg" rows="4" name="note" id="note"></textarea>
                                             </div>
                                 </div>
 
@@ -199,6 +198,7 @@
                     </div>
 				</div>
             </div>
+            <span id="result"></span>
         </div>
 
         <!--  modal status -->
@@ -209,12 +209,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Successfully Published
-                                                            The content will be generated and publish onto the website.
+                                                            บันทึกสำเร็จ
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('import/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('import/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -227,12 +226,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Fail
-                                                            Please try again
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('import/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('import/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -241,11 +239,23 @@
 <script>
 
     function confirmImport(){
+            var data = new FormData();
+
+            uuid = '<?php echo $uuid;?>';
+            data.append('uuid', uuid);
+
+            var note = document.getElementById("note").value;
+            data.append('note', note);
+
             $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('stock/import/confirm')?>',
-                        data: 'uuid=<?php echo $uuid;?>',
+                        data: data,
+                        processData: false,
+                        contentType: false,
                         success: function(result) { 
+                            //$('#result').html(result);
+                            
                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');

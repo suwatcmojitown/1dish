@@ -69,8 +69,7 @@
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
                 <img class="logo-abbr" src="<?php echo base_url()?>app-assets/images/custom/logo.png" alt="">
-                <img class="logo-compact" src="<?php echo base_url()?>app-assets/images/logo-text.png" alt="">
-                <img class="brand-title" src="<?php echo base_url()?>app-assets/images/logo-text.png" alt="">
+                
             </a>
 
             <div class="nav-control">
@@ -92,17 +91,23 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
+                            <!--
                             <div class="input-group search-area">
                                 <input type="text" class="form-control" placeholder="Search here...">
                                 <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
                             </div>
+                            -->
                         </div>
+
+                        <?php 
+                        //console($_SESSION['username']);
+                        ?>
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                                     <div class="header-info">
-                                        <span>Hello, <strong>Samuel</strong></span>
+                                        <span>Hello, <strong><?php echo @$_SESSION['username'];?></strong></span>
                                     </div>
                                     <img src="<?php echo base_url()?>app-assets/images/profile/pic1.jpg" width="20" alt=""/>
                                 </a>

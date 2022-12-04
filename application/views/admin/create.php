@@ -97,12 +97,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Successfully Published
-                                                            The content will be generated and publish onto the website.
+                                                            บันทึกสำเร็จ
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('admin/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('admin/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -115,12 +114,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Fail
-                                                            Please try again
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('admin/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('admin/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>

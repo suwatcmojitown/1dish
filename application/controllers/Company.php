@@ -105,6 +105,7 @@ class Company extends MY_Controller {
 		$data = new stdClass(); 
 		$data->id = getUUId($this->session->userdata['token']);
 		$data->name = $_POST['name'];
+		$data->short_name = $_POST['short_name'];
 		$data->image = $image;
 		$data->company_type = (isset($_POST['company_type'])) ? $_POST['company_type'] : '';
 		$data->branch_type = (isset($_POST['branch_type'])) ? $_POST['branch_type'] : '';
@@ -167,6 +168,7 @@ class Company extends MY_Controller {
 		//console($_POST);
 		$data->id = $_POST['id'];
 		$data->name = $_POST['name'];
+		$data->short_name = $_POST['short_name'];
 		$data->image = $image;
 		$data->company_type = (isset($_POST['company_type'])) ? $_POST['company_type'] : '';
 		$data->branch_type = (isset($_POST['branch_type'])) ? $_POST['branch_type'] : '';

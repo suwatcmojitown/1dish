@@ -24,6 +24,13 @@
                                                     <input type="text" class="form-control form-control-lg" name="name">
                                                 </div>
                                             </div>
+
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label custom text-info">รหัส</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-lg" name="code">
+                                                </div>
+                                            </div>
                                             
                                             <div class="mb-3 row">
                                                 <label class="col-sm-3 col-form-label custom text-info">รูปถ่าย</label>
@@ -129,6 +136,8 @@
                                                 <div class="col-sm-4 select-custom">
                                                     <select class="form-control " name="guide_commission">
                                                         <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <option value="0" >0%</option>
+                                                        <option value="5" >5%</option>
                                                         <option value="10" >10%</option>
                                                         <option value="15" >15%</option>
                                                         <option value="20" >20%</option>
@@ -174,12 +183,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Successfully Published
-                                                            The content will be generated and publish onto the website.
+                                                            บันทึกสำเร็จ
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('guide/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('guide/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,12 +200,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Fail
-                                                            Please try again
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('guide/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('guide/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>

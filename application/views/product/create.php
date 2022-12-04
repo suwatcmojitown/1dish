@@ -57,12 +57,22 @@
                                         <hr>
                                         <div class="mb-3 col-5">
                                                 <label class="text-info form-label col-form-label-lg">คำนวณ Vat (%)</label>
-                                                <input type="text" class="form-control form-control-lg" name="calculate_vat">
+                                                <!--<input type="text" class="form-control form-control-lg" name="calculate_vat">-->
+                                                <select class="default-select form-control wide mb-3" name="calculate_vat" >
+                                                    <option value="1">คำนวณ</option>
+                                                    <option value="0">ไม่คำนวณ</option>
+                                                </select>
                                         </div>
 
                                         <div class="mb-3 col-5">
                                                 <label class="text-info form-label col-form-label-lg">คำนวณค่า Com (%)</label>
+                                                <!--
                                                 <input type="text" class="form-control form-control-lg" name="calculate_commision">
+                                                -->
+                                                <select class="default-select form-control wide mb-3" name="calculate_commission" >
+                                                    <option value="1">คำนวณ</option>
+                                                    <option value="0">ไม่คำนวณ</option>
+                                                </select>
                                         </div>
 
                                         <div class="mb-3 col-5">
@@ -107,12 +117,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Successfully Published
-                                                            The content will be generated and publish onto the website.
+                                                            บันทึกสำเร็จ
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -125,12 +134,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Fail
-                                                            Please try again
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -24,6 +24,13 @@
                                                     <input type="text" class="form-control form-control-lg" name="name" value="<?php echo @$detail->name;?>">
                                                 </div>
                                             </div>
+
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label custom text-info">รหัส</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-lg" name="short_name" value="<?php echo @$detail->short_name;?>">
+                                                </div>
+                                            </div>
                                             
                                             <div class="mb-3 row">
                                                 <label class="col-sm-3 col-form-label custom text-info">โลโก้บริษัท</label>
@@ -180,7 +187,8 @@
                                                 <label class="col-sm-3 col-form-label custom text-info">ค่าคอมไกด์</label>
                                                 <div class="col-sm-4 select-custom">
                                                     <select class="form-control " name="company_commission">
-                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option><option <?php if($detail->company_commission==0) echo 'selected';?> value="0" >0%</option>
+                                                        <option <?php if($detail->company_commission==5) echo 'selected';?> value="5" >5%</option>
                                                         <option <?php if($detail->company_commission==10) echo 'selected';?> value="10" >10%</option>
                                                         <option <?php if($detail->company_commission==15) echo 'selected';?> value="15" >15%</option>
                                                         <option <?php if($detail->company_commission==20) echo 'selected';?> value="20" >20%</option>
@@ -233,12 +241,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Successfully Published
-                                                            The content will be generated and publish onto the website.
+                                                            บันทึกสำเร็จ
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('company/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('company/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -251,12 +258,11 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Fail
-                                                            Please try again
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('company/list');?>"><button type="button" class="btn btn-primary">Back to content list</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Stay on this page</button>
+                                                            <a href="<?php echo base_url('company/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>

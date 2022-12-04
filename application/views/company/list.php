@@ -113,7 +113,7 @@
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบบริษัท <span class="text-danger">#1</span> </h4>
+                                                                <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบบริษัท <span class="text-danger">#<?php echo $row->id;?></span> </h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                                 </button>
                                                             </div>

@@ -120,7 +120,7 @@ class Product extends MY_Controller {
 		$data->description_en = $_POST['description_en'];
 		$data->image = $image;
 		$data->calculate_vat = $_POST['calculate_vat'];
-		$data->calculate_commision = $_POST['calculate_commision'];
+		$data->calculate_commission = $_POST['calculate_commission'];
 		$data->cost = $_POST['cost'];
 		$data->price = $_POST['price'];
 		$data->unit = $_POST['unit'];
@@ -178,7 +178,7 @@ class Product extends MY_Controller {
 		$data->description_en = $_POST['description_en'];
 		$data->image = $image;
 		$data->calculate_vat = $_POST['calculate_vat'];
-		$data->calculate_commision = $_POST['calculate_commision'];
+		$data->calculate_commission = $_POST['calculate_commission'];
 		$data->cost = $_POST['cost'];
 		$data->price = $_POST['price'];
 		$data->unit = $_POST['unit'];

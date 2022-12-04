@@ -66,12 +66,12 @@
                                             ?>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> 
                                 
                                 <div class="col-12">
                                             <label class="text-info col-12 col-form-label col-form-label-lg label-custom">หมายเหตุ</label>
                                             <div class="col-12">
-                                            <textarea class="form-control form-control-lg" rows="4" name="note"></textarea>
+                                            <textarea class="form-control form-control-lg" rows="4" name="note" id="note"></textarea>
                                             </div>
                                 </div>
                                 <div class="card-order-footer" style="margin-top: 4rem;bottom: 2rem;">
@@ -88,8 +88,70 @@
 
                                     <div class="btn_box">
                                         <div class="row no-gutter mx-0">
-                                            <a href="javascript:void(0);" id="home-counter-tab" class="btn btn-danger btn-block col-6 m-0 rounded-0">ยกเลิก</a>
-                                            <a href="javascript:void(0);" id="place-order-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">ยืนยันนำเข้าสินค้า</a>
+                                            <a onclick="cancelImport()" id="home-counter-tab" class="btn btn-danger btn-block col-6 m-0 rounded-0">ยกเลิก</a>
+                                            <a onclick="confirmImport()" id="place-order-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">ยืนยันนำเข้าสินค้า</a>
                                         </div>
                                     </div>
                                 </div>
+
+<script>
+
+    function confirmImport(){
+            var data = new FormData();
+
+            uuid = '<?php echo $uuid;?>';
+            data.append('uuid', uuid);
+
+            var note = document.getElementById("note").value;
+            data.append('note', note);
+
+            $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('stock/import/confirm')?>',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function(result) { 
+                            $('#result').html(result);
+                            
+                            if(result==true)
+                                            {
+                                                $('#result_modal').modal('show');
+                                            } 
+                                            else{
+                                                $('#result_modal_fail').modal('show');
+                                            }
+                        }
+            });
+    }
+
+    function cancelImport(){
+            $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('stock/import/cancel')?>',
+                        data: 'uuid=<?php echo $uuid;?>',
+                        success: function(result) { 
+                            if(result==true)
+                                            {
+                                                $('#result_modal').modal('show');
+                                            } 
+                                            else{
+                                                $('#result_modal_fail').modal('show');
+                                            }
+                        }
+            });
+    }
+
+    function confirmDelete(uuid,item_id){
+            $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('stock/import/deleteItem')?>',
+                        data: 'uuid='+uuid+'&item_id='+item_id,
+                        success: function(result) { 
+                            //$('#result').html(result);
+                            $("#_itemList").html(result);
+                        }
+            });
+    }
+
+</script>

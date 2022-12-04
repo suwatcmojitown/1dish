@@ -116,6 +116,7 @@ class Guide extends MY_Controller {
 		$data = new stdClass(); 
 		$data->id = getUUId($this->session->userdata['token']);
 		$data->name = $_POST['name'];
+		$data->code = $_POST['code'];
 		$data->image = $image;
 		$data->telephone = $_POST['telephone'];
 		$data->address = $_POST['address'];
@@ -188,6 +189,7 @@ class Guide extends MY_Controller {
 		//console($_POST);
 		$data->id = $_POST['id'];
 		$data->name = $_POST['name'];
+		$data->code = $_POST['code'];
 		$data->image = $image;
 		$data->telephone = $_POST['telephone'];
 		$data->address = $_POST['address'];

@@ -120,17 +120,27 @@ class Stock_model extends CI_Model {
            
     }
 
-    public function confirmImport($data)
+    public function confirmImport($data,$data_2)
     {
+            $myJSON_2 = json_encode($data_2); 
+            $result_2 = json_decode(callAPI('PUT',PATH_API.'backend/requisition-in',$myJSON_2)); 
+            if($result_2->header->res_code=='200')
+            {
+                    $res_2 = true;
+            }
+            else $res_2 = false;
+
             $myJSON = json_encode($data); 
             $result = json_decode(callAPI('PUT',PATH_API.'backend/requisition-in/confirm',$myJSON)); 
-            //console($result);
-
             if($result->header->res_code=='200')
             {
-                    return true;
+                    $res = true;
             }
-            else return false;
+            else $res = false;
+
+            if(($res==true)&&($res_2==true)){
+                return true;
+            }else return false;
     }
 
     public function cancelImport($data)
@@ -241,17 +251,27 @@ class Stock_model extends CI_Model {
            
     }
 
-    public function confirmExport($data)
+    public function confirmExport($data,$data_2)
     {
+            $myJSON_2 = json_encode($data_2); 
+            $result_2 = json_decode(callAPI('PUT',PATH_API.'backend/requisition-out',$myJSON_2)); 
+            if($result_2->header->res_code=='200')
+            {
+                    $res_2 = true;
+            }
+            else $res_2 = false;
+
             $myJSON = json_encode($data); 
             $result = json_decode(callAPI('PUT',PATH_API.'backend/requisition-out/confirm',$myJSON)); 
-            //console($result);
-
             if($result->header->res_code=='200')
             {
-                    return true;
+                    $res = true;
             }
-            else return false;
+            else $res = false;
+
+            if(($res==true)&&($res_2==true)){
+                return true;
+            }else return false;
     }
 
     public function cancelExport($data)

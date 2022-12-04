@@ -180,6 +180,8 @@ class Stock extends MY_Controller {
 		
 		$result = $this->Stock_model->add($data);
 
+		$temp['uuid'] = $_POST['requisition_in_id'];
+
 		$itemList = $this->Stock_model->getItemList($_POST['requisition_in_id']);
 		if($itemList)
 		{
@@ -207,10 +209,13 @@ class Stock extends MY_Controller {
 	public function confirmImport()
 	{
 		$temp = new stdClass(); 
-		
 		$temp->id = $_POST['uuid'];
-		$temp->note = $_POST['note'];
-		$result = $this->Stock_model->confirmImport($temp);
+		
+		$temp_2 = new stdClass(); 
+		$temp_2->id = $_POST['uuid'];
+		$temp_2->note = $_POST['note'];
+
+		$result = $this->Stock_model->confirmImport($temp,$temp_2);
 		if($result==true){
 			unset($_SESSION['uuid']);
 			unset($_SESSION['document_no']);
@@ -308,6 +313,7 @@ class Stock extends MY_Controller {
 				$data['productList'] = '';
 				$data['itemList'] = '';
 				$data['placeList'] = '';
+				$data['typeList'] = '';
 
 				//$status,$keysearch,category,$active_page,$limit
 				$productList = $this->Product_model->getContentList('','','',1,1000);
@@ -327,6 +333,12 @@ class Stock extends MY_Controller {
 				if($itemList)
 				{
 					$data['itemList'] = $itemList->body;
+				}
+
+				$typeList = $this->Place_model->getRequisitionTypeList(1,PAGE_LIMIT);
+				if($typeList)
+				{
+					$data['typeList'] = $typeList->body;
 				}
 				//console($data);
 				$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
@@ -361,11 +373,19 @@ class Stock extends MY_Controller {
 			$temp['itemList'] = $itemList->body;
 		}
 
+		$temp['uuid'] = $_POST['requisition_out_id'];
+
 		//$active_page,$limit
 		$placeList = $this->Place_model->getContentList(1,1000);
 		if($placeList)
 		{
 			$temp['placeList'] = $placeList->body;
+		}
+
+		$typeList = $this->Place_model->getRequisitionTypeList(1,PAGE_LIMIT);
+		if($typeList)
+		{
+			$temp['typeList'] = $typeList->body;
 		}
 
 
@@ -376,10 +396,18 @@ class Stock extends MY_Controller {
 	public function confirmExport()
 	{
 		$temp = new stdClass(); 
-		
 		$temp->id = $_POST['uuid'];
-		$temp->note = $_POST['note'];
-		$result = $this->Stock_model->confirmExport($temp);
+		
+		$temp_2 = new stdClass(); 
+		$temp_2->id = $_POST['uuid'];
+		$temp_2->requisition_type_id = $_POST['requisition_type_id'];
+		$temp_2->origin_place_id = $_POST['origin_place_id'];
+		$temp_2->destination_place_id = $_POST['destination_place_id'];
+		$temp_2->note = $_POST['note'];
+
+		$result = $this->Stock_model->confirmExport($temp,$temp_2);
+		
+		//$result = false;
 		if($result==true){
 			unset($_SESSION['uuid']);
 			unset($_SESSION['document_no']);

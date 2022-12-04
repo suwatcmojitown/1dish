@@ -53,12 +53,11 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    Are you sure you want to delete this content?
-                                                                    It will not appear in any place anymore.
+                                                                    ยืนยันที่จะลบรายการนี้ ?
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="close" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" value="<?php echo $row->id?>" onclick="confirmDelete('<?php echo $row->id;?>')">Confirm</button>
+                                                                    <button type="close" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" value="<?php echo $row->id?>" onclick="confirmDelete('<?php echo $row->id;?>')">ยืนยัน</button>
                                                                 </div>
                                                             </div>
                                                         </div>
