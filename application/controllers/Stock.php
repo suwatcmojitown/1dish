@@ -484,7 +484,7 @@ class Stock extends MY_Controller {
 
 		//console($data);
 		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
-		$this->template['content'] = $this->load->view ($this->middle = 'stock/reportImportlist',$data, true);
+		$this->template['content'] = $this->load->view ($this->middle = 'stock/reportImportList',$data, true);
 		$this->master_layout();
 		
 	}
@@ -529,7 +529,7 @@ class Stock extends MY_Controller {
 
 		//console($data);
 		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
-		$this->template['content'] = $this->load->view ($this->middle = 'stock/reportExportlist',$data, true);
+		$this->template['content'] = $this->load->view ($this->middle = 'stock/reportExportList',$data, true);
 		$this->master_layout();
 		
 	}
