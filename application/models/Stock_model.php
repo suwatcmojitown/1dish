@@ -33,7 +33,18 @@ class Stock_model extends CI_Model {
                 return $object;
     }
 
-    
+    public function create($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('POST',PATH_API.'backend/product-stock',$myJSON)); 
+            //console($result);
+
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+    }
 
     public function update($data)
     {
@@ -192,7 +203,8 @@ class Stock_model extends CI_Model {
 
     public function genCodeExport()
     {
-                $result = json_decode(callAPI('GET',PATH_API.'backend/requisition-out/gen-document-no',''));  
+                $result = json_decode(callAPI('GET',PATH_API.'backend/requisition-out/gen-document-no','')); 
+                //echo  PATH_API.'backend/requisition-out/gen-document-no';
                 if($result->header->res_code=='200')
                 {
                         $object = $result->body;
@@ -253,16 +265,20 @@ class Stock_model extends CI_Model {
 
     public function confirmExport($data,$data_2)
     {
+            //console($data_2);
             $myJSON_2 = json_encode($data_2); 
             $result_2 = json_decode(callAPI('PUT',PATH_API.'backend/requisition-out',$myJSON_2)); 
+            //console($result_2);
             if($result_2->header->res_code=='200')
             {
                     $res_2 = true;
             }
             else $res_2 = false;
 
+            //console($data);
             $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('PUT',PATH_API.'backend/requisition-out/confirm',$myJSON)); 
+            $result = json_decode(callAPI('PUT',PATH_API.'backend/requisition-out/confirm',$myJSON));
+            //console($result); 
             if($result->header->res_code=='200')
             {
                     $res = true;
@@ -396,6 +412,55 @@ class Stock_model extends CI_Model {
                 
                 return $object;
     }
+
+    public function getImportDetailById($id){
+
+                $result = json_decode(callAPI('GET',PATH_API.'backend/requisition-in?id='.$id.'',''));  
+                if($result->header->res_code=='200')
+                {
+                        $object = $result->body[0];
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
+    public function getExportDetailById($id){
+
+                $result = json_decode(callAPI('GET',PATH_API.'backend/requisition-out?id='.$id.'',''));  
+                if($result->header->res_code=='200')
+                {
+                        $object = $result->body[0];
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
+    public function updateImportNote($data){
+                $myJSON = json_encode($data); 
+                $result = json_decode(callAPI('PUT',PATH_API.'backend/requisition-in',$myJSON)); 
+                //console($result);
+
+                if($result->header->res_code=='200')
+                {
+                        return true;
+                }
+                else return false;
+    }
+
+    public function updateExportNote($data){
+                $myJSON = json_encode($data); 
+                $result = json_decode(callAPI('PUT',PATH_API.'backend/requisition-out',$myJSON)); 
+                //console($result);
+
+                if($result->header->res_code=='200')
+                {
+                        return true;
+                }
+                else return false;
+    }
+
 
 
 

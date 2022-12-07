@@ -14,6 +14,7 @@ class Stock extends MY_Controller {
 		$this->load->model('Product_model');
 		$this->load->model('Stock_model');
 		$this->load->model('Place_model');
+		$this->load->model('ProductCategory_model');
 	}
 
 	/*
@@ -34,6 +35,7 @@ class Stock extends MY_Controller {
 		$data['page'] = $active_page;
 		$data['keysearch'] = '';
 
+		
 		//$keysearch,$active_page,$limit
 		$resultList = $this->Stock_model->getImportList('',$active_page,PAGE_LIMIT);
 		if($resultList)
@@ -74,17 +76,17 @@ class Stock extends MY_Controller {
 	public function import()
 	{
 
-		if(isset($this->session->userdata['uuid'])&&!empty($this->session->userdata['uuid'])){
+		if(isset($this->session->userdata['import_uuid'])&&!empty($this->session->userdata['import_uuid'])){
 			$genCode = new stdClass(); 
-            $genCode->uuid = $this->session->userdata['uuid'];
-            $genCode->document_no = $this->session->userdata['document_no'];
+            $genCode->uuid = $this->session->userdata['import_uuid'];
+            $genCode->document_no = $this->session->userdata['import_document_no'];
         }
         else{
         	$genCode = $this->Stock_model->genCode();
         	
         	$this->session->set_userdata(
-						array('uuid'    => $genCode->uuid,
-							  'document_no'    => $genCode->document_no
+						array('import_uuid'    => $genCode->uuid,
+							  'import_document_no'    => $genCode->document_no
 			));
         }
 		//gen uuid and document id
@@ -100,13 +102,23 @@ class Stock extends MY_Controller {
 				
 				$data['productList'] = '';
 				$data['itemList'] = '';
+				$data['categoryList'] = '';
+
+				$categoryList = $this->ProductCategory_model->getContentList('',1,PAGE_LIMIT);
+				if($categoryList)
+				{
+					$data['categoryList'] = $categoryList->body;
+				}
+
 
 				//$status,$keysearch,category,$active_page,$limit
+				/*
 				$productList = $this->Product_model->getContentList('','','',1,1000);
 				if($productList)
 				{
 					$data['productList'] = $productList->body;
 				}
+				*/
 
 				$itemList = $this->Stock_model->getItemList($data['uuid']);
 				if($itemList)
@@ -201,9 +213,46 @@ class Stock extends MY_Controller {
 		{
 			$data['stockList'] = $stockList->body;
 		}
-		//console($data);
-		
 		$this->load->view('stock/loadProductStockList',$data);
+		/*
+		$response = array();
+
+		if($result)
+		{
+			$shelf_id = $result;
+			$response['shelf_id'] = $shelf_id;
+			$response['status'] = true;
+		}
+		else{
+			$response['status'] = false;
+		}
+		
+		echo json_encode($response);
+		*/
+	}
+
+	public function loadProductList()
+	{
+		$product_category_id = $_POST['product_category_id'];
+		//id,product_id
+		$productList = $this->Product_model->getContentList('','',$product_category_id,1,400);
+		if($productList)
+		{
+			$data['productList'] = $productList->body;
+		}
+		//console($data);
+		$this->load->view('stock/loadProductList',$data);
+	}
+
+
+	public function loadProductPrice()
+	{
+		$id = $_POST['product_id'];
+		//id,product_id
+		$detail = $this->Product_model->getContentDetail($id);
+		if(isset($detail->cost)&&!empty($detail->cost)){
+			echo '<input type="text" class="form-control form-control-lg" name="price_per_item" value="'.$detail->cost.'">';
+		}else echo '<input type="text" class="form-control form-control-lg" name="price_per_item" value="">';
 	}
 
 	public function confirmImport()
@@ -217,8 +266,8 @@ class Stock extends MY_Controller {
 
 		$result = $this->Stock_model->confirmImport($temp,$temp_2);
 		if($result==true){
-			unset($_SESSION['uuid']);
-			unset($_SESSION['document_no']);
+			unset($_SESSION['import_uuid']);
+			unset($_SESSION['import_document_no']);
 		}
 		//$result = true;
 		echo $result;
@@ -231,8 +280,8 @@ class Stock extends MY_Controller {
 		$temp->id = $_POST['uuid'];
 		$result = $this->Stock_model->cancelImport($temp);
 		if($result==true){
-			unset($_SESSION['uuid']);
-			unset($_SESSION['document_no']);
+			unset($_SESSION['import_uuid']);
+			unset($_SESSION['import_document_no']);
 		}
 		//$result = true;
 		echo $result;
@@ -286,17 +335,17 @@ class Stock extends MY_Controller {
 	public function export()
 	{
 
-		if(isset($this->session->userdata['uuid'])&&!empty($this->session->userdata['uuid'])){
+		if(isset($this->session->userdata['export_uuid'])&&!empty($this->session->userdata['export_uuid'])){
 			$genCode = new stdClass(); 
-            $genCode->uuid = $this->session->userdata['uuid'];
-            $genCode->document_no = $this->session->userdata['document_no'];
+            $genCode->uuid = $this->session->userdata['export_uuid'];
+            $genCode->document_no = $this->session->userdata['export_document_no'];
         }
         else{
         	$genCode = $this->Stock_model->genCodeExport();
         	
         	$this->session->set_userdata(
-						array('uuid'    => $genCode->uuid,
-							  'document_no'    => $genCode->document_no
+						array('export_uuid'    => $genCode->uuid,
+							  'export_document_no'    => $genCode->document_no
 			));
         }
 		//gen uuid and document id
@@ -314,6 +363,13 @@ class Stock extends MY_Controller {
 				$data['itemList'] = '';
 				$data['placeList'] = '';
 				$data['typeList'] = '';
+				$data['categoryList'] = '';
+
+				$categoryList = $this->ProductCategory_model->getContentList('',1,PAGE_LIMIT);
+				if($categoryList)
+				{
+					$data['categoryList'] = $categoryList->body;
+				}
 
 				//$status,$keysearch,category,$active_page,$limit
 				$productList = $this->Product_model->getContentList('','','',1,1000);
@@ -409,8 +465,8 @@ class Stock extends MY_Controller {
 		
 		//$result = false;
 		if($result==true){
-			unset($_SESSION['uuid']);
-			unset($_SESSION['document_no']);
+			unset($_SESSION['export_uuid']);
+			unset($_SESSION['export_document_no']);
 		}
 		//$result = true;
 		echo $result;
@@ -423,8 +479,8 @@ class Stock extends MY_Controller {
 		$temp->id = $_POST['uuid'];
 		$result = $this->Stock_model->cancelExport($temp);
 		if($result==true){
-			unset($_SESSION['uuid']);
-			unset($_SESSION['document_no']);
+			unset($_SESSION['export_uuid']);
+			unset($_SESSION['export_document_no']);
 		}
 		//$result = true;
 		echo $result;
@@ -556,6 +612,103 @@ class Stock extends MY_Controller {
 		
 		$this->load->view('stock/loadReportExportlist',$data);
 	}
+
+	public function importView($id){
+		$data['detail'] = null;
+		$data['itemList'] = null;
+
+		$detail = $this->Stock_model->getImportDetailById($id);
+		$data['detail'] = $detail;
+
+		$document_no = $detail->document_no;
+
+		$itemList = $this->Stock_model->getItemList($id);
+		if($itemList){
+			$data['itemList'] = $itemList->body;
+		}
+
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'stock/viewImport',$data, true);
+		$this->master_layout();
+
+	}
+
+	public function exportView($id){
+		$data['detail'] = null;
+		$data['itemList'] = null;
+
+		$detail = $this->Stock_model->getExportDetailById($id);
+		$data['detail'] = $detail;
+
+		$document_no = $detail->document_no;
+
+		$itemList = $this->Stock_model->getExportItemList($id);
+		if($itemList){
+			$data['itemList'] = $itemList->body;
+		}
+
+		//$active_page,$limit
+		$placeList = $this->Place_model->getContentList(1,1000);
+		if($placeList)
+		{
+			$data['placeList'] = $placeList->body;
+		}
+
+		$typeList = $this->Place_model->getRequisitionTypeList(1,PAGE_LIMIT);
+		if($typeList)
+		{
+			$data['typeList'] = $typeList->body;
+		}
+
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'stock/viewExport',$data, true);
+		$this->master_layout();
+
+	}
+
+	public function updateImportNote(){
+		$temp = new stdClass(); 
+		$temp->id = $_POST['uuid'];
+		$temp->note = $_POST['note'];
+
+		$result = $this->Stock_model->updateImportNote($temp);
+		
+		echo $result;
+	}
+
+	public function updateExportNote(){
+		$temp = new stdClass(); 
+		$temp->id = $_POST['uuid'];
+		$temp->note = $_POST['note'];
+
+		$result = $this->Stock_model->updateExportNote($temp);
+		//console($result);
+		echo $result;
+	}
+
+	/*
+	public function changeStatusExport{
+
+		$temp = new stdClass(); 
+		
+		$temp->id = $_POST['id'];
+		$temp->status = $_POST['status'];
+		$result = $this->Stock_model->changeStatusExport($temp);
+		//$result = true;
+		echo $result;
+	}
+
+	public function changeStatusImport{
+
+		$temp = new stdClass(); 
+		
+		$temp->id = $_POST['id'];
+		$temp->status = $_POST['status'];
+		$result = $this->Stock_model->changeStatusImport($temp);
+		//$result = true;
+		echo $result;
+	}
+	*/
 	
 
 }

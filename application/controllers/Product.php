@@ -291,6 +291,20 @@ class Product extends MY_Controller {
 		echo $result;
 	}
 
+	public function createStock(){
+
+		$data = new stdClass(); 
+		//console($_POST);
+		//$data->name_title = $_POST['name_title'];
+		$data->id = getUUId($this->session->userdata['token']);
+		$data->product_id = $_POST['id'];
+		$data->barcode = $_POST['barcode'];
+		//console($data);
+		$result = $this->Stock_model->create($data);
+		//console($result);
+		echo $result;
+	}
+
 	public function loadStockList()
 	{
 		$data['stockList'] = '';

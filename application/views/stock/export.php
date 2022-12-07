@@ -10,8 +10,29 @@
                             <div class="card-body">
                                 <div class="basic-form">
                                     <form class="row" id="addForm">
-                                        <span id="result"></span>
+                                        <span id="result">ddddd</span>
                                         <input type="hidden" class="form-control form-control-lg" name="requisition_out_id" value="<?php echo $uuid;?>">
+                                        <div class="mb-3 col-12">
+                                            <label class="text-info form-label col-form-label-lg">หมวดหมู่</label>
+                                                <select class="default-select form-control wide mb-3" id="product_category_id" name="product_category_id" onchange="categoryChange()">
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($categoryList)&&!empty($categoryList))
+                                                        {
+                                                            foreach($categoryList as $row)
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row->id;?>"><?php echo $row->name_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
+                                        </div>
+                                        <div class="mb-3 col-12" id="_productList">
+                                            <label class="text-info form-label col-form-label-lg">สินค้า</label>
+                                        </div>
+                                        <!--
                                         <div class="mb-3 col-12">
                                             <label class="text-info form-label col-form-label-lg">สินค้า</label>
                                             <select id="single-select" class="default-select form-control wide mb-3"name="product_id" onchange="productChange()">
@@ -29,6 +50,7 @@
                                                 ?>
                                             </select>
                                         </div>
+                                        -->
 
                                         <div class="mb-3 col-12" id="_productStockList">
                                             <label class="text-info form-label col-form-label-lg">รหัสสินค้า</label>
@@ -36,7 +58,8 @@
 
                                         <div class="mb-3 col-12">
                                                 <label class="text-info form-label col-form-label-lg">ราคา</label>
-                                                <input type="text" class="form-control form-control-lg" name="price_per_item">
+                                                <span id='_price'>
+                                                <input type="text" class="form-control form-control-lg" name="price_per_item" value=""></span>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-info form-label col-form-label-lg">จำนวน</label>
@@ -354,7 +377,7 @@
                         processData: false,
                         contentType: false,
                         success: function(result) { 
-                            //$('#result').html(result);
+                            $('#result').html(result);
                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');
@@ -397,15 +420,38 @@
 
     function productChange(){
         
-        product = document.getElementById("single-select").value;
+        product = document.getElementById("product_id").value;
 
         $.ajax({
             type: 'POST',
-            url: '<?php echo base_url('stock/loadExportProductStockList')?>',
+            url: '<?php echo base_url('stock/loadProductStockList')?>',
             data: 'product_id='+product+'',
             success: function(result) { 
-                //$('#result').html(result);
                 $("#_productStockList").html(result);
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('stock/loadProductPrice')?>',
+                    data: 'product_id='+product+'',
+                    success: function(result) { 
+                        $("#_price").html(result);
+
+                    }
+                });
+            }
+        });
+    }
+
+    function categoryChange(){
+        
+        product_category_id = document.getElementById("product_category_id").value;
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('stock/loadProductList')?>',
+            data: 'product_category_id='+product_category_id+'',
+            success: function(result) { 
+                //$('#result').html(result);
+                $("#_productList").html(result);
             }
         });
     }

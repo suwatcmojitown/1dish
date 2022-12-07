@@ -41,7 +41,8 @@
                                                 <label class="text-info form-label col-form-label-lg">รูปภาพ</label>
                                                 <input type="file" class="form-control form-control-lg" name="image" style="padding-top: 14px;">
                                         </div>
-                                        <div class="mb-3 col-12 category">
+                                        <div class="mb-3 col-8 category">
+                                                <!--
                                                 <label class="text-info form-label col-form-label-lg" style="display:block;">หมวดหมู่</label>
                                                     <?php 
                                                     if(isset($categoryList)&&!empty($categoryList)){
@@ -52,6 +53,22 @@
                                                         }
                                                     }
                                                     ?>
+                                                -->
+                                                <label class="text-info form-label col-form-label-lg">หมวดหมู่</label>
+                                                <select class="default-select form-control wide mb-3" name="product_category_id" >
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($categoryList)&&!empty($categoryList))
+                                                        {
+                                                            foreach($categoryList as $row)
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row->id;?>"><?php echo $row->name_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
                                         </div>
 
                                         <hr>
@@ -151,11 +168,13 @@
         
                 var product_category_id = null;
         
+                /*
                 $(".category button").each(function(){ 
                     if($(this).hasClass("active")) { 
                         product_category_id = $(this).attr("value");
                     }
                 });
+                */
 
                 var data = new FormData();
 
@@ -172,7 +191,7 @@
                         data.append("image", file_data[i]);
                 }
 
-                data.append('product_category_id', product_category_id);
+                //data.append('product_category_id', product_category_id);
                 
                                     $.ajax({
                                         type: 'POST',
@@ -196,11 +215,14 @@
          
     });
 
+    /*
     $('.category button').on('click', function(){
         $(this).addClass('active');
         $('.category button').not(this).removeClass('active');
         $('.category button').not(this).addClass('light');
         $(this).removeClass('light');
+
 });
+    */
 
 </script>

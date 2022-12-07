@@ -1,30 +1,65 @@
- <div class="content-body">
+<!--**********************************
+            Content body start
+        ***********************************--> 
+        <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
                 <div class="form-head d-flex mb-3 align-items-start">
                     <div class="me-auto d-none d-lg-block ">
-                        <h2 class="text-primary font-w600 mb-0"><i class="far fa-file" aria-hidden="true"></i> Report Import</h2>
+                        <h2 class="text-primary font-w600 mb-0"><i class="fa fa-credit-card" aria-hidden="true"></i> Commission Guide</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active"><a href="javascript:void(0)">List</a></li>
                             <!--<li class="breadcrumb-item"><a href="javascript:void(0)">Accordion</a></li>-->
                         </ol>
                     </div>
+                    <!--
+                    <div class="input-group search-area style-1 mb-4 ">
+                            <input type="text" class="form-control search-input" id="keysearch" placeholder="คำค้นหา...">
+                    </div>
+                    <div class="dropdown custom-dropdown ms-3">
+                        <div class="input-group mb-3" style="">
+                                            <select id="status" class="form-select wide" aria-label="Default select example" style="background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
+                                                  <option selected disabled>Choose...</option>
+                                                  <option value="1">เปิดใช้งาน</option>
+                                                  <option value="0">ไม่เปิดใช้งาน</option>
+                                            </select>
+                                            <button class="btn btn-primary" type="button">สถานะ</button>
+                                        </div>
+                    </div>
+                    -->
                     <div class="mb-3" style="margin-right: 3px;">
                             <input id="keysearch" class="form-control form-control-lg" type="text" placeholder="คำค้นหา" >
                     </div>
-
                     <div class="dropdown custom-dropdown ms-3">
                         <div class="input-group mb-3" style="">
                                             <select id="status" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
                                                   <option value="">-- สถานะ --</option>
                                                   <option value="1">เปิดใช้งาน</option>
-                                                  <option value="2">ไม่เปิดใช้งาน</option>
+                                                  <option value="0">ไม่เปิดใช้งาน</option>
                                             </select>
                         </div>
                     </div>
                     <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
-                    <a href="<?php echo base_url('stock/import');?>" id="add-order" class="btn btn-warning btn-rounded ms-3">Add +</a>
-                    
+                    <!--
+                    <a href="<?php echo base_url('admin/create');?>" id="add-order" class="btn btn-warning btn-rounded ms-3">Add +</a>-->
+                    <!--
+                    <div class="dropdown custom-dropdown ms-3">
+                        <button type="button" class="btn btn-primary light d-flex align-items-center svg-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg width="16" height="16" class="scale5" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4281 2.856H21.8681V1.428C21.8681 0.56 21.2801 0 20.4401 0C19.6001 0 19.0121 0.56 19.0121 1.428V2.856H9.71606V1.428C9.71606 0.56 9.15606 0 8.28806 0C7.42006 0 6.86006 0.56 6.86006 1.428V2.856H5.57206C2.85606 2.856 0.560059 5.152 0.560059 7.868V23.016C0.560059 25.732 2.85606 28.028 5.57206 28.028H22.4281C25.1441 28.028 27.4401 25.732 27.4401 23.016V7.868C27.4401 5.152 25.1441 2.856 22.4281 2.856ZM5.57206 5.712H22.4281C23.5761 5.712 24.5841 6.72 24.5841 7.868V9.856H3.41606V7.868C3.41606 6.72 4.42406 5.712 5.57206 5.712ZM22.4281 25.144H5.57206C4.42406 25.144 3.41606 24.136 3.41606 22.988V12.712H24.5561V22.988C24.5841 24.136 23.5761 25.144 22.4281 25.144Z" fill="#2F4CDD"/></svg>
+                            <span class="fs-16 ms-3">Today</span>
+                            <i class="fa fa-angle-down scale5 ms-3"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Monday</a>
+                            <a class="dropdown-item" href="#">Tuesday</a>
+                            <a class="dropdown-item" href="#">Wednesday</a>
+                            <a class="dropdown-item" href="#">Thursday</a>
+                            <a class="dropdown-item" href="#">Friday</a>
+                            <a class="dropdown-item" href="#">Saturday</a>
+                            <a class="dropdown-item" href="#">Sunday</a>
+                        </div>
+                    </div>
+                    -->
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -35,75 +70,69 @@
                                     <table class="table custom table-responsive-sm">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th></th>
-                                                <th>จำนวน</th>
-                                                <th>ราคา</th>
+                                                <th>ชื่อไกด์</th>
+                                                <th>% คอมมิชชั่น</th>
+                                                <th>ค่าคอมมิชชั่น</th>
+                                                <th>สถานะ</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            //console($list);
+                                            //console($paging);
+                                            $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                             if(isset($list)&&!empty($list)){
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
-                                                <!--
+                                                <th><?php echo $i;?></th>
+                                                <th></th>
                                                 <td>
-                                                    <h4 class="text-muted mb-0 name"><strong>เม็ดมะม่วง</strong></h4>
-                                                    <h5 class="text-muted email">sriadmin@gmail.com</h5>
+                                                    <h4 class="text-muted mb-0 name"><strong><?php echo @$row->guide_name;?></strong></h4>
+                                                    <h5 class="text-muted email"><?php echo @$row->email;?></h5>
                                                 </td>
-                                                -->
+                                                <td><?php echo @$row->commission;?></td>
+                                                <td><?php echo number_format(@$row->grandTotal);?></td>
                                                 <td>
-                                                    <h4 class="text-primary mb-1 name" style="font-weight: 400;"><?php echo @$row->document_no?></h4>
-                                                    <normal style="display:block;"> 
-                                                    <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>">
+                                                    <?php if($row->status=='1'){?>
+                                                    <div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> จ่ายแล้ว</div>
                                                     <?php 
-                                                    if($row->status==1){
+                                                    }else{
                                                     ?>
-                                                    <span class="text-success pl-7 pr-7">เปิดใช้งาน</span>
-                                                    <?php }elseif($row->status==0){?>
-                                                    <span class="text-danger pl-7 pr-7">ไม่เปิดใช้งาน</span>
-                                                    <?php }else{?>
-                                                    <span class="text-warning pl-7 pr-7">ร่าง</span>
-                                                    <?php }?>
-                                                    </a>
-                                                    <span class="text-muted">updated : <?php echo @$row->created_at;?></span>
-                                                    </normal>
-                                                    <!-- modal danger -->
-                                                        <div class="modal fade modal-danger text-start" id="warning-<?php echo $row->id;?>" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"><span class="badge badge-lg badge-warning"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> เปลี่ยนสถานะ <span class="text-warning">#<?php echo $row->name_th;?></span> </h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p>คุณต้องการยืนยันที่จะเปลี่ยนสถานะสินค้านี้ ?</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-warning light" data-bs-dismiss="modal">ยกเลิก</button>
-                                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" value="<?php echo $row->id?>" onclick="changeStatus('<?php echo $row->id;?>','<?php echo $row->status;?>')">ยืนยัน</button>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                    <!-- modal danger -->
-                                                    
-                                                </td>
-                                                <td>
-                                                    <?php echo number_format(@$row->total_quantity);?>
-                                                </td>
-                                                <td>
-                                                    <?php echo number_format(@$row->grand_total);?>
+                                                    <div class="d-flex align-items-center"><i class="fa fa-circle text-danger me-1"></i> ยังไม่จ่าย</div>
+                                                    <?php 
+                                                    }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="<?php echo base_url('stock/import/view/').$row->id;?>" class="btn btn-success shadow btn-sm sharp" ><i class="fa fa-eye"></i></a>
+                                                        <a href="<?php echo base_url('admin/edit/').$row->guide_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a data-bs-original-title="ลบ" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->guide_id;?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                        <!-- modal danger -->
+                                                        <div class="modal fade modal-danger text-start" id="warning-<?php echo $row->guide_id;?>" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="myModalLabel120">Delete #<?php echo $row->username;?></h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ยืนยันที่จะลบรายการนี้ ?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="close" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" value="<?php echo $row->guide_id?>" onclick="confirmDelete('<?php echo $row->guide_id;?>')">ยืนยัน</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- modal danger -->
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <?php 
+                                            <?php
+                                                $i++; 
                                                 }
                                             }
                                             ?>
@@ -162,42 +191,6 @@
         <!--**********************************
             Content body end
         ***********************************-->
-
-        <!--  modal status -->
-                                            <div class="modal fade text-start" id="result_modal" tabindex="-1" aria-labelledby="myModalLabel17" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            บันทึกสำเร็จ
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="modal fade text-start" id="result_modal_fail" tabindex="-1" aria-labelledby="myModalLabel17" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
 <span id="result"></span>
 
 <script>
@@ -208,7 +201,7 @@ function loadPage(page){
     
     $.ajax({
                 type: 'POST',
-                url: '<?php echo base_url('stock/report/loadImportList')?>',
+                url: '<?php echo base_url('commission/loadGuideList')?>',
                 data: 'keysearch='+keysearch+'&status='+status+'&page='+page,
                 success: function(result) { 
                     //$('#result').html(result);
@@ -224,7 +217,7 @@ $("#filterBtn").click(function(){
     
     $.ajax({
                 type: 'POST',
-                url: '<?php echo base_url('stock/report/loadImportList')?>',
+                url: '<?php echo base_url('commission/loadGuideList')?>',
                 data: 'keysearch='+keysearch+'&status='+status+'&page=1',
                 success: function(result) { 
                     //$('#result').html(result);
@@ -234,19 +227,26 @@ $("#filterBtn").click(function(){
 });
 
 
-function changeStatus(id,change_status){
-    status = document.getElementById("changeStatus").value;
-
+function changeStatus(id,status){
                     $.ajax({
                         type: 'POST',
-                        url: '<?php echo base_url('stock/report/changeStatusImport')?>',
+                        url: '<?php echo base_url('admin/changeStatus')?>',
                         data: 'id='+id+'&status='+status,
                         success: function(result) { 
                             //$('#result').html(result);
-                            $("#_list").html(result);
-                        } 
+                            if(result==true)
+                            {
+                                toastr.success('บันทึกข้อมูลในระบบเรียบร้อยแล้ว','แก้ไขคลังปัญญา');
+                                setTimeout(function() { 
+                                        var url = "<?php echo base_url('article/list');?>";    
+                                        $(location).attr('href',url);
+                                }, 3000);
+                            } 
+                            else{
+                                toastr.error('บันทึกข้อมูลในระบบไม่สำเร็จ','แก้ไขคลังปัญญา');
+                            }    
+                        }
                     });
-    
 }
 
 
@@ -256,13 +256,12 @@ function confirmDelete(id){
             var status = '';
 
             keysearch = document.getElementById("keysearch").value;
-            product_category_id = document.getElementById("product_category_id").value;
             status = document.getElementById("status").value;
 
             $.ajax({
                         type: 'POST',
-                        url: '<?php echo base_url('product/delete')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page='+page,
+                        url: '<?php echo base_url('admin/delete')?>',
+                        data: 'id='+id+'&keysearch='+keysearch+'&status='+status+'&page='+page,
                         success: function(result) { 
                             //$('#result').html(result);
                             $("#_list").html(result);

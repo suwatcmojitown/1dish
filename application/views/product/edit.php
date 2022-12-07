@@ -46,6 +46,7 @@
                                                 <img src="<?php echo @$detail->thumbnail_path;?>"></img>
                                         </div>
                                         <input type="hidden" class="form-control" name="thumbnail_hidden" placeholder="" value="<?php echo @$detail->thumbnail;?>"> 
+                                        <!--
                                         <div class="mb-3 col-12 category">
                                                 <label class="text-info form-label col-form-label-lg" style="display:block;">หมวดหมู่</label>
                                                     <?php 
@@ -57,6 +58,24 @@
                                                         }
                                                     }
                                                     ?>
+                                        </div>
+                                        -->
+                                        <div class="mb-3 col-8 category">
+                                        <label class="text-info form-label col-form-label-lg">หมวดหมู่</label>
+                                                <select class="default-select form-control wide mb-3" name="product_category_id" >
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($categoryList)&&!empty($categoryList))
+                                                        {
+                                                            foreach($categoryList as $row)
+                                                            {
+                                                        ?>
+                                                            <option <?php if($detail->product_category_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->name_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
                                         </div>
 
                                         <hr>

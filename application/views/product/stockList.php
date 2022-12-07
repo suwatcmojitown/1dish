@@ -1,6 +1,6 @@
 <!--**********************************
             Content body start
-        ***********************************-->
+        ***********************************--> 
         <div class="content-body" style="font-family: 'Kanit';">
             <!-- row -->
 			<div class="container-fluid">
@@ -13,9 +13,35 @@
                         </ol>
 					</div>
                     
+                    <a data-bs-toggle="modal" data-bs-target="#addStock" class="btn btn-primary btn-rounded ms-3"><i class="fa fa-cube" aria-hidden="true"></i> เพิ่ม stock</a>
+                    <a href="<?php echo base_url('stock/export');?>" id="add-order" class="btn btn-danger btn-rounded ms-3"><i class="fas fa-minus-circle"></i> นำสินค้าออก</a>
+                    <a href="<?php echo base_url('stock/import');?>" id="add-order" class="btn btn-success btn-rounded ms-3"><i class="fas fa-plus-circle"></i> นำสินค้าเข้า</a>
+                    <!-- modal danger -->
+                                                        <div class="modal fade modal-primary text-start" id="addStock" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"><span class="badge badge-lg badge-primary"> <i class="fas fa-pencil-alt"></i> </span> เพิ่ม stock <span class="text-primary">#<?php echo @$detail->name_th;?></span> </h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form id="createForm">        
+                                                                        <label>บาร์โค้ด : </label>
+                                                                            <div class="mb-1">
+                                                                                <input type="text" class="form-control form-control-lg" name="cBarcode" id="cBarcode">
+                                                                            </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary light" data-bs-dismiss="modal">ยกเลิก</button>
+                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" value="" onclick="addCode('<?php echo $detail->id?>')">ยืนยัน</button>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                    <!-- modal danger -->
 
-                    <a href="javascript:void(0);" id="add-order" class="btn btn-danger btn-rounded ms-3"><i class="fas fa-minus-circle"></i> นำสินค้าออก</a>
-                    <a href="javascript:void(0);" id="add-order" class="btn btn-success btn-rounded ms-3"><i class="fas fa-plus-circle"></i> นำสินค้าเข้า</a>
+
                     
 				</div>
                 <div class="row">
@@ -140,6 +166,27 @@
             $.ajax({
                                     type: 'POST',
                                     url: '<?php echo base_url('product/updateStock')?>',
+                                    data: 'id='+id+'&barcode='+barcode,
+                                    success: function(result) { 
+                                        //$('#result').html(result);
+                                        $.ajax({
+                                                    type: 'POST',
+                                                    url: '<?php echo base_url('product/loadStockList')?>',
+                                                    data: 'product_id=<?php echo $detail->id;?>',
+                                                    success: function(result) { 
+                                                        $("#_stockList").html(result);   
+                                                    }
+                                        });
+                                    }
+            });
+    }
+
+    function addCode(id){
+            barcode = document.getElementById('cBarcode').value;
+            
+            $.ajax({
+                                    type: 'POST',
+                                    url: '<?php echo base_url('product/createStock')?>',
                                     data: 'id='+id+'&barcode='+barcode,
                                     success: function(result) { 
                                         //$('#result').html(result);

@@ -101,7 +101,7 @@ $route['guide/add'] = 'Guide/addContent';
 $route['guide/edit/(:any)'] = 'Guide/edit/$1';
 $route['guide/update'] = 'Guide/updateContent';
 $route['guide/loadContentList'] = 'Guide/loadContentList';
-$route['adguidemin/delete'] = 'Guide/deleteContent';
+$route['guide/delete'] = 'Guide/deleteContent';
 
 $route['product'] = 'Product/list';
 $route['product/create'] = 'Product/create';
@@ -113,6 +113,7 @@ $route['product/changeStatus'] = 'Product/changeStatus';
 $route['product/delete'] = 'Product/deleteContent';
 $route['product/stock/view/(:any)'] = 'Product/stockList/$1';
 $route['product/updateStock'] = 'Product/updateStock';
+$route['product/createStock'] = 'Product/createStock';
 $route['product/loadStockList'] = 'Product/loadStockList';
 
 $route['product-category'] = 'ProductCategory/list';
@@ -131,12 +132,23 @@ $route['stock/import/deleteItem'] = 'Stock/deleteItemImport';
 $route['stock/import/confirm'] = 'Stock/confirmImport';
 $route['stock/import/cancel'] = 'Stock/cancelImport';
 $route['stock/loadProductStockList'] = 'Stock/loadProductStockList';
+$route['stock/loadProductPrice'] = 'Stock/loadProductPrice';
+$route['stock/loadProductList'] = 'Stock/loadProductList';
 $route['stock/loadExportProductStockList'] = 'Stock/loadExportProductStockList';
+
+$route['stock/import/view/(:any)'] = 'Stock/importView/$1';
+$route['stock/import/updateNote'] = 'Stock/updateImportNote';
+$route['stock/export/view/(:any)'] = 'Stock/exportView/$1';
+$route['stock/export/updateNote'] = 'Stock/updateExportNote';
 
 $route['stock/report/import'] = 'Stock/reportImportList';
 $route['stock/report/loadImportList'] = 'Stock/loadReportImportList';
 $route['stock/report/export'] = 'Stock/reportExportList';
 $route['stock/report/loadExportList'] = 'Stock/loadReportExportList';
+$route['stock/report/changeStatusExport'] = 'Stock/changeStatusExport';
+$route['stock/report/changeStatusImport'] = 'Stock/changeStatusImport';
+
+
 
 $route['stock/preview/(:num)'] = 'Stock/preview/$1';
 
@@ -146,6 +158,13 @@ $route['stock/export/addProduct'] = 'Stock/addProductExport';
 $route['stock/export/confirm'] = 'Stock/confirmExport';
 $route['stock/export/cancel'] = 'Stock/cancelExport';
 $route['stock/export/deleteItem'] = 'Stock/deleteItemExport';
+
+
+
+$route['commission/company'] = 'Commission/companyList';
+$route['commission/loadCompanyList'] = 'Commission/loadCompanyList';
+$route['commission/guide'] = 'Commission/guideList';
+$route['commission/loadGuideList'] = 'Commission/loadGuideList';
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';

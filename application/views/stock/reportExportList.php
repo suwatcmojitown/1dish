@@ -17,8 +17,9 @@
                         <div class="input-group mb-3" style="">
                                             <select id="status" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
                                                   <option value="">-- สถานะ --</option>
+                                                  <option value="0">ไม่เปิดใช้งาน</option>
                                                   <option value="1">เปิดใช้งาน</option>
-                                                  <option value="2">ไม่เปิดใช้งาน</option>
+                                                  <option value="2">ร่าง</option>
                                             </select>
                         </div>
                     </div>
@@ -43,7 +44,7 @@
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            //console($resultList);
+                                            //console($list);
                                             if(isset($list)&&!empty($list)){
                                                 foreach($list as $row){
                                             ?>
@@ -62,8 +63,10 @@
                                                     if($row->status==1){
                                                     ?>
                                                     <span class="text-success pl-7 pr-7">เปิดใช้งาน</span>
-                                                    <?php }else{?>
+                                                    <?php }elseif($row->status==0){?>
                                                     <span class="text-danger pl-7 pr-7">ไม่เปิดใช้งาน</span>
+                                                    <?php }else{?>
+                                                    <span class="text-warning pl-7 pr-7">ร่าง</span>
                                                     <?php }?>
                                                     </a>
                                                     <span class="text-muted">updated : <?php echo @$row->created_at;?></span>
@@ -73,11 +76,17 @@
                                                         <div class="modal-dialog modal-dialog-centered">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title"><span class="badge badge-lg badge-warning"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> เปลี่ยนสถานะ <span class="text-warning">#<?php echo $row->name_th;?></span> </h5>
+                                                                    <h5 class="modal-title"><span class="badge badge-lg badge-warning"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> เปลี่ยนสถานะ <span class="text-warning">#<?php echo $row->document_no;?></span> </h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <p>คุณต้องการยืนยันที่จะเปลี่ยนสถานะสินค้านี้ ?</p>
+                                                                    <select id="changeStatus" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
+                                                                  <option value="null" disabled selected>-- สถานะ --</option>
+                                                                  <option value="0" <?php if($row->status=='0')echo 'selected';?>>ไม่เปิดใช้งาน</option>
+                                                                  <option value="1" <?php if($row->status=='1')echo 'selected';?>>เปิดใช้งาน</option>
+                                                                  <option value="2" <?php if($row->status=='2')echo 'selected';?>>ร่าง</option>
+                                            </select>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-warning light" data-bs-dismiss="modal">ยกเลิก</button>
@@ -97,7 +106,7 @@
                                                 <td>
                                                     <div class="d-flex">
                                                         <a href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="#" class="btn btn-success shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-eye"></i></a>
+                                                        <a href="<?php echo base_url('stock/export/view/').$row->id;?>" class="btn btn-success shadow btn-sm sharp" ><i class="fa fa-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -233,14 +242,12 @@ $("#filterBtn").click(function(){
 
 
 function changeStatus(id,change_status){
-    keysearch = document.getElementById("keysearch").value;
-    status = document.getElementById("status").value;
-
+    status = document.getElementById("changeStatus").value;
 
                     $.ajax({
                         type: 'POST',
-                        url: '<?php echo base_url('product/changeStatus')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page=<?php echo $active_page;?>&change_status='+change_status,
+                        url: '<?php echo base_url('stock/report/changeStatusExport')?>',
+                        data: 'id='+id+'&status='+status,
                         success: function(result) { 
                             //$('#result').html(result);
                             $("#_list").html(result);
@@ -248,26 +255,5 @@ function changeStatus(id,change_status){
                     });
     
 }
-
-
-function confirmDelete(id){
-            var page = <?php echo $active_page;?>;
-            var keysearch = '';
-            var status = '';
-
-            keysearch = document.getElementById("keysearch").value;
-            product_category_id = document.getElementById("product_category_id").value;
-            status = document.getElementById("status").value;
-
-            $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('product/delete')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page='+page,
-                        success: function(result) { 
-                            //$('#result').html(result);
-                            $("#_list").html(result);
-                        }
-            });
-    }
 
 </script>

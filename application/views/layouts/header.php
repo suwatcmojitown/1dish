@@ -154,13 +154,13 @@
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="far fa-file"></i>
-                            <span class="nav-text">Stock</span>
+                            <span class="nav-text">ใบเบิก</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?php echo base_url('stock/report/import');?>">Report Import</a></li>
-                            <li><a href="<?php echo base_url('stock/report/export');?>">Report Export</a></li>
-                            <li><a href="<?php echo base_url('stock/import');?>">Import Product</a></li>
-                            <li><a href="<?php echo base_url('stock/export');?>">Export Product</a></li>
+                            <li><a href="<?php echo base_url('stock/report/import');?>">ใบเบิกสินค้าเข้า</a></li>
+                            <li><a href="<?php echo base_url('stock/report/export');?>">ใบเบิกสินค้าออก</a></li>
+                            <li><a href="<?php echo base_url('stock/import');?>">เพิ่มใบเบิกสินค้าเข้า</a></li>
+                            <li><a href="<?php echo base_url('stock/export');?>">เพิ่มใบเบิกสินค้าออก</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
