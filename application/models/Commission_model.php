@@ -49,9 +49,22 @@ class Commission_model extends CI_Model {
            
     }
 
-    public function getContentDetail($id)
+    public function getCompanyDetail($id)
     {
-           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-tour?id='.$id.'',''));  
+           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-tour?bill_id='.$id.'',''));  
+           
+           if($result->header->res_code=='200')
+           {
+                    $object = $result->body[0];
+           }
+           else $object = NULL;
+           
+           return $object;
+    }
+
+    public function getGuideDetail($id)
+    {
+           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-guide?bill_id='.$id.'',''));  
            
            if($result->header->res_code=='200')
            {

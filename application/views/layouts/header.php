@@ -164,6 +164,15 @@
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span class="nav-text">คอมมิชชั่น</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="<?php echo base_url('commission/guide');?>">คอมไกด์</a></li>
+                            <li><a href="<?php echo base_url('commission/company');?>">คอมทัวร์</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-cog"></i>
                             <span class="nav-text">Setting</span>
                         </a>

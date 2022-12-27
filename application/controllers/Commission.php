@@ -105,6 +105,58 @@ class Commission extends MY_Controller {
 		
 		$this->load->view('commission/loadGuideList',$data);
 	}
+
+	function companyDetail($id){
+
+		$detail = $this->Commission_model->getCompanyDetail($id);
+		$data['detail'] = $detail;
+		//console($detail);
+		
+		if($detail)
+		{
+			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+			$this->template['content'] = $this->load->view ($this->middle = 'commission/companyDetail',$data, true);
+			$this->master_layout();
+		}
+	}
+
+	function companyPrint($id){
+
+		$detail = $this->Commission_model->getCompanyDetail($id);
+		$data['detail'] = $detail;
+		//console($detail);
+		
+		if($detail)
+		{
+			$this->load->view('commission/companyPrint',$data);
+		}
+	}
+
+	function guideDetail($id){
+
+		$detail = $this->Commission_model->getGuideDetail($id);
+		$data['detail'] = $detail;
+		//console($detail);
+		
+		if($detail)
+		{
+			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+			$this->template['content'] = $this->load->view ($this->middle = 'commission/guideDetail',$data, true);
+			$this->master_layout();
+		}
+	}
+
+	function guidePrint($id){
+
+		$detail = $this->Commission_model->getGuideDetail($id);
+		$data['detail'] = $detail;
+		//console($detail);
+		
+		if($detail)
+		{
+			$this->load->view('commission/guidePrint',$data);
+		}
+	}
 	
 
 }
