@@ -30,7 +30,7 @@ class Commission extends MY_Controller {
 		}
 
 		//$status,$keysearch,$active_page,$limit
-		$resultList = $this->Commission_model->getCommissionCompanyList('','',$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionCompanyList('','','','',$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -38,6 +38,8 @@ class Commission extends MY_Controller {
 		}
 
 		//console($data);
+		//$this->load->view('commission/companyList',$data);
+		
 		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
 		$this->template['content'] = $this->load->view ($this->middle = 'commission/companyList',$data, true);
 		$this->master_layout();
@@ -48,17 +50,25 @@ class Commission extends MY_Controller {
 
 		$data['list'] = '';
 		$data['paging'] = '';
-
+		
 		$tour_company_id = $_POST['keysearch'];
 		$status = $_POST['status'];
 		$active_page = $_POST['page'];
+		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
+			$temp = explode(' ถึง ', $_POST['daterange'] );
+			$start = $temp[0];
+			$end = $temp[1];
+		}else{
+			$start = '';
+			$end = '';
+		}
 
 		$data['page'] = $active_page;
 
 		//console($_POST);
 
 		//$status,$keysearch,$active_page,$limit
-		$resultList = $this->Commission_model->getCommissionCompanyList($status,$tour_company_id,$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionCompanyList($start,$end,$status,$tour_company_id,$active_page,PAGE_LIMIT);
 		//console($resultList);
 		if($resultList)
 		{
@@ -84,8 +94,9 @@ class Commission extends MY_Controller {
 			$data['guideList'] = $guideList->body;
 		}
 
+
 		//$status,$keysearch,$active_page,$limit
-		$resultList = $this->Commission_model->getCommissionGuideList('','',$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionGuideList('','','','',$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -110,10 +121,19 @@ class Commission extends MY_Controller {
 
 		$data['page'] = $active_page;
 
+		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
+			$temp = explode(' ถึง ', $_POST['daterange'] );
+			$start = $temp[0];
+			$end = $temp[1];
+		}else{
+			$start = '';
+			$end = '';
+		}
+
 		//console($data);
 
 		//$status,$keysearch,$active_page,$limit
-		$resultList = $this->Commission_model->getCommissionGuideList($status,$guide_id,$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionGuideList($start,$end,$status,$guide_id,$active_page,PAGE_LIMIT);
 		//console($resultList);
 		if($resultList)
 		{

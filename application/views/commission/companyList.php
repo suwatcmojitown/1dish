@@ -1,3 +1,12 @@
+<script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!--**********************************
             Content body start
         ***********************************--> 
@@ -27,9 +36,16 @@
                                         </div>
                     </div>
                     -->
-                    <div class="mb-4" style="margin-right: 3px;width: 300px;">
+                    
+                </div>
+                <div class="row">
+                    <div class="col-4 mb-4" >
+                            <input type="text" class="form-control search-input" id="datefilter" name="datefilter" placeholder="เลือกช่วงเวลา" style="font-size: 1.09375rem;">
+                    </div>
+
+                    <div class="col-3  mb-4" >
                             <select class="default-select form-control wide mb-3" id="tourname" name="tourname">
-                                                        <option value="null" selected> ----- กรุณาเลือกบริษัททัวร์ ----- </option>
+                                                        <option value="" selected>  กรุณาเลือกบริษัททัวร์  </option>
                                                         <?php 
                                                         if(isset($tourList)&&!empty($tourList))
                                                         {
@@ -43,16 +59,18 @@
                                                         ?>
                             </select>
                     </div>
-                    <div class="dropdown custom-dropdown ms-3">
-                        <div class="input-group mb-3" style="">
+                    <div class="col-2 dropdown custom-dropdown ms-3">
+                        <div class="default-select input-group mb-3" style="">
                                             <select id="status" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
-                                                  <option value="">-- สถานะ --</option>
-                                                  <option value="1">เปิดใช้งาน</option>
-                                                  <option value="0">ไม่เปิดใช้งาน</option>
+                                                  <option value=""> สถานะ </option>
+                                                  <option value="1">จ่ายแล้ว</option>
+                                                  <option value="0">ยังไม่จ่าย</option>
                                             </select>
                         </div>
                     </div>
-                    <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
+                    <div class="col-2 ">
+                        <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา <i class="fa fa-filter"></i></a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -178,13 +196,14 @@
 <script>
 
 function loadPage(page){
+    daterange = document.getElementById("datefilter").value;
     keysearch = document.getElementById("tourname").value;
     status = document.getElementById("status").value;
     
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('commission/loadCompanyList')?>',
-                data: 'keysearch='+keysearch+'&status='+status+'&page='+page,
+                data: 'keysearch='+keysearch+'&status='+status+'&page='+page+'&daterange='+daterange,
                 success: function(result) { 
                     //$('#result').html(result);
                     $("#_list").html(result);
@@ -194,13 +213,14 @@ function loadPage(page){
 
 
 $("#filterBtn").click(function(){
+    daterange = document.getElementById("datefilter").value;
     keysearch = document.getElementById("tourname").value;
     status = document.getElementById("status").value;
     
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('commission/loadCompanyList')?>',
-                data: 'keysearch='+keysearch+'&status='+status+'&page=1',
+                data: 'keysearch='+keysearch+'&status='+status+'&page=1&daterange='+daterange,
                 success: function(result) { 
                     //$('#result').html(result);
                     $("#_list").html(result);
@@ -210,12 +230,13 @@ $("#filterBtn").click(function(){
 
 
 function changeStatus(id){
+    daterange = document.getElementById("datefilter").value;
     keysearch = document.getElementById("tourname").value;
     status = document.getElementById("status").value;
                     $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('commission/changeCompanyStatus')?>',
-                        data: 'keysearch='+keysearch+'&status='+status+'&page=<?php echo $active_page;?>&id='+id,
+                        data: 'keysearch='+keysearch+'&status='+status+'&page=<?php echo $active_page;?>&id='+id+'&daterange='+daterange,
                         success: function(result) { 
                             //$('#result').html(result); 
                             $("#_list").html(result);

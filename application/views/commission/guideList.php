@@ -27,53 +27,40 @@
                                         </div>
                     </div>
                     -->
-                    
-                    <div class="mb-4" style="margin-right: 3px;width: 300px;">
-                            <select class="default-select form-control wide mb-3" id="guidename" name="guidename">
-                                                        <option value="" selected> ----- กรุณาเลือกไกด์ ----- </option>
-                                                        <?php 
-                                                        if(isset($guideList)&&!empty($guideList))
-                                                        {
-                                                            foreach($guideList as $row)
+                    </div>
+                    <div class="row">
+                        <div class="col-4 mb-4" >
+                            <input type="text" class="form-control search-input" id="datefilter" name="datefilter" placeholder="เลือกช่วงเวลา" style="font-size: 1.09375rem;">
+                        </div>
+                        <div class="col-3 mb-4" style="margin-right: 3px;width: 300px;">
+                                <select class="default-select form-control wide mb-3" id="guidename" name="guidename">
+                                                            <option value="" selected> ----- กรุณาเลือกไกด์ ----- </option>
+                                                            <?php 
+                                                            if(isset($guideList)&&!empty($guideList))
                                                             {
-                                                        ?>
-                                                            <option value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
-                                                        <?php 
+                                                                foreach($guideList as $row)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
+                                                            <?php 
+                                                                }
                                                             }
-                                                        }
-                                                        ?>
-                            </select>
-                    </div>
-                    <div class="dropdown custom-dropdown ms-3">
-                        <div class="input-group mb-3" style="">
-                                            <select id="status" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
-                                                  <option value="">-- สถานะ --</option>
-                                                  <option value="1">เปิดใช้งาน</option>
-                                                  <option value="0">ไม่เปิดใช้งาน</option>
-                                            </select>
+                                                            ?>
+                                </select>
+                        </div>
+                        <div class="col-2 dropdown custom-dropdown ms-3">
+                            <div class="input-group mb-3" style="">
+                                                <select id="status" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
+                                                      <option value="">-- สถานะ --</option>
+                                                      <option value="1">เปิดใช้งาน</option>
+                                                      <option value="0">ไม่เปิดใช้งาน</option>
+                                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2 ">
+                            <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
                         </div>
                     </div>
-                    <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
-                    <!--
-                    <a href="<?php echo base_url('admin/create');?>" id="add-order" class="btn btn-warning btn-rounded ms-3">Add +</a>-->
-                    <!--
-                    <div class="dropdown custom-dropdown ms-3">
-                        <button type="button" class="btn btn-primary light d-flex align-items-center svg-btn" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg width="16" height="16" class="scale5" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.4281 2.856H21.8681V1.428C21.8681 0.56 21.2801 0 20.4401 0C19.6001 0 19.0121 0.56 19.0121 1.428V2.856H9.71606V1.428C9.71606 0.56 9.15606 0 8.28806 0C7.42006 0 6.86006 0.56 6.86006 1.428V2.856H5.57206C2.85606 2.856 0.560059 5.152 0.560059 7.868V23.016C0.560059 25.732 2.85606 28.028 5.57206 28.028H22.4281C25.1441 28.028 27.4401 25.732 27.4401 23.016V7.868C27.4401 5.152 25.1441 2.856 22.4281 2.856ZM5.57206 5.712H22.4281C23.5761 5.712 24.5841 6.72 24.5841 7.868V9.856H3.41606V7.868C3.41606 6.72 4.42406 5.712 5.57206 5.712ZM22.4281 25.144H5.57206C4.42406 25.144 3.41606 24.136 3.41606 22.988V12.712H24.5561V22.988C24.5841 24.136 23.5761 25.144 22.4281 25.144Z" fill="#2F4CDD"/></svg>
-                            <span class="fs-16 ms-3">Today</span>
-                            <i class="fa fa-angle-down scale5 ms-3"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Monday</a>
-                            <a class="dropdown-item" href="#">Tuesday</a>
-                            <a class="dropdown-item" href="#">Wednesday</a>
-                            <a class="dropdown-item" href="#">Thursday</a>
-                            <a class="dropdown-item" href="#">Friday</a>
-                            <a class="dropdown-item" href="#">Saturday</a>
-                            <a class="dropdown-item" href="#">Sunday</a>
-                        </div>
-                    </div>
-                    -->
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -199,13 +186,14 @@
 <script>
 
 function loadPage(page){
+    daterange = document.getElementById("datefilter").value;
     keysearch = document.getElementById("guidename").value;
     status = document.getElementById("status").value;
     
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('commission/loadGuideList')?>',
-                data: 'keysearch='+keysearch+'&status='+status+'&page='+page,
+                data: 'keysearch='+keysearch+'&status='+status+'&page='+page+'&daterange='+daterange,
                 success: function(result) { 
                     //$('#result').html(result);
                     $("#_list").html(result);
@@ -215,13 +203,14 @@ function loadPage(page){
 
 
 $("#filterBtn").click(function(){
+    daterange = document.getElementById("datefilter").value;
     keysearch = document.getElementById("guidename").value;
     status = document.getElementById("status").value;
     
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('commission/loadGuideList')?>',
-                data: 'keysearch='+keysearch+'&status='+status+'&page=1',
+                data: 'keysearch='+keysearch+'&status='+status+'&page=1&daterange='+daterange,
                 success: function(result) { 
                     //$('#result').html(result);
                     $("#_list").html(result);
@@ -231,12 +220,13 @@ $("#filterBtn").click(function(){
  
 
 function changeStatus(id){
+    daterange = document.getElementById("datefilter").value;
     keysearch = document.getElementById("guidename").value;
     status = document.getElementById("status").value;
                     $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('commission/changeGuideStatus')?>',
-                        data: 'keysearch='+keysearch+'&status='+status+'&page=<?php echo $active_page;?>&id='+id,
+                        data: 'keysearch='+keysearch+'&status='+status+'&page=<?php echo $active_page;?>&id='+id+'&daterange='+daterange,
                         success: function(result) { 
                             //$('#result').html(result); 
                             $("#_list").html(result);

@@ -2,11 +2,13 @@
 
 class Commission_model extends CI_Model {
 
-    public function getCommissionCompanyList($status='',$tour_company_id='',$active_page=1,$limit)
+    public function getCommissionCompanyList($start='',$end='',$status='',$tour_company_id='',$active_page=1,$limit)
     {
                 $temp = array();
                 $path = '';
 
+                if($start!='') $temp['start'] = $start;
+                if($end!='') $temp['end'] = $end;
                 if($status!='') $temp['status'] = $status;
                 if(($tour_company_id!='')&&($tour_company_id!='null')) $temp['tour_company_id'] = ($tour_company_id);
                 if($active_page!='') $temp['page'] = $active_page;
@@ -75,11 +77,13 @@ class Commission_model extends CI_Model {
            return $object;
     }
 
-    public function getCommissionGuideList($status='',$guide_id='',$active_page=1,$limit)
+    public function getCommissionGuideList($start='',$end='',$status='',$guide_id='',$active_page=1,$limit)
     {
                 $temp = array();
                 $path = '';
 
+                if($start!='') $temp['start'] = $start;
+                if($end!='') $temp['end'] = $end;
                 if($status!='') $temp['status'] = $status;
                 if(($guide_id!='')&&($guide_id!='null')) $temp['guide_id'] = ($guide_id);
                 if($active_page!='') $temp['page'] = $active_page;
