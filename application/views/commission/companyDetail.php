@@ -33,7 +33,7 @@
                     -->
                    
                 </div>
-                <div class="row">
+                <div class="row" id="_content">
                 	<?php //console($detail);?>
                     <div class="col-5">
                         <div class="card">
@@ -131,8 +131,18 @@
 
                                     <div class="btn_box">
                                         <div class="row no-gutter mx-0">
-                                            <a onclick="cancelImport()" id="home-counter-tab" class="btn btn-danger btn-block col-6 m-0 rounded-0">ยกเลิก</a>
-                                            <a onclick="confirmImport()" id="place-order-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">ยืนยัน</a>
+                                            <?php 
+                                            if($detail->status==0){
+                                            ?>
+                                            <a onclick="changeStatus('<?php echo $detail->bill_id;?>')" id="home-counter-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">จ่ายค่าคอม</a>
+                                            <?php 
+                                            }
+                                            if($detail->status==1){
+                                            ?>
+                                            <a href="<?php echo base_url('commission/company/print/').$detail->bill_id;?>" target="_blank" id="place-order-tab" class="btn btn-info btn-block col-6 m-0 rounded-0">ปริ๊น</a>
+                                            <?php 
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -147,4 +157,20 @@
             Content body end
         ***********************************-->
 <span id="result"></span>
+
+<script>
+
+function changeStatus(id){
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?php echo base_url('commission/changeCompanyStatusDetail')?>',
+                        data: 'id='+id,
+                        success: function(result) { 
+                            //$('#result').html(result); 
+                            $("#_content").html(result);
+                        }
+                    });
+}
+
+</script>
 

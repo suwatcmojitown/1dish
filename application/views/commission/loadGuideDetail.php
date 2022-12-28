@@ -1,41 +1,4 @@
-<!--
-
--->
-
-<!--**********************************
-            Content body start
-        ***********************************--> 
-        <div class="content-body">
-            <!-- row -->
-            <div class="container-fluid">
-                <div class="form-head d-flex mb-3 align-items-start">
-                    <div class="me-auto d-none d-lg-block ">
-                        <h2 class="text-primary font-w600 mb-0"><i class="fa fa-credit-card" aria-hidden="true"></i> Commission Guide</h2>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)"><?php echo @$detail->guide_code?> <?php echo ' | '.@$detail->guide_name;?></a></li>
-                            <!--<li class="breadcrumb-item"><a href="javascript:void(0)">Accordion</a></li>-->
-                        </ol>
-                    </div>
-                    <!--
-                    <div class="input-group search-area style-1 mb-4 ">
-                            <input type="text" class="form-control search-input" id="keysearch" placeholder="คำค้นหา...">
-                    </div>
-                    <div class="dropdown custom-dropdown ms-3">
-                        <div class="input-group mb-3" style="">
-                                            <select id="status" class="form-select wide" aria-label="Default select example" style="background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
-                                                  <option selected disabled>Choose...</option>
-                                                  <option value="1">เปิดใช้งาน</option>
-                                                  <option value="0">ไม่เปิดใช้งาน</option>
-                                            </select>
-                                            <button class="btn btn-primary" type="button">สถานะ</button>
-                                        </div>
-                    </div>
-                    -->
-                   
-                </div>
-                <div class="row" id="_content">
-                	<?php //console($detail);?>
-                    <div class="col-5">
+<div class="col-5">
                         <div class="card">
                             <?php 
                             	if($detail->status==1){
@@ -149,29 +112,3 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-<span id="result"></span>
-
-
-<script>
-
-function changeStatus(id){
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('commission/changeGuideStatusDetail')?>',
-                        data: 'id='+id,
-                        success: function(result) { 
-                            //$('#result').html(result); 
-                            $("#_content").html(result);
-                        }
-                    });
-}
-
-</script>
-

@@ -27,8 +27,22 @@
                                         </div>
                     </div>
                     -->
-                    <div class="mb-3" style="margin-right: 3px;">
-                            <input id="keysearch" class="form-control form-control-lg" type="text" placeholder="คำค้นหา" >
+                    
+                    <div class="mb-4" style="margin-right: 3px;width: 300px;">
+                            <select class="default-select form-control wide mb-3" id="guidename" name="guidename">
+                                                        <option value="" selected> ----- กรุณาเลือกไกด์ ----- </option>
+                                                        <?php 
+                                                        if(isset($guideList)&&!empty($guideList))
+                                                        {
+                                                            foreach($guideList as $row)
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                            </select>
                     </div>
                     <div class="dropdown custom-dropdown ms-3">
                         <div class="input-group mb-3" style="">
@@ -111,6 +125,13 @@
                                                     <div class="d-flex">
                                                         <a href="<?php echo base_url('commission/guide/view/').$row->bill_id;?>" class="btn btn-success shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
                                                         <a target="_blank" href="<?php echo base_url('commission/guide/print/').$row->bill_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
+                                                        <?php 
+                                                        if($row->status==0){
+                                                        ?>
+                                                        <a style="padding-left: 14px;cursor: pointer;" onclick="changeStatus('<?php echo $row->bill_id;?>')"><span class="badge badge-success">จ่ายค่าคอม</span></a>
+                                                        <?php 
+                                                        }
+                                                        ?>
                                                 </td>
                                             </tr>
                                             <?php
@@ -178,7 +199,7 @@
 <script>
 
 function loadPage(page){
-    keysearch = document.getElementById("keysearch").value;
+    keysearch = document.getElementById("guidename").value;
     status = document.getElementById("status").value;
     
     $.ajax({
@@ -194,7 +215,7 @@ function loadPage(page){
 
 
 $("#filterBtn").click(function(){
-    keysearch = document.getElementById("keysearch").value;
+    keysearch = document.getElementById("guidename").value;
     status = document.getElementById("status").value;
     
     $.ajax({
@@ -207,48 +228,22 @@ $("#filterBtn").click(function(){
                 } 
     });
 });
+ 
 
-
-function changeStatus(id,status){
+function changeStatus(id){
+    keysearch = document.getElementById("guidename").value;
+    status = document.getElementById("status").value;
                     $.ajax({
                         type: 'POST',
-                        url: '<?php echo base_url('admin/changeStatus')?>',
-                        data: 'id='+id+'&status='+status,
+                        url: '<?php echo base_url('commission/changeGuideStatus')?>',
+                        data: 'keysearch='+keysearch+'&status='+status+'&page=<?php echo $active_page;?>&id='+id,
                         success: function(result) { 
-                            //$('#result').html(result);
-                            if(result==true)
-                            {
-                                toastr.success('บันทึกข้อมูลในระบบเรียบร้อยแล้ว','แก้ไขคลังปัญญา');
-                                setTimeout(function() { 
-                                        var url = "<?php echo base_url('article/list');?>";    
-                                        $(location).attr('href',url);
-                                }, 3000);
-                            } 
-                            else{
-                                toastr.error('บันทึกข้อมูลในระบบไม่สำเร็จ','แก้ไขคลังปัญญา');
-                            }    
+                            //$('#result').html(result); 
+                            $("#_list").html(result);
                         }
                     });
 }
 
 
-function confirmDelete(id){
-            var page = <?php echo $active_page;?>;
-            var keysearch = '';
-            var status = '';
-
-            keysearch = document.getElementById("keysearch").value;
-            status = document.getElementById("status").value;
-
-            $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('admin/delete')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&status='+status+'&page='+page,
-                        success: function(result) { 
-                            //$('#result').html(result);
-                            $("#_list").html(result);
-                        }
-            });
-    }
 
 </script>

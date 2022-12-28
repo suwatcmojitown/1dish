@@ -167,8 +167,12 @@ $route['commission/guide'] = 'Commission/guideList';
 $route['commission/loadGuideList'] = 'Commission/loadGuideList';
 $route['commission/company/view/(:any)'] = 'Commission/companyDetail/$1';
 $route['commission/company/print/(:any)'] = 'Commission/companyPrint/$1';
+$route['commission/changeCompanyStatus'] = 'Commission/changeCompanyStatus';
+$route['commission/changeCompanyStatusDetail'] = 'Commission/changeCompanyStatusDetail';
 $route['commission/guide/view/(:any)'] = 'Commission/guideDetail/$1';
 $route['commission/guide/print/(:any)'] = 'Commission/guidePrint/$1';
+$route['commission/changeGuideStatus'] = 'Commission/changeGuideStatus';
+$route['commission/changeGuideStatusDetail'] = 'Commission/changeGuideStatusDetail';
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';

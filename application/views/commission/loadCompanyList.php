@@ -13,7 +13,8 @@
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            //console($paging);
+                                            //console($list);
+                                            
                                             if(isset($list)&&!empty($list)){
                                                 $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                                 foreach($list as $row){
@@ -22,8 +23,8 @@
                                                 <th><?php echo $i;?></th>
                                                 <th></th>
                                                 <td>
-                                                    <h4 class="text-muted mb-0 name"><strong><?php echo @$row->tour_company_name;?></strong></h4>
-                                                    <h5 class="text-muted email"><?php echo @$row->email;?></h5>
+                                                    <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->tour_company_name;?></h4>
+                                                    <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->document_no;?></h5>
                                                 </td>
                                                 <td><?php echo @$row->commission;?></td>
                                                 <td><?php echo number_format(@$row->grandTotal);?></td>
@@ -40,27 +41,15 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="<?php echo base_url('admin/edit/').$row->tour_company_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a data-bs-original-title="ลบ" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->tour_company_id;?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                        <!-- modal danger -->
-                                                        <div class="modal fade modal-danger text-start" id="warning-<?php echo $row->tour_company_id;?>" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="myModalLabel120">Delete #<?php echo $row->username;?></h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    ยืนยันที่จะลบรายการนี้ ?
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="close" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" value="<?php echo $row->tour_company_id?>" onclick="confirmDelete('<?php echo $row->tour_company_id;?>')">ยืนยัน</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- modal danger -->
-                                                    </div>
+                                                        <a href="<?php echo base_url('commission/company/view/').$row->bill_id;?>" class="btn btn-success shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('commission/company/print/').$row->bill_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
+                                                        <?php 
+                                                        if($row->status==0){
+                                                        ?>
+                                                        <a style="padding-left: 14px;cursor: pointer;" onclick="changeStatus('<?php echo $row->bill_id;?>')"><span class="badge badge-success">จ่ายค่าคอม</span></a>
+                                                        <?php 
+                                                        }
+                                                        ?>
                                                 </td>
                                             </tr>
                                             <?php

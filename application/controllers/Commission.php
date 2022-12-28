@@ -10,6 +10,7 @@ class Commission extends MY_Controller {
 			redirect(base_url('login'), 'refresh');
         }
 
+        
     	
 		$this->load->model('Commission_model');
 	}
@@ -17,9 +18,16 @@ class Commission extends MY_Controller {
 	public function companyList($active_page = 1)
 	{
 		$data['page'] = $active_page;
-		$data['keysearch'] = '';
+		$data['tour_company_id'] = '';
 		$data['list'] = '';
 		$data['paging'] = '';
+		$data['tourList'] = '';
+
+		$tourList = $this->Commission_model->getTourListName();
+		if($tourList)
+		{
+			$data['tourList'] = $tourList->body;
+		}
 
 		//$status,$keysearch,$active_page,$limit
 		$resultList = $this->Commission_model->getCommissionCompanyList('','',$active_page,PAGE_LIMIT);
@@ -41,14 +49,16 @@ class Commission extends MY_Controller {
 		$data['list'] = '';
 		$data['paging'] = '';
 
-		$keysearch = $_POST['keysearch'];
+		$tour_company_id = $_POST['keysearch'];
 		$status = $_POST['status'];
 		$active_page = $_POST['page'];
 
 		$data['page'] = $active_page;
 
+		//console($_POST);
+
 		//$status,$keysearch,$active_page,$limit
-		$resultList = $this->Commission_model->getCommissionCompanyList($status,$keysearch,$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionCompanyList($status,$tour_company_id,$active_page,PAGE_LIMIT);
 		//console($resultList);
 		if($resultList)
 		{
@@ -63,9 +73,16 @@ class Commission extends MY_Controller {
 	public function guideList($active_page = 1)
 	{
 		$data['page'] = $active_page;
-		$data['keysearch'] = '';
+		$data['guide_id'] = '';
 		$data['list'] = '';
 		$data['paging'] = '';
+		$data['guideList'] = '';
+
+		$guideList = $this->Commission_model->getGuideListName();
+		if($guideList)
+		{
+			$data['guideList'] = $guideList->body;
+		}
 
 		//$status,$keysearch,$active_page,$limit
 		$resultList = $this->Commission_model->getCommissionGuideList('','',$active_page,PAGE_LIMIT);
@@ -87,14 +104,16 @@ class Commission extends MY_Controller {
 		$data['list'] = '';
 		$data['paging'] = '';
 
-		$keysearch = $_POST['keysearch'];
+		$guide_id = $_POST['keysearch'];
 		$status = $_POST['status'];
 		$active_page = $_POST['page'];
 
 		$data['page'] = $active_page;
 
+		//console($data);
+
 		//$status,$keysearch,$active_page,$limit
-		$resultList = $this->Commission_model->getCommissionGuideList($status,$keysearch,$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionGuideList($status,$guide_id,$active_page,PAGE_LIMIT);
 		//console($resultList);
 		if($resultList)
 		{
@@ -156,6 +175,108 @@ class Commission extends MY_Controller {
 		{
 			$this->load->view('commission/guidePrint',$data);
 		}
+	}
+
+	function changeCompanyStatus(){
+
+		$temp = new stdClass(); 
+		$temp->bill_id = $_POST['id'];
+		$tz_object = new DateTimeZone('Asia/Bangkok');
+		$datetime = new DateTime();
+		$datetime->setTimezone($tz_object);
+		$temp->transfer_date = $datetime->format('Y\-m\-d\ H:i:s');
+
+		$this->Commission_model->changeCompanyStatus($temp);
+		
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		$tour_company_id = $_POST['keysearch'];
+		$status = $_POST['status'];
+		$active_page = $_POST['page'];
+
+		$data['page'] = $active_page;
+
+		$resultList = $this->Commission_model->getCommissionCompanyList($status,$tour_company_id,$active_page,PAGE_LIMIT);
+		//console($resultList);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		$this->load->view('commission/loadCompanyList',$data);
+	}
+
+	function changeCompanyStatusDetail(){
+
+		$temp = new stdClass(); 
+		$temp->bill_id = $_POST['id'];
+		$tz_object = new DateTimeZone('Asia/Bangkok');
+		$datetime = new DateTime();
+		$datetime->setTimezone($tz_object);
+		$temp->transfer_date = $datetime->format('Y\-m\-d\ H:i:s');
+
+		$this->Commission_model->changeCompanyStatus($temp);
+		
+		$detail = $this->Commission_model->getCompanyDetail($_POST['id']);
+		$data['detail'] = $detail;
+		//console($detail);
+		
+		$this->load->view('commission/loadCompanyDetail',$data);
+		
+	}
+
+
+
+	function changeGuideStatus(){
+
+		$temp = new stdClass(); 
+		$temp->bill_id = $_POST['id'];
+		$tz_object = new DateTimeZone('Asia/Bangkok');
+		$datetime = new DateTime();
+		$datetime->setTimezone($tz_object);
+		$temp->transfer_date = $datetime->format('Y\-m\-d\ H:i:s');
+
+		$this->Commission_model->changeGuideStatus($temp);
+		
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		$tour_company_id = $_POST['keysearch'];
+		$status = $_POST['status'];
+		$active_page = $_POST['page'];
+
+		$data['page'] = $active_page;
+
+		$resultList = $this->Commission_model->getCommissionGuideList($status,$tour_company_id,$active_page,PAGE_LIMIT);
+		//console($resultList);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		$this->load->view('commission/loadGuideList',$data);
+	}
+
+	function changeGuideStatusDetail(){
+
+		$temp = new stdClass(); 
+		$temp->bill_id = $_POST['id'];
+		$tz_object = new DateTimeZone('Asia/Bangkok');
+		$datetime = new DateTime();
+		$datetime->setTimezone($tz_object);
+		$temp->transfer_date = $datetime->format('Y\-m\-d\ H:i:s');
+
+		$this->Commission_model->changeGuideStatus($temp);
+		
+		$detail = $this->Commission_model->getGuideDetail($_POST['id']);
+		$data['detail'] = $detail;
+		//console($detail);
+		
+		$this->load->view('commission/loadGuideDetail',$data);
+		
 	}
 	
 
