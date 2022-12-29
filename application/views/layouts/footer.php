@@ -52,7 +52,8 @@ $(function() {
       autoUpdateInput: false,
       locale: {
           format: 'YYYY:MM:DD',
-      }
+      },
+      autoApply: true,
   });
 
   $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
@@ -63,7 +64,38 @@ $(function() {
       $(this).val('');
   });
 
+  $('input[name="datepick"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          format: 'YYYY:MM:DD',
+      },
+      singleDatePicker: true,
+      autoApply: true,
+  });
+
+  $('input[name="datepick"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY-MM-DD'));
+      a = document.getElementById("groupname").value;
+      
+      $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('bill/loadGroupname')?>',
+                data: 'keysearch='+a,
+                success: function(result) { 
+                    //$('#result').html(result);
+                    $("#groupname").html(result);
+                } 
+      });
+  });
+
+  $('input[name="datepick"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+
 });
+
+  
+
 </script>
 
 

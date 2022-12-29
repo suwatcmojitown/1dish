@@ -7,9 +7,9 @@
   $("#single-select").select2();
   $("#product_id").select2();
   $("#product_category_id").select2();
-  $("#tourname").select2({
-    width: 'resolve' // need to override the changed default
-});
+  $("#tourname").select2();
+  $("#guidename").select2();
+  $("#groupname").select2();
 
   // multi select box
   $('.multi-select').select2();

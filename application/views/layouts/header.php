@@ -171,6 +171,11 @@
                             <li><a href="<?php echo base_url('commission/company');?>">คอมทัวร์</a></li>
                         </ul>
                     </li>
+                    <li><a class="ai-icon" href="<?php echo base_url('bill');?>" >
+                            <i class="fa fa-coffee" aria-hidden="true"></i>
+                            <span class="nav-text">Bills</span>
+                        </a>
+                    </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-cog"></i>
                             <span class="nav-text">Setting</span>

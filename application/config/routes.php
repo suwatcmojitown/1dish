@@ -173,6 +173,13 @@ $route['commission/guide/view/(:any)'] = 'Commission/guideDetail/$1';
 $route['commission/guide/print/(:any)'] = 'Commission/guidePrint/$1';
 $route['commission/changeGuideStatus'] = 'Commission/changeGuideStatus';
 $route['commission/changeGuideStatusDetail'] = 'Commission/changeGuideStatusDetail';
+
+$route['bill'] = 'Bill/list';
+$route['bill/loadContentList'] = 'Bill/loadContentList';
+$route['bill/loadGroupname'] = 'Bill/loadGroupname';
+$route['bill/view/(:any)'] = 'Bill/view/$1';
+$route['bill/edit/(:any)'] = 'Bill/edit/$1';
+$route['bill/update'] = 'Bill/update';
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';
