@@ -17,7 +17,7 @@
                                             ?>
                                             <tr>
                                                 <td>
-                                                    <img style="max-height: 70px;" src="<?php echo base_url()?>app-assets/images/custom/product-1.jpeg">
+                                                    <img style="max-height: 70px;" src="<?php echo @$row->image_url?>">
                                                 </td>
                                                 <!--
                                                 <td>

@@ -50,7 +50,7 @@
                     ?>
                     <div class="col-4">
                         <div class="card">
-                            <img class="card-img-top img-fluid" src="<?php echo base_url()?>app-assets/images/custom/product-1.jpeg" alt="Card image cap">
+                            <img class="card-img-top img-fluid" src="<?php echo @$detail->image_url;?>" alt="Card image cap">
                             <div style="padding: 1.5rem 1.875rem 1.25rem;">
                                 <h4 class="text-primary mb-1 name" style="font-weight: 400;display: block!important;"><?php echo @$detail->name_th;?></h4>
                                 <h4 class="text-primary mb-1 name" style="font-weight: 300;"><?php echo @$detail->name_en;?></h4>
