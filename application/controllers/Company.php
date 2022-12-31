@@ -107,11 +107,11 @@ class Company extends MY_Controller {
 		$data->name = $_POST['name'];
 		$data->short_name = $_POST['short_name'];
 		$data->image = $image;
-		$data->company_type = (isset($_POST['company_type'])) ? $_POST['company_type'] : '';
-		$data->branch_type = (isset($_POST['branch_type'])) ? $_POST['branch_type'] : '';
+		$data->company_type = (isset($_POST['company_type'])) ? $_POST['company_type'] : 0;
+		$data->branch_type = (isset($_POST['branch_type'])) ? $_POST['branch_type'] : 0;
 		$data->tax_no = $_POST['tax_no'];
 		$data->address = $_POST['address'];
-		$data->credit_day = $_POST['credit_day'];
+		$data->credit_day = (isset($_POST['credit_day'])&&!empty($_POST['credit_day'])) ? $_POST['credit_day'] : 0;
 		
 		$data->telephone = $_POST['telephone'];
 		$data->fax = $_POST['fax'];
@@ -122,9 +122,11 @@ class Company extends MY_Controller {
 		$data->bank_account_name = $_POST['bank_account_name'];
 		$data->bank_id = (isset($_POST['bank_id'])) ? $_POST['bank_id'] : '';
 		$data->bank_branch = $_POST['bank_branch'];
-		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : '';
-		$data->company_commission = (isset($_POST['company_commission'])) ? $_POST['company_commission'] : '';
+		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : 0;
+		$data->company_commission = (isset($_POST['company_commission'])) ? $_POST['company_commission'] : 0;
 		$data->status = $_POST['status'];
+
+		//console($data);
 
 		$result = $this->Company_model->add($data);
 		echo $result;
@@ -170,11 +172,11 @@ class Company extends MY_Controller {
 		$data->name = $_POST['name'];
 		$data->short_name = $_POST['short_name'];
 		$data->image = $image;
-		$data->company_type = (isset($_POST['company_type'])) ? $_POST['company_type'] : '';
-		$data->branch_type = (isset($_POST['branch_type'])) ? $_POST['branch_type'] : '';
+		$data->company_type = (isset($_POST['company_type'])) ? $_POST['company_type'] : 0;
+		$data->branch_type = (isset($_POST['branch_type'])) ? $_POST['branch_type'] : 0;
 		$data->tax_no = $_POST['tax_no'];
 		$data->address = $_POST['address'];
-		$data->credit_day = $_POST['credit_day'];
+		$data->credit_day = (isset($_POST['credit_day'])&&!empty($_POST['credit_day'])) ? $_POST['credit_day'] : 0;
 		
 		$data->telephone = $_POST['telephone'];
 		$data->fax = $_POST['fax'];
@@ -185,8 +187,8 @@ class Company extends MY_Controller {
 		$data->bank_account_name = $_POST['bank_account_name'];
 		$data->bank_id = (isset($_POST['bank_id'])) ? $_POST['bank_id'] : '';
 		$data->bank_branch = $_POST['bank_branch'];
-		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : '';
-		$data->company_commission = (isset($_POST['company_commission'])) ? $_POST['company_commission'] : '';
+		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : 0;
+		$data->company_commission = (isset($_POST['company_commission'])) ? $_POST['company_commission'] : 0;
 		$data->status = $_POST['status'];
 		//console($data);
 		$result = $this->Company_model->update($data);

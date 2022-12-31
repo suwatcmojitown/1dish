@@ -236,6 +236,8 @@ class Product extends MY_Controller {
 		$temp->id = $_POST['id'];
 		$result = $this->Product_model->delete($temp);
 		
+		//console($result);
+
 		$data['list'] = '';
 		$data['paging'] = '';
 

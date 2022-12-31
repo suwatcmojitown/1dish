@@ -127,8 +127,8 @@ class Guide extends MY_Controller {
 		$data->bank_account_name = $_POST['bank_account_name'];
 		$data->bank_id = (isset($_POST['bank_id'])) ? $_POST['bank_id'] : '';
 		$data->bank_branch = $_POST['bank_branch'];
-		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : '';
-		$data->guide_commission = (isset($_POST['guide_commission'])) ? $_POST['guide_commission'] : '';
+		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : 0;
+		$data->guide_commission = (isset($_POST['guide_commission'])) ? $_POST['guide_commission'] : 0;
 		$data->status = $_POST['status'];
 
 		$result = $this->Guide_model->add($data);
@@ -200,8 +200,8 @@ class Guide extends MY_Controller {
 		$data->bank_account_name = $_POST['bank_account_name'];
 		$data->bank_id = (isset($_POST['bank_id'])) ? $_POST['bank_id'] : '';
 		$data->bank_branch = $_POST['bank_branch'];
-		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : '';
-		$data->guide_commission = (isset($_POST['guide_commission'])) ? $_POST['guide_commission'] : '';
+		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : 0;
+		$data->guide_commission = (isset($_POST['guide_commission'])) ? $_POST['guide_commission'] : 0;
 		$data->status = $_POST['status'];
 		//console($data);
 		$result = $this->Guide_model->update($data);

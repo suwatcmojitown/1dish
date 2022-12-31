@@ -6,7 +6,8 @@ class Guide_model extends CI_Model {
     public function add($data)
     {
             $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('POST',PATH_API.'backend/guide',$myJSON));  
+            $result = json_decode(callAPI('POST',PATH_API.'backend/guide',$myJSON)); 
+            //console($result); 
             if($result->header->res_code=='200')
             {
                     return true;
