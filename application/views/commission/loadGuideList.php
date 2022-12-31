@@ -14,9 +14,8 @@
                                         <tbody>
                                             <?php 
                                             //console($list);
-                                            
+                                            $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                             if(isset($list)&&!empty($list)){
-                                                $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
@@ -24,7 +23,7 @@
                                                 <th></th>
                                                 <td>
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->guide_name;?></h4>
-                                                    <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->document_no;?></h5>
+                                                    <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->group_no;?></h5>
                                                 </td>
                                                 <td><?php echo @$row->commission;?></td>
                                                 <td><?php echo number_format(@$row->grandTotal);?></td>
@@ -42,12 +41,12 @@
                                                 
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="<?php echo base_url('commission/guide/view/').$row->bill_id;?>" class="btn btn-success shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
-                                                        <a target="_blank" href="<?php echo base_url('commission/guide/print/').$row->bill_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
+                                                        <a href="<?php echo base_url('commission/guide/view/').$row->tour_grouping_id;?>" class="btn btn-success shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('commission/guide/print/').$row->tour_grouping_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
                                                         <?php 
                                                         if($row->status==0){
                                                         ?>
-                                                        <a style="padding-left: 14px;cursor: pointer;" onclick="changeStatus('<?php echo $row->bill_id;?>')"><span class="badge badge-success">จ่ายค่าคอม</span></a>
+                                                        <a style="padding-left: 14px;cursor: pointer;" onclick="changeStatus('<?php echo $row->tour_grouping_id;?>')"><span class="badge badge-success">จ่ายค่าคอม</span></a>
                                                         <?php 
                                                         }
                                                         ?>

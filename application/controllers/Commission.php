@@ -200,7 +200,7 @@ class Commission extends MY_Controller {
 	function changeCompanyStatus(){
 
 		$temp = new stdClass(); 
-		$temp->bill_id = $_POST['id'];
+		$temp->tour_grouping_id = $_POST['id'];
 		$tz_object = new DateTimeZone('Asia/Bangkok');
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);
@@ -211,13 +211,23 @@ class Commission extends MY_Controller {
 		$data['list'] = '';
 		$data['paging'] = '';
 
+		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
+			$temp = explode(' ถึง ', $_POST['daterange'] );
+			$start = $temp[0];
+			$end = $temp[1];
+		}else{
+			$start = '';
+			$end = '';
+		}
+
 		$tour_company_id = $_POST['keysearch'];
 		$status = $_POST['status'];
 		$active_page = $_POST['page'];
 
 		$data['page'] = $active_page;
 
-		$resultList = $this->Commission_model->getCommissionCompanyList($status,$tour_company_id,$active_page,PAGE_LIMIT);
+
+		$resultList = $this->Commission_model->getCommissionCompanyList($start,$end,$status,$tour_company_id,$active_page,PAGE_LIMIT);
 		//console($resultList);
 		if($resultList)
 		{
@@ -231,7 +241,7 @@ class Commission extends MY_Controller {
 	function changeCompanyStatusDetail(){
 
 		$temp = new stdClass(); 
-		$temp->bill_id = $_POST['id'];
+		$temp->tour_grouping_id = $_POST['id'];
 		$tz_object = new DateTimeZone('Asia/Bangkok');
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);
@@ -252,7 +262,7 @@ class Commission extends MY_Controller {
 	function changeGuideStatus(){
 
 		$temp = new stdClass(); 
-		$temp->bill_id = $_POST['id'];
+		$temp->tour_grouping_id = $_POST['id'];
 		$tz_object = new DateTimeZone('Asia/Bangkok');
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);
@@ -260,6 +270,15 @@ class Commission extends MY_Controller {
 
 		$this->Commission_model->changeGuideStatus($temp);
 		
+		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
+			$temp = explode(' ถึง ', $_POST['daterange'] );
+			$start = $temp[0];
+			$end = $temp[1];
+		}else{
+			$start = '';
+			$end = '';
+		}
+
 		$data['list'] = '';
 		$data['paging'] = '';
 
@@ -269,7 +288,7 @@ class Commission extends MY_Controller {
 
 		$data['page'] = $active_page;
 
-		$resultList = $this->Commission_model->getCommissionGuideList($status,$tour_company_id,$active_page,PAGE_LIMIT);
+		$resultList = $this->Commission_model->getCommissionGuideList($start,$end,$status,$tour_company_id,$active_page,PAGE_LIMIT);
 		//console($resultList);
 		if($resultList)
 		{
@@ -283,7 +302,7 @@ class Commission extends MY_Controller {
 	function changeGuideStatusDetail(){
 
 		$temp = new stdClass(); 
-		$temp->bill_id = $_POST['id'];
+		$temp->tour_grouping_id = $_POST['id'];
 		$tz_object = new DateTimeZone('Asia/Bangkok');
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);

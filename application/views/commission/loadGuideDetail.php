@@ -97,12 +97,12 @@
                                             <?php 
                                             if($detail->status==0){
                                             ?>
-                                            <a onclick="changeStatus('<?php echo $detail->bill_id;?>')" id="home-counter-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">จ่ายค่าคอม</a>
+                                            <a onclick="changeStatus('<?php echo $detail->tour_grouping_id;?>')" id="home-counter-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">จ่ายค่าคอม</a>
                                             <?php 
                                             }
                                             if($detail->status==1){
                                             ?>
-                                            <a href="<?php echo base_url('commission/guide/print/').$detail->bill_id;?>" target="_blank" id="place-order-tab" class="btn btn-info btn-block col-6 m-0 rounded-0">ปริ๊น</a>
+                                            <a href="<?php echo base_url('commission/guide/print/').$detail->tour_grouping_id;?>" target="_blank" id="place-order-tab" class="btn btn-info btn-block col-6 m-0 rounded-0">ปริ๊น</a>
                                             <?php 
                                             }
                                             ?>

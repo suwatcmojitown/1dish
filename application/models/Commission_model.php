@@ -53,7 +53,7 @@ class Commission_model extends CI_Model {
 
     public function getCompanyDetail($id)
     {
-           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-tour?bill_id='.$id.'',''));  
+           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-tour?tour_grouping_id='.$id.'',''));  
            
            if($result->header->res_code=='200')
            {
@@ -66,7 +66,7 @@ class Commission_model extends CI_Model {
 
     public function getGuideDetail($id)
     {
-           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-guide?bill_id='.$id.'',''));  
+           $result = json_decode(callAPI('GET',PATH_API.'backend/commission-guide?tour_grouping_id='.$id.'',''));  
            
            if($result->header->res_code=='200')
            {
