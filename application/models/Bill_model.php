@@ -51,14 +51,18 @@ class Bill_model extends CI_Model {
 
    
 
-    public function getGroupListName($start,$discount)
+    public function getGroupListName($start,$discount='')
     {
+
+                //echo $discount;
                 $temp = array();
                 $path = '';
 
                 $temp['limit'] = 1000;
                 if($start!='') $temp['start'] = $start;
                 if($discount!='') $temp['discount'] = 0;
+
+                //console($temp);
 
                 $i = 0;
                 foreach($temp as $key => $value)

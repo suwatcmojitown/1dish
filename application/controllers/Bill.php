@@ -124,7 +124,7 @@ class Bill extends MY_Controller {
 			$now_date = '';
 		}
 		
-		$groupList = $this->Bill_model->getGroupListName($now_date,0);
+		$groupList = $this->Bill_model->getGroupListName($now_date,'discount');
 		if($groupList)
 		{
 			$data['groupList'] = $groupList->body;
