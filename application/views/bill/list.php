@@ -31,6 +31,9 @@
                     
                 </div>
                 <div class="row">
+                    <?php 
+                    //console($groupList);
+                    ?>
                     <div class="col-4 mb-4" >
                             <input type="text" class="form-control search-input" id="datepick" name="datepick" placeholder="เลือกวันที่" style="font-size: 1.09375rem;">
                     </div>
@@ -44,7 +47,7 @@
                                                             foreach($groupList as $row)
                                                             {
                                                         ?>
-                                                            <option value="<?php echo $row->id;?>"><?php echo $row->group_sign;?></option>
+                                                            <option value="<?php echo $row->id;?>"><?php echo $row->group_sign.' - '.$row->guide_name;?></option>
                                                         <?php 
                                                             }
                                                         }

@@ -54,7 +54,7 @@
                                                             foreach($groupList as $row)
                                                             {
                                                         ?>
-                                                            <option value="<?php echo $row->id;?>" <?php if($row->id==$detail->tour_grouping_id) echo 'selected';?>><?php echo $row->group_sign;?></option>
+                                                            <option value="<?php echo $row->id;?>" <?php if($row->id==$detail->tour_grouping_id) echo 'selected';?>><?php echo $row->group_sign.' - '.$row->guide_name;;?></option>
                                                         <?php 
                                                             }
                                                         }
