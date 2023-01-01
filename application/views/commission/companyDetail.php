@@ -42,12 +42,12 @@
                             	?>
                             	<div class="card-header bg-success">
                                 <h4 class="card-title text-white" > [ จ่ายแล้ว ]</h4>
-                                <h4 class="text-white" ><?php echo number_format(@$detail->grandTotal);?></h4>
+                                <h4 class="text-white" ><?php echo number_format(@$detail->total);?></h4>
                                 </div>
                             	<?php }else{?>
                             	<div class="card-header bg-danger">
                                 <h4 class="card-title text-white" > [ ค้างจ่าย ]</h4>
-                                <h4 class="text-white" ><?php echo number_format(@$detail->grandTotal);?></h4>
+                                <h4 class="text-white" ><?php echo number_format(@$detail->total);?></h4>
                                 </div>
                             	<?php }?>
                             
