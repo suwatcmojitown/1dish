@@ -271,7 +271,10 @@ class Product extends MY_Controller {
 		{
 			//id,product_id
 			$stockList = $this->Stock_model->getContentList('',$product_id);
-			$data['stockList'] = $stockList->body;
+			if($stockList){
+				$data['stockList'] = $stockList->body;
+			}
+			
 			//console($stockList);
 
 			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
@@ -314,7 +317,9 @@ class Product extends MY_Controller {
 		$product_id = $_POST['product_id'];	
 		//id,product_id
 		$stockList = $this->Stock_model->getContentList('',$product_id);
-		$data['stockList'] = $stockList->body;
+		if($stockList){
+				$data['stockList'] = $stockList->body;
+		}
 		//console($stockList);
 
 		$this->load->view('product/loadStockList',$data);
