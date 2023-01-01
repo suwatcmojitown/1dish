@@ -14,8 +14,9 @@
                                         <tbody>
                                             <?php 
                                             //console($list);
-                                            $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
+                                            
                                             if(isset($list)&&!empty($list)){
+                                                $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
