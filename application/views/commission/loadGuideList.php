@@ -6,6 +6,7 @@
                                                 <th></th>
                                                 <th>ชื่อไกด์</th>
                                                 <th>% คอมมิชชั่น</th>
+                                                <th>ยอดขาย</th>
                                                 <th>ค่าคอมมิชชั่น</th>
                                                 <th>สถานะ</th>
                                                 <th></th>
@@ -27,6 +28,7 @@
                                                     <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->group_no;?></h5>
                                                 </td>
                                                 <td><?php echo @$row->commission;?></td>
+                                                <td><?php echo number_format(@$row->bill_grandTotal);?></td>
                                                 <td><?php echo number_format(@$row->total);?></td>
                                                 <td>
                                                     <?php if($row->status=='1'){?>
