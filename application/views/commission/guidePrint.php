@@ -59,7 +59,7 @@
 								ยอด
 								</div>
 								<div style="width:100px;" align="right">
-								<?php echo number_format(@$detail->grandTotal);?>
+								<?php echo number_format(@$detail->bill_grandTotal);?>
 								</div>
 							</div>
 							<hr class="noline" style="margin-top:5px!important;margin-bottom:14px!important;">
