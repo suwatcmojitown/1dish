@@ -96,7 +96,7 @@
                                                     <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->group_no;?></h5>
                                                 </td>
                                                 <td><?php echo @$row->commission;?></td>
-                                                <td><?php echo number_format(@$row->grandTotal);?></td>
+                                                <td><?php echo number_format(@$row->total);?></td>
                                                 <td>
                                                     <?php if($row->status=='1'){?>
                                                     <div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> จ่ายแล้ว</div>
