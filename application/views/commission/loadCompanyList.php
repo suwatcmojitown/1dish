@@ -61,6 +61,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                
                                 <?php 
                                 if($paging)
                                 {

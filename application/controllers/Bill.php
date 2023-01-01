@@ -53,18 +53,23 @@ class Bill extends MY_Controller {
 
 		$data['list'] = '';
 		$data['paging'] = '';
+		$data['summary'] = '';
+		$data['date'] = '';
 		
 		$tour_grouping_id = $_POST['keysearch'];
 		//$status = $_POST['status'];
 		$active_page = $_POST['page'];
 		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
 			$start = $_POST['daterange'];
+			$summary = $this->Bill_model->getSummary($start);
+			$data['date'] = $_POST['daterange'];
 		}else{
 			$start = '';
+			$summary = '';
 		}
 
 		$data['page'] = $active_page;
-
+		$data['summary'] = $summary;
 		//console($_POST);
 
 		//start,status,tour_grouping_id,active_page,limit

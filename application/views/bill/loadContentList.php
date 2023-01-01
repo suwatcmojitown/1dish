@@ -3,7 +3,6 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th></th>
                                                 <th>รายการ</th>
                                                 <th>สัญลักษณ์</th>
                                                 <th>ชื่อทัวร์</th>
@@ -13,7 +12,8 @@
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            //console($list);
+                                            //console($summary);
+                                            //console($date);
                                             
                                             if(isset($list)&&!empty($list)){
                                                 $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
@@ -21,7 +21,6 @@
                                             ?>
                                             <tr>
                                                 <th><?php echo $i;?></th>
-                                                <th></th>
                                                 <td>
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->document_no;?></h4>
                                                     <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->created_at;?></h5>
@@ -60,6 +59,21 @@
                                             <?php
                                                 $i++; 
                                                 }
+                                            }
+                                            ?>
+
+                                            <?php
+                                            if(isset($date)&&!empty($date)){ 
+                                            ?>
+                                            <tr style="background-color: #2f4cdd;">
+                                                <td style="color:white;">#</td>
+                                                <td style="color:white;">ยอดขายทั้งหมดภายในวันที่</td>
+                                                <td style="color:white;"><?php echo @$date;?></td>
+                                                <td></td>
+                                                <td style="color:white;"><?php echo number_format(@$summary[0]->bill_summary);?></td>
+                                                <td></td>
+                                            </tr>
+                                            <?php 
                                             }
                                             ?>
                                         </tbody>

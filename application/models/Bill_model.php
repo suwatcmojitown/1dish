@@ -99,6 +99,35 @@ class Bill_model extends CI_Model {
             }
             else return false;
     }
+
+    public function getSummary($start){
+            $temp = array();
+                $path = '';
+
+                if($start!='') $temp['start'] = $start;
+
+                $i = 0;
+                foreach($temp as $key => $value)
+                {
+                        if($i==0)
+                        {
+                                $path = '?'.$key.'='.$value;
+                        }
+                        else $path = $path.'&'.$key.'='.$value;
+                        $i++;
+                }
+                
+                $result = json_decode(callAPI('GET',PATH_API.'frontend/bill/summary'.$path.'',''));  
+                //echo PATH_API.'backend/commission-tour'.$path.'';
+                //console($result);
+                if($result->header->res_code=='200')
+                {
+                        $object = $result->body;
+                }
+                else $object = NULL;
+                
+                return $object;
+    } 
     
 
 

@@ -50,6 +50,7 @@ class Commission extends MY_Controller {
 
 		$data['list'] = '';
 		$data['paging'] = '';
+		$data['summary'] = '';
 		
 		$tour_company_id = $_POST['keysearch'];
 		$status = $_POST['status'];
@@ -63,6 +64,7 @@ class Commission extends MY_Controller {
 			$end = '';
 		}
 
+		$data['summary'] = $summary;
 		$data['page'] = $active_page;
 
 		//console($_POST);
