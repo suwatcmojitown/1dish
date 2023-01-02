@@ -133,6 +133,7 @@ class Product extends MY_Controller {
 
 	public function edit($id)
 	{
+
 		$categoryList = $this->ProductCategory_model->getContentList('','',PAGE_LIMIT);
 		if($categoryList)
 		{
@@ -141,6 +142,7 @@ class Product extends MY_Controller {
 
 		$detail = $this->Product_model->getContentDetail($id);
 		$data['detail'] = $detail;
+		//console($data);
 		if($detail)
 		{
 			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');

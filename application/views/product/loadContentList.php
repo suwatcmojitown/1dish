@@ -11,7 +11,7 @@
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            //console($resultList);
+                                            //console($list);
                                             if(isset($list)&&!empty($list)){
                                                 foreach($list as $row){
                                             ?>
@@ -68,19 +68,19 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="<?php echo base_url('product/stock/view/').$row->id;?>"class="btn btn-primary shadow btn-sm sharp me-1">
+                                                        <a target="_blank" href="<?php echo base_url('product/stock/view/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1">
                                                             <i class="fa fa-cube" aria-hidden="true"></i>
                                                         </a>
-                                                        <a href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->
-                                                <div class="modal fade" id="exampleModalCenter">
+                                                <div class="modal fade" id="del<?php echo $row->id;?>">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบสินค้า <span class="text-danger">#1</span> </h4>
+                                                                <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบสินค้า <span class="text-danger"><?php echo @$row->name_th;?></span> </h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                                 </button>
                                                             </div>
@@ -90,7 +90,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">ยกเลิก</button>
-                                                                <button type="button" class="btn btn-danger">ยืนยัน</button>
+                                                                <button type="button" class="btn btn-danger" onclick="confirmDelete('<?php echo $row->id;?>')">ยืนยัน</button>
                                                             </div>
                                                         </div>
                                                     </div>

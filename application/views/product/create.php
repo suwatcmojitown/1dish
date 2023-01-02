@@ -94,12 +94,12 @@
 
                                         <div class="mb-3 col-5">
                                                 <label class="text-info form-label col-form-label-lg">ราคาทุน (บาท)</label>
-                                                <input type="text" class="form-control form-control-lg" name="cost">
+                                                <input type="text" class="form-control form-control-lg" name="cost" placeholder="จำเป็นต้องกรอก">
                                         </div>
 
                                         <div class="mb-3 col-5">
                                                 <label class="text-info form-label col-form-label-lg">ราคาหน้าร้าน (บาท)</label>
-                                                <input type="text" class="form-control form-control-lg" name="price">
+                                                <input type="text" class="form-control form-control-lg" name="price" placeholder="จำเป็นต้องกรอก">
                                         </div>
                                         
                                         <div class="mb-3 mb-0 col-5">
@@ -151,7 +151,8 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาตรวจสอบข้อมูลอีกครั้ง <br>
+                                                            หมวดหมู่ , ราคาทุน , ราคาขาย 
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>

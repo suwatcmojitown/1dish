@@ -116,15 +116,15 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="<?php echo base_url('product/stock/view/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1">
+                                                        <a target="_blank" href="<?php echo base_url('product/stock/view/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1">
                                                             <i class="fa fa-cube" aria-hidden="true"></i>
                                                         </a>
-                                                        <a href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->
-                                                <div class="modal fade" id="exampleModalCenter">
+                                                <div class="modal fade" id="del<?php echo $row->id;?>">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -200,6 +200,7 @@
 					</div>
 				</div>
             </div>
+            <span id="result"></span>
         </div>
         <!--**********************************
             Content body end
@@ -238,9 +239,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
 
-<span id="result"></span>
+
 
 <script>
 
@@ -298,6 +300,7 @@ function changeStatus(id,change_status){
 
 
 function confirmDelete(id){
+            //alert(id);
             var page = <?php echo $active_page;?>;
             var keysearch = '';
             var status = '';
@@ -311,6 +314,8 @@ function confirmDelete(id){
                         url: '<?php echo base_url('product/delete')?>',
                         data: 'id='+id+'&keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page='+page,
                         success: function(result) { 
+                            //alert(result);
+                            $('#del'+id+'').modal('hide');
                             //$('#result').html(result);
                             $("#_list").html(result);
                         }

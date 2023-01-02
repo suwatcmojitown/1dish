@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Product_model extends CI_Model {
+class Product_model extends CI_Model { 
 
 
     public function add($data)
@@ -54,7 +54,7 @@ class Product_model extends CI_Model {
     {
             $myJSON = json_encode($data); 
             $result = json_decode(callAPI('DEL',PATH_API.'backend/product',$myJSON));  
-            //console($result);
+            console($result);
             if($result->header->res_code=='200')
             {
                     return true;

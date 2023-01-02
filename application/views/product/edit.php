@@ -61,8 +61,13 @@
                                         </div>
                                         -->
                                         <div class="mb-3 col-8 category">
+                                        <?php 
+                                        //console($detail);
+                                        //echo $detail->product_category_id;
+                                        //console($categoryList);
+                                        ?>
                                         <label class="text-info form-label col-form-label-lg">หมวดหมู่</label>
-                                                <select class="default-select form-control wide mb-3" name="product_category_id" >
+                                                <select class="default-select form-control wide mb-3" id="product_category_id" name="product_category_id" >
                                                         <option value="null" disabled selected> --- กรุณาเลือก --- </option>
                                                         <?php 
                                                         if(isset($categoryList)&&!empty($categoryList))
@@ -159,7 +164,8 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
+                                                            บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาตรวจสอบข้อมูลอีกครั้ง <br>
+                                                            หมวดหมู่ , ราคาทุน , ราคาขาย 
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
@@ -173,7 +179,8 @@
     var submitButton = $('#submit_btn');
     formContainer  = $('#addForm');
     $("#submit_btn").click(function(){
-        
+                
+                /*
                 var product_category_id = null;
         
                 $(".category button").each(function(){ 
@@ -181,6 +188,7 @@
                         product_category_id = $(this).attr("value");
                     }
                 });
+                */
 
                 var data = new FormData();
 
@@ -206,6 +214,7 @@
                 var calculate_commission = document.getElementById("calculate_commission").value;
                 data.append('calculate_commission', calculate_commission);
 
+                var product_category_id = document.getElementById("product_category_id").value;
                 data.append('product_category_id', product_category_id);
                 
                                     $.ajax({
@@ -216,7 +225,6 @@
                                         contentType: false,
                                         success: function(result) { 
                                             //$('#result').html(result);
-                                            
                                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');
@@ -224,17 +232,16 @@
                                             else{
                                                 $('#result_modal_fail').modal('show');
                                             }
-
                                         }
                                     });
          
     });
-
+    /*
     $('.category button').on('click', function(){
         $(this).addClass('active');
         $('.category button').not(this).removeClass('active');
         $('.category button').not(this).addClass('light');
         $(this).removeClass('light');
-});
-
+    });
+    */
 </script>

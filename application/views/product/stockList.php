@@ -54,6 +54,7 @@
                             <div style="padding: 1.5rem 1.875rem 1.25rem;">
                                 <h4 class="text-primary mb-1 name" style="font-weight: 400;display: block!important;"><?php echo @$detail->name_th;?></h4>
                                 <h4 class="text-primary mb-1 name" style="font-weight: 300;"><?php echo @$detail->name_en;?></h4>
+                                <a href="<?php echo base_url('product/edit/').@$detail->id;?>"><span class="badge badge-lg badge-success" style="font-weight: 400;font-size:16px;"> <i class="fas fa-pencil-alt"></i> แก้ไข Product </span></a>
                             </div>
                         </div>
                     </div>
@@ -63,28 +64,26 @@
                     ?>
                         <div class="card">
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="_stockList">
                                     <table class="table custom table-responsive-sm">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>บาร์โค้ด</th>
                                                 <th>จำนวน</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody id="_stockList">
+                                        <tbody >
                                             <?php 
-                                            $i = 1;
                                             if(isset($stockList)&&!empty($stockList)){
                                                 foreach($stockList as $row){
                                             ?>
                                             <tr>
-                                                <td><?php echo $i;?></td>
                                                 <td>
                                                     <h4 class="mb-2 name"><?php echo @$row->barcode;?></h4>
-                                                    <small class="text-muted">updated : <?php echo @$row->updated_at;?></small>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7367f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg> <?php echo @$row->updated_by;?>
+                                                    <normal class="text-muted">updated : <?php echo @$row->updated_at;?></normal>
+                                                    <normal>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7367f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg> <?php echo @$row->updated_by;?></normal>
                                                     
                                                 </td>
                                                 <td style="font-size: 18px;">
@@ -120,7 +119,6 @@
                                                 <!-- modal danger -->
                                             </tr>
                                             <?php
-                                                $i++; 
                                                 }
                                             }
                                             ?>
