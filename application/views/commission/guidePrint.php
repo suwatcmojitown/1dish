@@ -69,7 +69,7 @@
 							</div>
 							<div class="row print">
                                 <div style="width:180px" align="left">
-								<?php echo @$detail->guide_code.' '.@$detail->guide_name;?>
+								<?php echo @$detail->guide_code.'|'.@$detail->guide_name;?>
 								</div>
 								<div style="width:55px;padding-right:3px;" align="right">
 								จอด
@@ -176,7 +176,7 @@
                 mode: mode,
                 popClose: close
             };
-            //$("div.printableArea").printArea(options);
+            $("div.printableArea").printArea(options);
        
     }, 1000)
 	

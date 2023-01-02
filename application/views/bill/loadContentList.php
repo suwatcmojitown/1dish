@@ -3,17 +3,18 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th></th>
                                                 <th>รายการ</th>
                                                 <th>สัญลักษณ์</th>
                                                 <th>ชื่อทัวร์</th>
+                                                <th>เครื่อง</th>
                                                 <th>ยอดรวม</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            //console($summary);
-                                            //console($date);
+                                            //console($list);
                                             
                                             if(isset($list)&&!empty($list)){
                                                 $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
@@ -21,6 +22,7 @@
                                             ?>
                                             <tr>
                                                 <th><?php echo $i;?></th>
+                                                <th></th>
                                                 <td>
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->document_no;?></h4>
                                                     <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->created_at;?></h5>
@@ -30,6 +32,7 @@
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->tour_company_name;?></h4>
                                                     <h5 class="text-muted" style="font-weight: 300;"><?php echo @$row->guide_name;?></h5>
                                                 </td>
+                                                <td><?php echo @$row->cashier_no;?></td>
                                                 <td><?php echo number_format(@$row->grand_total);?></td>
                                                 <!--
                                                 <td>
@@ -50,7 +53,7 @@
                                                         <?php 
                                                         if($row->discount=='0%'){
                                                         ?>
-                                                        <a style="padding-left: 14px;cursor: pointer;" href="<?php echo base_url('bill/edit/').@$row->id;?>"  target="_blank"><span class="badge badge-info">ย้ายกลุ่ม</span></a>
+                                                        <a style="padding-left: 14px;cursor: pointer;" href="<?php echo base_url('bill/edit/').@$row->id;?>" target="_blank"><span class="badge badge-info">ย้ายกลุ่ม</span></a>
                                                         <?php 
                                                         }
                                                         ?>
@@ -59,21 +62,6 @@
                                             <?php
                                                 $i++; 
                                                 }
-                                            }
-                                            ?>
-
-                                            <?php
-                                            if(isset($date)&&!empty($date)){ 
-                                            ?>
-                                            <tr style="background-color: #2f4cdd;">
-                                                <td style="color:white;">#</td>
-                                                <td style="color:white;">ยอดขายทั้งหมดภายในวันที่</td>
-                                                <td style="color:white;"><?php echo @$date;?></td>
-                                                <td></td>
-                                                <td style="color:white;"><?php echo number_format(@$summary[0]->bill_summary);?></td>
-                                                <td></td>
-                                            </tr>
-                                            <?php 
                                             }
                                             ?>
                                         </tbody>

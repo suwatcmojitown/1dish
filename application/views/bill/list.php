@@ -83,6 +83,7 @@
                                                 <th>รายการ</th>
                                                 <th>สัญลักษณ์</th>
                                                 <th>ชื่อทัวร์</th>
+                                                <th>เครื่อง</th>
                                                 <th>ยอดรวม</th>
                                                 <th></th>
                                             </tr>
@@ -107,6 +108,7 @@
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->tour_company_name;?></h4>
                                                     <h5 class="text-muted" style="font-weight: 300;"><?php echo @$row->guide_name;?></h5>
                                                 </td>
+                                                <td><?php echo @$row->cashier_no;?></td>
                                                 <td><?php echo number_format(@$row->grand_total);?></td>
                                                 <!--
                                                 <td>

@@ -17,56 +17,81 @@
 <div class="row">
 	<?php //console($detail);?>
                     <div class="col-md-4" >
-                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:2px;margin-right:10px;font-weight: bold;font-family: tahoma;">
+                        <div class="card card-body printableArea" style="font-size:14px;width:455px;margin-left:2.2rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
                             
                             
 							<div class="row">
                                 <div class="col-md-12" align="center">
-									<img src="<?php echo base_url()?>app-assets/images/logo.jpg" alt="logo" width="180" style="padding-right:5rem;">
+									<img src="<?php echo base_url()?>app-assets/images/logo.jpg" alt="logo" width="180" style="padding-right:11rem;">
 								</div>
 							</div>
 							<br>
 							<div> 
-								<span style="padding-left: 6rem;">Rep Grp ( Tour Company )</span>
+								<span style="padding-left: 3rem;">Rep Grp ( Tour Company )</span>
 							</div>
 							<br>
 							<div class="row print">
-                                <div style="width:250px;" align="left">
-								<?php echo @$detail->transfer_date;?>
+								<div style="width:180px" align="left">
+                                <?php 
+                                $temp_date = explode(' ', $detail->tour_grouping_created_at);
+                                echo $temp_date[0].' #'.@$detail->group_no;
+                                ?>
 								</div>
-								<div style="width:50px;padding-right:3px;" align="right">
+								<div style="width:55px;padding-right:3px;" align="right">
+								</div>
+								<div style="width:55px;" align="right">
+								</div>
+							</div>
+							<div class="row print">
+								<div style="width:180px" align="left">
+                                <?php 
+                                echo $temp_date[1];
+                                ?>
+								</div>
+								<div style="width:55px;padding-right:3px;" align="right">
+								</div>
+								<div style="width:55px;" align="right">
+								</div>
+							</div>
+							<div class="row print">
+                                <div style="width:180px;" align="left">
+								กลุ่ม <?php 
+	                                echo @$detail->group_sign;
+	                                ?>
+								</div>
+								<div style="width:55px;padding-right:3px;" align="right">
 								คอม
 								</div>
-								<div style="width:100px;" align="right">
+								<div style="width:55px;" align="right">
 								<?php echo number_format(@$detail->total);?>
 								</div>
 							</div>
 							<div class="row print">
                                 <div style="width:400px;" align="left">
-								<?php echo @$detail->guide_name.' | '.@$detail->guide_code;?>
+								<?php echo @$detail->guide_code.'|'.@$detail->guide_name;?>
 								</div>
 							</div>
 							<div class="row print">
-                                <div style="width:250px;" align="left">
-								<?php echo @$detail->short_name.' '.@$detail->company_name;?>
+                                <div style="width:180px;" align="left">
+								<?php echo @$detail->short_name.'|'.@$detail->company_name;?>
 								</div>
-								<div style="width:50px;padding-right:3px;" align="right">
+								<div style="width:55px;padding-right:3px;" align="right">
 								ยอด
 								</div>
-								<div style="width:100px;" align="right">
+								<div style="width:55px;" align="right">
 								<?php echo number_format(@$detail->bill_grandTotal);?>
 								</div>
 							</div>
 							<hr class="noline" style="margin-top:5px!important;margin-bottom:14px!important;">
 
 							<div class="row print" style="margin-top:3px;">
-									<div style="width:250px;" align="left">
+									<div style="width:180px;" align="left">
 									สินค้า
 									</div>
-									<div style="width:50px;padding-right:3px;" align="right">
+									<div style="width:55px;padding-right:3px;" align="right">
 									จำนวน
 									</div>
-									<div style="width:100px;" align="right">
+									<div style="width:55px;" align="right">
 									ค่าคอม
 									</div>
 							</div>
@@ -76,13 +101,13 @@
 							foreach($detail->bill_item as $row){
 							?>
 							<div class="row print" style="margin-top:3px;">
-									<div style="width:250px;" align="left">
+									<div style="width:180px;" align="left">
 									<?php echo @$row->product_name_en;?>
 									</div>
-									<div style="width:50px;padding-right:3px;" align="right">
+									<div style="width:55px;padding-right:3px;" align="right">
 									<?php echo @$row->quantity;?>
 									</div>
-									<div style="width:100px;" align="right">
+									<div style="width:55px;" align="right">
 									<?php echo @($row->price);?>
 									</div>
 							</div>
@@ -92,26 +117,26 @@
 							
 								
 								<div class="row print" style="margin-top:7rem!important;">
-	                                <div style="width:220px;" align="center">
+	                                <div style="width:150px;" align="center">
 									ผู้จ่ายเงิน
 									</div>
-									<div style="width:220px;" align="center">
+									<div style="width:150px;" align="center">
 									ผู้รับเงิน
 									</div>
 								</div>
 								<div class="row print" style="margin-top:2rem!important;">
-	                                <div style="width:220px;" align="center">
+	                                <div style="width:150px;" align="center">
 									
 									</div>
-									<div style="width:220px;" align="center">
-									______/______/______
+									<div style="width:150px;" align="center">
+									____/____/____
 									</div>
 								</div>
 								<div class="row print" style="margin-top:1rem!important;">
-	                                <div style="width:220px;" align="center">
+	                                <div style="width:150px;" align="center">
 									
 									</div>
-									<div style="width:220px;" align="center">
+									<div style="width:150px;" align="center">
 									วันที่รับ
 									</div>
 								</div>
