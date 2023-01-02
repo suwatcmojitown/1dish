@@ -4,7 +4,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>ชื่อไกด์</th>
-                                                <th>สัญลักษณ์</th>
+                                                <th>บัญชีธนาคาร</th>
                                                 <th>ค่าจอด</th>
                                                 <th>% คอมมิชชั่น</th>
                                                 <th>ยอดซื้อ</th>
@@ -24,7 +24,7 @@
                                             <tr>
                                                 <td><?php echo @$row->group_no;?></td>
                                                 <td>
-                                                    <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->guide_name;?></h4>
+                                                    <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->guide_name.' | '.@$row->guide_code;?></h4>
                                                     <h5 class="text-muted" style="font-weight: 400;">  
                                                         <?php 
                                                         if($row->created_at){
@@ -33,7 +33,12 @@
                                                         }
                                                         ?></h5>
                                                 </td>
-                                                <td><?php echo @$row->group_sign;?></td>
+                                                <td>
+                                                    <h5 class="text-muted" style="font-weight: 400;">  
+                                                        <?php echo @$row->bank_name;?></h5>
+                                                    <h5 class="text-muted" style="font-weight: 400;">  
+                                                        <?php echo @$row->bank_account;?></h5>
+                                                </td>
                                                 <td><?php echo @$row->parking;?></td>
                                                 <td><?php echo @$row->commission;?></td>
                                                 <td><?php echo number_format(@$row->bill_grandTotal);?></td>
