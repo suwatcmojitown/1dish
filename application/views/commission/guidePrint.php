@@ -15,9 +15,10 @@
 	}
 </style>
 <div class="row">
+	<?php //console($detail);?>
 	<?php //console($_SESSION['username']);?>
                     <div class="col-md-4" >
-                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:2px;margin-right:10px;font-weight: bold;font-family: tahoma;">
+                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:1rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
                             
                             
 							<div class="row">
@@ -31,13 +32,38 @@
 							</div>
 							<br>
 							<div class="row print">
-                                <div style="width:250px;" align="left">
-								<?php echo @$detail->transfer_date;?>
+								<div style="width:250px;" align="left">
+                                <?php 
+                                $temp_date = explode(' ', $detail->tour_grouping_created_at);
+                                echo $temp_date[0].' #'.@$detail->group_no;
+                                ?>
 								</div>
-								<div style="width:70px;padding-right:3px;" align="right">
+								<div style="width:55px;padding-right:3px;" align="right">
+								</div>
+								<div style="width:70px;" align="right">
+								</div>
+							</div>
+							<div class="row print">
+								<div style="width:250px;" align="left">
+                                <?php 
+                                echo $temp_date[1];
+                                ?>
+								</div>
+								<div style="width:55px;padding-right:3px;" align="right">
+								</div>
+								<div style="width:70px;" align="right">
+								</div>
+							</div>
+							<div class="row print">
+                                <div style="width:250px;" align="left">
+                                	กลุ่ม <?php 
+	                                echo @$detail->group_sign;
+	                                ?>
+                                </div>
+								<div style="width:55px;padding-right:3px;" align="right">
 								คอมไกด์
 								</div>
-								<div style="width:100px;" align="right">
+								<div style="width:70px;" align="right">
 								<?php echo number_format(@$detail->total);?>
 								</div>
 							</div>
@@ -45,20 +71,21 @@
                                 <div style="width:250px;" align="left">
 								<?php echo @$detail->guide_code.' '.@$detail->guide_name;?>
 								</div>
-								<div style="width:70px;padding-right:3px;" align="right">
+								<div style="width:55px;padding-right:3px;" align="right">
 								จอด
 								</div>
-								<div style="width:100px;" align="right">
+								<div style="width:70px;" align="right">
 								<?php echo number_format(@$detail->parking);?>
 								</div>
 							</div>
 							<div class="row print">
                                 <div style="width:250px;" align="left">
+                                <?php echo @$detail->tour_company_name;?>
 								</div>
-								<div style="width:70px;padding-right:3px;" align="right">
+								<div style="width:55px;padding-right:3px;" align="right">
 								ยอด
 								</div>
-								<div style="width:100px;" align="right">
+								<div style="width:70px;" align="right">
 								<?php echo number_format(@$detail->bill_grandTotal);?>
 								</div>
 							</div>
@@ -68,10 +95,10 @@
 									<div style="width:250px;" align="left">
 									สินค้า
 									</div>
-									<div style="width:70px;padding-right:3px;" align="right">
+									<div style="width:55px;padding-right:3px;" align="right">
 									จำนวน
 									</div>
-									<div style="width:100px;" align="right">
+									<div style="width:70px;" align="right">
 									ค่าคอม
 									</div>
 							</div>
@@ -84,10 +111,10 @@
 									<div style="width:250px;" align="left">
 									<?php echo @$row->product_name_en;?>
 									</div>
-									<div style="width:70px;padding-right:3px;" align="right">
+									<div style="width:55px;padding-right:3px;" align="right">
 									<?php echo @$row->quantity;?>
 									</div>
-									<div style="width:100px;" align="right">
+									<div style="width:70px;" align="right">
 									<?php echo @($row->price);?>
 									</div>
 							</div>
@@ -97,23 +124,23 @@
 							
 								
 								<div class="row print" style="margin-top:7rem!important;">
-	                                <div style="width:220px;" align="center">
+	                                <div style="width:180px;" align="center">
 									พิมพ์โดย
 									</div>
-									<div style="width:220px;" align="center">
+									<div style="width:180px;" align="center">
 									ผู้รับเงิน
 									</div>
 								</div>
 								<div class="row print" style="margin-top:2rem!important;">
-	                                <div style="width:220px;" align="center">
+	                                <div style="width:180px;" align="center">
 									<?php echo $_SESSION['username'];?>
 									</div>
-									<div style="width:220px;" align="center">
+									<div style="width:180px;" align="center">
 									______/______/______
 									</div>
 								</div>
 								<div class="row print" style="margin-top:1rem!important;">
-	                                <div style="width:220px;" align="center">
+	                                <div style="width:180px;" align="center">
 									<?php 
 										$tz_object = new DateTimeZone('Asia/Bangkok');
 									    $datetime = new DateTime();
@@ -122,7 +149,7 @@
 										echo $datetime->format('Y\-m\-d\ H:i:s');
 									?>
 									</div>
-									<div style="width:220px;" align="center">
+									<div style="width:180px;" align="center">
 									วันที่รับ
 									</div>
 								</div>

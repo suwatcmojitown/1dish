@@ -1,9 +1,18 @@
+<script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!--**********************************
             Content body start
         ***********************************--> 
         <div class="content-body">
             <!-- row -->
-            <div class="container-fluid"> 
+            <div class="container-fluid">
                 <div class="form-head d-flex mb-3 align-items-start">
                     <div class="me-auto d-none d-lg-block ">
                         <h2 class="text-primary font-w600 mb-0"><i class="fa fa-credit-card" aria-hidden="true"></i> Commission Guide</h2>
@@ -27,8 +36,9 @@
                                         </div>
                     </div>
                     -->
-                    </div>
-                    <div class="row">
+                    
+                </div>
+                <div class="row">
                         <div class="col-4 mb-4" >
                             <input type="text" class="form-control search-input" id="datefilter" name="datefilter" placeholder="เลือกช่วงเวลา" style="font-size: 1.09375rem;">
                         </div>
@@ -60,7 +70,6 @@
                         <div class="col-2 ">
                             <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
                         </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -72,7 +81,6 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th></th>
                                                 <th>ชื่อไกด์</th>
                                                 <th>% คอมมิชชั่น</th>
                                                 <th>ยอดซื้อ</th>
@@ -86,15 +94,20 @@
                                             //console($list);
                                             
                                             if(isset($list)&&!empty($list)){
-                                                $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
+                                                //$i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
-                                                <th><?php echo $i;?></th>
-                                                <th></th>
+                                                <td><?php echo @$row->group_no;?></td>
                                                 <td>
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->guide_name;?></h4>
-                                                    <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->group_no;?></h5>
+                                                    <h5 class="text-muted" style="font-weight: 400;">  
+                                                        <?php 
+                                                        if($row->created_at){
+                                                            $temp = explode(' ', $row->created_at);
+                                                            echo @$temp[0]; 
+                                                        }
+                                                        ?></h5>
                                                 </td>
                                                 <td><?php echo @$row->commission;?></td>
                                                 <td><?php echo number_format(@$row->bill_grandTotal);?></td>
@@ -122,10 +135,11 @@
                                                         <?php 
                                                         }
                                                         ?>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php
-                                                $i++; 
+                                                //$i++; 
                                                 }
                                             }
                                             ?>
@@ -180,11 +194,12 @@
                     </div>
                 </div>
             </div>
+            <span id="result"></span>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
-<span id="result"></span>
+
 
 <script>
 

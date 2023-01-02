@@ -55,7 +55,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="10%"></th>
-                                                <th></th>                                
+                                                <th></th> 
+                                                <th>รหัส</th>                               
                                                 <th>เบอร์โทรศัพท์</th>
                                                 <th>ค่าคอมมิชชั่น</th>
                                                 <th></th>
@@ -96,6 +97,7 @@
                                                     </normal>
                                                     <small class="text-muted">updated : <?php echo @$row->created_at;?></small>
                                                 </td> 
+                                                <td><?php echo @$row->code;?></td>
                                                 <td><?php echo @$row->telephone;?></td>
                                                 <td><?php echo @$row->guide_commission;?></td>
                                                 <td>

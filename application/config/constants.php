@@ -2,8 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-define('PATH_API','https://merchant-apis.sborchid9.com/v1/');
-define('PATH_CURL','merchant-apis.sborchid9.com');
+//define('PATH_API','https://merchant-apis.sborchid9.com/v1/');
+//define('PATH_CURL','merchant-apis.sborchid9.com');
+define('PATH_API','https://st-merchant-apis.sborchid9.com/v1/');
+define('PATH_CURL','st-merchant-apis.sborchid9.com');
+
 define('PAGE_LIMIT',20);
 define('PATH_CURL_IMPORT','merchant-apis.sborchid9.com/v1');
 
