@@ -3,11 +3,12 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>ชื่อบริษัททัวร์</th>
+                                                <th>ชื่อทัวร์</th>
+                                                <th>ชื่อไกด์</th>
                                                 <th>บัญชีธนาคาร</th>
-                                                <th>% คอมมิชชั่น</th>
+                                                <th>% คอม</th>
                                                 <th>ยอดซื้อ</th>
-                                                <th>ค่าคอมบริษัท</th>
+                                                <th>ค่าคอม</th>
                                                 <!--
                                                 <th>สถานะ</th>
                                                 -->
@@ -34,6 +35,17 @@
                                                         }
                                                         ?></h5>
                                                 </td>
+                                                <td>
+                                                    <h5 class="text-muted" style="font-weight: 400;">  
+                                                        <?php 
+                                                        echo @$row->guide_name;
+                                                        ?>
+                                                    </h5>
+                                                    <h5 class="text-muted" style="font-weight: 400;">  
+                                                        <?php 
+                                                        echo @$row->guide_code;
+                                                        ?>
+                                                    </h5>
                                                 <td>
                                                     <h5 class="text-muted" style="font-weight: 400;">  
                                                         <?php 

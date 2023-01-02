@@ -117,7 +117,7 @@ class Commission_model extends CI_Model {
                 $temp = array();
                 $path = '';
 
-                $temp['limit'] = 1000;
+                $temp['limit'] = 3000;
 
                 $i = 0;
                 foreach($temp as $key => $value)
@@ -149,7 +149,7 @@ class Commission_model extends CI_Model {
                 $temp = array();
                 $path = '';
 
-                $temp['limit'] = 1000;
+                $temp['limit'] = 3000;
 
                 $i = 0;
                 foreach($temp as $key => $value)

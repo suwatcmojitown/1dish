@@ -82,11 +82,12 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>ชื่อไกด์</th>
+                                                <th>ชื่อทัวร์</th>
                                                 <th>บัญชีธนาคาร</th>
                                                 <th>ค่าจอด</th>
-                                                <th>% คอมมิชชั่น</th>
+                                                <th>% คอม</th>
                                                 <th>ยอดซื้อ</th>
-                                                <th>ค่าคอมไกด์</th>
+                                                <th>ค่าคอม</th>
                                                 <!--<th>สถานะ</th>-->
                                                 <th></th>
                                             </tr>
@@ -111,6 +112,7 @@
                                                         }
                                                         ?></h5>
                                                 </td>
+                                                <td><?php echo @$row->tour_company_name;?></td>
                                                 <td>
                                                     <h5 class="text-muted" style="font-weight: 400;">  
                                                         <?php echo @$row->bank_name;?></h5>
