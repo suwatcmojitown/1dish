@@ -4,10 +4,12 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>ชื่อไกด์</th>
+                                                <th>สัญลักษณ์</th>
+                                                <th>ค่าจอด</th>
                                                 <th>% คอมมิชชั่น</th>
                                                 <th>ยอดซื้อ</th>
-                                                <th>ค่าคอมมิชชั่น</th>
-                                                <th>สถานะ</th>
+                                                <th>ค่าคอมไกด์</th>
+                                                <!--<th>สถานะ</th>-->
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -31,9 +33,12 @@
                                                         }
                                                         ?></h5>
                                                 </td>
+                                                <td><?php echo @$row->group_sign;?></td>
+                                                <td><?php echo @$row->parking;?></td>
                                                 <td><?php echo @$row->commission;?></td>
                                                 <td><?php echo number_format(@$row->bill_grandTotal);?></td>
                                                 <td><?php echo number_format(@$row->total);?></td>
+                                                <!--
                                                 <td>
                                                     <?php if($row->status=='1'){?>
                                                     <div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> จ่ายแล้ว</div>
@@ -45,11 +50,13 @@
                                                     }
                                                     ?>
                                                 </td>
+                                                -->
                                                 
                                                 <td>
                                                     <div class="d-flex">
                                                         <a href="<?php echo base_url('commission/guide/view/').$row->tour_grouping_id;?>" class="btn btn-success shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
                                                         <a target="_blank" href="<?php echo base_url('commission/guide/print/').$row->tour_grouping_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
+                                                        <!--
                                                         <?php 
                                                         if($row->status==0){
                                                         ?>
@@ -57,6 +64,7 @@
                                                         <?php 
                                                         }
                                                         ?>
+                                                        -->
                                                     </div>
                                                 </td>
                                             </tr>

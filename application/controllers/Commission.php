@@ -64,7 +64,7 @@ class Commission extends MY_Controller {
 			$end = '';
 		}
 
-		$data['summary'] = $summary;
+		//$data['summary'] = $summary;
 		$data['page'] = $active_page;
 
 		//console($_POST);

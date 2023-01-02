@@ -3,32 +3,42 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th></th>
                                                 <th>ชื่อบริษัททัวร์</th>
+                                                <th>สัญลักษณ์</th>
                                                 <th>% คอมมิชชั่น</th>
                                                 <th>ยอดซื้อ</th>
-                                                <th>ค่าคอมมิชชั่น</th>
+                                                <th>ค่าคอมบริษัท</th>
+                                                <!--
                                                 <th>สถานะ</th>
+                                                -->
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                             //console($list);
+                                            
                                             if(isset($list)&&!empty($list)){
-                                                $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
+                                                //$i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
-                                                <th><?php echo $i;?></th>
-                                                <th></th>
+                                                <td><?php echo $row->group_no;?></td>
                                                 <td>
                                                     <h4 class="text-primary mb-0 name" style="font-weight: 400;"><?php echo @$row->tour_company_name;?></h4>
-                                                    <h5 class="text-muted" style="font-weight: 300;">#<?php echo @$row->group_no;?></h5>
+                                                    <h5 class="text-muted" style="font-weight: 400;">  
+                                                        <?php 
+                                                        if($row->created_at){
+                                                            $temp = explode(' ', $row->created_at);
+                                                            echo @$temp[0]; 
+                                                        }
+                                                        ?></h5>
                                                 </td>
+                                                <td><?php echo $row->group_sign;?></td>
                                                 <td><?php echo @$row->commission;?></td>
                                                 <td><?php echo number_format(@$row->bill_grandTotal);?></td>
                                                 <td><?php echo number_format(@$row->total);?></td>
+                                                <!--
                                                 <td>
                                                     <?php if($row->status=='1'){?>
                                                     <div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i> จ่ายแล้ว</div>
@@ -40,10 +50,12 @@
                                                     }
                                                     ?>
                                                 </td>
+                                                -->
                                                 <td>
                                                     <div class="d-flex">
                                                         <a href="<?php echo base_url('commission/company/view/').$row->tour_grouping_id;?>" class="btn btn-success shadow btn-xs sharp me-1"><i class="fas fa-eye"></i></a>
                                                         <a target="_blank" href="<?php echo base_url('commission/company/print/').$row->tour_grouping_id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
+                                                        <!--
                                                         <?php 
                                                         if($row->status==0){
                                                         ?>
@@ -51,17 +63,17 @@
                                                         <?php 
                                                         }
                                                         ?>
+                                                        -->
                                                 </td>
                                             </tr>
                                             <?php
-                                                $i++; 
+                                                //$i++; 
                                                 }
                                             }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
-                                
                                 <?php 
                                 if($paging)
                                 {

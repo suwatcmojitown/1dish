@@ -37,19 +37,11 @@
                 	<?php //console($detail);?>
                     <div class="col-5">
                         <div class="card">
-                            <?php 
-                            	if($detail->status==1){
-                            	?>
-                            	<div class="card-header bg-success">
-                                <h4 class="card-title text-white" > [ จ่ายแล้ว ]</h4>
-                                <h4 class="text-white" ><?php echo number_format(@$detail->total);?></h4>
-                                </div>
-                            	<?php }else{?>
+                                
                             	<div class="card-header bg-danger">
                                 <h4 class="card-title text-white" > [ ค้างจ่าย ]</h4>
                                 <h4 class="text-white" ><?php echo number_format(@$detail->total);?></h4>
                                 </div>
-                            	<?php }?>
                             
                             <div class="card-body">
                                 <div class="basic-form">
@@ -128,13 +120,15 @@
                                             <span class="me-0 ms-auto"><?php echo number_format(@$detail->total);?></span>
                                         </h5>
                                     </div>
-
+                                    <!--
                                     <div class="btn_box">
                                         <div class="row no-gutter mx-0">
                                             <?php 
                                             if($detail->status==0){
                                             ?>
+                                            
                                             <a onclick="changeStatus('<?php echo $detail->tour_grouping_id;?>')" id="home-counter-tab" class="btn btn-success btn-block col-6 m-0 rounded-0">จ่ายค่าคอม</a>
+                                            
                                             <?php 
                                             }
                                             if($detail->status==1){
@@ -145,6 +139,7 @@
                                             ?>
                                         </div>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>

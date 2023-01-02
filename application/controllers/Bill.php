@@ -25,6 +25,7 @@ class Bill extends MY_Controller {
 		$data['list'] = '';
 		$data['paging'] = '';
 		$data['groupList'] = '';
+		$data['now_date'] = $now_date;
 
 		$groupList = $this->Bill_model->getGroupListName($now_date,'');
 		if($groupList)
@@ -33,7 +34,7 @@ class Bill extends MY_Controller {
 		}
 
 		//start,status,tour_grouping_id,active_page,limit
-		$resultList = $this->Bill_model->getContentList('','','',$active_page,PAGE_LIMIT);
+		$resultList = $this->Bill_model->getContentList($now_date,'','',$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -53,7 +54,7 @@ class Bill extends MY_Controller {
 
 		$data['list'] = '';
 		$data['paging'] = '';
-		$data['summary'] = '';
+		//$data['summary'] = '';
 		$data['date'] = '';
 		
 		$tour_grouping_id = $_POST['keysearch'];
@@ -61,15 +62,15 @@ class Bill extends MY_Controller {
 		$active_page = $_POST['page'];
 		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
 			$start = $_POST['daterange'];
-			$summary = $this->Bill_model->getSummary($start);
+			//$summary = $this->Bill_model->getSummary($start);
 			$data['date'] = $_POST['daterange'];
 		}else{
 			$start = '';
-			$summary = '';
+			//$summary = '';
 		}
 
 		$data['page'] = $active_page;
-		$data['summary'] = $summary;
+		//$data['summary'] = $summary;
 		//console($_POST);
 
 		//start,status,tour_grouping_id,active_page,limit

@@ -84,6 +84,11 @@
 							</div>
 							<hr class="noline" style="margin-top:5px!important;margin-bottom:14px!important;">
 
+							
+                            <?php 
+							//console($objResult);
+							if(isset($detail->bill_item)&&!empty($detail->bill_item)){
+							?>
 							<div class="row print" style="margin-top:3px;">
 									<div style="width:180px;" align="left">
 									สินค้า
@@ -95,9 +100,7 @@
 									ค่าคอม
 									</div>
 							</div>
-                            <?php 
-							//console($objResult);
-							if(isset($detail->bill_item)&&!empty($detail->bill_item)){
+							<?php
 							foreach($detail->bill_item as $row){
 							?>
 							<div class="row print" style="margin-top:3px;">
@@ -114,7 +117,9 @@
 							<?php
 							}
 							?>
-							
+							<?php 
+							}
+							?>
 								
 								<div class="row print" style="margin-top:7rem!important;">
 	                                <div style="width:150px;" align="center">
@@ -140,9 +145,7 @@
 									วันที่รับ
 									</div>
 								</div>
-							<?php 
-							}
-							?>	
+								
                         </div>
                     </div>
 					<!--

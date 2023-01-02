@@ -35,7 +35,7 @@
                     //console($groupList);
                     ?>
                     <div class="col-4 mb-4" >
-                            <input type="text" class="form-control search-input" id="datepick" name="datepick" placeholder="เลือกวันที่" style="font-size: 1.09375rem;">
+                            <input type="text" class="form-control search-input" id="datepick" name="datepick" placeholder="<?php echo @$now_date;?>" style="font-size: 1.09375rem;">
                     </div>
 
                     <div class="col-3  mb-4" >
