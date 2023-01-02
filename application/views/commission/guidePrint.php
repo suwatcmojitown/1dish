@@ -18,7 +18,7 @@
 	<?php //console($detail);?>
 	<?php //console($_SESSION['username']);?>
                     <div class="col-md-4" >
-                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:2rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
+                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:2.5rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
                             
                             
 							<div class="row">
@@ -32,7 +32,7 @@
 							</div>
 							<br>
 							<div class="row print">
-								<div style="width:200px" align="left">
+								<div style="width:180px" align="left">
                                 <?php 
                                 $temp_date = explode(' ', $detail->tour_grouping_created_at);
                                 echo $temp_date[0].' #'.@$detail->group_no;
@@ -44,7 +44,7 @@
 								</div>
 							</div>
 							<div class="row print">
-								<div style="width:200px" align="left">
+								<div style="width:180px" align="left">
                                 <?php 
                                 echo $temp_date[1];
                                 ?>
@@ -55,7 +55,7 @@
 								</div>
 							</div>
 							<div class="row print">
-                                <div style="width:200px" align="left">
+                                <div style="width:180px" align="left">
                                 	กลุ่ม <?php 
 	                                echo @$detail->group_sign;
 	                                ?>
@@ -68,7 +68,7 @@
 								</div>
 							</div>
 							<div class="row print">
-                                <div style="width:200px" align="left">
+                                <div style="width:180px" align="left">
 								<?php echo @$detail->guide_code.' '.@$detail->guide_name;?>
 								</div>
 								<div style="width:55px;padding-right:3px;" align="right">
@@ -79,7 +79,7 @@
 								</div>
 							</div>
 							<div class="row print">
-                                <div style="width:200px" align="left">
+                                <div style="width:180px" align="left">
                                 <?php echo @$detail->tour_company_name;?>
 								</div>
 								<div style="width:55px;padding-right:3px;" align="right">
@@ -92,7 +92,7 @@
 							<hr class="noline" style="margin-top:5px!important;margin-bottom:14px!important;">
 
 							<div class="row print" style="margin-top:3px;">
-									<div style="width:200px" align="left">
+									<div style="width:180px" align="left">
 									สินค้า
 									</div>
 									<div style="width:55px;padding-right:3px;" align="right">
@@ -108,7 +108,7 @@
 							foreach($detail->bill_item as $row){
 							?>
 							<div class="row print" style="margin-top:3px;">
-									<div style="width:200px" align="left">
+									<div style="width:180px" align="left">
 									<?php echo @$row->product_name_en;?>
 									</div>
 									<div style="width:55px;padding-right:3px;" align="right">
@@ -124,23 +124,23 @@
 							
 								
 								<div class="row print" style="margin-top:7rem!important;">
-	                                <div style="width:180px;" align="center">
+	                                <div style="width:150px;" align="center">
 									พิมพ์โดย
 									</div>
-									<div style="width:180px;" align="center">
+									<div style="width:150px;" align="center">
 									ผู้รับเงิน
 									</div>
 								</div>
 								<div class="row print" style="margin-top:2rem!important;">
-	                                <div style="width:180px;" align="center">
+	                                <div style="width:150px;" align="center">
 									<?php echo $_SESSION['username'];?>
 									</div>
-									<div style="width:180px;" align="center">
+									<div style="width:150px;" align="center">
 									______/______/______
 									</div>
 								</div>
 								<div class="row print" style="margin-top:1rem!important;">
-	                                <div style="width:180px;" align="center">
+	                                <div style="width:150px;" align="center">
 									<?php 
 										$tz_object = new DateTimeZone('Asia/Bangkok');
 									    $datetime = new DateTime();
@@ -149,7 +149,7 @@
 										echo $datetime->format('Y\-m\-d\ H:i:s');
 									?>
 									</div>
-									<div style="width:180px;" align="center">
+									<div style="width:150px;" align="center">
 									วันที่รับ
 									</div>
 								</div>
