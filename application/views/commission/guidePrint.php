@@ -18,7 +18,7 @@
 	<?php //console($detail);?>
 	<?php //console($_SESSION['username']);?>
                     <div class="col-md-4" >
-                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:2.5rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
+                        <div class="card card-body printableArea" style="font-size:14px;width:450px;margin-left:2.2rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
                             
                             
 							<div class="row">
@@ -136,7 +136,7 @@
 									<?php echo $_SESSION['username'];?>
 									</div>
 									<div style="width:150px;" align="center">
-									______/______/______
+									____/____/____
 									</div>
 								</div>
 								<div class="row print" style="margin-top:1rem!important;">
