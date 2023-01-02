@@ -23,12 +23,12 @@
                             
 							<div class="row">
                                 <div class="col-md-12" align="center">
-									<img src="<?php echo base_url()?>app-assets/images/logo.jpg" alt="logo" width="180" style="padding-right:13rem;">
+									<img src="<?php echo base_url()?>app-assets/images/logo.jpg" alt="logo" width="180" style="padding-right:11rem;">
 								</div>
 							</div>
 							<br>
 							<div> 
-								<span style="padding-left: 4rem;">Rep Grp ( Guide )</span>
+								<span style="padding-left: 5rem;">Rep Grp ( Guide )</span>
 							</div>
 							<br>
 							<div class="row print">
