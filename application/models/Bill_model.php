@@ -128,6 +128,32 @@ class Bill_model extends CI_Model {
                 
                 return $object;
     } 
+
+    public function getItemList($id)
+    {
+                $result = json_decode(callAPI('GET',PATH_API.'frontend/bill/item?bill_id='.$id,''));  
+                //echo PATH_API.'backend/requisition-in/item?requisition_in_id='.$id;
+                if($result->header->res_code=='200')
+                {
+                        $object = $result;
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
+    public function cancelBill($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('PUT',PATH_API.'frontend/bill',$myJSON)); 
+            console($result);
+
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+    }
     
 
 

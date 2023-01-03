@@ -180,6 +180,9 @@ $route['bill/loadGroupname'] = 'Bill/loadGroupname';
 $route['bill/view/(:any)'] = 'Bill/view/$1';
 $route['bill/edit/(:any)'] = 'Bill/edit/$1';
 $route['bill/update'] = 'Bill/update';
+$route['bill/print/(:any)'] = 'Bill/printInvoice/$1';
+$route['bill/cancelBill'] = 'Bill/cancelBill';
+
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';

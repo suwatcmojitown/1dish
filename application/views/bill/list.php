@@ -126,10 +126,19 @@
                                                 <td>
                                                     <div class="d-flex">
                                                         <a href="<?php echo base_url('bill/view/').@$row->id;?>" class="btn btn-success shadow btn-xs sharp me-1"  target="_blank"><i class="fas fa-eye"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('bill/print/').$row->id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
                                                         <?php 
                                                         if($row->discount=='0%'){
                                                         ?>
                                                         <a style="padding-left: 14px;cursor: pointer;" href="<?php echo base_url('bill/edit/').@$row->id;?>" target="_blank"><span class="badge badge-info">ย้ายกลุ่ม</span></a>
+                                                        <?php 
+                                                        }
+                                                        ?>
+                                                        <?php 
+                                                        if($row->status==0){
+                                                        ?>
+                                                        <a style="padding-left: 14px;cursor: pointer;" 
+                                                        onclick="cancelBill('<?php echo $row->id;?>')"><span class="badge badge-danger">ยกเลิกบิล</span></a>
                                                         <?php 
                                                         }
                                                         ?>
@@ -233,18 +242,18 @@ $("#filterBtn").click(function(){
 });
 
 
-function changeStatus(id){
+function cancelBill(id){
     daterange = document.getElementById("datepick").value;
     keysearch = document.getElementById("groupname").value;
     //status = document.getElementById("status").value;
                     $.ajax({
                         type: 'POST',
-                        url: '<?php echo base_url('commission/changeCompanyStatus')?>',
-                        data: 'keysearch='+keysearch+'&page=<?php echo $active_page;?>&id='+id+'&daterange='+daterange,
+                        url: '<?php echo base_url('bill/cancelBill')?>',
+                        data: 'id='+id+'&keysearch='+keysearch+'&page=<?php echo $active_page;?>&daterange='+daterange,
                         success: function(result) { 
-                            //$('#result').html(result); 
-                            $("#_list").html(result);
-                        }
+                            $('#result').html(result);
+                            //$("#_list").html(result);
+                        } 
                     });
 }
 

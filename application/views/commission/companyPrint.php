@@ -166,7 +166,7 @@
                 mode: mode,
                 popClose: close
             };
-            $("div.printableArea").printArea(options);
+            //$("div.printableArea").printArea(options);
        
     }, 1000)
 	

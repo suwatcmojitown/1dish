@@ -57,7 +57,6 @@ class Bill extends MY_Controller {
 
 		$data['list'] = '';
 		$data['paging'] = '';
-		//$data['summary'] = '';
 		$data['date'] = '';
 		
 		$tour_grouping_id = $_POST['keysearch'];
@@ -161,6 +160,45 @@ class Bill extends MY_Controller {
 		echo $result;
 	}
 
+	function cancelBill(){
+
+		$temp = new stdClass(); 
+		$temp->id = $_POST['id'];
+		$temp->status = 4;
+		$result = $this->Bill_model->cancelBill($temp);
+		//console($result);
+		//echo $result;
+
+		$data['list'] = '';
+		$data['paging'] = '';
+		$data['date'] = '';
+		
+		$tour_grouping_id = $_POST['keysearch'];
+		//$status = $_POST['status'];
+		$active_page = $_POST['page'];
+		if(isset($_POST['daterange'])&&!empty($_POST['daterange'])){
+			$start = $_POST['daterange'];
+			//$summary = $this->Bill_model->getSummary($start);
+			$data['date'] = $_POST['daterange'];
+		}else{
+			$start = '';
+			//$summary = '';
+		}
+
+		$data['active_page'] = $active_page;
+		
+		$resultList = $this->Bill_model->getContentList($start,'',$tour_grouping_id,$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		
+		$this->load->view('bill/loadContentList',$data);
+
+	}
+
 	function changeCompanyStatusDetail(){
 
 		$temp = new stdClass(); 
@@ -229,6 +267,28 @@ class Bill extends MY_Controller {
 		//console($detail);
 		
 		$this->load->view('commission/loadGuideDetail',$data);
+		
+	}
+
+	public function printInvoice($id)
+	{
+		$billDetail = $this->Bill_model->getBillDetail($id);
+		$data['billDetail'] = $billDetail;
+
+		$itemList = $this->Bill_model->getItemList($id);
+		if($itemList){
+			$data['itemList'] = $itemList->body;
+		}
+		
+
+		
+		/*
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'pos/printInvoice',$data, true);
+		$this->master_layout();
+		*/
+		
+		$this->load->view('bill/printInvoice',$data);
 		
 	}
 	

@@ -50,10 +50,19 @@
                                                 <td>
                                                     <div class="d-flex">
                                                         <a href="<?php echo base_url('bill/view/').@$row->id;?>" class="btn btn-success shadow btn-xs sharp me-1"  target="_blank"><i class="fas fa-eye"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('bill/print/').$row->id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-print"></i></a>
                                                         <?php 
                                                         if($row->discount=='0%'){
                                                         ?>
                                                         <a style="padding-left: 14px;cursor: pointer;" href="<?php echo base_url('bill/edit/').@$row->id;?>" target="_blank"><span class="badge badge-info">ย้ายกลุ่ม</span></a>
+                                                        <?php 
+                                                        }
+                                                        ?>
+                                                        <?php 
+                                                        if($row->status==0){
+                                                        ?>
+                                                        <a style="padding-left: 14px;cursor: pointer;" 
+                                                        onclick="cancelBill('<?php echo $row->id;?>')"><span class="badge badge-danger">ยกเลิกบิล</span></a>
                                                         <?php 
                                                         }
                                                         ?>
