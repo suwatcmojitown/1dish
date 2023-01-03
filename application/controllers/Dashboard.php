@@ -10,14 +10,22 @@ class Dashboard extends MY_Controller {
 			redirect(base_url('login'), 'refresh');
         }
 
+        if($this->session->userdata['group_admin']!='super_admin'){
+        	redirect(base_url('product'), 'refresh');
+        }
+
     	$this->load->model('Dashboard_model');
 
 	}
 
 	public function  index()
 	{
-		
+
 		$data['incomeSummaryList'] = '';
+		$data['incomeSummaryByCashierList'] = '';
+		$data['parkingSummaryList'] = '';
+		$data['comGuideSummaryList'] = '';
+		$data['comCompanySummaryList'] = '';
 		$data['now_date'] = '';
 
 		$tz_object = new DateTimeZone('Asia/Bangkok');
