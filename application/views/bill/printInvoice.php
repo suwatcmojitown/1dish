@@ -42,6 +42,7 @@
 <body>
 <div id="print-area" style="font-size:14px;width:450px;margin-left:21px;margin-right:10px;font-weight: bold;font-family: tahoma;">
   <div class="row">
+    <?php //console($billDetail);?>
                                 <div class="col-md-12" align="center">
                                     <a href="<?php echo base_url('pos');?>"><img src="<?php echo base_url()?>app-assets/images/logo.jpg" alt="logo" width="170" style="margin-right:5rem;"></a>
                                 </div>
@@ -53,10 +54,7 @@
                                 </div>
                                 <div style="width:330px;" align="right">
                                 <?php 
-                                $tz_object = new DateTimeZone('Asia/Bangkok');
-                                $datetime = new DateTime();
-                                $datetime->setTimezone($tz_object);
-                                echo $datetime->format('Y\-m\-d\ H:i:s');
+                                echo @$billDetail->created_at;
                                 ?>
                                 </div>
                             </div>
