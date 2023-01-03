@@ -132,11 +132,17 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="ai-icon" href="javascript:void()" >
+                    <?php 
+                    if($_SESSION['group_admin']=='super_admin'){
+                    ?>
+                    <li><a class="ai-icon" href="<?php echo base_url('dashboard');?>" >
                             <i class="flaticon-381-networking"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
+                    <?php 
+                    }
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('product');?>" >
                             <i class="fa fa-coffee" aria-hidden="true"></i>
                             <span class="nav-text">Product</span>

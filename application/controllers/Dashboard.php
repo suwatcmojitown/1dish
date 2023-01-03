@@ -16,6 +16,7 @@ class Dashboard extends MY_Controller {
 
 	public function  index()
 	{
+		
 		$data['incomeSummaryList'] = '';
 		$data['now_date'] = '';
 

@@ -125,9 +125,24 @@ class User extends MY_Controller
 	public function validlogin()
 	{
 		$result = $this->User_model->fetch_user_login($this->input->post('username'), $this->input->post('password'));
-		
+		//console($result);
 		if(isset($result)&&!empty($result))
 		{
+			//7dff8cfc-595e-4aa8-b24a-83484d640d68 = super admin
+			//c0859d8a-d4ab-49da-9ae1-8e5f8e9fd696 = admin
+			//7e6b7949-4a35-4057-aea5-e44d1cfad6fc = cashier
+			$temp_group_admin = $result->group_admin_id;
+			switch ($temp_group_admin) {
+			  case "7dff8cfc-595e-4aa8-b24a-83484d640d68":
+			    $group_admin = 'super_admin';
+			    break;
+			  case "c0859d8a-d4ab-49da-9ae1-8e5f8e9fd696":
+			    $group_admin = 'admin';
+			    break;
+			  case "7e6b7949-4a35-4057-aea5-e44d1cfad6fc":
+			    $group_admin = 'cashier';
+			    break;
+			}
 			$this->session->set_userdata(
 				array('user_id'    => $result->id,
 					  'admin_id'    => $result->admin_id,
@@ -135,12 +150,16 @@ class User extends MY_Controller
 					  'token'    => $result->token,
 					  'system_at'    => $result->system_at,
 					  'username' => $result->username,
+					  'group_admin' => $group_admin,
 			  ));
-			redirect(base_url());
+			  if($group_admin=='super_admin'){
+			  	redirect(base_url('dashboard'));
+			  }
+			  else redirect(base_url());
 		}	
 		else
 		{
-			redirect(base_url('login?status=error'), 'refresh');
+			//redirect(base_url('login?status=error'), 'refresh');
 		}	 	
 		
 	}
