@@ -107,7 +107,9 @@
                                                             <i class="fa fa-cube" aria-hidden="true"></i>
                                                         </a> -->
                                                         <a href="<?php echo base_url('guide/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-trash"></i></a>
+                                                        <?php if($row->status==1){?>
+                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#modal<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
+                                                        <?php }?>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->
@@ -115,7 +117,7 @@
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบไกด์ <span class="text-danger">#<?php echo $row->id;?></span> </h4>
+                                                                <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบไกด์ <span class="text-danger">#<?php echo $row->name;?></span> </h4>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                                 </button>
                                                             </div>
@@ -240,6 +242,7 @@ function confirmDelete(id){
                         data: 'id='+id+'&keysearch='+keysearch+'&status='+status+'&page='+page,
                         success: function(result) { 
                             //$('#result').html(result);
+                            $('#modal'+id+'').modal('hide');
                             $("#_list").html(result);
                             //$('#'+name+'').modal('toggle');
                         }

@@ -130,9 +130,9 @@ class Guide extends MY_Controller {
 		$data->bank_type = (isset($_POST['bank_type'])) ? $_POST['bank_type'] : 0;
 		$data->guide_commission = (isset($_POST['guide_commission'])) ? $_POST['guide_commission'] : 0;
 		$data->status = $_POST['status'];
-
+		//console($data);
 		$result = $this->Guide_model->add($data);
-		echo $result;
+		//echo $result;
 	}
 
 	public function edit($id)

@@ -241,8 +241,9 @@
                                         processData: false,
                                         contentType: false,
                                         success: function(result) { 
-                                            $('#result').html(result);
-                                            /*
+                                            //$('#result').html(result);
+
+                                            
                                             
                                             if(result==true)
                                             {
@@ -251,7 +252,7 @@
                                             else{
                                                 $('#result_modal_fail').modal('show');
                                             }
-*/
+
                                         }
                                     });
          
