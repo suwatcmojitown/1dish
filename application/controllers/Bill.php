@@ -19,6 +19,7 @@ class Bill extends MY_Controller {
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);
 		$now_date = $datetime->format('Y-m-d');
+		//$now_date = '2023-01-02';
 
 		$data['page'] = $active_page;
 		$data['tour_grouping_id'] = '';
@@ -26,6 +27,8 @@ class Bill extends MY_Controller {
 		$data['paging'] = '';
 		$data['groupList'] = '';
 		$data['now_date'] = $now_date;
+
+		$data['active_page'] = $active_page;
 
 		$groupList = $this->Bill_model->getGroupListName($now_date,'');
 		if($groupList)
@@ -69,7 +72,7 @@ class Bill extends MY_Controller {
 			//$summary = '';
 		}
 
-		$data['page'] = $active_page;
+		$data['active_page'] = $active_page;
 		//$data['summary'] = $summary;
 		//console($_POST);
 
@@ -197,7 +200,7 @@ class Bill extends MY_Controller {
 		$status = $_POST['status'];
 		$active_page = $_POST['page'];
 
-		$data['page'] = $active_page;
+		$data['active_page'] = $active_page;
 
 		$resultList = $this->Commission_model->getCommissionGuideList($status,$tour_company_id,$active_page,PAGE_LIMIT);
 		//console($resultList);

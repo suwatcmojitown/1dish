@@ -25,7 +25,7 @@ class Bill_model extends CI_Model {
                 }
                 
                 $result = json_decode(callAPI('GET',PATH_API.'frontend/bill'.$path.'',''));  
-                //echo PATH_API.'backend/commission-tour'.$path.'';
+                //echo PATH_API.'frontend/bill'.$path.'';
                 //console($result);
                 if($result->header->res_code=='200')
                 {

@@ -226,7 +226,7 @@ $("#filterBtn").click(function(){
                     $("#_list").html(result);
                 } 
     });
-});
+}); 
 
 
 function changeStatus(id,status){
