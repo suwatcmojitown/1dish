@@ -183,7 +183,7 @@
                           </div>
                           <span class="pull-right ms-auto col-2 col-xxl-3 px-0 text-right" style="color:#2bc155!important;font-weight: 600;"><?php echo number_format(round(@$row->credit));?></span>
                         </div>
-                        <div class="d-flex flex-wrap offset-5 offset-xxl-5 revenue-chart-bar" style="padding-left: 10px!important;margin-top: 0.2rem;">
+                        <div class="d-flex flex-wrap offset-5 offset-xxl-5 revenue-chart-bar" style="padding-left: 10px!important;margin-top: 0.2rem;margin-bottom: 0.2rem;">
                             <div class="d-flex align-items-end me-4 mb-2">
                               <div>
                                 <normal class=" fs-23 text-primary" style="font-size: 1rem;">KBank</normal>
