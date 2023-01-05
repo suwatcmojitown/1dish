@@ -72,6 +72,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['dashboard'] = 'Dashboard/index';
+$route['dashboard/loadContentList'] = 'Dashboard/loadContentList';
 
 $route['login'] = 'User/login';
 $route['logout'] = 'User/logout';

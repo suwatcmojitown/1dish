@@ -92,6 +92,35 @@ $(function() {
       $(this).val('');
   });
 
+  $('input[name="datepick_2"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          format: 'YYYY:MM:DD',
+      },
+      singleDatePicker: true,
+      autoApply: true,
+  });
+
+  $('input[name="datepick_2"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY-MM-DD'));
+      daterange = document.getElementById("datepick_2").value;
+      $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('dashboard/loadContentList')?>',
+                data: 'daterange='+daterange,
+                success: function(result) { 
+                    //$('#result').html(result);
+                    $("#_list").html(result);
+                } 
+    });
+      
+      
+  });
+
+  $('input[name="datepick_2"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+
 });
 
   

@@ -1,19 +1,4 @@
-  <div class="content-body">
-            <!-- row -->
-      <div class="container-fluid">
-        <div class="form-head d-flex mb-3 align-items-start">
-          <div class="me-auto d-none d-lg-block">
-            <h2 class="text-primary font-w600 mb-0" id="show_date">Dashboard : <?php echo $show_date;?></h2>
-            <p class="mb-0" ><h4 style="font-family: 'Kanit';">รายงานประจำวัน</h4></p>
-          </div>
-          
-          <div class="dropdown custom-dropdown">
-              <input type="text" class="form-control search-input" id="datepick_2" name="datepick_2" placeholder="กรุณาเลือกวันที่" style="font-size: 1.09375rem;">
-          </div>
-        </div>
-        
-        <div class="row"  id="_list">
-          <div class="col-xl-3 col-xxl-3 col-lg-6 col-md-6 col-sm-6">
+<div class="col-xl-3 col-xxl-3 col-lg-6 col-md-6 col-sm-6">
             <div class="widget-stat card">
               <div class="card-body p-4">
                 <div class="media ai-icon d-flex">  
@@ -241,26 +226,3 @@
             </div>
 
           </div>
-
-         </div>
-  </div>
-</div>
-
-<script>
-
-
-
-  $("#filterBtn").click(function(){
-    daterange = document.getElementById("datepick_2").value;
-    alert(daterange);
-    $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('dashboard/loadContentList')?>',
-                data: 'daterange='+daterange,
-                success: function(result) { 
-                    //$('#result').html(result);
-                    $("#_list").html(result);
-                } 
-    });
-  });
-</script>

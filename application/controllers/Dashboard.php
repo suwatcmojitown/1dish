@@ -32,8 +32,8 @@ class Dashboard extends MY_Controller {
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);
 
-		//$start = '2023-01-01';
-		$start = $datetime->format('Y-m-d');
+		$start = '2023-01-01';
+		//$start = $datetime->format('Y-m-d');
 		$show_date = $datetime->format('d-m-Y');
 		$data['now_date'] = $start;
 		$data['show_date'] = $show_date;
@@ -76,6 +76,69 @@ class Dashboard extends MY_Controller {
 		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
 		$this->template['content'] = $this->load->view ($this->middle = 'dashboard/index',$data, true);
 		$this->master_layout();
+		
+	}
+
+	public function  loadContentList()
+	{
+
+		$data['incomeSummaryList'] = '';
+		$data['incomeSummaryByCashierList'] = '';
+		$data['parkingSummaryList'] = '';
+		$data['comGuideSummaryList'] = '';
+		$data['comCompanySummaryList'] = '';
+		$data['now_date'] = '';
+
+		$tz_object = new DateTimeZone('Asia/Bangkok');
+		$datetime = new DateTime();
+		$datetime->setTimezone($tz_object);
+
+		//$start = '2023-01-01';
+		//$start = $datetime->format('Y-m-d');
+		//$show_date = $datetime->format('d-m-Y');
+		
+		$start = $_POST['daterange'];
+		$data['now_date'] = $start;
+		$temp_date = explode('-', $start);
+		$show_date = $temp_date['2'].'-'.$temp_date['1'].'-'.$temp_date['0'];
+		$data['show_date'] = $show_date;
+		
+		//start,end
+		$incomeSummaryList = $this->Dashboard_model->getIncomeSummary($start,'');
+		if($incomeSummaryList)
+		{
+			$data['incomeSummaryList'] = $incomeSummaryList[0];
+		}
+
+		$incomeSummaryByCashierList = $this->Dashboard_model->getIncomeSummaryByCashier($start,'');
+		if($incomeSummaryByCashierList)
+		{
+			$data['incomeSummaryByCashierList'] = $incomeSummaryByCashierList;
+		}
+
+		$parkingSummaryList = $this->Dashboard_model->getParkingSummary($start,'');
+		if($parkingSummaryList)
+		{
+			$data['parkingSummaryList'] = $parkingSummaryList[0];
+		}
+
+		//console($data['parkingSummaryList']);
+		//exit();
+
+		$comGuideSummaryList = $this->Dashboard_model->getComGuideSummary($start,'');
+		if($comGuideSummaryList)
+		{
+			$data['comGuideSummaryList'] = $comGuideSummaryList[0];
+		}
+
+		$comCompanySummaryList = $this->Dashboard_model->getComCompanySummary($start,'');
+		if($comCompanySummaryList)
+		{
+			$data['comCompanySummaryList'] = $comCompanySummaryList[0];
+		}
+		//console($data);
+
+		$this->load->view ('dashboard/loadContentList',$data);
 		
 	}
 
