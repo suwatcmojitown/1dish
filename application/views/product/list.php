@@ -116,11 +116,21 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
+                                                        <?php 
+                                                        if($_SESSION['group_admin']!='cashier'){
+                                                        ?>
                                                         <a target="_blank" href="<?php echo base_url('product/stock/view/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1">
                                                             <i class="fa fa-cube" aria-hidden="true"></i>
                                                         </a>
                                                         <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <?php }?>
+                                                        <?php 
+                                                        if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
+                                                        ?>
                                                         <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
+                                                        <?php 
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->

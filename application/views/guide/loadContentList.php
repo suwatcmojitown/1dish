@@ -53,14 +53,16 @@
                                                 <td><?php echo @$row->guide_commission;?></td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <!--
-                                                        <a class="btn btn-primary shadow btn-sm sharp me-1">
-                                                            <i class="fa fa-cube" aria-hidden="true"></i>
-                                                        </a> -->
                                                         <a href="<?php echo base_url('guide/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <?php if($row->status==1){?>
+                                                        <?php 
+                                                        if($row->status==1){
+                                                            if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
+                                                        ?>
                                                         <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#modal<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
-                                                        <?php }?>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->

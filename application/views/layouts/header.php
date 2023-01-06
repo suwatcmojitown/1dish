@@ -168,6 +168,9 @@
                             <li><a href="<?php echo base_url('stock/export');?>">เพิ่มใบเบิกสินค้าออก</a></li>
                         </ul>
                     </li>
+                    <?php 
+                    if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
+                    ?>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="fa fa-credit-card" aria-hidden="true"></i>
                             <span class="nav-text">คอมมิชชั่น</span>
@@ -177,6 +180,7 @@
                             <li><a href="<?php echo base_url('commission/company');?>">คอมทัวร์</a></li>
                         </ul>
                     </li>
+                    <?php }?>
                     <li><a class="ai-icon" href="<?php echo base_url('bill');?>" >
                             <i class="fa fa-coffee" aria-hidden="true"></i>
                             <span class="nav-text">Bills</span>

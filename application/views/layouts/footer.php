@@ -75,12 +75,12 @@ $(function() {
 
   $('input[name="datepick"]').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('YYYY-MM-DD'));
-      a = document.getElementById("groupname").value;
-      
+      datepick = document.getElementById("datepick").value;
+      //alert(datepick);
       $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('bill/loadGroupname')?>',
-                data: 'keysearch='+a,
+                data: 'keysearch='+datepick,
                 success: function(result) { 
                     //$('#result').html(result);
                     $("#groupname").html(result);

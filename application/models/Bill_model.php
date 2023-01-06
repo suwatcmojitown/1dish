@@ -76,7 +76,7 @@ class Bill_model extends CI_Model {
                 }
                 
                 $result = json_decode(callAPI('GET',PATH_API.'backend/filter/tour-grouping'.$path.'',''));  
-                //echo PATH_API.'backend/commission-tour'.$path.'';
+                //echo PATH_API.'backend/filter/tour-grouping'.$path.'';
                 //console($result);
                 if($result->header->res_code=='200')
                 {

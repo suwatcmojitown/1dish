@@ -32,8 +32,8 @@ class Dashboard extends MY_Controller {
 		$datetime = new DateTime();
 		$datetime->setTimezone($tz_object);
 
-		$start = '2023-01-01';
-		//$start = $datetime->format('Y-m-d');
+		//$start = '2023-01-01';
+		$start = $datetime->format('Y-m-d');
 		$show_date = $datetime->format('d-m-Y');
 		$data['now_date'] = $start;
 		$data['show_date'] = $show_date;

@@ -89,9 +89,12 @@ class Bill extends MY_Controller {
 
 	public function loadGroupname(){
 
+		$data['groupList'] = ''; 
+
 		$now_date = $_POST['keysearch'];
 
 		$groupList = $this->Bill_model->getGroupListName($now_date,'');
+		//console($groupList);
 		if($groupList)
 		{
 			$data['groupList'] = $groupList->body;
