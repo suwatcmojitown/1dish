@@ -109,7 +109,11 @@
                                                     <h5 class="text-muted" style="font-weight: 300;"><?php echo @$row->guide_name;?></h5>
                                                 </td>
                                                 <td><?php echo @$row->cashier_no;?></td>
-                                                <td><?php echo number_format(@$row->grand_total);?></td>
+                                                <td>
+                                                    <?php 
+                                                    if($row->status==3){ echo "ยกเลิกบิล"; }else echo number_format(@$row->grand_total);
+                                                    ?>
+                                                </td>
                                                 <!--
                                                 <td>
                                                     <?php if($row->status=='1'){?>

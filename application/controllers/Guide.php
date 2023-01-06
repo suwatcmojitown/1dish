@@ -239,6 +239,15 @@ class Guide extends MY_Controller {
 		$this->load->view('guide/loadContentList',$data);
 	}
 
+	public function checkName()
+	{
+		$name = $_POST;
+		
+		//$status,$keysearch,$active_page,$limit
+		$resultList = $this->Guide_model->getContentList('',$name,1,PAGE_LIMIT);
+		console($resultList);
+	}
+
 	
 
 }

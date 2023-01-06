@@ -20,8 +20,11 @@
                                         
                                         <div class="mb-3 row">
                                                 <label class="col-sm-3 col-form-label custom text-info">ชื่อ</label>
-                                                <div class="col-sm-9">
+                                                <div class="col-sm-6">
                                                     <input type="text" class="form-control form-control-lg" name="name">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button id="checkName" type="button" class="btn btn-warning" style="float:right;">ตรวจสอบชื่อ</button>
                                                 </div>
                                             </div>
 
