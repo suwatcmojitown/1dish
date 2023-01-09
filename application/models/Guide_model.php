@@ -88,6 +88,35 @@ class Guide_model extends CI_Model {
             else return false;
     }
 
+    public function getContentListFilter()
+    {
+                $temp = array();
+                $path = '';
+
+                $temp['limit'] = 3000;
+
+                $i = 0;
+                foreach($temp as $key => $value)
+                {
+                        if($i==0)
+                        {
+                                $path = '?'.$key.'='.$value;
+                        }
+                        else $path = $path.'&'.$key.'='.$value;
+                        $i++;
+                }
+                
+                $result = json_decode(callAPI('GET',PATH_API.'backend/filter/guide'.$path.'',''));  
+                //console($result);
+                if($result->header->res_code=='200')
+                {
+                        $object = $result;
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
     
 
 

@@ -24,7 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost:8888/cms_sribhurapa';
-$config['base_url'] = 'https://merchant-cms.sborchid9.com';
+$config['base_url'] = 'https://merchant-cms.sborchid9.com'; //Product
+//$config['base_url'] = 'https://st-merchant-cms.sborchid9.com'; //Staging
 
 
 /*

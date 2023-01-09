@@ -184,6 +184,12 @@ $route['bill/update'] = 'Bill/update';
 $route['bill/print/(:any)'] = 'Bill/printInvoice/$1';
 $route['bill/cancelBill'] = 'Bill/cancelBill';
 
+$route['grouping'] = 'TourGrouping/list';
+$route['grouping/loadTourGroupingList'] = 'TourGrouping/loadContentList';
+$route['grouping/edit/(:any)'] = 'TourGrouping/edit/$1';
+$route['grouping/update'] = 'TourGrouping/updateContent';
+$route['grouping/view/(:any)'] = 'TourGrouping/view/$1';
+
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';

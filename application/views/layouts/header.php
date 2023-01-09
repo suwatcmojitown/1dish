@@ -181,6 +181,15 @@
                         </ul>
                     </li>
                     <?php }?>
+                    <?php 
+                    if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
+                    ?>
+                    <li><a class="ai-icon" href="<?php echo base_url('grouping');?>" >
+                            <i class="fa fa-coffee" aria-hidden="true"></i>
+                            <span class="nav-text">กรุ๊ปทัวร์</span>
+                        </a>
+                    </li>
+                    <?php }?>
                     <li><a class="ai-icon" href="<?php echo base_url('bill');?>" >
                             <i class="fa fa-coffee" aria-hidden="true"></i>
                             <span class="nav-text">Bills</span>
