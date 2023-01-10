@@ -31,7 +31,7 @@ class TourGrouping extends MY_Controller {
 		}
 
 		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
-		$this->template['content'] = $this->load->view ($this->middle = 'TourGrouping/list',$data, true);
+		$this->template['content'] = $this->load->view ($this->middle = 'tourGrouping/list',$data, true);
 		$this->master_layout();
 		
 	}
@@ -101,7 +101,7 @@ class TourGrouping extends MY_Controller {
 		if($detail)
 		{
 			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
-			$this->template['content'] = $this->load->view ($this->middle = 'TourGrouping/edit',$data, true);
+			$this->template['content'] = $this->load->view ($this->middle = 'tourGrouping/edit',$data, true);
 			$this->master_layout();
 		}
 	}
@@ -133,7 +133,7 @@ class TourGrouping extends MY_Controller {
 		if($detail)
 		{
 			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
-			$this->template['content'] = $this->load->view ($this->middle = 'TourGrouping/view',$data, true);
+			$this->template['content'] = $this->load->view ($this->middle = 'tourGrouping/view',$data, true);
 			$this->master_layout();
 		}
 	}
