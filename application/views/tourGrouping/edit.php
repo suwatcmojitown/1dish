@@ -103,7 +103,7 @@
                                         <hr>
 
                                         <div class="mb-3 mt-3">
-                                            <button type="button" class="btn btn-danger">ยกเลิก</button>
+                                            <a href="<?php echo base_url('grouping')?>"><button type="button" class="btn btn-danger">ยกเลิก</button></a>
                                             <button id="submit_btn" type="button" class="btn btn-success" style="float:right;">ยืนยัน</button>
                                         </div>
                                     </form>

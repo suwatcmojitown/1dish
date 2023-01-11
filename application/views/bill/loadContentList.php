@@ -14,11 +14,17 @@
                                         </thead>
                                         <tbody>
                                             <?php 
+                                            $tz_object = new DateTimeZone('Asia/Bangkok');
+                                            $datetime = new DateTime();
+                                            $datetime->setTimezone($tz_object);
+                                            $now_date = $datetime->format('Y-m-d');
                                             //console($list);
                                             
                                             if(isset($list)&&!empty($list)){
                                                 $i = (($paging->page - 1) * PAGE_LIMIT) + 1;
                                                 foreach($list as $row){
+                                                $temp = explode(' ', $row->created_at);
+                                                $temp_date = $temp[0];
                                             ?>
                                             <tr>
                                                 <th><?php echo $i;?></th>
@@ -62,10 +68,12 @@
                                                         ?>
                                                         <?php 
                                                         if($row->status==0){
+                                                            if($now_date==$temp_date){
                                                         ?>
                                                         <a style="padding-left: 14px;cursor: pointer;" 
                                                         onclick="cancelBill('<?php echo $row->id;?>')"><span class="badge badge-danger">ยกเลิกบิล</span></a>
                                                         <?php 
+                                                            }
                                                         }
                                                         ?>
                                                 </td>
