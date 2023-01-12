@@ -63,7 +63,7 @@ class TourGrouping extends MY_Controller {
 		}
 		//console($data);
 		
-		$this->load->view('TourGrouping/loadContentList',$data);
+		$this->load->view('tourGrouping/loadContentList',$data);
 	}
 
 	public function edit($id)
