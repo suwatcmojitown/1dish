@@ -136,7 +136,33 @@ class Dashboard extends MY_Controller {
 			$data['incomeSummaryList'] = $incomeSummaryList[0];
 		}
 
-		$incomeSummaryByCashierList = $this->Dashboard_model->getIncomeSummaryByCashier($start,'');
+		$tempIncomeSummaryByCashierList = $this->Dashboard_model->getIncomeSummaryByCashier($start,'');
+		//console($tempIncomeSummaryByCashierList);
+		$temp = array();
+
+		
+		$count = 0;
+		foreach($tempIncomeSummaryByCashierList as $row){
+			if($row->created_by=='cf1409a7-11ab-4673-be39-fe306c5fb53a'){
+				$temp[] = $row;
+				//unset($tempIncomeSummaryByCashierList[$count]);
+				\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+			}
+			$count++;
+		}
+		
+		
+		$count = 0;
+		foreach($tempIncomeSummaryByCashierList as $row){
+			if($row->created_by=='6d264042-6e03-4f93-8812-d9483accfabb'){
+				$temp[] = $row;
+				\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+			}
+			$count++;
+		}
+
+		
+		$incomeSummaryByCashierList = array_merge($temp, $tempIncomeSummaryByCashierList);
 		if($incomeSummaryByCashierList)
 		{
 			$data['incomeSummaryByCashierList'] = $incomeSummaryByCashierList;
