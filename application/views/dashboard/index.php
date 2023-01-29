@@ -112,25 +112,37 @@
               <div class="card-body tab-content orders-summary pt-3">
                 <div class="tab-pane fade show active" id="Monthly">
                   <div class="d-flex flex-wrap order-manage p-3 align-items-center mb-4">
-                    <a href="javascript:void(0);" class="btn fs-32 font-w600 text-white py-1 btn-success px-4 me-3"><?php echo number_format(@$incomeSummaryList->grand_total);?></a>
+                    <a href="javascript:void(0);" class="btn fs-32 font-w600 text-white py-1 btn-success px-4 me-3">
+                      <?php 
+                            if(is_integer($incomeSummaryList->grand_total)) echo number_format(@$incomeSummaryList->grand_total);else echo number_format((@$incomeSummaryList->grand_total),2);
+                            ?></a>
                     <h4 class="mb-0" style="font-family: 'Kanit';">ยอดรวมทั้งหมด</h4>
                   </div>
                   <div class="row">
                     <div class="col-sm-4 mb-4">
                       <div class="border px-3 py-3 rounded-xl">
-                        <h2 class="fs-23 font-w600 counter"><?php echo number_format(@$incomeSummaryList->cash);?></h2>
+                        <h2 class="fs-23 font-w600 counter">
+                          <?php 
+                            if(is_integer($incomeSummaryList->cash)) echo number_format(@$incomeSummaryList->cash);else echo number_format((@$incomeSummaryList->cash),2);
+                            ?></h2>
                         <p class="fs-16 mb-0" style="color:#ff6d4d!important;font-size:20px!important;font-weight: 500;font-family: 'Kanit';">เงินสด</p>
                       </div>
                     </div>
                     <div class="col-sm-4 mb-4">
                       <div class="border px-3 py-3 rounded-xl">
-                        <h2 class="fs-23 font-w600 counter"><?php echo number_format(@$incomeSummaryList->credit);?></h2>
+                        <h2 class="fs-23 font-w600 counter">
+                          <?php 
+                            if(is_integer($incomeSummaryList->credit)) echo number_format(@$incomeSummaryList->credit);else echo number_format((@$incomeSummaryList->credit),2);
+                            ?></h2>
                         <p class="fs-16 mb-0" style="color:#2bc155!important;font-size:20px!important;font-weight: 500;font-family: 'Kanit';">บัตรเครดิต</p>
                       </div>
                     </div>
                     <div class="col-sm-4 mb-4">
                       <div class="border px-3 py-3 rounded-xl">
-                        <h2 class="fs-23 font-w600 counter"><?php echo number_format(@$incomeSummaryList->promptpay);?></h2>
+                        <h2 class="fs-23 font-w600 counter">
+                          <?php 
+                            if(is_integer($incomeSummaryList->promptpay)) echo number_format(@$incomeSummaryList->promptpay);else echo number_format((@$incomeSummaryList->promptpay),2);
+                            ?></h2>
                         <p class="fs-16 mb-0" style="font-size:20px!important;font-weight: 500;font-family: 'Kanit';">PromptPay</p>
                       </div>
                     </div>
@@ -138,7 +150,10 @@
                 </div>
                 <div class="tab-pane fade" id="Weekly">
                   <div class="d-flex flex-wrap order-manage p-3 align-items-center mb-4">
-                    <a href="javascript:void(0);" class="btn fs-32 font-w600 text-white py-1 btn-success px-4 me-3"><?php echo number_format(@$incomeSummaryList->grand_total);?></a>
+                    <a href="javascript:void(0);" class="btn fs-32 font-w600 text-white py-1 btn-success px-4 me-3">
+                      <?php 
+                            if(is_integer($incomeSummaryList->grand_total)) echo number_format(@$incomeSummaryList->grand_total);else echo number_format((@$incomeSummaryList->grand_total),2);
+                            ?></a>
                     <h4 class="mb-0" style="font-family: 'Kanit';">ยอดรวมทั้งหมด</h4>
                   </div>
                   <div class="row">
