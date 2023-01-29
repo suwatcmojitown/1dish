@@ -17,7 +17,7 @@
 <div class="row">
 	<?php //console($detail);?>
                     <div class="col-md-4" >
-                        <div class="card card-body printableArea" style="font-size:14px;width:455px;margin-left:2.2rem;margin-right:10px;font-weight: bold;font-family: tahoma;">
+                        <div class="card card-body printableArea" style="font-size:14px;width:455px;margin-left:2.2rem;margin-right:10px;font-family: tahoma;">
                             
                             
 							<div class="row">
