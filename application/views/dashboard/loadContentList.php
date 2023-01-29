@@ -129,7 +129,6 @@
                   <div class="row">
                     <?php 
                     if($incomeSummaryByCashierList){
-                      //console($incomeSummaryByCashierList);
                     foreach($incomeSummaryByCashierList as $row){
                       $cash_percent = round((100/$row->grand_total)*$row->cash);
                       $credit_percent = round((100/$row->grand_total)*$row->credit);
@@ -139,7 +138,9 @@
 
                     <div class="col-sm-4 mb-4" style="margin-top:1rem;">
                       <div class="border px-3 py-3 rounded-xl" style="background-color: rgba(47,76,221,0.1);">
-                        <h2 class="fs-32 font-w600 counter"><?php echo number_format((@$row->grand_total));?></h2>
+                        <h2 class="fs-32 font-w600 counter"><?php 
+                            if(is_integer($row->grand_total)) echo number_format(@$row->grand_total);else echo number_format((@$row->grand_total),2);
+                            ?></h2>
                         <h4 class="mb-0 text-primary" style="font-family: 'Kanit';"><?php echo (@$row->cashier);?></h4>
                       </div>
                     </div>
