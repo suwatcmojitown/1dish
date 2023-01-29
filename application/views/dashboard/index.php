@@ -3,7 +3,7 @@
       <div class="container-fluid">
         <div class="form-head d-flex mb-3 align-items-start">
           <div class="me-auto d-none d-lg-block">
-            <h2 class="text-primary font-w600 mb-0" id="show_date">Dashboard : <?php echo $show_date;?></h2>
+            <h2 class="text-primary font-w600 mb-0" id="show_date">Dashboard : <span id="_date"><?php echo $show_date;?></span></h2>
             <p class="mb-0" ><h4 style="font-family: 'Kanit';">รายงานประจำวัน</h4></p>
           </div>
           
@@ -153,53 +153,75 @@
 
                     <div class="col-sm-4 mb-4" style="margin-top:1rem;">
                       <div class="border px-3 py-3 rounded-xl" style="background-color: rgba(47,76,221,0.1);">
-                        <h2 class="fs-32 font-w600 counter"><?php echo number_format(round(@$row->grand_total));?></h2>
+                        <h2 class="fs-32 font-w600 counter"><?php 
+                            if(is_integer($row->grand_total)) echo number_format(@$row->grand_total);else echo number_format((@$row->grand_total),2);
+                            ?></h2>
                         <h4 class="mb-0 text-primary" style="font-family: 'Kanit';"><?php echo (@$row->cashier);?></h4>
                       </div>
                     </div>
 
                     <div class="col-xl-9 col-lg-10 col-xxl-8 col-sm-9 col-md-9 border px-3 py-3 rounded-xl" style="margin-top:1rem;">
                         <div class="d-flex align-items-center">
-                          <p class="mb-0 fs-18 me-2 col-4 col-xxl-5 px-0" style="color:#ff6d4d!important;font-weight: 400;font-family: 'Kanit';">เงินสด</p>
+                          <p class="mb-0 fs-18 me-2 col-3 col-xxl-5 px-0" style="color:#ff6d4d!important;font-weight: 400;font-family: 'Kanit';">Cash</p>
                           <div class="progress mb-0" style="height:8px; width:100%;">
                             <div class="progress-bar bg-warning progress-animated" style="width:<?php echo $cash_percent;?>%; height:8px;" role="progressbar">
                             </div>
                           </div>  
-                          <span class="pull-right ms-auto col-2 col-xxl-3 px-0 text-right text-warn" style="color:#ff6d4d!important;font-weight: 600;"><?php echo number_format(round(@$row->cash));?></span>
+                          <span class="pull-right ms-auto col-3 col-xxl-3 px-0 text-right text-warn" style="color:#ff6d4d!important;font-weight: 600;"><?php 
+                            if(is_integer($row->cash)) echo number_format(@$row->cash);else echo number_format((@$row->cash),2);
+                            ?></span>
                         </div>
                         <div class="d-flex align-items-center">
-                          <p class="mb-0 fs-18 me-2 col-4 col-xxl-5 px-0" style="font-weight: 400;font-family: 'Kanit';">PromptPay</p>
+                          <p class="mb-0 fs-18 me-2 col-3 col-xxl-5 px-0" style="font-weight: 400;font-family: 'Kanit';">PromP</p>
                           <div class="progress mb-0" style="height:8px; width:100%;">
                             <div class="progress-bar bg-dark progress-animated" style="width:<?php echo $promptpay_percent;?>%; height:8px;" role="progressbar">
                             </div>
                           </div>
-                          <span class="pull-right ms-auto col-2 col-xxl-3 px-0 text-right" style="font-weight: 600;"><?php echo number_format(round(@$row->promptpay));?></span>
+                          <span class="pull-right ms-auto col-3 col-xxl-3 px-0 text-right" style="font-weight: 600;">
+                            <?php 
+                            if(is_integer($row->promptpay)) echo number_format(@$row->promptpay);else echo number_format((@$row->promptpay),2);
+                            ?></span>
                         </div>
                         <div class="d-flex align-items-center">
-                          <p class="mb-0 fs-18 me-2 col-4 col-xxl-5 px-0" style="color:#2bc155!important;font-weight: 400;font-family: 'Kanit';">บัตรเครดิต</p>
+                          <p class="mb-0 fs-18 me-2 col-3 col-xxl-5 px-0" style="color:#2bc155!important;font-weight: 400;font-family: 'Kanit';">Credit</p>
                           <div class="progress mb-0" style="height:8px; width:100%;">
                             <div class="progress-bar bg-success progress-animated" style="width:<?php echo $credit_percent;?>%; height:8px;" role="progressbar">
                             </div>
                           </div>
-                          <span class="pull-right ms-auto col-2 col-xxl-3 px-0 text-right" style="color:#2bc155!important;font-weight: 600;"><?php echo number_format(round(@$row->credit));?></span>
+                          <span class="pull-right ms-auto col-3 col-xxl-3 px-0 text-right" style="color:#2bc155!important;font-weight: 600;">
+                            <?php 
+                            if(is_integer($row->credit)) echo number_format(@$row->credit);else echo number_format((@$row->credit),2);
+                            ?>
+                          </span>
                         </div>
-                        <div class="d-flex flex-wrap offset-5 offset-xxl-5 revenue-chart-bar" style="padding-left: 10px!important;margin-top: 0.2rem;margin-bottom: 0.2rem;">
+                        <div class="d-flex flex-wrap offset-xxl-5 revenue-chart-bar" style="padding-left: 10px!important;margin-top: 0.2rem;margin-bottom: 0.2rem;">
                             <div class="d-flex align-items-end me-4 mb-2">
                               <div>
                                 <normal class=" fs-23 text-primary" style="font-size: 1rem;">KBank</normal>
-                                <h4 class="font-w500 mb-0"><span class="counter"><?php echo number_format(round(@$row->credit_kbank));?></span></h4>
+                                <h4 class="font-w500 mb-0"><span class="counter">
+                                  <?php 
+                                  if(is_integer($row->credit_kbank)) echo number_format(@$row->credit_kbank);else echo number_format((@$row->credit_kbank),2);
+                                  ?></span></h4>
                               </div>
                             </div>
                             <div class="d-flex align-items-end me-4 mb-2">
                               <div>
                                 <small class=" fs-23 text-primary" style="font-size: 1rem;">BBL</small>
-                                <h4 class="font-w500 mb-0"><span class="counter"><?php echo number_format(round(@$row->credit_bbl));?></span></h4>
+                                <h4 class="font-w500 mb-0"><span class="counter">
+                                  <?php 
+                                  if(is_integer($row->credit_bbl)) echo number_format(@$row->credit_bbl);else echo number_format((@$row->credit_bbl),2);
+                                  ?>
+                                </span></h4>
                               </div>
                             </div>
                             <div class="d-flex align-items-end mb-2">
                               <div>
                                 <small class=" fs-23 text-primary" style="font-size: 1rem;">None</small>
-                                <h4 class="font-w500 mb-0"><span class="counter"><?php echo number_format(round(@$row->credit_unititled));?></span></h4>
+                                <h4 class="font-w500 mb-0"><span class="counter">
+                                  <?php 
+                                  if(is_integer($row->credit_unititled)) echo number_format(@$row->credit_unititled);else echo number_format((@$row->credit_unititled),2);
+                                  ?>
+                                </span></h4>
                               </div>
                             </div>
                         </div>
@@ -251,8 +273,9 @@
 
 
   $("#filterBtn").click(function(){
+    alert('a');
     daterange = document.getElementById("datepick_2").value;
-    alert(daterange);
+    //alert(daterange);
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('dashboard/loadContentList')?>',

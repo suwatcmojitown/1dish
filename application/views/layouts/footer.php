@@ -108,8 +108,9 @@ $(function() {
                 type: 'POST',
                 url: '<?php echo base_url('dashboard/loadContentList')?>',
                 data: 'daterange='+daterange,
-                success: function(result) { 
-                    //$('#result').html(result);
+                success: function(result) {
+                    //alert('a'); 
+                    $('#_date').html(daterange);
                     $("#_list").html(result);
                 } 
     });
