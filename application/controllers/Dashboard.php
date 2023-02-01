@@ -46,35 +46,36 @@ class Dashboard extends MY_Controller {
 		}
 
 		$tempIncomeSummaryByCashierList = $this->Dashboard_model->getIncomeSummaryByCashier($start,'');
-		//console($tempIncomeSummaryByCashierList);
-		$temp = array();
+		if($tempIncomeSummaryByCashierList){
+			$temp = array();
 
-		
-		$count = 0;
-		foreach($tempIncomeSummaryByCashierList as $row){
-			if($row->created_by=='cf1409a7-11ab-4673-be39-fe306c5fb53a'){
-				$temp[] = $row;
-				//unset($tempIncomeSummaryByCashierList[$count]);
-				\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+			
+			$count = 0;
+			foreach($tempIncomeSummaryByCashierList as $row){
+				if($row->created_by=='cf1409a7-11ab-4673-be39-fe306c5fb53a'){
+					$temp[] = $row;
+					//unset($tempIncomeSummaryByCashierList[$count]);
+					\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+				}
+				$count++;
 			}
-			$count++;
-		}
-		
-		
-		$count = 0;
-		foreach($tempIncomeSummaryByCashierList as $row){
-			if($row->created_by=='6d264042-6e03-4f93-8812-d9483accfabb'){
-				$temp[] = $row;
-				\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+			
+			
+			$count = 0;
+			foreach($tempIncomeSummaryByCashierList as $row){
+				if($row->created_by=='6d264042-6e03-4f93-8812-d9483accfabb'){
+					$temp[] = $row;
+					\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+				}
+				$count++;
 			}
-			$count++;
-		}
 
-		
-		$incomeSummaryByCashierList = array_merge($temp, $tempIncomeSummaryByCashierList);
-		if($incomeSummaryByCashierList)
-		{
-			$data['incomeSummaryByCashierList'] = $incomeSummaryByCashierList;
+			
+			$incomeSummaryByCashierList = array_merge($temp, $tempIncomeSummaryByCashierList);
+			if($incomeSummaryByCashierList)
+			{
+				$data['incomeSummaryByCashierList'] = $incomeSummaryByCashierList;
+			}
 		}
 
 
@@ -137,35 +138,36 @@ class Dashboard extends MY_Controller {
 		}
 
 		$tempIncomeSummaryByCashierList = $this->Dashboard_model->getIncomeSummaryByCashier($start,'');
-		//console($tempIncomeSummaryByCashierList);
-		$temp = array();
+		if($tempIncomeSummaryByCashierList){
+			$temp = array();
 
-		
-		$count = 0;
-		foreach($tempIncomeSummaryByCashierList as $row){
-			if($row->created_by=='cf1409a7-11ab-4673-be39-fe306c5fb53a'){
-				$temp[] = $row;
-				//unset($tempIncomeSummaryByCashierList[$count]);
-				\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+			
+			$count = 0;
+			foreach($tempIncomeSummaryByCashierList as $row){
+				if($row->created_by=='cf1409a7-11ab-4673-be39-fe306c5fb53a'){
+					$temp[] = $row;
+					//unset($tempIncomeSummaryByCashierList[$count]);
+					\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+				}
+				$count++;
 			}
-			$count++;
-		}
-		
-		
-		$count = 0;
-		foreach($tempIncomeSummaryByCashierList as $row){
-			if($row->created_by=='6d264042-6e03-4f93-8812-d9483accfabb'){
-				$temp[] = $row;
-				\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+			
+			
+			$count = 0;
+			foreach($tempIncomeSummaryByCashierList as $row){
+				if($row->created_by=='6d264042-6e03-4f93-8812-d9483accfabb'){
+					$temp[] = $row;
+					\array_splice($tempIncomeSummaryByCashierList, $count, 1);
+				}
+				$count++;
 			}
-			$count++;
-		}
 
-		
-		$incomeSummaryByCashierList = array_merge($temp, $tempIncomeSummaryByCashierList);
-		if($incomeSummaryByCashierList)
-		{
-			$data['incomeSummaryByCashierList'] = $incomeSummaryByCashierList;
+			
+			$incomeSummaryByCashierList = array_merge($temp, $tempIncomeSummaryByCashierList);
+			if($incomeSummaryByCashierList)
+			{
+				$data['incomeSummaryByCashierList'] = $incomeSummaryByCashierList;
+			}
 		}
 
 		$parkingSummaryList = $this->Dashboard_model->getParkingSummary($start,'');
@@ -190,7 +192,7 @@ class Dashboard extends MY_Controller {
 		}
 		//console($data);
 
-		$this->load->view ('dashboard/loadContentList',$data);
+		//$this->load->view ('dashboard/loadContentList',$data);
 		
 	}
 
