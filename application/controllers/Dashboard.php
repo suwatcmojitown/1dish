@@ -192,7 +192,7 @@ class Dashboard extends MY_Controller {
 		}
 		//console($data);
 
-		//$this->load->view ('dashboard/loadContentList',$data);
+		$this->load->view ('dashboard/loadContentList',$data);
 		
 	}
 
