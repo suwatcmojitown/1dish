@@ -145,7 +145,7 @@
                                                         }
                                                         ?>
                                                         <?php 
-                                                        if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
+                                                        if($_SESSION['group_admin']=='super_admin'){
                                                             if($row->status==0){
                                                                 if($now_date==$temp_date){
                                                             ?>
