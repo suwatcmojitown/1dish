@@ -67,12 +67,14 @@
                                                         }
                                                         ?>
                                                         <?php 
-                                                        if($row->status==0){
-                                                            if($now_date==$temp_date){
-                                                        ?>
-                                                        <a style="padding-left: 14px;cursor: pointer;" 
-                                                        onclick="cancelBill('<?php echo $row->id;?>')"><span class="badge badge-danger">ยกเลิกบิล</span></a>
-                                                        <?php 
+                                                        if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
+                                                            if($row->status==0){
+                                                                if($now_date==$temp_date){
+                                                            ?>
+                                                            <a style="padding-left: 14px;cursor: pointer;" 
+                                                            onclick="cancelBill('<?php echo $row->id;?>')"><span class="badge badge-danger">ยกเลิกบิล</span></a>
+                                                            <?php 
+                                                                }
                                                             }
                                                         }
                                                         ?>
