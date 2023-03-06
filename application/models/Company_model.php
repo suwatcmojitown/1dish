@@ -93,7 +93,7 @@ class Company_model extends CI_Model {
                 $temp = array();
                 $path = '';
 
-                $temp['limit'] = 3000;
+                $temp['limit'] = 10000;
 
                 $i = 0;
                 foreach($temp as $key => $value)
