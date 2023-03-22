@@ -20,9 +20,9 @@ h4.custom {
 }
 
 .table.custom thead th {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    color: #2f4cdd!important;
+    color: #ab0600!important;
     text-transform: none;
 }
 
@@ -163,4 +163,33 @@ h4.custom {
 
 textarea.custom{
     font-size: 1.2rem!important;
+}
+
+.text-custom{
+    color:#ab0600!important;
+}
+
+.bg-custom{
+    background-color: #ab0600;
+}
+
+.btn.btn-presuccess{
+    background-color: #c1f4cf;
+    border-color: #c1f4cf;
+    padding: 0.75rem 1.125rem;
+    color:#2bc155;
+}
+
+.btn.btn-preinfo{
+    background-color: #b7d4ef;
+    border-color: #b7d4ef;
+    padding: 0.75rem 1.125rem;
+    color:#2781d5;
+}
+
+.btn.btn-custom{
+    background-color: #ab0600;
+    border-color: #ab0600;
+    padding: 0.75rem 1.125rem;
+    color:white;
 }

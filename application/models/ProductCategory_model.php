@@ -35,7 +35,7 @@ class ProductCategory_model extends CI_Model {
                         $i++;
                 }
                 
-                $result = json_decode(callAPI('GET',PATH_API.'backend/product-category'.$path.'',''));  
+                $result = json_decode(callAPI('GET',PATH_API.'backend/category'.$path.'',''));  
                 //console($result);
                 if($result->header->res_code=='200')
                 {
@@ -51,7 +51,7 @@ class ProductCategory_model extends CI_Model {
     public function delete($data)
     {
             $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('DEL',PATH_API.'backend/product-category',$myJSON));  
+            $result = json_decode(callAPI('DEL',PATH_API.'backend/category',$myJSON));  
             if($result->header->res_code=='200')
             {
                     return true;
@@ -62,7 +62,7 @@ class ProductCategory_model extends CI_Model {
 
     public function getContentDetail($id)
     {
-           $result = json_decode(callAPI('GET',PATH_API.'backend/product-category?id='.$id.'',''));  
+           $result = json_decode(callAPI('GET',PATH_API.'backend/category?id='.$id.'',''));  
            
            if($result->header->res_code=='200')
            {
@@ -76,7 +76,7 @@ class ProductCategory_model extends CI_Model {
     public function update($data)
     {
             $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('PUT',PATH_API.'backend/product-category',$myJSON)); 
+            $result = json_decode(callAPI('PUT',PATH_API.'backend/category',$myJSON)); 
             //console($result);
 
             if($result->header->res_code=='200')

@@ -13,7 +13,7 @@
     <meta property="og:description" content="Davur - Restaurant Bootstrap Admin Dashboard + FrontEnd" />
     <meta property="og:image" content="https://davur.dexignzone.com/dashboard/social-image.png" />
     <meta name="format-detection" content="telephone=no">
-    <title>CMS - SRI BHURAPA ORCHID </title>
+    <title>CMS - BIG 2 Corporation</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="<?php echo base_url()?>app-assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -144,7 +144,7 @@
                     }
                     ?>
                     <li><a class="ai-icon" href="<?php echo base_url('product');?>" >
-                            <i class="fa fa-coffee" aria-hidden="true"></i>
+                            <i class="fas fa-car-alt"></i>
                             <span class="nav-text">Product</span>
                         </a>
                     </li>

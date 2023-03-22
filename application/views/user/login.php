@@ -13,7 +13,7 @@
     <meta property="og:description" content="Davur - Restaurant Bootstrap Admin Dashboard + FrontEnd" />
     <meta property="og:image" content="https://davur.dexignzone.com/dashboard/social-image.png" />
     <meta name="format-detection" content="telephone=no">
-    <title>CMS - SRI BHURAPA ORCHID </title>
+    <title>CMS - BIG 2 Corporation</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url()?>app-assets/images/favicon.png">
     <link href="<?php echo base_url()?>app-assets/css/style.css" rel="stylesheet">
@@ -43,7 +43,7 @@
                                             <input type="password" class="form-control" name="password">
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                            <button type="submit" class="btn btn-danger btn-block">Sign In</button>
                                         </div>
                                     </form>
                                     <?php 

@@ -1,81 +1,98 @@
 <div class="content-body">
-            <!-- row -->
+            <!-- row --> 
 			<div class="container-fluid">
                 <div class="row page-titles">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a href="<?php echo base_url('product');?>"><i class="fa fa-coffee" aria-hidden="true"></i> Product</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Edit</a></li>
+                        <li class="breadcrumb-item active "><a href="<?php echo base_url('product');?>" style="color:#ab0600!important;"><i class="fa fa-coffee text-custom" aria-hidden="true"></i> Product</a></li>
+                        <li class="breadcrumb-item text-custom"><a href="javascript:void(0)">Edit</a></li>
                     </ol>
                 </div>
                 <div class="row">
 					<div class="col-12">
 
                         <div class="card">
-                            <div class="card-header bg-info">
-                                <h4 class="card-title text-white" > <i class="fas fa-pencil-alt"></i> แก้ไข Product : <?php echo @$detail->name_th;?></h4>
+                            <div class="card-header bg-custom">
+                                <h4 class="card-title text-white" > <i class="fas fa-pencil-alt"></i> แก้ไข Product : <?php echo @$detail->title_th;?></h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
                                     <form class="row" id="addForm">
                                         <input type="hidden" class="form-control" name="id" value="<?php echo @$detail->id;?>">
                                         <div class="mb-3 col-8">
-                                                <label class="text-info form-label col-form-label-lg">ชื่อ</label>
-                                                <input type="text" class="form-control form-control-lg" name="name_th" value="<?php echo @$detail->name_th;?>">
+                                                <label class="text-custom form-label col-form-label-lg">ชื่อ</label>
+                                                <input type="text" class="form-control form-control-lg" name="title_th" value="<?php echo @$detail->title_th;?>">
                                         </div>
                                         <div class="mb-3 col-8">
-                                                <label class="text-info form-label col-form-label-lg">ชื่อ <code>EN</code></label>
-                                                <input type="text" class="form-control form-control-lg" name="name_en" value="<?php echo @$detail->name_en;?>">
-                                        </div>
-                                        <div class="mb-3 col-5">
-                                                <label class="text-info form-label col-form-label-lg">หน่วยสินค้า</label>
-                                                <input type="text" class="form-control form-control-lg" name="unit" value="<?php echo @$detail->unit;?>">
+                                                <label class="text-custom form-label col-form-label-lg">ชื่อ <code>EN</code></label>
+                                                <input type="text" class="form-control form-control-lg" name="title_en" value="<?php echo @$detail->title_en;?>">
                                         </div>
                                         <div class="mb-3 col-12">
-                                                <label class="text-info form-label col-form-label-lg">รายละเอียด</code></label>
+                                                <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม</code></label>
+                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th"><?php echo @$detail->subtitle_th;?></textarea>
+                                        </div>
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม <code>EN</code></code></label>
+                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en"><?php echo @$detail->subtitle_en;?></textarea>
+                                        </div>
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">รายละเอียด</code></label>
                                                 <textarea class="form-control form-control-lg" rows="4" name="description_th"><?php echo @$detail->description_th;?></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
-                                                <label class="text-info form-label col-form-label-lg">รายละเอียด <code>EN</code></code></label>
+                                                <label class="text-custom form-label col-form-label-lg">รายละเอียด <code>EN</code></code></label>
                                                 <textarea class="form-control form-control-lg" rows="4" name="description_en"><?php echo @$detail->description_en;?></textarea>
                                         </div>
                                         <div class="mb-3 col-5">
-                                                <label class="text-info form-label col-form-label-lg">รูปภาพ</label>
+                                                <label class="text-custom form-label col-form-label-lg">ราคา</label>
+                                                <input type="text" class="form-control form-control-lg" name="price" value="<?php echo @$detail->price;?>">
+                                        </div>
+                                        
+                                        <div class="mb-3 col-8">
+                                                <label class="text-custom form-label col-form-label-lg">รูปภาพ</label>
                                                 <input type="file" class="form-control form-control-lg" name="image" style="padding-top: 14px;">
                                         </div>
-                                        <div class="mb-3 col-3">
-                                                <img src="<?php echo @$detail->thumbnail_path;?>"></img>
+                                        <div class="mb-3 col-2">
+                                                <img src="<?php echo @$detail->image_url;?>" class="img-fluid"></img>
                                         </div>
-                                        <input type="hidden" class="form-control" name="thumbnail_hidden" placeholder="" value="<?php echo @$detail->thumbnail;?>"> 
-                                        <!--
-                                        <div class="mb-3 col-12 category">
-                                                <label class="text-info form-label col-form-label-lg" style="display:block;">หมวดหมู่</label>
-                                                    <?php 
-                                                    if(isset($categoryList)&&!empty($categoryList)){
-                                                        foreach($categoryList as $row){
-                                                    ?>
-                                                    <button type="button" class="btn <?php if($detail->product_category_id!=$row->id) echo 'light';?> btn-info ma-7 mb-2 <?php if($detail->product_category_id==$row->id) echo 'active';?>" value="<?php echo $row->id?>" style="font-size: 16px;"><?php echo $row->name_th;?></button>
-                                                    <?php 
-                                                        }
-                                                    }
-                                                    ?>
+                                        <input type="hidden" class="form-control" name="thumbnail_hidden" placeholder="" value="<?php echo @$detail->image;?>"> 
+                                        
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">คำอธิบายสินค้า</code></label>
+                                                <textarea class="form-control form-control-lg" rows="4" name="detail_th"><?php echo @$detail->detail_th;?></textarea>
                                         </div>
-                                        -->
-                                        <div class="mb-3 col-8 category">
-                                        <?php 
-                                        //console($detail);
-                                        //echo $detail->product_category_id;
-                                        //console($categoryList);
-                                        ?>
-                                        <label class="text-info form-label col-form-label-lg">หมวดหมู่</label>
-                                                <select class="default-select form-control wide mb-3" id="product_category_id" name="product_category_id" >
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">คำอธิบายสินค้า <code>EN</code></code></label>
+                                                <textarea class="form-control form-control-lg" rows="4" name="detail_en"><?php echo @$detail->detail_en;?></textarea>
+                                        </div>
+
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">Youtube Link</label>
+                                                <input type="text" class="form-control form-control-lg" name="external_link" value="<?php echo @$detail->external_link;?>">
+                                        </div>
+
+                                        <div class="mb-3 col-5">
+                                                <label class="text-custom form-label col-form-label-lg">หัวข้อ Youtube</label>
+                                                <input type="text" class="form-control form-control-lg" name="external_link_title_th" value="<?php echo @$detail->external_link_title_th;?>">
+                                        </div>
+
+                                        <div class="mb-3 col-5">
+                                                <label class="text-custom form-label col-form-label-lg">หัวข้อ Youtube <code>EN</code></label>
+                                                <input type="text" class="form-control form-control-lg" name="external_link_title_en" value="<?php echo @$detail->external_link_title_en;?>">
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="mb-3 col-4">
+                                        <label class="text-custom form-label col-form-label-lg">ประเภท</label>
+                                                <select class="default-select form-control wide mb-3" id="content_type_id" name="content_type_id" onchange="contentTypeChange()">
                                                         <option value="null" disabled selected> --- กรุณาเลือก --- </option>
                                                         <?php 
-                                                        if(isset($categoryList)&&!empty($categoryList))
+                                                        if(isset($contentTypeList)&&!empty($contentTypeList))
                                                         {
-                                                            foreach($categoryList as $row)
+                                                            foreach($contentTypeList as $row)
                                                             {
                                                         ?>
-                                                            <option <?php if($detail->product_category_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->name_th;?></option>
+                                                            <option <?php if(@$detail->content_type_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->title_th;?></option>
                                                         <?php 
                                                             }
                                                         }
@@ -83,40 +100,143 @@
                                                 </select>
                                         </div>
 
+                                        <div class="mb-3 col-4 category" id="_categoryList">
+                                        <?php 
+                                        //console($detail);
+                                        //echo $detail->product_category_id;
+                                        //console($categoryList);
+                                        ?>
+                                        <label class="text-custom form-label col-form-label-lg">หมวดหมู่</label>
+                                                <select class="default-select form-control wide mb-3" id="category_id" name="category_id" onchange="categoryChange()">
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($categoryList)&&!empty($categoryList))
+                                                        {
+                                                            foreach($categoryList as $row)
+                                                            {
+                                                        ?>
+                                                            <option <?php if($detail->category_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->title_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
+                                        </div>
+
+                                        <div class="mb-3 col-4" id="_subCategoryList">
+                                        <?php 
+                                        //console($detail);
+                                        //echo $detail->product_category_id;
+                                        //console($categoryList);
+                                        ?>
+                                        <label class="text-custom form-label col-form-label-lg">หมวดหมู่ย่อย</label>
+                                                <select class="default-select form-control wide mb-3" id="subcategory_id" name="subcategory_id" >
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($subCategoryList)&&!empty($subCategoryList))
+                                                        {
+                                                            foreach($subCategoryList as $row)
+                                                            {
+                                                        ?>
+                                                            <option <?php if($detail->subcategory_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->title_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
+                                        </div>
+
+                                        
+
+                                        <div class="mb-3 col-5" >
+                                        <?php 
+                                        //console($detail);
+                                        //echo $detail->product_category_id;
+                                        //console($categoryList);
+                                        ?>
+                                        <label class="text-custom form-label col-form-label-lg">ยี่ห้อ</label>
+                                                <select class="default-select form-control wide mb-1" id="car_brand_id" name="car_brand_id" onchange="carBrandChange()">
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($carBrandList)&&!empty($carBrandList))
+                                                        {
+                                                            foreach($carBrandList as $row)
+                                                            {
+                                                        ?>
+                                                            <option <?php if($detail->car_brand_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->title_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
+                                                <small class="text-muted">เลือกเมื่อเป็นประเภทโช๊คฝากระโปรง</small>
+                                        </div>
+
+                                        <div class="mb-3 col-5" id="_carModelList">
+                                        <?php 
+                                        //console($detail);
+                                        //echo $detail->product_category_id;
+                                        //console($categoryList);
+                                        ?>
+                                        <label class="text-custom form-label col-form-label-lg">รุ่น</label>
+                                                <select class="default-select form-control wide mb-1" id="car_model_id" name="car_model_id" >
+                                                        <option value="null" disabled selected> --- กรุณาเลือก --- </option>
+                                                        <?php 
+                                                        if(isset($carModelList)&&!empty($carModelList))
+                                                        {
+                                                            foreach($carModelList as $row)
+                                                            {
+                                                        ?>
+                                                            <option <?php if($detail->car_model_id==$row->id) echo 'selected';?> value="<?php echo $row->id;?>"><?php echo $row->title_th;?></option>
+                                                        <?php 
+                                                            }
+                                                        }
+                                                        ?>
+                                                </select>
+                                                <small class="text-muted">เลือกเมื่อเป็นประเภทโช๊คฝากระโปรง</small>
+                                        </div>
+
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">ปีรถ</label>
+                                                <input type="text" class="form-control form-control-lg" name="year" value="<?php echo @$detail->year;?>">
+                                                <small class="text-muted">ตัวอย่าง : 2013,2014,2015</small>
+                                        </div>
+
                                         <hr>
+
                                         <div class="mb-3 col-5">
-                                                <label class="text-info form-label col-form-label-lg">คำนวณ Vat (%)</label>
-                                                <!--
-                                                <input type="text" class="form-control form-control-lg" name="calculate_vat" value="<?php echo @$detail->calculate_vat;?>">-->
-                                                <select class="default-select form-control wide mb-3" name="calculate_vat" id="calculate_vat">
-                                                    <option value="1" <?php if($detail->calculate_vat=='1') echo 'selected';?>>คำนวณ</option>
-                                                    <option value="0" <?php if($detail->calculate_vat=='0') echo 'selected';?>>ไม่คำนวณ</option>
-                                                </select>
+                                                <label class="text-custom form-label col-form-label-lg">Link lazada</label>
+                                                <input type="text" class="form-control form-control-lg" name="link_lazada" value="<?php echo @$detail->link_lazada;?>">
                                         </div>
 
                                         <div class="mb-3 col-5">
-                                                <label class="text-info form-label col-form-label-lg">คำนวณค่า Com (%)</label>
-                                                <!--
-                                                <input type="text" class="form-control form-control-lg" name="calculate_commision" value="<?php echo @$detail->calculate_commision;?>">
-                                                -->
-                                                <select class="default-select form-control wide mb-3" name="calculate_commission" id="calculate_commission">
-                                                    <option value="1" <?php if($detail->calculate_commission=='1') echo 'selected';?>>คำนวณ</option>
-                                                    <option value="0" <?php if($detail->calculate_commission=='0') echo 'selected';?>>ไม่คำนวณ</option>
-                                                </select>
+                                                <label class="text-custom form-label col-form-label-lg">Link Shopee</label>
+                                                <input type="text" class="form-control form-control-lg" name="link_shopee" value="<?php echo @$detail->link_shopee;?>">
                                         </div>
 
-                                        <div class="mb-3 col-5">
-                                                <label class="text-info form-label col-form-label-lg">ราคาทุน (บาท)</label>
-                                                <input type="text" class="form-control form-control-lg" name="cost" value="<?php echo @$detail->cost;?>">
+                                        <div class="mb-3 col-12">
+                                                <label class="text-custom form-label col-form-label-lg">Keyword</label>
+                                                <input type="text" class="form-control form-control-lg" name="keyword" value="<?php echo @$detail->keyword;?>">
                                         </div>
 
-                                        <div class="mb-3 col-5">
-                                                <label class="text-info form-label col-form-label-lg">ราคาหน้าร้าน (บาท)</label>
-                                                <input type="text" class="form-control form-control-lg" name="price" value="<?php echo @$detail->price;?>">
+                                        <div class="mb-3 mb-0 col-6">
+                                            <label class="text-custom form-label col-form-label-lg">Best Seller</label>
+                                            <select class="default-select form-control wide mb-3" name="best_seller" id="best_seller">
+                                                <option value="1" <?php if($detail->best_seller=='1') echo 'selected';?>>เปิดใช้งาน</option>
+                                                <option value="0" <?php if($detail->best_seller=='0') echo 'selected';?>>ไม่เปิดใช้งาน</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3 mb-0 col-6">
+                                            <label class="text-custom form-label col-form-label-lg">Recommend</label>
+                                            <select class="default-select form-control wide mb-3" name="recommended" id="recommended">
+                                                <option value="1" <?php if($detail->recommended=='1') echo 'selected';?>>เปิดใช้งาน</option>
+                                                <option value="0" <?php if($detail->recommended=='0') echo 'selected';?>>ไม่เปิดใช้งาน</option>
+                                            </select>
                                         </div>
                                         
                                         <div class="mb-3 mb-0 col-5">
-                                            <label class="text-info form-label col-form-label-lg">สถานะ</label>
+                                            <label class="text-custom form-label col-form-label-lg">สถานะ</label>
                                             <select class="default-select form-control wide mb-3" name="status" id="status">
                                                 <option value="1" <?php if($detail->status=='1') echo 'selected';?>>เปิดใช้งาน</option>
                                                 <option value="0" <?php if($detail->status=='0') echo 'selected';?>>ไม่เปิดใช้งาน</option>
@@ -165,7 +285,6 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาตรวจสอบข้อมูลอีกครั้ง <br>
-                                                            หมวดหมู่ , ราคาทุน , ราคาขาย 
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
@@ -208,14 +327,23 @@
                 var status = document.getElementById("status").value;
                 data.append('status', status);
 
-                var calculate_vat = document.getElementById("calculate_vat").value;
-                data.append('calculate_vat', calculate_vat);
+                var category_id = document.getElementById("category_id").value;
+                data.append('category_id', category_id);
 
-                var calculate_commission = document.getElementById("calculate_commission").value;
-                data.append('calculate_commission', calculate_commission);
+                var subcategory_id = document.getElementById("subcategory_id").value;
+                data.append('subcategory_id', subcategory_id);
 
-                var product_category_id = document.getElementById("product_category_id").value;
-                data.append('product_category_id', product_category_id);
+                var car_brand_id = document.getElementById("car_brand_id").value;
+                data.append('car_brand_id', car_brand_id);
+
+                var car_model_id = document.getElementById("car_model_id").value;
+                data.append('car_model_id', car_model_id);
+
+                var recommended = document.getElementById("recommended").value;
+                data.append('recommended', recommended);
+
+                var best_seller = document.getElementById("best_seller").value;
+                data.append('best_seller', best_seller);
                 
                                     $.ajax({
                                         type: 'POST',
@@ -236,12 +364,52 @@
                                     });
          
     });
-    /*
-    $('.category button').on('click', function(){
-        $(this).addClass('active');
-        $('.category button').not(this).removeClass('active');
-        $('.category button').not(this).addClass('light');
-        $(this).removeClass('light');
-    });
-    */
+    
+    function contentTypeChange(){
+        
+        content_type_id = document.getElementById("content_type_id").value;
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('product/loadCategoryList')?>',
+            data: 'content_type_id='+content_type_id+'',
+            success: function(result) { 
+                //$('#result').html(result);
+                $("#_categoryList").html(result);
+            }
+        });
+    } 
+
+    function categoryChange(){
+        
+        category_id = document.getElementById("category_id").value;
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('product/loadSubCategoryList')?>',
+            data: 'category_id='+category_id+'',
+            success: function(result) { 
+                //$('#result').html(result);
+                $("#_subCategoryList").html(result);
+            }
+        });
+    } 
+
+
+
+    function carBrandChange(){
+        
+        car_brand_id = document.getElementById("car_brand_id").value;
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('product/loadCarModelList')?>',
+            data: 'car_brand_id='+car_brand_id+'',
+            success: function(result) { 
+                //$('#result').html(result);
+                $("#_carModelList").html(result);
+            }
+        });
+    } 
+
 </script>

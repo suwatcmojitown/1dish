@@ -4,7 +4,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="<?php echo base_url();?>" target="_blank">SRI BHURAPA ORCHID</a> 2022</p>
+                <p>Copyright © Designed &amp; Developed by <a href="<?php echo base_url();?>" target="_blank">BIG 2 Corporation</a> 2022</p>
             </div>
         </div>
         <!--**********************************

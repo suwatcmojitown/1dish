@@ -116,6 +116,7 @@ $route['product/stock/view/(:any)'] = 'Product/stockList/$1';
 $route['product/updateStock'] = 'Product/updateStock';
 $route['product/createStock'] = 'Product/createStock';
 $route['product/loadStockList'] = 'Product/loadStockList';
+$route['product/gallery/(:any)'] = 'Product/gallery/$1';
 
 $route['product-category'] = 'ProductCategory/list';
 $route['product-category/create'] = 'ProductCategory/create';
@@ -189,6 +190,9 @@ $route['grouping/loadTourGroupingList'] = 'TourGrouping/loadContentList';
 $route['grouping/edit/(:any)'] = 'TourGrouping/edit/$1';
 $route['grouping/update'] = 'TourGrouping/updateContent';
 $route['grouping/view/(:any)'] = 'TourGrouping/view/$1';
+
+$route['filter/loadSubCategoryList'] = 'Filter/getSubcategory';
+
 
 /*
 $route['user/register'] = 'User/register';

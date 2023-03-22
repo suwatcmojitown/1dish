@@ -4,8 +4,9 @@
                                             <tr>
                                                 <th width="10%"></th>
                                                 <th></th>
-                                                <th>จำนวน</th>
                                                 <th>หมวดหมู่</th>
+                                                <th>แบรนด์</th>
+                                                <th>ราคา</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -26,8 +27,8 @@
                                                 </td>
                                                 -->
                                                 <td>
-                                                    <h4 class="text-primary mb-1 name" style="font-weight: 400;"><?php echo @$row->name_th?></h4>
-                                                    <h4 class="text-primary mb-1 name" style="font-weight: 300;"><?php echo @$row->name_en?></h4>
+                                                    <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->title_th?></h4>
+                                                    <h4 class="text-custom mb-1 name" style="font-weight: 300;"><?php echo @$row->title_en?></h4>
                                                     <normal style="display:block;"> 
                                                     <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>">
                                                     <?php 
@@ -61,28 +62,37 @@
                                                     
                                                 </td>
                                                 <td>
-                                                    <?php echo @$row->quantity;?>
+                                                    <?php echo @$row->category_title_th;?>
                                                 </td>
                                                 <td>
-                                                    <?php echo @$row->product_category_name_th;?>
+                                                    <?php echo @$row->car_brand_title_th;?>
+                                                </td>
+                                                <td>
+                                                    <?php echo number_format(@$row->price);?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
                                                         <?php 
                                                         if($_SESSION['group_admin']!='cashier'){
                                                         ?>
-                                                        <a target="_blank" href="<?php echo base_url('product/stock/view/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1">
-                                                            <i class="fa fa-cube" aria-hidden="true"></i>
-                                                        </a>
-                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
                                                         <?php }?>
+                                                        <a target="_blank" href="<?php echo base_url('product/gallery/').$row->id;?>" class="btn btn-info shadow btn-sm sharp me-1">
+                                                            <i class="fa fa-image" aria-hidden="true"></i>
+                                                        </a>
                                                         <?php 
                                                         if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
                                                         ?>
-                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
+                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp me-1" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
                                                         <?php 
                                                         }
                                                         ?>
+                                                        <a target="_blank" class="btn btn-<?php if($row->best_seller=='0')echo 'pre';?>success shadow btn-sm sharp me-1" onclick="changeStatusBestSeller('<?php echo $row->id;?>','<?php echo $row->best_seller;?>','<?php echo $page;?>')">
+                                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a target="_blank" class="btn btn-<?php if($row->recommended=='0')echo 'pre';?>info shadow btn-sm sharp me-1" onclick="changeStatusRecommend('<?php echo $row->id;?>','<?php echo $row->recommended;?>','<?php echo $page;?>')">
+                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                        </a>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->
@@ -123,7 +133,7 @@
                                     {
                                 ?>
                                 <nav style="float: right;">
-                                    <ul class="pagination pagination-gutter pagination-primary no-bg">
+                                    <ul class="pagination pagination-gutter pagination-danger no-bg">
                                         <?php 
                                         if($active_page-1>0){
                                             ?>

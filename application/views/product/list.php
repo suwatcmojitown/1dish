@@ -1,11 +1,12 @@
  <div class="content-body">
             <!-- row -->
 			<div class="container-fluid">
+                <?php //console($paging);?>
 				<div class="form-head d-flex mb-3 align-items-start">
 					<div class="me-auto d-none d-lg-block ">
-						<h2 class="text-primary font-w600 mb-0"><i class="fa fa-coffee" aria-hidden="true"></i> Product</h2>
+						<h2 class="text-custom font-w600 mb-0"><i class="fa fa-coffee" aria-hidden="true"></i> Product</h2>
 						<ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">List</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)" class="text-custom">List</a></li>
                             <!--<li class="breadcrumb-item"><a href="javascript:void(0)">Accordion</a></li>-->
                         </ol>
 					</div>
@@ -14,17 +15,24 @@
                     </div>
                     <div class="dropdown custom-dropdown ms-3">
                         <div class="input-group mb-3" style="">
-                                            <select id="product_category_id" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
+                                            <select id="category_id" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;" onchange="categoryChange()">
                                                   <option value="">-- หมวดหมู่ --</option>
                                                   <?php 
                                                   if(isset($categoryList)&&!empty($categoryList)){
                                                     foreach($categoryList as $row){
                                                   ?>
-                                                  <option value="<?php echo $row->id?>"><?php echo @$row->name_th;?></option>
+                                                  <option value="<?php echo $row->id?>"><?php echo @$row->title_th;?></option>
                                                   <?php 
                                                     }
                                                   }
                                                   ?>
+                                            </select>
+                        </div>
+                    </div>
+                    <div class="dropdown custom-dropdown ms-3">
+                        <div class="input-group mb-3" style="" id="_subCategoryList">
+                                            <select id="subcategory_id" class="form-select wide" aria-label="Default select example" style="font-size:1.09375rem;background: #fff;border: 0.0625rem solid #f0f1f5;padding: 0.3125rem 1.25rem;color: #6e6e6e;height: 3.5rem;border-radius: 0.5rem;">
+                                                  <option value="">-- หมวดหมู่ย่อย --</option>
                                             </select>
                         </div>
                     </div>
@@ -38,7 +46,7 @@
                         </div>
                     </div>
                     <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
-                    <a href="<?php echo base_url('product/create');?>" id="add-order" class="btn btn-warning btn-rounded ms-3">Add +</a>
+                    <a href="<?php echo base_url('product/create');?>" id="add-order" class="btn btn-success btn-rounded ms-3">Add +</a>
                     
 				</div>
                 <div class="row">
@@ -52,8 +60,9 @@
                                             <tr>
                                                 <th width="10%"></th>
                                                 <th></th>
-                                                <th>จำนวน</th>
                                                 <th>หมวดหมู่</th>
+                                                <th>แบรนด์</th>
+                                                <th>ราคา</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -74,8 +83,8 @@
                                                 </td>
                                                 -->
                                                 <td>
-                                                    <h4 class="text-primary mb-1 name" style="font-weight: 400;"><?php echo @$row->name_th?></h4>
-                                                    <h4 class="text-primary mb-1 name" style="font-weight: 300;"><?php echo @$row->name_en?></h4>
+                                                    <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->title_th?></h4>
+                                                    <h4 class="text-custom mb-1 name" style="font-weight: 300;"><?php echo @$row->title_en?></h4>
                                                     <normal style="display:block;"> 
                                                     <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>">
                                                     <?php 
@@ -109,28 +118,37 @@
                                                     
                                                 </td>
                                                 <td>
-                                                    <?php echo @$row->quantity;?>
+                                                    <?php echo @$row->category_title_th;?>
                                                 </td>
                                                 <td>
-                                                    <?php echo @$row->product_category_name_th;?>
+                                                    <?php echo @$row->car_brand_title_th;?>
+                                                </td>
+                                                <td>
+                                                    <?php echo number_format(@$row->price);?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
                                                         <?php 
                                                         if($_SESSION['group_admin']!='cashier'){
                                                         ?>
-                                                        <a target="_blank" href="<?php echo base_url('product/stock/view/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1">
-                                                            <i class="fa fa-cube" aria-hidden="true"></i>
-                                                        </a>
-                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-primary shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
                                                         <?php }?>
+                                                        <a target="_blank" href="<?php echo base_url('product/gallery/').$row->id;?>" class="btn btn-info shadow btn-sm sharp me-1">
+                                                            <i class="fa fa-image" aria-hidden="true"></i>
+                                                        </a>
                                                         <?php 
                                                         if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
                                                         ?>
-                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
+                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp me-1" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
                                                         <?php 
                                                         }
                                                         ?>
+                                                        <a target="_blank" class="btn btn-<?php if($row->best_seller=='0')echo 'pre';?>success shadow btn-sm sharp me-1" onclick="changeStatusBestSeller('<?php echo $row->id;?>','<?php echo $row->best_seller;?>','<?php echo $page;?>')">
+                                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a target="_blank" class="btn btn-<?php if($row->recommended=='0')echo 'pre';?>info shadow btn-sm sharp me-1" onclick="changeStatusRecommend('<?php echo $row->id;?>','<?php echo $row->recommended;?>','<?php echo $page;?>')">
+                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                        </a>
                                                     </div>
                                                 </td>
                                                 <!-- Modal Tash -->
@@ -171,7 +189,7 @@
                                     {
                                 ?>
                                 <nav style="float: right;">
-                                    <ul class="pagination pagination-gutter pagination-primary no-bg">
+                                    <ul class="pagination pagination-gutter pagination-danger no-bg">
                                         <?php 
                                         if($active_page-1>0){
                                             ?>
@@ -227,8 +245,8 @@
                                                             บันทึกสำเร็จ
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
+                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-danger">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,8 +262,8 @@
                                                             บันทึกไม่สำเร็จ เกิดข้อผิดพลาด กรุณาลองใหม่
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-primary">กลับสู่หน้าหลัก</button></a>
-                                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ตกลง</button>
+                                                            <a href="<?php echo base_url('product/list');?>"><button type="button" class="btn btn-danger">กลับสู่หน้าหลัก</button></a>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ตกลง</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -256,17 +274,34 @@
 
 <script>
 
+function categoryChange(){
+        
+        category_id = document.getElementById("category_id").value;
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url('filter/loadSubCategoryList')?>',
+            data: 'category_id='+category_id+'',
+            success: function(result) { 
+                //$('#result').html(result);
+                $("#_subCategoryList").html(result);
+            }
+        });
+}    
+
 function loadPage(page){
+    //alert(page);
     keysearch = document.getElementById("keysearch").value;
-    product_category_id = document.getElementById("product_category_id").value;
+    category_id = document.getElementById("category_id").value;
+    subcategory_id = document.getElementById("subcategory_id").value;
     status = document.getElementById("status").value;
     
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('product/loadContentList')?>',
-                data: 'keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page='+page,
+                data: 'keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page,
                 success: function(result) { 
-                    //$('#result').html(result);
+                   // $('#result').html(result);
                     $("#_list").html(result);
                 } 
     });
@@ -275,13 +310,14 @@ function loadPage(page){
 
 $("#filterBtn").click(function(){
     keysearch = document.getElementById("keysearch").value;
-    product_category_id = document.getElementById("product_category_id").value;
+    category_id = document.getElementById("category_id").value;
+    subcategory_id = document.getElementById("subcategory_id").value;
     status = document.getElementById("status").value;
     
     $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url('product/loadContentList')?>',
-                data: 'keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page=1',
+                data: 'keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page=1',
                 success: function(result) { 
                     //$('#result').html(result);
                     $("#_list").html(result);
@@ -292,14 +328,15 @@ $("#filterBtn").click(function(){
 
 function changeStatus(id,change_status){
     keysearch = document.getElementById("keysearch").value;
-    product_category_id = document.getElementById("product_category_id").value;
+    category_id = document.getElementById("category_id").value;
+    subcategory_id = document.getElementById("subcategory_id").value;
     status = document.getElementById("status").value;
 
 
                     $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('product/changeStatus')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page=<?php echo $active_page;?>&change_status='+change_status,
+                        data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page=<?php echo $active_page;?>&change_status='+change_status,
                         success: function(result) { 
                             //$('#result').html(result);
                             $("#_list").html(result);
@@ -316,13 +353,14 @@ function confirmDelete(id){
             var status = '';
 
             keysearch = document.getElementById("keysearch").value;
-            product_category_id = document.getElementById("product_category_id").value;
+            category_id = document.getElementById("category_id").value;
+            subcategory_id = document.getElementById("subcategory_id").value;
             status = document.getElementById("status").value;
 
             $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('product/delete')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&product_category_id='+product_category_id+'&status='+status+'&page='+page,
+                        data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page,
                         success: function(result) { 
                             //alert(result);
                             $('#del'+id+'').modal('hide');
@@ -331,5 +369,43 @@ function confirmDelete(id){
                         }
             });
     }
+
+function changeStatusBestSeller(id,change_status,page){
+
+    keysearch = document.getElementById("keysearch").value;
+    category_id = document.getElementById("category_id").value;
+    subcategory_id = document.getElementById("subcategory_id").value;
+    status = document.getElementById("status").value;
+    
+    $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('product/changeStatusBestSeller')?>',
+                data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page+'&change_status='+change_status,
+                success: function(result) { 
+                    //$('#result').html(result);
+                    $("#_list").html(result);
+                } 
+    });
+}
+
+function changeStatusRecommend(id,change_status,page){
+
+    
+    keysearch = document.getElementById("keysearch").value;
+    category_id = document.getElementById("category_id").value;
+    subcategory_id = document.getElementById("subcategory_id").value;
+    status = document.getElementById("status").value;
+    
+    $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url('product/changeStatusRecommend')?>',
+                data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page+'&change_status='+change_status,
+                success: function(result) { 
+                    //$('#result').html(result);
+                    $("#_list").html(result);
+                } 
+    });
+    
+}
 
 </script>

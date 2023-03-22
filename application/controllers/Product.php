@@ -12,8 +12,7 @@ class Product extends MY_Controller {
 
     	
 		$this->load->model('Product_model');
-		$this->load->model('ProductCategory_model');
-		$this->load->model('Stock_model');
+		$this->load->model('Filter_model');
 	}
 
 	public function list($active_page = 1)
@@ -24,14 +23,15 @@ class Product extends MY_Controller {
 		$data['list'] = '';
 		$data['paging'] = '';
 
-		$categoryList = $this->ProductCategory_model->getContentList('',$active_page,PAGE_LIMIT);
+		$categoryList = $this->Filter_model->getCategory(1);
 		if($categoryList)
 		{
 			$data['categoryList'] = $categoryList->body;
 		}
+		//console($categoryList);
 
 		//$status,$keysearch,category,$active_page,$limit
-		$resultList = $this->Product_model->getContentList('','','',$active_page,PAGE_LIMIT);
+		$resultList = $this->Product_model->getContentList('','','','',$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -52,13 +52,16 @@ class Product extends MY_Controller {
 
 		$keysearch = $_POST['keysearch'];
 		$status = $_POST['status'];
-		$product_category_id = $_POST['product_category_id'];
+		$category_id = $_POST['category_id'];
+		$subcategory_id = $_POST['subcategory_id'];
 		$active_page = $_POST['page'];
 
 		$data['page'] = $active_page;
 
-		//$status,$keysearch,category,$active_page,$limit
-		$resultList = $this->Product_model->getContentList($status,$keysearch,$product_category_id,$active_page,PAGE_LIMIT);
+		//console($data);
+
+		//$status,$keysearch,category,subcategory,$active_page,$limit
+		$resultList = $this->Product_model->getContentList($status,$keysearch,$category_id,$subcategory_id,$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -71,21 +74,29 @@ class Product extends MY_Controller {
 
 	public function create()
 	{
-		/*
-		$user_id = $this->session->userdata['login_id'];
-		if($this->session->userdata['group_id']=='1')
+		$data['contentTypeList'] = '';
+		$data['categoryList'] = '';
+		$data['subCategoryList'] = '';
+		$data['carBrandList'] = '';
+		$data['carModelList'] = '';
+
+		$contentTypeList = $this->Filter_model->getContentType();
+		if($contentTypeList)
 		{
-			$user_id = '';
+			$data['contentTypeList'] = $contentTypeList->body;
 		}
-		*/
 
-		$data['list'] = '';
-		$data['paging'] = '';
 
-		$categoryList = $this->ProductCategory_model->getContentList('','',PAGE_LIMIT);
+		$categoryList = $this->Filter_model->getCategory(1);
 		if($categoryList)
 		{
 			$data['categoryList'] = $categoryList->body;
+		}
+
+		$carBrandList = $this->Filter_model->getCarBrand();
+		if($carBrandList)
+		{
+			$data['carBrandList'] = $carBrandList->body;
 		}
 
 		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
@@ -110,20 +121,31 @@ class Product extends MY_Controller {
 		//console($_POST);
 		
 		$data = new stdClass(); 
-		
+		//console($_POST);
 		//$data->name_title = $_POST['name_title'];
-		$data->id = getUUId($this->session->userdata['token']);
-		$data->product_category_id = $_POST['product_category_id'];
-		$data->name_th = $_POST['name_th'];
-		$data->name_en = $_POST['name_en'];
+		$data->category_id = $_POST['category_id'];
+		$data->subcategory_id = $_POST['subcategory_id'];
+		$data->car_brand_id = $_POST['car_brand_id'];
+		$data->car_model_id = $_POST['car_model_id'];
+		$data->year = $_POST['year'];
+		$data->title_th = $_POST['title_th'];
+		$data->title_en = $_POST['title_en'];
+		$data->subtitle_th = $_POST['subtitle_th'];
+		$data->subtitle_en = $_POST['subtitle_en'];
 		$data->description_th = $_POST['description_th'];
-		$data->description_en = $_POST['description_en'];
-		$data->image = $image;
-		$data->calculate_vat = $_POST['calculate_vat'];
-		$data->calculate_commission = $_POST['calculate_commission'];
-		$data->cost = $_POST['cost'];
+		$data->description_th = $_POST['description_th'];
+		$data->detail_th = $_POST['detail_th'];
+		$data->detail_en = $_POST['detail_en'];
 		$data->price = $_POST['price'];
-		$data->unit = $_POST['unit'];
+		$data->keyword = $_POST['keyword'];
+		$data->image = $image;
+		$data->link_lazada = $_POST['link_lazada'];
+		$data->link_shopee = $_POST['link_shopee'];
+		$data->external_link = $_POST['external_link'];
+		$data->external_link_title_th = $_POST['external_link_title_th'];
+		$data->external_link_title_en = $_POST['external_link_title_en'];
+		$data->recommended = $_POST['recommended'];
+		$data->best_seller = $_POST['best_seller'];
 		$data->status = $_POST['status'];
 		
 		//console($data);
@@ -133,8 +155,20 @@ class Product extends MY_Controller {
 
 	public function edit($id)
 	{
+		$data['contentTypeList'] = '';
+		$data['categoryList'] = '';
+		$data['subCategoryList'] = '';
+		$data['carBrandList'] = '';
+		$data['carModelList'] = '';
 
-		$categoryList = $this->ProductCategory_model->getContentList('','',PAGE_LIMIT);
+		$contentTypeList = $this->Filter_model->getContentType();
+		if($contentTypeList)
+		{
+			$data['contentTypeList'] = $contentTypeList->body;
+		}
+
+
+		$categoryList = $this->Filter_model->getCategory(1);
 		if($categoryList)
 		{
 			$data['categoryList'] = $categoryList->body;
@@ -142,9 +176,35 @@ class Product extends MY_Controller {
 
 		$detail = $this->Product_model->getContentDetail($id);
 		$data['detail'] = $detail;
-		//console($data);
+		
 		if($detail)
 		{
+			if($detail->category_id){
+				$category_id = $detail->category_id;
+				$subCategoryList = $this->Filter_model->getSubCategory($category_id);
+				if($subCategoryList)
+				{
+					$data['subCategoryList'] = $subCategoryList->body;
+				}
+			}
+			
+			$carBrandList = $this->Filter_model->getCarBrand();
+			if($carBrandList)
+			{
+				$data['carBrandList'] = $carBrandList->body;
+			}
+
+			if($detail->car_brand_id){
+				$car_brand_id = $detail->car_brand_id;
+				$carModelList = $this->Filter_model->getCarModel($car_brand_id);
+				if($carModelList)
+				{
+					$data['carModelList'] = $carModelList->body;
+				}
+			}
+			
+			//console($data);
+
 			$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
 			$this->template['content'] = $this->load->view ($this->middle = 'product/edit',$data, true);
 			$this->master_layout();
@@ -173,17 +233,29 @@ class Product extends MY_Controller {
 		//console($_POST);
 		//$data->name_title = $_POST['name_title'];
 		$data->id = $_POST['id'];
-		$data->product_category_id = $_POST['product_category_id'];
-		$data->name_th = $_POST['name_th'];
-		$data->name_en = $_POST['name_en'];
+		$data->category_id = $_POST['category_id'];
+		$data->subcategory_id = $_POST['subcategory_id'];
+		$data->car_brand_id = $_POST['car_brand_id'];
+		$data->car_model_id = $_POST['car_model_id'];
+		$data->year = $_POST['year'];
+		$data->title_th = $_POST['title_th'];
+		$data->title_en = $_POST['title_en'];
+		$data->subtitle_th = $_POST['subtitle_th'];
+		$data->subtitle_en = $_POST['subtitle_en'];
 		$data->description_th = $_POST['description_th'];
-		$data->description_en = $_POST['description_en'];
-		$data->image = $image;
-		$data->calculate_vat = $_POST['calculate_vat'];
-		$data->calculate_commission = $_POST['calculate_commission'];
-		$data->cost = $_POST['cost'];
+		$data->description_th = $_POST['description_th'];
+		$data->detail_th = $_POST['detail_th'];
+		$data->detail_en = $_POST['detail_en'];
 		$data->price = $_POST['price'];
-		$data->unit = $_POST['unit'];
+		$data->keyword = $_POST['keyword'];
+		$data->image = $image;
+		$data->link_lazada = $_POST['link_lazada'];
+		$data->link_shopee = $_POST['link_shopee'];
+		$data->external_link = $_POST['external_link'];
+		$data->external_link_title_th = $_POST['external_link_title_th'];
+		$data->external_link_title_en = $_POST['external_link_title_en'];
+		$data->recommended = $_POST['recommended'];
+		$data->best_seller = $_POST['best_seller'];
 		$data->status = $_POST['status'];
 		//console($data);
 		$result = $this->Product_model->update($data);
@@ -325,6 +397,219 @@ class Product extends MY_Controller {
 		//console($stockList);
 
 		$this->load->view('product/loadStockList',$data);
+		
+	}
+
+	public function loadCategoryList()
+	{
+		$data['categoryList'] = '';
+		
+		$content_type_id = $_POST['content_type_id'];	
+		//id,product_id
+		$categoryList = $this->Filter_model->getCategory($content_type_id);
+		if($categoryList){
+				$data['categoryList'] = $categoryList->body;
+		}
+		//console($stockList);
+
+		$this->load->view('product/loadCategoryList',$data);
+		
+	}
+
+	public function loadSubCategoryList()
+	{
+		$data['subCategoryList'] = '';
+		
+		$category_id = $_POST['category_id'];	
+		//id,product_id
+		$subCategoryList = $this->Filter_model->getSubCategory($category_id);
+		if($subCategoryList){
+				$data['subCategoryList'] = $subCategoryList->body;
+		}
+		//console($stockList);
+
+		$this->load->view('product/loadSubCategoryList',$data);
+		
+	}
+
+	public function loadCarModelList()
+	{
+		$data['carModelList'] = '';
+		
+		$car_brand_id = $_POST['car_brand_id'];	
+		//id,product_id
+		$carModelList = $this->Filter_model->getCarModel($car_brand_id);
+		if($carModelList){
+				$data['carModelList'] = $carModelList->body;
+		}
+		//console($stockList);
+
+		$this->load->view('product/loadCarModelList',$data);
+		
+	}
+
+	public function changeStatusBestSeller()
+	{
+		$temp = new stdClass(); 
+		
+		$temp_status = $_POST['change_status'];
+		if($temp_status==1){
+			$temp_status=0;
+		}else{
+			$temp_status=1;
+		}
+		$temp->id = $_POST['id'];
+		$temp->best_seller = $temp_status;
+		
+		$result = $this->Product_model->update($temp);
+		
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		$keysearch = $_POST['keysearch'];
+		$status = $_POST['status'];
+		$category_id = $_POST['category_id'];
+		$subcategory_id = $_POST['subcategory_id'];
+		$active_page = $_POST['page'];
+
+		$data['page'] = $active_page;
+
+		//$status,$keysearch,category,subcategory,$active_page,$limit
+		$resultList = $this->Product_model->getContentList($status,$keysearch,$category_id,$subcategory_id,$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		
+		$this->load->view('product/loadContentList',$data);
+
+	}
+
+	public function changeStatusRecommend()
+	{
+		$temp = new stdClass(); 
+		
+		$temp_status = $_POST['change_status'];
+		if($temp_status==1){
+			$temp_status=0;
+		}else{
+			$temp_status=1;
+		}
+		$temp->id = $_POST['id'];
+		$temp->recommended = $temp_status;
+		
+		$result = $this->Product_model->update($temp);
+		
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		$keysearch = $_POST['keysearch'];
+		$status = $_POST['status'];
+		$category_id = $_POST['category_id'];
+		$subcategory_id = $_POST['subcategory_id'];
+		$active_page = $_POST['page'];
+
+		$data['page'] = $active_page;
+
+		//$status,$keysearch,category,subcategory,$active_page,$limit
+		$resultList = $this->Product_model->getContentList($status,$keysearch,$category_id,$subcategory_id,$active_page,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		//console($data);
+		
+		$this->load->view('product/loadContentList',$data);
+
+	}
+
+	public function gallery($product_id)
+	{
+		$data['galleryList'] = '';
+		$data['detail'] = '';
+
+		$detail = $this->Product_model->getContentDetail($product_id);
+		$data['detail'] = $detail;
+
+		//console($detail);
+
+		$galleryList = $this->Product_model->getGallery($product_id);
+		//console($galleryList);
+		if($galleryList)
+		{
+			$data['galleryList'] = $galleryList;
+		}
+
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'product/gallery',$data, true);
+		$this->master_layout();
+		
+	}
+
+	public function addGallery(){
+
+		$galleryList = '';
+
+		$image = '';
+		if(isset($_FILES['image'])&&($_FILES['image']['error']!='4'))
+		{
+				$result_upload = json_decode(upload_pic($_FILES,'image'));
+				if($result_upload->header->res_code=='200')
+				{
+					$image = $result_upload->body->image_path;
+				}
+				else $image = '';
+		}
+
+		$data = new stdClass(); 
+		//console($_POST);
+		//$data->name_title = $_POST['name_title'];
+		$data->product_id = $_POST['product_id'];
+		$data->image = $image;
+		
+		//console($data);
+		$result = $this->Product_model->addGallery($data);
+		
+		$galleryList = $this->Product_model->getGallery($_POST['product_id']);
+
+		$temp['galleryList'] = $galleryList;
+
+		$this->load->view('product/loadGalleryList',$temp);
+		/*
+
+		$response = array();
+
+		$response['galleryList'] = $galleryList;
+		if($result)
+		{
+			$response['status'] = true;
+		}
+		else{
+			$response['status'] = false;
+		}
+		
+		echo json_encode($response);
+		*/
+	}
+
+	public function removePic()
+	{
+		$galleryList = '';
+
+		$temp = new stdClass(); 
+		
+		//$data->name_title = $_POST['name_title'];
+		$temp->id = $_POST['id'];
+		$result = $this->Product_model->deletePic($temp);
+		
+		$galleryList = $this->Product_model->getGallery($_POST['product_id']);
+
+		$data['galleryList'] = $galleryList;
+
+		$this->load->view('product/loadGalleryList',$data);
 		
 	}
 	

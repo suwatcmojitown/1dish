@@ -15,14 +15,15 @@ class Product_model extends CI_Model {
            
     }
 
-    public function getContentList($status='',$keysearch='',$product_category_id='',$active_page=1,$limit)
+    public function getContentList($status='',$keysearch='',$category_id='',$subcategory_id='',$active_page=1,$limit)
     {
                 $temp = array();
                 $path = '';
 
                 if($status!='') $temp['status'] = $status;
                 if($keysearch!='') $temp['search'] = urlencode($keysearch);
-                if($product_category_id!='') $temp['product_category_id'] = $product_category_id;
+                if($category_id!='') $temp['category_id'] = $category_id;
+                if($subcategory_id!='') $temp['subcategory_id'] = $subcategory_id;
                 if($active_page!='') $temp['page'] = $active_page;
                 if($limit!='') $temp['limit'] = $limit;
 
@@ -37,7 +38,8 @@ class Product_model extends CI_Model {
                         $i++;
                 }
                 
-                $result = json_decode(callAPI('GET',PATH_API.'backend/product'.$path.'',''));  
+                $result = json_decode(callAPI('GET',PATH_API.'backend/product'.$path.'','')); 
+                //echo PATH_API.'backend/product'.$path.'';
                 //console($result);
                 if($result->header->res_code=='200')
                 {
@@ -54,7 +56,7 @@ class Product_model extends CI_Model {
     {
             $myJSON = json_encode($data); 
             $result = json_decode(callAPI('DEL',PATH_API.'backend/product',$myJSON));  
-            console($result);
+            //console($result);
             if($result->header->res_code=='200')
             {
                     return true;
@@ -87,6 +89,44 @@ class Product_model extends CI_Model {
                     return true;
             }
             else return false;
+    }
+
+    public function getGallery($id)
+    {
+           $result = json_decode(callAPI('GET',PATH_API.'backend/product-gallery?product_id='.$id.'',''));  
+           
+           if($result->header->res_code=='200')
+           {
+                    $object = $result->body;
+           }
+           else $object = NULL;
+           
+           return $object;
+    }
+
+    public function addGallery($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('POST',PATH_API.'backend/product-gallery',$myJSON));  
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+           
+    }
+
+    public function deletePic($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('DEL',PATH_API.'backend/product-gallery',$myJSON));  
+            //console($result);
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+           
     }
 
     

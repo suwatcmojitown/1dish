@@ -6,7 +6,7 @@
   // single select box
   $("#single-select").select2();
   $("#product_id").select2();
-  $("#product_category_id").select2();
+  //$("#product_category_id").select2();
   $("#tourname").select2();
   $("#guidename").select2();
   $("#groupname").select2();
