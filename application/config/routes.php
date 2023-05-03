@@ -88,22 +88,6 @@ $route['admin/update'] = 'Admin/updateContent';
 $route['admin/delete'] = 'Admin/deleteContent';
 
 
-$route['company'] = 'Company/list';
-$route['company/create'] = 'Company/create';
-$route['company/add'] = 'Company/addContent';
-$route['company/edit/(:any)'] = 'Company/edit/$1';
-$route['company/update'] = 'Company/updateContent';
-$route['company/loadContentList'] = 'Company/loadContentList';
-$route['company/delete'] = 'Company/deleteContent';
-
-$route['guide'] = 'Guide/list';
-$route['guide/create'] = 'Guide/create';
-$route['guide/add'] = 'Guide/addContent';
-$route['guide/edit/(:any)'] = 'Guide/edit/$1';
-$route['guide/update'] = 'Guide/updateContent';
-$route['guide/loadContentList'] = 'Guide/loadContentList';
-$route['guide/delete'] = 'Guide/deleteContent';
-
 $route['product'] = 'Product/list';
 $route['product/create'] = 'Product/create';
 $route['product/add'] = 'Product/addContent';
@@ -118,79 +102,30 @@ $route['product/createStock'] = 'Product/createStock';
 $route['product/loadStockList'] = 'Product/loadStockList';
 $route['product/gallery/(:any)'] = 'Product/gallery/$1';
 
-$route['product-category'] = 'ProductCategory/list';
-$route['product-category/create'] = 'ProductCategory/create';
-$route['product-category/add'] = 'productCategory/addContent';
-$route['product-category/loadContentList'] = 'productCategory/loadContentList';
-$route['product-category/edit/(:any)'] = 'productCategory/edit/$1';
-$route['product-category/update'] = 'productCategory/updateContent';
+$route['shelf'] = 'Shelf/list';
+$route['shelf/content/(:any)'] = 'Shelf/manageContent/$1';
+$route['shelf/edit/(:any)'] = 'Shelf/edit/$1';
+$route['shelf/update'] = 'Shelf/update';
+$route['shelf/print/(:any)'] = 'Shelf/printInvoice/$1';
+$route['shelf/cancelBill'] = 'Shelf/cancelBill';
+$route['shelf/addShelfContent'] = 'Shelf/addShelfContent';
+$route['shelf/deleteContentItem'] = 'Shelf/deleteContentItem';
 
-$route['stock'] = 'Stock/list';
-$route['stock/import'] = 'Stock/import';
-$route['stock/import/list'] = 'Stock/importList';
-$route['stock/loadImportList'] = 'Stock/loadImportList';
-$route['stock/import/addProduct'] = 'Stock/addProductImport';
-$route['stock/import/deleteItem'] = 'Stock/deleteItemImport';
-$route['stock/import/confirm'] = 'Stock/confirmImport';
-$route['stock/import/cancel'] = 'Stock/cancelImport';
-$route['stock/loadProductStockList'] = 'Stock/loadProductStockList';
-$route['stock/loadProductPrice'] = 'Stock/loadProductPrice';
-$route['stock/loadProductList'] = 'Stock/loadProductList';
-$route['stock/loadExportProductStockList'] = 'Stock/loadExportProductStockList';
+$route['bubble'] = 'Bubble/manageContent';
+$route['bubble/add'] = 'Bubble/addContent';
+$route['bubble/deleteContentItem'] = 'Bubble/deleteContentItem';
+$route['bubble/edit'] = 'Bubble/edit';
+$route['bubble/update'] = 'Bubble/updateContent';
 
-$route['stock/import/view/(:any)'] = 'Stock/importView/$1';
-$route['stock/import/updateNote'] = 'Stock/updateImportNote';
-$route['stock/export/view/(:any)'] = 'Stock/exportView/$1';
-$route['stock/export/updateNote'] = 'Stock/updateExportNote';
-
-$route['stock/report/import'] = 'Stock/reportImportList';
-$route['stock/report/loadImportList'] = 'Stock/loadReportImportList';
-$route['stock/report/export'] = 'Stock/reportExportList';
-$route['stock/report/loadExportList'] = 'Stock/loadReportExportList';
-$route['stock/report/changeStatusExport'] = 'Stock/changeStatusExport';
-$route['stock/report/changeStatusImport'] = 'Stock/changeStatusImport';
-
-
-
-$route['stock/preview/(:num)'] = 'Stock/preview/$1';
-
-$route['stock/export'] = 'Stock/export';
-$route['stock/export/list'] = 'Stock/exportList';
-$route['stock/export/addProduct'] = 'Stock/addProductExport';
-$route['stock/export/confirm'] = 'Stock/confirmExport';
-$route['stock/export/cancel'] = 'Stock/cancelExport';
-$route['stock/export/deleteItem'] = 'Stock/deleteItemExport';
-
-
-
-$route['commission/company'] = 'Commission/companyList';
-$route['commission/loadCompanyList'] = 'Commission/loadCompanyList';
-$route['commission/guide'] = 'Commission/guideList';
-$route['commission/loadGuideList'] = 'Commission/loadGuideList';
-$route['commission/company/view/(:any)'] = 'Commission/companyDetail/$1';
-$route['commission/company/print/(:any)'] = 'Commission/companyPrint/$1';
-$route['commission/changeCompanyStatus'] = 'Commission/changeCompanyStatus';
-$route['commission/changeCompanyStatusDetail'] = 'Commission/changeCompanyStatusDetail';
-$route['commission/guide/view/(:any)'] = 'Commission/guideDetail/$1';
-$route['commission/guide/print/(:any)'] = 'Commission/guidePrint/$1';
-$route['commission/changeGuideStatus'] = 'Commission/changeGuideStatus';
-$route['commission/changeGuideStatusDetail'] = 'Commission/changeGuideStatusDetail';
-
-$route['bill'] = 'Bill/list';
-$route['bill/loadContentList'] = 'Bill/loadContentList';
-$route['bill/loadGroupname'] = 'Bill/loadGroupname';
-$route['bill/view/(:any)'] = 'Bill/view/$1';
-$route['bill/edit/(:any)'] = 'Bill/edit/$1';
-$route['bill/update'] = 'Bill/update';
-$route['bill/print/(:any)'] = 'Bill/printInvoice/$1';
-$route['bill/cancelBill'] = 'Bill/cancelBill';
-
-$route['grouping'] = 'TourGrouping/list';
-$route['grouping/loadTourGroupingList'] = 'TourGrouping/loadContentList';
-$route['grouping/edit/(:any)'] = 'TourGrouping/edit/$1';
-$route['grouping/update'] = 'TourGrouping/updateContent';
-$route['grouping/view/(:any)'] = 'TourGrouping/view/$1';
-
+$route['highlight'] = 'Highlight/manageContent';
+$route['highlight/add'] = 'Highlight/addContent';
+$route['highlight/deleteContentItem'] = 'Highlight/deleteContentItem';
+$route['highlight/edit'] = 'Highlight/edit';
+$route['highlight/update'] = 'Highlight/updateContent';
+/*
+$route['shelf/addShelfContent'] = 'Shelf/addShelfContent';
+$route['shelf/deleteContentItem'] = 'Shelf/deleteContentItem';
+*/
 $route['filter/loadSubCategoryList'] = 'Filter/getSubcategory';
 
 

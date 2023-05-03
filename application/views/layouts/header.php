@@ -24,7 +24,8 @@
     <!--<link href="<?php echo base_url()?>app-assets/css/style3.css" rel="stylesheet">-->
     <link href="<?php echo base_url()?>app-assets/css/custom.css" rel="stylesheet">
     <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-
+    <!-- Nestable -->
+    <link href="<?php echo base_url()?>app-assets/vendor/nestable2/css/jquery.nestable.min.css" rel="stylesheet">
 
 
     <!-- Form step -->

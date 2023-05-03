@@ -39,9 +39,13 @@
     <script src="<?php echo base_url()?>app-assets/vendor/select2/js/select2.full.min.js"></script>
     <script src="<?php echo base_url()?>app-assets/js/plugins-init/select2-init.js"></script>
     
-         <!-- Form validate init -->
+    <!-- Form validate init -->
     <script src="<?php echo base_url()?>app-assets/js/plugins-init/jquery.validate-init.js"></script>
-
+    <!-- Nestable -->
+    <!--
+    <script src="<?php echo base_url()?>app-assets/vendor/nestable2/js/jquery.nestable.min.js"></script>
+    -->
+    <script src="<?php echo base_url()?>app-assets/js/jquery.nestable.js"></script>
     
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
