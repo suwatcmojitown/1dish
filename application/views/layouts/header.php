@@ -68,7 +68,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="<?php echo base_url()?>app-assets/images/custom/logo.png" alt="">
+                <img src="<?php echo base_url()?>assets/images/big2-logo.png" alt="" style="width: 195px!important;padding-top: 7px;">
                 
             </a>
 
@@ -149,62 +149,25 @@
                             <span class="nav-text">Product</span>
                         </a>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-car-alt"></i>
-                            <span class="nav-text">Tour</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?php echo base_url('guide');?>">Guide</a></li>
-                            <li><a href="<?php echo base_url('company');?>">Company</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="far fa-file"></i>
-                            <span class="nav-text">ใบเบิก</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?php echo base_url('stock/report/import');?>">ใบเบิกสินค้าเข้า</a></li>
-                            <li><a href="<?php echo base_url('stock/report/export');?>">ใบเบิกสินค้าออก</a></li>
-                            <li><a href="<?php echo base_url('stock/import');?>">เพิ่มใบเบิกสินค้าเข้า</a></li>
-                            <li><a href="<?php echo base_url('stock/export');?>">เพิ่มใบเบิกสินค้าออก</a></li>
-                        </ul>
-                    </li>
-                    <?php 
-                    if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
-                    ?>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="fa fa-credit-card" aria-hidden="true"></i>
-                            <span class="nav-text">คอมมิชชั่น</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?php echo base_url('commission/guide');?>">คอมไกด์</a></li>
-                            <li><a href="<?php echo base_url('commission/company');?>">คอมทัวร์</a></li>
-                        </ul>
-                    </li>
-                    <?php }?>
-                    <?php 
-                    if(($_SESSION['group_admin']!='cashier')||($_SESSION['group_admin']!='account')){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('grouping');?>" >
-                            <i class="fa fa-coffee" aria-hidden="true"></i>
-                            <span class="nav-text">กรุ๊ปทัวร์</span>
+                    <li><a class="ai-icon" href="<?php echo base_url('highlight');?>" >
+                            <i class="fas fa-star"></i>
+                            <span class="nav-text">Highlight</span>
                         </a>
                     </li>
-                    <?php }?>
-                    <li><a class="ai-icon" href="<?php echo base_url('bill');?>" >
-                            <i class="fa fa-coffee" aria-hidden="true"></i>
-                            <span class="nav-text">Bills</span>
+                    <li><a class="ai-icon" href="<?php echo base_url('bubble');?>" >
+                            <i class="fas fa-pencil-alt"></i>
+                            <span class="nav-text">Bubble</span>
                         </a>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-cog"></i>
-                            <span class="nav-text">Setting</span>
+                    <li><a class="ai-icon" href="<?php echo base_url('shelf');?>" >
+                            <i class="fas fa-paper-plane"></i>
+                            <span class="nav-text">Shelf</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="<?php echo base_url('admin');?>">User</a></li>
-                            <li><a href="<?php echo base_url('product-category');?>">Product Category</a></li>
-
-                        </ul>
+                    </li>
+                    <li><a class="ai-icon" href="<?php echo base_url('content/list');?>" >
+                            <i class="fa fa-id-badge"></i>
+                            <span class="nav-text">Content</span>
+                        </a>
                     </li>
                 </ul>
             </div>

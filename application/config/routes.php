@@ -128,6 +128,13 @@ $route['shelf/deleteContentItem'] = 'Shelf/deleteContentItem';
 */
 $route['filter/loadSubCategoryList'] = 'Filter/getSubcategory';
 
+$route['content/list'] = 'Content/listContent';
+$route['content/loadContentList'] = 'Content/loadContentList';
+$route['content/create'] = 'Content/createContent';
+$route['content/add'] = 'Content/addContent';
+$route['content/delete'] = 'Content/deleteContent';
+$route['content/edit/(:num)'] = 'Content/editContent/$1';
+$route['content/update'] = 'Content/updateContent';
 
 /*
 $route['user/register'] = 'User/register';
