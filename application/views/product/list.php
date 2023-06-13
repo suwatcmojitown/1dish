@@ -45,8 +45,8 @@
                                             </select>
                         </div>
                     </div>
-                    <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา  <i class="fa fa-filter"></i></a>
-                    <a href="<?php echo base_url('product/create');?>" id="add-order" class="btn btn-success btn-rounded ms-3">Add +</a>
+                    <a  id="filterBtn" class="btn btn-primary ms-3" style="margin-right: 4px;">ค้นหา</a>
+                    <a href="<?php echo base_url('product/create');?>" id="add-order" class="btn btn-success btn-rounded ms-3">Add</a>
                     
 				</div>
                 <div class="row">

@@ -54,11 +54,11 @@
                                         
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">คำอธิบายสินค้า</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="detail_th"></textarea>
+                                                <div id="detail_th"></div>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">คำอธิบายสินค้า <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="detail_en"></textarea>
+                                                <div id="detail_en"></div>
                                         </div>
 
                                         <div class="mb-3 col-12">
@@ -290,6 +290,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+<script>
+        new FroalaEditor('#detail_th',{
+        // Set the file upload URL.
+        imageUploadURL: '<?php echo base_url('upload_image.php')?>',
+        imageUploadParams: {
+            id: 'my_editor'
+        }
+        });
+        new FroalaEditor('#detail_en',{
+        // Set the file upload URL.
+        imageUploadURL: '<?php echo base_url('upload_image.php')?>',
+        imageUploadParams: {
+            id: 'my_editor'
+        }
+        });
+</script>  
 
 <script>
     var submitButton = $('#submit_btn');
@@ -343,6 +359,12 @@
                 var best_seller = document.getElementById("best_seller").value;
                 data.append('best_seller', best_seller);
                 
+                var detail_th = new FroalaEditor('#detail_th');
+                data.append('detail_th', detail_th.html.get());
+
+                var detail_en = new FroalaEditor('#detail_en');
+                data.append('detail_en', detail_en.html.get());
+
                                     $.ajax({
                                         type: 'POST',
                                         url: '<?php echo base_url('product/add')?>',

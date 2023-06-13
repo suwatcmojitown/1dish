@@ -33,6 +33,10 @@
     <!-- Form step -->
     <link href="<?php echo base_url()?>app-assets/vendor/jquery-smartwizard/dist/css/smart_wizard.min.css" rel="stylesheet">
 
+    <link href='<?php echo base_url('froala_editor/css/froala_editor.pkgd.min.css')?>' rel='stylesheet' type='text/css' />
+
+    <script type='text/javascript' src='<?php echo base_url('froala_editor')?>/js/froala_editor.pkgd.min.js'></script>
+    <script type="text/javascript" src="<?php echo base_url('froala_editor')?>/js/plugins/image.min.js"></script>
 
     <script
   src="https://code.jquery.com/jquery-3.6.1.js"

@@ -36,11 +36,11 @@
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">เนื้อหา </label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="detail_th"><?php echo @$detail->detail_th;?></textarea>
+                                                <div id="detail_th"><?php echo @$detail->detail_th;?></div>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">เนื้อหา <code>EN</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="detail_en"><?php echo @$detail->detail_en;?></textarea>
+                                                <div id="detail_en"><?php echo @$detail->detail_en;?></div>
                                         </div>
                                         
                                         <div class="mb-3 col-8">
@@ -128,6 +128,23 @@
                                             </div>
 
 <script>
+        new FroalaEditor('#detail_th',{
+        // Set the file upload URL.
+        imageUploadURL: '<?php echo base_url('upload_image.php')?>',
+        imageUploadParams: {
+            id: 'my_editor'
+        }
+        });
+        new FroalaEditor('#detail_en',{
+        // Set the file upload URL.
+        imageUploadURL: '<?php echo base_url('upload_image.php')?>',
+        imageUploadParams: {
+            id: 'my_editor'
+        }
+        });
+</script>  
+
+<script>
     var submitButton = $('#submit_btn');
     formContainer  = $('#addForm');
     $("#submit_btn").click(function(){
@@ -157,6 +174,12 @@
                     for (var i = 0; i < file_data.length; i++) {
                         data.append("image", file_data[i]);
                 }
+
+                var detail_th = new FroalaEditor('#detail_th');
+                data.append('detail_th', detail_th.html.get());
+
+                var detail_en = new FroalaEditor('#detail_en');
+                data.append('detail_en', detail_en.html.get());
 
                 var status = document.getElementById("status").value;
                 data.append('status', status);
