@@ -116,12 +116,14 @@ $route['bubble/add'] = 'Bubble/addContent';
 $route['bubble/deleteContentItem'] = 'Bubble/deleteContentItem';
 $route['bubble/edit'] = 'Bubble/edit';
 $route['bubble/update'] = 'Bubble/updateContent';
+$route['bubble/reorder'] = 'Bubble/reorder';
 
 $route['highlight'] = 'Highlight/manageContent';
 $route['highlight/add'] = 'Highlight/addContent';
 $route['highlight/deleteContentItem'] = 'Highlight/deleteContentItem';
 $route['highlight/edit'] = 'Highlight/edit';
 $route['highlight/update'] = 'Highlight/updateContent';
+$route['highlight/reorder'] = 'Highlight/reorder';
 /*
 $route['shelf/addShelfContent'] = 'Shelf/addShelfContent';
 $route['shelf/deleteContentItem'] = 'Shelf/deleteContentItem';

@@ -20,6 +20,8 @@
                         <div class="card">
                             <div class="card-header" style="background-color: #ab0600;">
                                 <h4 class="card-title text-white" > <i class="fas fa-pencil-alt"></i> จัดการ Bubble </h4>
+                                <a href="<?php echo base_url('bubble/reorder');?>"><h4 class="card-title text-white" style="float:right;">  
+<i class="fa fa-retweet"></i> Sort Orders </h4></a>
                             </div>
 
                             <div class="cf nestable-lists card-body">

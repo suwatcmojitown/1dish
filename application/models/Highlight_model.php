@@ -101,6 +101,20 @@ class Highlight_model extends CI_Model {
             else return false;
     }
 
+
+    public function updateOrder($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('PUT',PATH_API.'backend/shelf-top-highlight/sorting',$myJSON)); 
+            //console($result);
+
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+    }
+
     
 
     

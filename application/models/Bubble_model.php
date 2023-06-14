@@ -155,7 +155,7 @@ class Bubble_model extends CI_Model {
     public function updateOrder($data)
     {
             $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('PUT',PATH_API.'backend/shelf-product-item/sorting',$myJSON)); 
+            $result = json_decode(callAPI('PUT',PATH_API.'backend/shelf-bubble/sorting',$myJSON)); 
             //console($result);
 
             if($result->header->res_code=='200')

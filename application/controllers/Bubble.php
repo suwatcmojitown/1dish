@@ -34,6 +34,26 @@ class Bubble extends MY_Controller {
 		
 	}
 
+
+	public function reorder()
+	{
+		$data['list'] = '';
+		$data['detail'] = '';
+
+		$list = $this->Bubble_model->getSelectContentList();
+		if($list)
+		{
+			$data['list'] = $list->body;
+		}
+
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'bubble/reorder',$data, true);
+		$this->master_layout();
+		//$this->load->view ('shelf/manageContent',$data);
+		
+	}
+
+
 	public function addShelfContent(){
 		//console($_POST);
 		$data['selectList'] = '';
@@ -542,6 +562,8 @@ class Bubble extends MY_Controller {
 	}
 
 	public function updateOrder(){
+
+		/*
 		$shelf_id = $_POST['shelf_id'];
 		$selectList = $this->Shelf_model->getSelectContentList();
 		//console($selectList);
@@ -554,25 +576,50 @@ class Bubble extends MY_Controller {
 			$listId[] = array();
 		}
 		
+		*/
+
+		$temp = ($_POST['item']);
+		$updateList = ($temp);
+
+		//console($updateList);
+		
+		$selectList = $this->Bubble_model->getSelectContentList();
+		//console($selectList);
+		if($selectList){
+			foreach($selectList->body as $row)
+			{
+				$listId[] = $row->id;
+			}
+		}else{
+			$listId[] = array();
+		}
+
+
+				
 
 		
-		$temp = ($_POST['order']);
-		$updateList = json_decode($temp);
-		//console($updateList);
-
 		$count = 0;
 		foreach($updateList as $key => $value){
-			if(!(in_array($value->id, $listId))) {
-		    	//add product in list
-		    	//echo 'id:'.$value->id.'-index:'.($key+1);
-		    	$data = new stdClass(); 
-				$data->shelf_product_id = $shelf_id;
-				$data->product_id = $value->id;
+				//$data = new stdClass(); 
+				//$data->shelf_product_id = $shelf_id;
+				/*
+				$data->id = $value;
 				$data->sort = $key+1;
-		    	$this->Shelf_model->addProductItem($data);
 		    	$count++;
-			}
+		    	*/
+		    	$tempSort = [
+					"id" => $value,
+					"sort"=> $key+1
+				];
+				$o_temp = (object) $tempSort;
+
+				$sortList[] = $o_temp;
+			
 		}
+		$result = $this->Bubble_model->updateOrder($sortList);
+		echo $result;
+		//console($sortList);
+		/*
 
 		//console($data);
 
@@ -591,10 +638,6 @@ class Bubble extends MY_Controller {
 				$newSelectList = $temp_newSelectList->body;
 			}
 
-			/*
-			console($newSelectList);
-			console($updateList);
-			*/
 
 			foreach($newSelectList as $row){
 				$id = $row->id;
@@ -629,7 +672,7 @@ class Bubble extends MY_Controller {
 			$this->load->view('shelf/loadSelectList',$data);
 		}
 
-
+		*/
 		
 	}
 	

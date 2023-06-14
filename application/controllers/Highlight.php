@@ -34,6 +34,27 @@ class Highlight extends MY_Controller {
 		
 	}
 
+
+
+
+	public function reorder()
+	{
+		$data['list'] = '';
+		$data['detail'] = '';
+
+		$list = $this->Highlight_model->getSelectContentList();
+		if($list)
+		{
+			$data['list'] = $list->body;
+		}
+
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'highlight/reorder',$data, true);
+		$this->master_layout();
+		//$this->load->view ('shelf/manageContent',$data);
+		
+	}
+
 	
 
 	public function deleteContentItem()
@@ -125,6 +146,122 @@ class Highlight extends MY_Controller {
 		$result = $this->Highlight_model->update($data);
 		//console($result);
 		echo $result;
+	}
+
+
+	public function updateOrder(){
+
+		/*
+		$shelf_id = $_POST['shelf_id'];
+		$selectList = $this->Shelf_model->getSelectContentList();
+		//console($selectList);
+		if($selectList){
+			foreach($selectList->body as $row)
+			{
+				$listId[] = $row->product_id;
+			}
+		}else{
+			$listId[] = array();
+		}
+		
+		*/
+
+		$temp = ($_POST['item']);
+		$updateList = ($temp);
+
+		//console($updateList);
+		
+		$selectList = $this->Highlight_model->getSelectContentList();
+		//console($selectList);
+		if($selectList){
+			foreach($selectList->body as $row)
+			{
+				$listId[] = $row->id;
+			}
+		}else{
+			$listId[] = array();
+		}
+
+
+				
+
+		
+		$count = 0;
+		foreach($updateList as $key => $value){
+				//$data = new stdClass(); 
+				//$data->shelf_product_id = $shelf_id;
+				/*
+				$data->id = $value;
+				$data->sort = $key+1;
+		    	$count++;
+		    	*/
+		    	$tempSort = [
+					"id" => $value,
+					"sort"=> $key+1
+				];
+				$o_temp = (object) $tempSort;
+
+				$sortList[] = $o_temp;
+			
+		}
+		$result = $this->Highlight_model->updateOrder($sortList);
+		echo $result;
+		//console($sortList);
+		/*
+
+		//console($data);
+
+		if($count==0){
+			$data['selectList'] = '';
+			if($selectList)
+			{
+				$data['selectList'] = $selectList->body;
+			}
+			$this->load->view('shelf/loadSelectList',$data);
+		}
+		else{
+			$temp_newSelectList = $this->Shelf_model->getSelectContentList();
+			if($temp_newSelectList)
+			{
+				$newSelectList = $temp_newSelectList->body;
+			}
+
+
+			foreach($newSelectList as $row){
+				$id = $row->id;
+				$product_id = $row->product_id;
+				//echo "row:".$id.'<br>';
+				foreach($updateList as $key => $value){
+					if($product_id==$value->id)
+					{
+						$sort = $key+1;;
+					}
+					else $sort = 0;
+				}
+				//echo "sort:".$sort.'<br>';
+
+				$tempSort = [
+					"id" => $id,
+					"sort"=> $sort
+				];
+				$o_temp = (object) $tempSort;
+
+				$sortList[] = $o_temp;
+			}
+			//console($sortList);
+			//sort
+			$this->Shelf_model->updateOrder($sortList);
+			$sortUpdateList = $this->Shelf_model->getSelectContentList();
+			$data['selectList'] = '';
+			if($sortUpdateList)
+			{
+				$data['selectList'] = $sortUpdateList->body;
+			}
+			$this->load->view('shelf/loadSelectList',$data);
+		}
+
+		*/
+		
 	}
 	
 
