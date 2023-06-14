@@ -195,51 +195,34 @@ class Shelf extends MY_Controller {
 	}
 
 
+
+	public function loadShelfList()
+	{
+		$data['list'] = '';
+		$data['paging'] = '';
+
+		//$status,$keysearch,category,$active_page,$limit
+		$resultList = $this->Shelf_model->getContentList(1,PAGE_LIMIT);
+		if($resultList)
+		{
+			$data['list'] = $resultList->body;
+			$data['paging'] = $resultList->header;
+		}
+		
+		$this->load->view('shelf/loadShelfList',$data);
+	}
+
+
 	public function addContent(){
 
-		$image = '';
-		if(isset($_FILES['image'])&&($_FILES['image']['error']!='4'))
-		{
-				$result_upload = json_decode(upload_pic($_FILES,'image'));
-				if($result_upload->header->res_code=='200')
-				{
-					$image = $result_upload->body->image_path;
-				}
-				else $image = '';
-		}
-
-		//console($_POST);
-		
 		$data = new stdClass(); 
 		//console($_POST);
 		//$data->name_title = $_POST['name_title'];
-		$data->category_id = $_POST['category_id'];
-		$data->subcategory_id = $_POST['subcategory_id'];
-		$data->car_brand_id = $_POST['car_brand_id'];
-		$data->car_model_id = $_POST['car_model_id'];
-		$data->year = $_POST['year'];
 		$data->title_th = $_POST['title_th'];
 		$data->title_en = $_POST['title_en'];
-		$data->subtitle_th = $_POST['subtitle_th'];
-		$data->subtitle_en = $_POST['subtitle_en'];
-		$data->description_th = $_POST['description_th'];
-		$data->description_th = $_POST['description_th'];
-		$data->detail_th = $_POST['detail_th'];
-		$data->detail_en = $_POST['detail_en'];
-		$data->price = $_POST['price'];
-		$data->keyword = $_POST['keyword'];
-		$data->image = $image;
-		$data->link_lazada = $_POST['link_lazada'];
-		$data->link_shopee = $_POST['link_shopee'];
-		$data->external_link = $_POST['external_link'];
-		$data->external_link_title_th = $_POST['external_link_title_th'];
-		$data->external_link_title_en = $_POST['external_link_title_en'];
-		$data->recommended = $_POST['recommended'];
-		$data->best_seller = $_POST['best_seller'];
-		$data->status = $_POST['status'];
 		
 		//console($data);
-		$result = $this->Product_model->add($data);
+		$result = $this->Shelf_model->add($data);
 		echo $result;
 	}
 
@@ -354,28 +337,24 @@ class Shelf extends MY_Controller {
 	}
 
 
-	public function deleteContent()
+	public function deleteShelf()
 	{
 		$temp = new stdClass(); 
 		
 		//$data->name_title = $_POST['name_title'];
 		$temp->id = $_POST['id'];
-		$result = $this->Product_model->delete($temp);
+		$result = $this->Shelf_model->deleteShelf($temp);
 		
 		//console($result);
 
 		$data['list'] = '';
 		$data['paging'] = '';
 
-		$keysearch = $_POST['keysearch'];
-		$status = $_POST['status'];
-		$product_category_id = $_POST['product_category_id'];
-		$active_page = $_POST['page'];
-
-		$data['page'] = $active_page;
+		
+		$data['page'] = 1;
 
 		//$status,$keysearch,product_category_id,$active_page,$limit
-		$resultList = $this->Product_model->getContentList($status,$keysearch,$product_category_id,$active_page,PAGE_LIMIT);
+		$resultList = $this->Shelf_model->getContentList(1,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -383,7 +362,7 @@ class Shelf extends MY_Controller {
 		}
 		//console($resultList);
 		
-		$this->load->view('product/loadContentList',$data);
+		$this->load->view('shelf/loadShelfList',$data);
 	}
 
 
@@ -708,6 +687,8 @@ class Shelf extends MY_Controller {
 		
 	}
 
+	/*
+
 	public function updateOrder(){
 		$shelf_id = 2;
 		$selectList = $this->Shelf_model->getSelectContentList($shelf_id);
@@ -758,10 +739,7 @@ class Shelf extends MY_Controller {
 				$newSelectList = $temp_newSelectList->body;
 			}
 
-			/*
-			console($newSelectList);
-			console($updateList);
-			*/
+			
 
 			foreach($newSelectList as $row){
 				$id = $row->id;
@@ -797,6 +775,73 @@ class Shelf extends MY_Controller {
 		}
 
 
+		
+	}
+
+	*/
+
+	public function reorder($shelf_id)
+	{
+		$data['list'] = '';
+		$data['detail'] = '';
+		$data['shelf_id'] = $shelf_id;
+
+		$detail = $this->Shelf_model->getContentDetail($shelf_id);
+		if($detail)
+		{
+			$data['detail'] = $detail;
+		}
+
+		$list = $this->Shelf_model->getSelectContentList($shelf_id);
+		if($list)
+		{
+			$data['list'] = $list->body;
+		}
+
+		$this->template['menu'] = $this->load->view ($this->menu = 'layouts/menu');
+		$this->template['content'] = $this->load->view ($this->middle = 'shelf/reorder',$data, true);
+		$this->master_layout();
+		//$this->load->view ('shelf/manageContent',$data);
+		
+	}
+
+	public function updateOrder(){
+
+		$shelf_id = $_POST['shelf_id'];
+
+		$temp = ($_POST['item']);
+		$updateList = ($temp);
+
+		//console($updateList);
+		
+		$count = 0;
+		foreach($updateList as $key => $value){
+				//$data = new stdClass(); 
+				//$data->shelf_product_id = $shelf_id;
+				/*
+				$data->id = $value;
+				$data->sort = $key+1;
+		    	$count++;
+		    	*/
+		    	$tempId = explode('|',$value);
+
+		    	$tempSort = [
+					"id" => $tempId[0],
+					"shelf_product_id" => $shelf_id,
+					"product_id" => $tempId[1],
+					"sort"=> $key+1
+				];
+				$o_temp = (object) $tempSort;
+
+				$sortList[] = $o_temp;
+			
+		}
+
+		//console($sortList);
+		$result = $this->Shelf_model->updateOrder($sortList);
+		echo $result;
+		//console($sortList);
+		
 		
 	}
 	

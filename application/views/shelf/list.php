@@ -4,15 +4,42 @@
                 <?php //console($paging);?>
 				<div class="form-head d-flex mb-3 align-items-start">
 					<div class="me-auto d-none d-lg-block ">
-						<h2 class="text-custom font-w600 mb-0"><i class="fa fa-coffee" aria-hidden="true"></i> Shelf</h2>
+						<h2 class="text-custom font-w600 mb-0"><i class="fas fa-paper-plane"></i> Shelf</h2>
 						<ol class="breadcrumb">
                             <li class="breadcrumb-item active"><a href="javascript:void(0)" class="text-custom">List</a></li>
                             <!--<li class="breadcrumb-item"><a href="javascript:void(0)">Accordion</a></li>-->
                         </ol>
 					</div>
                     
-                    <a href="<?php echo base_url('product/create');?>" id="add-order" class="btn btn-success btn-rounded ms-3">Add +</a>
+                    <a class="btn btn-success btn-rounded ms-3"><span data-bs-toggle="modal" data-bs-target="#createPosition" style="float:right;cursor: pointer;">+ create</span></a>
                     
+                    <div class="modal modal-primary fade text-start" id="createPosition" tabindex="-1" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="myModalLabel33">+ Create Shelf</h4>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="createShelfForm">                                
+                                                                    <label>ชื่อ</label>
+                                                                    <div class="mb-1">
+                                                                        <input type="text" class="form-control" name="title_th">
+                                                                    </div>
+
+                                                                    <label>ชื่อ <code>EN</code></label>
+                                                                    <div class="mb-1">
+                                                                        <input type="text" class="form-control" name="title_en">
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="submitShelfBtn" class="btn btn-custom" data-bs-dismiss="modal">Create</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
 				</div>
                 <div class="row">
 					<div class="col-12">
@@ -55,6 +82,31 @@
                                                 <td>
                                                     <div class="d-flex">
                                                         <a target="_blank" href="<?php echo base_url('shelf/content/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+
+                                                        <a target="_blank" href="<?php echo base_url('shelf/reorder/').$row->id;?>" class="btn btn-warning shadow btn-sm sharp me-1"><i class="fa fa-retweet"></i></a>
+
+                                                        <a href="#" class="btn btn-danger shadow btn-sm sharp me-1" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
+
+                                                        <!-- Modal Tash -->
+                                                        <div class="modal fade" id="del<?php echo $row->id;?>">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title"><span class="badge badge-lg badge-danger"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> ยืนยันลบ Shelf <span class="text-danger"><?php echo @$row->title_th;?></span> </h4>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>คุณต้องการยืนยันที่จะลบ Shelf นี้ ?</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">ยกเลิก</button>
+                                                                        <button type="button" class="btn btn-danger" onclick="confirmDelete('<?php echo $row->id;?>')">ยืนยัน</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal Tash -->
                                                         
                                                     </div>
                                                 </td>
@@ -158,23 +210,41 @@
                                             </div>
 
 
+<script>
+                                    formContainer  = $('#createShelfForm');
+                                    $("#submitShelfBtn").click(function(){
+                                            
+                                            var data = new FormData();
+
+                                            //Form data
+                                            var form_data = $('#createShelfForm').serializeArray();
+                                            $.each(form_data, function (key, input) {
+                                                data.append(input.name, input.value);
+                                            });
+
+                                            $.ajax({
+                                                                    type: 'POST',
+                                                                    url: '<?php echo base_url('shelf/add')?>',
+                                                                    data: data,
+                                                                    processData: false,
+                                                                    contentType: false,
+                                                                    success: function(result) { 
+                                                                        //$('#result').html(result);
+                                                                        $.ajax({
+                                                                                    type: 'POST',
+                                                                                    url: '<?php echo base_url('shelf/loadShelfList')?>',
+                                                                                    success: function(result) { 
+                                                                                        //$('#result').html(result);
+                                                                                        $("#_list").html(result);   
+                                                                                    }
+                                                                        });
+                                                                    }
+                                            });
+                                    });
+</script>
 
 <script>
-
-function categoryChange(){
-        
-        category_id = document.getElementById("category_id").value;
-
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url('filter/loadSubCategoryList')?>',
-            data: 'category_id='+category_id+'',
-            success: function(result) { 
-                //$('#result').html(result);
-                $("#_subCategoryList").html(result);
-            }
-        });
-}    
+ 
 
 function loadPage(page){
     //alert(page);
@@ -195,59 +265,13 @@ function loadPage(page){
 }
 
 
-$("#filterBtn").click(function(){
-    keysearch = document.getElementById("keysearch").value;
-    category_id = document.getElementById("category_id").value;
-    subcategory_id = document.getElementById("subcategory_id").value;
-    status = document.getElementById("status").value;
-    
-    $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('product/loadContentList')?>',
-                data: 'keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page=1',
-                success: function(result) { 
-                    //$('#result').html(result);
-                    $("#_list").html(result);
-                } 
-    });
-});
-
-
-function changeStatus(id,change_status){
-    keysearch = document.getElementById("keysearch").value;
-    category_id = document.getElementById("category_id").value;
-    subcategory_id = document.getElementById("subcategory_id").value;
-    status = document.getElementById("status").value;
-
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '<?php echo base_url('product/changeStatus')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page=<?php echo $active_page;?>&change_status='+change_status,
-                        success: function(result) { 
-                            //$('#result').html(result);
-                            $("#_list").html(result);
-                        } 
-                    });
-    
-}
-
-
 function confirmDelete(id){
             //alert(id);
-            var page = <?php echo $active_page;?>;
-            var keysearch = '';
-            var status = '';
-
-            keysearch = document.getElementById("keysearch").value;
-            category_id = document.getElementById("category_id").value;
-            subcategory_id = document.getElementById("subcategory_id").value;
-            status = document.getElementById("status").value;
-
+           
             $.ajax({
                         type: 'POST',
-                        url: '<?php echo base_url('product/delete')?>',
-                        data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page,
+                        url: '<?php echo base_url('shelf/deleteShelf')?>',
+                        data: 'id='+id,
                         success: function(result) { 
                             //alert(result);
                             $('#del'+id+'').modal('hide');
@@ -257,42 +281,5 @@ function confirmDelete(id){
             });
     }
 
-function changeStatusBestSeller(id,change_status,page){
-
-    keysearch = document.getElementById("keysearch").value;
-    category_id = document.getElementById("category_id").value;
-    subcategory_id = document.getElementById("subcategory_id").value;
-    status = document.getElementById("status").value;
-    
-    $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('product/changeStatusBestSeller')?>',
-                data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page+'&change_status='+change_status,
-                success: function(result) { 
-                    //$('#result').html(result);
-                    $("#_list").html(result);
-                } 
-    });
-}
-
-function changeStatusRecommend(id,change_status,page){
-
-    
-    keysearch = document.getElementById("keysearch").value;
-    category_id = document.getElementById("category_id").value;
-    subcategory_id = document.getElementById("subcategory_id").value;
-    status = document.getElementById("status").value;
-    
-    $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('product/changeStatusRecommend')?>',
-                data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page+'&change_status='+change_status,
-                success: function(result) { 
-                    //$('#result').html(result);
-                    $("#_list").html(result);
-                } 
-    });
-    
-}
 
 </script>

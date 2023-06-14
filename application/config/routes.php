@@ -106,10 +106,12 @@ $route['shelf'] = 'Shelf/list';
 $route['shelf/content/(:any)'] = 'Shelf/manageContent/$1';
 $route['shelf/edit/(:any)'] = 'Shelf/edit/$1';
 $route['shelf/update'] = 'Shelf/update';
-$route['shelf/print/(:any)'] = 'Shelf/printInvoice/$1';
-$route['shelf/cancelBill'] = 'Shelf/cancelBill';
 $route['shelf/addShelfContent'] = 'Shelf/addShelfContent';
 $route['shelf/deleteContentItem'] = 'Shelf/deleteContentItem';
+$route['shelf/reorder/(:any)'] = 'Shelf/reorder/$1';
+$route['shelf/add'] = 'Shelf/addContent';
+$route['shelf/loadShelfList'] = 'Shelf/loadShelfList';
+$route['shelf/deleteShelf'] = 'Shelf/deleteShelf';
 
 $route['bubble'] = 'Bubble/manageContent';
 $route['bubble/add'] = 'Bubble/addContent';
