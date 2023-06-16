@@ -36,7 +36,8 @@ throw new \Exception("File does not meet the validation.");
 
 // Generate new random name.
 $name = sha1(microtime()) . "." . $extension;
-$fullNamePath = dirname(__FILE__) . $fileRoute . $name;
+//$fullNamePath = dirname(__FILE__) . $fileRoute . $name;
+$fullNamePath = $fileRoute . $name;
 
 // Check server protocol and load resources accordingly.
 if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off") {

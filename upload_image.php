@@ -36,7 +36,8 @@ throw new \Exception("File does not meet the validation.");
 
 // Generate new random name.
 $name = sha1(microtime()) . "." . $extension;
-$fullNamePath = dirname(__FILE__) . $fileRoute . $name;
+//$fullNamePath = dirname(__FILE__) . $fileRoute . $name;
+$fullNamePath = $fileRoute . $name;
 
 // Check server protocol and load resources accordingly.
 if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off") {
@@ -50,7 +51,8 @@ move_uploaded_file($tmpName, $fullNamePath);
 
 // Generate response.
 $response = new \StdClass;
-$response->link = $protocol.$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"]).$fileRoute . $name;
+//$response->link = $protocol.$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"]).$fileRoute . $name;
+$response->link = "https://static.big2corporation.com/assets/images/froala/" . $name;
 
 // Send response.
 echo stripslashes(json_encode($response));
