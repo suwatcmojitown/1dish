@@ -2,7 +2,8 @@
 
 try {
 // File Route.
-$fileRoute = "/uploads/";
+//$fileRoute = "/uploads/";
+$fileRoute = "/var/big2/web/prod/static.big2corporation.com/public_html/assets/images/froala/";
 
 $fieldname = "file";
 
@@ -49,7 +50,8 @@ move_uploaded_file($tmpName, $fullNamePath);
 
 // Generate response.
 $response = new \StdClass;
-$response->link = $protocol.$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"]).$fileRoute . $name;
+//$response->link = $protocol.$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"]).$fileRoute . $name;
+$response->link = "https://static.big2corporation.com/assets/images/froala/" . $name;
 
 // Send response.
 echo stripslashes(json_encode($response));

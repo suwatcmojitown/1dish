@@ -2,7 +2,8 @@
 
 try {
 // File Route.
-$fileRoute = "/uploads/";
+//$fileRoute = "/uploads/";
+$fileRoute = "/var/big2/web/prod/static.big2corporation.com/public_html/assets/images/froala/";
 
 $fieldname = "file";
 
@@ -26,7 +27,7 @@ $extension = end($filename);
 $allowedExts = array("gif", "jpeg", "jpg", "png", "svg", "blob");
 
 // Allowed mime types.
-$allowedMimeTypes = array("image/gif", "image/jpeg", "image/pjpeg", "image/x-png", "image/png", "image/svg+xml");
+$allowedMimeTypes = array("image/gif", "image/jpeg", "image/jpg", "image/pjpeg", "image/x-png", "image/png", "image/svg+xml");
 
 // Validate image.
 if (!in_array(strtolower($mimeType), $allowedMimeTypes) || !in_array(strtolower($extension), $allowedExts)) {
