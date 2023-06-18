@@ -27,19 +27,19 @@
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_th"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="description_th" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_en"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="description_en" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-5">
                                                 <label class="text-custom form-label col-form-label-lg">ราคา</label>
@@ -239,7 +239,7 @@
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3">
-                                            <button type="button" class="btn btn-danger">ยกเลิก</button>
+                                            <a href="<?php echo base_url('product');?>"><button type="button" class="btn btn-danger">ยกเลิก</button></a>
                                             <button id="submit_btn" type="button" class="btn btn-success" style="float:right;" data-bs-toggle="modal" data-bs-target=".bd-example-modal-md">ยืนยัน</button>
                                         </div>
                                     </form>
@@ -359,11 +359,11 @@
                 var best_seller = document.getElementById("best_seller").value;
                 data.append('best_seller', best_seller);
                 
-                var detail_th = new FroalaEditor('#detail_th');
-                data.append('detail_th', detail_th.html.get());
+                var editor = new FroalaEditor('#detail_th');
+                data.append('detail_th', editor.html.get());
 
-                var detail_en = new FroalaEditor('#detail_en');
-                data.append('detail_en', detail_en.html.get());
+                var editor = new FroalaEditor('#detail_en');
+                data.append('detail_en', editor.html.get());
 
                                     $.ajax({
                                         type: 'POST',

@@ -70,7 +70,9 @@
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3">
+                                            <a href="<?php echo base_url('content/list');?>">
                                             <button type="button" class="btn btn-danger">ยกเลิก</button>
+                                            </a>
                                             <button id="submit_btn" type="button" class="btn btn-success" style="float:right;" data-bs-toggle="modal" data-bs-target=".bd-example-modal-md">ยืนยัน</button>
                                         </div>
                                     </form>

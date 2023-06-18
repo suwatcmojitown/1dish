@@ -28,19 +28,19 @@
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th"><?php echo @$detail->subtitle_th;?></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th" maxlength="255"><?php echo @$detail->subtitle_th;?></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en"><?php echo @$detail->subtitle_en;?></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en" maxlength="255"><?php echo @$detail->subtitle_en;?></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_th"><?php echo @$detail->description_th;?></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="description_th" maxlength="255"><?php echo @$detail->description_th;?></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_en"><?php echo @$detail->description_en;?></textarea>
+                                                <textarea class="form-control form-control-lg" rows="4" name="description_en" maxlength="255"><?php echo @$detail->description_en;?></textarea>
                                         </div>
                                         <div class="mb-3 col-5">
                                                 <label class="text-custom form-label col-form-label-lg">ราคา</label>
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">คำอธิบายสินค้า <code>EN</code></code></label>
-                                                <div id="detail_th"><?php echo @$detail->detail_en;?></div>
+                                                <div id="detail_en"><?php echo @$detail->detail_en;?></div>
                                         </div>
 
                                         <div class="mb-3 col-12">
@@ -243,7 +243,7 @@
                                             </select>
                                         </div>
                                         <div class="mb-3 mt-3">
-                                            <button type="button" class="btn btn-danger">ยกเลิก</button>
+                                            <a href="<?php echo base_url('product');?>"><button type="button" class="btn btn-danger">ยกเลิก</button></a>
                                             <button id="submit_btn" type="button" class="btn btn-success" style="float:right;" data-bs-toggle="modal" data-bs-target=".bd-example-modal-md">ยืนยัน</button>
                                         </div>
                                     </form>
@@ -360,11 +360,11 @@
                 var best_seller = document.getElementById("best_seller").value;
                 data.append('best_seller', best_seller);
                 
-                var detail_th = new FroalaEditor('#detail_th');
-                data.append('detail_th', detail_th.html.get());
+                var editor = new FroalaEditor('#detail_th');
+                data.append('detail_th', editor.html.get());
 
-                var detail_en = new FroalaEditor('#detail_en');
-                data.append('detail_en', detail_en.html.get());
+                var editor = new FroalaEditor('#detail_en');
+                data.append('detail_en', editor.html.get());
                                     $.ajax({
                                         type: 'POST',
                                         url: '<?php echo base_url('product/update')?>',
@@ -373,6 +373,7 @@
                                         contentType: false,
                                         success: function(result) { 
                                             //$('#result').html(result);
+                                            
                                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');

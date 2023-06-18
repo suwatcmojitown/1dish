@@ -81,6 +81,7 @@ class Product_model extends CI_Model {
     public function update($data)
     {
             $myJSON = json_encode($data); 
+            //console($data);
             $result = json_decode(callAPI('PUT',PATH_API.'backend/product',$myJSON)); 
             //console($result);
 
