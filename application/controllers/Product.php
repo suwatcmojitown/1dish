@@ -254,7 +254,7 @@ class Product extends MY_Controller {
 		$data->subtitle_th = $_POST['subtitle_th'];
 		$data->subtitle_en = $_POST['subtitle_en'];
 		$data->description_th = $_POST['description_th'];
-		$data->description_th = $_POST['description_th'];
+		$data->description_en = $_POST['description_en'];
 		$data->detail_th = $_POST['detail_th'];
 		$data->detail_en = $_POST['detail_en'];
 		$data->price = $_POST['price'];
@@ -269,7 +269,7 @@ class Product extends MY_Controller {
 		$data->recommended = $_POST['recommended'];
 		$data->best_seller = $_POST['best_seller'];
 		$data->status = $_POST['status'];
-		//console($data);
+		console($data);
 		$result = $this->Product_model->update($data);
 		//console($result);
 		echo $result;
