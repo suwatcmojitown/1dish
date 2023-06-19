@@ -20,10 +20,12 @@
                                         <div class="mb-3 col-8">
                                                 <label class="text-custom form-label col-form-label-lg">ชื่อ</label>
                                                 <input type="text" class="form-control form-control-lg" name="title_th">
+                                                <small class="text-danger">* จำเป็นต้องใส่</small>
                                         </div>
                                         <div class="mb-3 col-8">
                                                 <label class="text-custom form-label col-form-label-lg">ชื่อ <code>EN</code></label>
                                                 <input type="text" class="form-control form-control-lg" name="title_en" >
+                                                <small class="text-danger">* จำเป็นต้องใส่</small>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม</code></label>
@@ -44,6 +46,7 @@
                                         <div class="mb-3 col-5">
                                                 <label class="text-custom form-label col-form-label-lg">ราคา</label>
                                                 <input type="text" class="form-control form-control-lg" name="price">
+                                                <small class="text-danger">* จำเป็นต้องใส่</small>
                                         </div>
                                         
                                         <div class="mb-3 col-8">
