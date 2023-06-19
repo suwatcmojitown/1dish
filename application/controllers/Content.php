@@ -77,16 +77,20 @@ class Content extends MY_Controller {
 
 	public function addContent()
 	{
-		$thumbnail = '';
-		
-		if(isset($_FILES['thumbnail'])&&($_FILES['thumbnail']['error']!='4'))
+		$image = '';
+		if(isset($_FILES['image'])&&($_FILES['image']['error']!='4'))
 		{
-				$result_upload = json_decode(upload_pic_multi($_FILES,'thumbnail'));
+				$result_upload = json_decode(upload_pic($_FILES,'image'));
 				if($result_upload->header->res_code=='200')
 				{
-					$thumbnail = $result_upload->body->image_path;
+					$image = $result_upload->body->image_path;
 				}
-				else $thumbnail = '';
+				else $image = '';
+		}
+		else{
+			if(isset($_POST['thumbnail_hidden'])&&!empty($_POST['thumbnail_hidden'])){
+				$image = $_POST['thumbnail_hidden'];
+			}
 		}
 
 		$data = new stdClass(); 
@@ -106,7 +110,7 @@ class Content extends MY_Controller {
 		$data->detail_en = $_POST['detail_en'];
 		$data->youtube_link = $_POST['youtube_link'];
 		$data->external_link = $_POST['external_link'];
-		$data->image = $thumbnail;
+		$data->image = $image;
 		$data->keyword = $_POST['keyword'];
 		$data->status = $_POST['status'];
 		
@@ -128,13 +132,24 @@ class Content extends MY_Controller {
 	}
 
 	public function deleteContent(){
+		$active_page = 1;
 
 		$data = new stdClass(); 
 
 		$data->id = $_POST['id'];
 		
 		$result = $this->content_model->deleteContent($data);
-		echo $result;
+		
+		$list = $this->content_model->getContentList('','',$active_page,PAGE_LIMIT);
+		if($list)
+		{
+			$temp['list'] = $list->body;
+			$temp['paging'] = $list->header;
+		}
+
+		//console($temp);
+
+		$this->load->view('content/loadContentList',$temp);
 	}
 
 	public function editContent($id)
@@ -154,20 +169,20 @@ class Content extends MY_Controller {
 
 	public function updateContent(){
 
-		$thumbnail = '';
+		$image = '';
 		
 
-		if(isset($_FILES['thumbnail'])&&($_FILES['thumbnail']['error']!='4'))
+		if(isset($_FILES['image'])&&($_FILES['image']['error']!='4'))
 		{
-				$result_upload = json_decode(upload_pic_multi($_FILES,'thumbnail'));
+				$result_upload = json_decode(upload_pic_multi($_FILES,'image'));
 				if($result_upload->header->res_code=='200')
 				{
-					$thumbnail = $result_upload->body->image_path;
+					$image = $result_upload->body->image_path;
 				}
-				else $thumbnail = '';
+				else $image = '';
 		}else{
 			if(isset($_POST['thumbnail_hidden'])&&!empty($_POST['thumbnail_hidden'])){
-				$thumbnail = $_POST['thumbnail_hidden'];
+				$image = $_POST['thumbnail_hidden'];
 			}
 		}
 
@@ -183,7 +198,7 @@ class Content extends MY_Controller {
 		$data->detail_en = $_POST['detail_en'];
 		$data->youtube_link = $_POST['youtube_link'];
 		$data->external_link = $_POST['external_link'];
-		$data->image = $thumbnail;
+		$data->image = $image;
 		$data->keyword = $_POST['keyword'];
 		$data->status = $_POST['status'];
 		//console($data);
