@@ -68,11 +68,13 @@
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">Youtube Link</label>
                                                 <input type="text" class="form-control form-control-lg" name="external_link" value="<?php echo @$detail->external_link;?>">
+                                                <small class="text-muted">link ต้องเป็น link จากการ embed เช่น https://www.youtube.com/embed/5kW0RtcJZC8</small>
                                         </div>
 
                                         <div class="mb-3 col-5">
                                                 <label class="text-custom form-label col-form-label-lg">หัวข้อ Youtube</label>
                                                 <input type="text" class="form-control form-control-lg" name="external_link_title_th" value="<?php echo @$detail->external_link_title_th;?>">
+
                                         </div>
 
                                         <div class="mb-3 col-5">
@@ -204,14 +206,19 @@
 
                                         <hr>
 
-                                        <div class="mb-3 col-5">
+                                        <div class="mb-3 col-4">
                                                 <label class="text-custom form-label col-form-label-lg">Link lazada</label>
                                                 <input type="text" class="form-control form-control-lg" name="link_lazada" value="<?php echo @$detail->link_lazada;?>">
                                         </div>
 
-                                        <div class="mb-3 col-5">
+                                        <div class="mb-3 col-4">
                                                 <label class="text-custom form-label col-form-label-lg">Link Shopee</label>
                                                 <input type="text" class="form-control form-control-lg" name="link_shopee" value="<?php echo @$detail->link_shopee;?>">
+                                        </div>
+
+                                        <div class="mb-3 col-4">
+                                                <label class="text-custom form-label col-form-label-lg">Link Tiktok</label>
+                                                <input type="text" class="form-control form-control-lg" name="link_tiktok" value="<?php echo @$detail->link_tiktok;?>">
                                         </div>
 
                                         <div class="mb-3 col-12">
