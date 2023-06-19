@@ -288,13 +288,14 @@ class Product extends MY_Controller {
 
 		$keysearch = $_POST['keysearch'];
 		$status = $_POST['status'];
-		$product_category_id = $_POST['product_category_id'];
+		$category_id = $_POST['category_id'];
+		$subcategory_id = $_POST['subcategory_id'];
 		$active_page = $_POST['page'];
 
 		$data['page'] = $active_page;
 
 		//$status,$keysearch,product_category_id,$active_page,$limit
-		$resultList = $this->Product_model->getContentList($status,$keysearch,$product_category_id,$active_page,PAGE_LIMIT);
+		$resultList = $this->Product_model->getContentList($status,$keysearch,$category_id,$subcategory_id,$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;
@@ -320,13 +321,14 @@ class Product extends MY_Controller {
 
 		$keysearch = $_POST['keysearch'];
 		$status = $_POST['status'];
-		$product_category_id = $_POST['product_category_id'];
+		$category_id = $_POST['category_id'];
+		$subcategory_id = $_POST['subcategory_id'];
 		$active_page = $_POST['page'];
 
 		$data['page'] = $active_page;
 
 		//$status,$keysearch,product_category_id,$active_page,$limit
-		$resultList = $this->Product_model->getContentList($status,$keysearch,$product_category_id,$active_page,PAGE_LIMIT);
+		$resultList = $this->Product_model->getContentList($status,$keysearch,$category_id,$subcategory_id,$active_page,PAGE_LIMIT);
 		if($resultList)
 		{
 			$data['list'] = $resultList->body;

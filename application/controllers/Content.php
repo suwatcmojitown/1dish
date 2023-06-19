@@ -99,6 +99,7 @@ class Content extends MY_Controller {
 		*/
 		$data->title_th = $_POST['title_th'];
 		$data->title_en = $_POST['title_en'];
+		$data->category_id = 5;
 		$data->description_th = $_POST['description_th'];
 		$data->description_en = $_POST['description_en'];
 		$data->detail_th = $_POST['detail_th'];
@@ -175,6 +176,7 @@ class Content extends MY_Controller {
 		$data->id = $_POST['id'];
 		$data->title_th = $_POST['title_th'];
 		$data->title_en = $_POST['title_en'];
+		$data->category_id = 5;
 		$data->description_th = $_POST['description_th'];
 		$data->description_en = $_POST['description_en'];
 		$data->detail_th = $_POST['detail_th'];

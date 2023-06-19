@@ -340,12 +340,13 @@ function confirmDelete(id){
             subcategory_id = document.getElementById("subcategory_id").value;
             status = document.getElementById("status").value;
 
+
             $.ajax({
                         type: 'POST',
                         url: '<?php echo base_url('product/delete')?>',
                         data: 'id='+id+'&keysearch='+keysearch+'&category_id='+category_id+'&subcategory_id='+subcategory_id+'&status='+status+'&page='+page,
                         success: function(result) { 
-                            //alert(result);
+                            //alert(id);
                             $('#del'+id+'').modal('hide');
                             //$('#result').html(result);
                             $("#_list").html(result);
