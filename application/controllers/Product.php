@@ -156,7 +156,7 @@ class Product extends MY_Controller {
 		$data->best_seller = $_POST['best_seller'];
 		$data->status = $_POST['status'];
 		
-		//console($data);
+		console($data);
 		$result = $this->Product_model->add($data);
 		echo $result;
 		
