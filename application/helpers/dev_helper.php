@@ -89,7 +89,7 @@ function upload_pic($temp_file,$name='thumbnail')
       $response = curl_exec($curl);
       $err = curl_error($curl);
       curl_close($curl);
-      unlink($target_file);
+      //unlink($target_file);
 
       if ($err) {
         echo "cURL Error #:" . $err;
