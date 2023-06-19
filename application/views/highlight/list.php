@@ -4,7 +4,7 @@
                 <?php //console($paging);?>
 				<div class="form-head d-flex mb-3 align-items-start">
 					<div class="me-auto d-none d-lg-block ">
-						<h2 class="text-custom font-w600 mb-0"><i class="fa fa-coffee" aria-hidden="true"></i> Shelf</h2>
+						<h2 class="text-custom font-w600 mb-0"><i class="fa fa-coffee" aria-hidden="true"></i> Top Banner</h2>
 						<ol class="breadcrumb">
                             <li class="breadcrumb-item active"><a href="javascript:void(0)" class="text-custom">List</a></li>
                             <!--<li class="breadcrumb-item"><a href="javascript:void(0)">Accordion</a></li>-->

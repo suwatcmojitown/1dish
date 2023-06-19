@@ -155,7 +155,7 @@
                     </li>
                     <li><a class="ai-icon" href="<?php echo base_url('highlight');?>" >
                             <i class="fas fa-star"></i>
-                            <span class="nav-text">Highlight</span>
+                            <span class="nav-text">Top Banner</span>
                         </a>
                     </li>
                     <li><a class="ai-icon" href="<?php echo base_url('bubble');?>" >

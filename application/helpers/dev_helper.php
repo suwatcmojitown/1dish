@@ -54,10 +54,8 @@ function upload_pic($temp_file,$name='thumbnail')
 
    $target_dir = "images/";
    $target_file = $target_dir . basename($temp_file["$name"]["name"]);
-   /*
    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
    if( move_uploaded_file($temp_file["$name"]["tmp_name"], $target_file) ) {
-   */
 
       $postfields = array();
       $file = curl_file_create($target_file);
@@ -89,7 +87,7 @@ function upload_pic($temp_file,$name='thumbnail')
       $response = curl_exec($curl);
       $err = curl_error($curl);
       curl_close($curl);
-      //unlink($target_file);
+      unlink($target_file);
 
       if ($err) {
         echo "cURL Error #:" . $err;
@@ -97,11 +95,9 @@ function upload_pic($temp_file,$name='thumbnail')
         //echo $response;
         return $response;
       }	
-   /*
    } else {
       echo "Error, Can not upload file.";
    }	
-   */
 }
 
 

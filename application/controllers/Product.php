@@ -107,13 +107,13 @@ class Product extends MY_Controller {
 
 	public function addContent(){
 
-		console($_FILES);
+		//console($_FILES);
 
 		$image = '';
 		if(isset($_FILES['image'])&&($_FILES['image']['error']!='4'))
 		{
 				$result_upload = json_decode(upload_pic($_FILES,'image'));
-				console($result_upload);
+				//console($result_upload);
 				if($result_upload->header->res_code=='200')
 				{
 					$image = $result_upload->body->image_path;
@@ -121,7 +121,7 @@ class Product extends MY_Controller {
 				else $image = '';
 		}
 
-		echo $image;
+		//echo $image;
 
 		
 		//console($_POST);
