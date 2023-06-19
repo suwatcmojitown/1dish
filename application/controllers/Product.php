@@ -148,7 +148,7 @@ class Product extends MY_Controller {
 		$data->image = $image;
 		$data->link_lazada = $_POST['link_lazada'];
 		$data->link_shopee = $_POST['link_shopee'];
-		$data->link_shopee = $_POST['link_tiktok'];
+		$data->link_tiktok = $_POST['link_tiktok'];
 		$data->external_link = $_POST['external_link'];
 		$data->external_link_title_th = $_POST['external_link_title_th'];
 		$data->external_link_title_en = $_POST['external_link_title_en'];
@@ -262,7 +262,7 @@ class Product extends MY_Controller {
 		$data->image = $image;
 		$data->link_lazada = $_POST['link_lazada'];
 		$data->link_shopee = $_POST['link_shopee'];
-		$data->link_shopee = $_POST['link_tiktok'];
+		$data->link_tiktok = $_POST['link_tiktok'];
 		$data->external_link = $_POST['external_link'];
 		$data->external_link_title_th = $_POST['external_link_title_th'];
 		$data->external_link_title_en = $_POST['external_link_title_en'];
