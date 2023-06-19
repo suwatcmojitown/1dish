@@ -382,8 +382,8 @@
                                         contentType: false,
                                         success: function(result) { 
                                             
-                                            //$('#result').html(result);
-                                            
+                                            $('#result').html(result);
+                                            /*
                                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');
@@ -391,6 +391,7 @@
                                             else{
                                                 $('#result_modal_fail').modal('show');
                                             }
+                                            */
 
                                         }
                                     });

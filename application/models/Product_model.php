@@ -7,7 +7,7 @@ class Product_model extends CI_Model {
     {
             $myJSON = json_encode($data); 
             $result = json_decode(callAPI('POST',PATH_API.'backend/product',$myJSON)); 
-            //console($result); 
+            console($result); 
             if($result->header->res_code=='200')
             {
                     return true;
