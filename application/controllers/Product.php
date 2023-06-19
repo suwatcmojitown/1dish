@@ -269,7 +269,7 @@ class Product extends MY_Controller {
 		$data->recommended = $_POST['recommended'];
 		$data->best_seller = $_POST['best_seller'];
 		$data->status = $_POST['status'];
-		console($data);
+		//console($data);
 		$result = $this->Product_model->update($data);
 		//console($result);
 		echo $result;
