@@ -123,6 +123,7 @@ class Product extends MY_Controller {
 		$data = new stdClass(); 
 		//console($_POST);
 		//$data->name_title = $_POST['name_title'];
+		$data->content_type_id = isset($_POST['content_type_id'])&&($_POST['content_type_id']!='null') ? $_POST['content_type_id'] : 0;//
 		$data->category_id = isset($_POST['category_id'])&&($_POST['category_id']!='null') ? $_POST['category_id'] : 0;//$_POST['category_id'];
 		$data->subcategory_id = isset($_POST['subcategory_id'])&&($_POST['subcategory_id']!='null') ? $_POST['subcategory_id'] : 0;//$_POST['subcategory_id'];
 		$data->car_brand_id = isset($_POST['car_brand_id'])&&($_POST['car_brand_id']!='null') ? $_POST['car_brand_id'] : 0;//$_POST['car_brand_id'];
@@ -233,6 +234,8 @@ class Product extends MY_Controller {
 		//console($_POST);
 		//$data->name_title = $_POST['name_title'];
 		$data->id = $_POST['id'];
+
+		$data->content_type_id = isset($_POST['content_type_id'])&&($_POST['content_type_id']!='null') ? $_POST['content_type_id'] : 0;
 		$data->category_id = isset($_POST['category_id'])&&($_POST['category_id']!='null') ? $_POST['category_id'] : 0;//$_POST['category_id'];
 		$data->subcategory_id = isset($_POST['subcategory_id'])&&($_POST['subcategory_id']!='null') ? $_POST['subcategory_id'] : 0;//$_POST['subcategory_id'];
 		$data->car_brand_id = isset($_POST['car_brand_id'])&&($_POST['car_brand_id']!='null') ? $_POST['car_brand_id'] : 0;//$_POST['car_brand_id'];

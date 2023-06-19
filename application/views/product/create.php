@@ -341,6 +341,9 @@
                 var status = document.getElementById("status").value;
                 data.append('status', status);
 
+                var content_type_id = document.getElementById("content_type_id").value;
+                data.append('content_type_id', content_type_id);
+
                 var category_id = document.getElementById("category_id").value;
                 data.append('category_id', category_id);
 
