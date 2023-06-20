@@ -140,6 +140,11 @@ $route['content/delete'] = 'Content/deleteContent';
 $route['content/edit/(:num)'] = 'Content/editContent/$1';
 $route['content/update'] = 'Content/updateContent';
 
+$route['category'] = 'Category/manageContent';
+$route['category/add'] = 'Category/addContent';
+$route['category/deleteContentItem'] = 'Category/deleteContentItem';
+$route['category/edit'] = 'Category/edit';
+$route['category/update'] = 'Category/updateContent';
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';

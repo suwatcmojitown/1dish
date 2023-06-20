@@ -173,6 +173,12 @@
                             <span class="nav-text">Content</span>
                         </a>
                     </li>
+
+                    <li><a class="ai-icon" href="<?php echo base_url('category');?>" >
+                            <i class="fa fa-id-badge"></i>
+                            <span class="nav-text">Category</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -1,112 +1,172 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Category_model extends CI_Model {
+class Category_model extends CI_Model { 
 
-    public function getCategoryAll($status='')
+
+    public function add($data)
     {
-                $this->db->select('*');
-                $this->db->from('category');
-                $this->db->order_by('category_id', 'ASC');
-                //$this->db->join('comments', 'comments.id = blogs.id');
-                if($status == 1){
-                    $this->db->where('status', 1);
-                }
-                $query = $this->db->get();
-
-                if ( $query->num_rows() > 0 )
-                {
-                    $row = $query->result();
-                    return $row;
-                }
-                else return null;
-
-                
-    }
-
-    public function getCategoryList($status='')
-    {
-                $this->db->select('*');
-                $this->db->from('category');
-                //$this->db->join('comments', 'comments.id = blogs.id');
-                $this->db->where('type', '1');
-                if($status == 1){
-                    $this->db->where('status', 1);
-                }
-                $query = $this->db->get();
-
-                if ( $query->num_rows() > 0 )
-                {
-                    $row = $query->result();
-                    return $row;
-                }
-                else return null;
-
-                
-    }
-
-    public function getCategoryName($id){
-                $this->db->select('name');
-                $this->db->from('category');
-                //$this->db->join('comments', 'comments.id = blogs.id');
-                $this->db->where('category_id', $id);
-                
-                $query = $this->db->get();
-
-                if ( $query->num_rows() > 0 )
-                {
-                    $row = $query->result();
-                    return $row;
-                }
-                else return null;
-    }
-
-    public function addCategory($data)
-    {
-            $this->db->insert('category', $data);
-
-            return ($this->db->affected_rows() != 1) ? false : true;
-           
-    }
-
-    public function getSubCategoryList($category_id)
-    {
-                $this->db->select('*');
-                $this->db->from('category');
-                $this->db->order_by('category_id', 'ASC');
-                $this->db->where('parent_id', $category_id);
-                
-                $query = $this->db->get();
-
-                if ( $query->num_rows() > 0 )
-                {
-                    $row = $query->result();
-                    return $row;
-                }
-                else return null;
-    }
-
-    public function getCategoryDetail($id)
-    {
-            $this->db->select('*');
-            $this->db->from('category');
-            $this->db->where('category_id', $id);
-            $query = $this->db->get();
-
-            if ( $query->num_rows() > 0 )
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('POST',PATH_API.'backend/category',$myJSON));  
+            //console($result);
+            if($result->header->res_code=='200')
             {
-                $row = $query->result();
-                return $row[0];
+                    return true;
             }
-            else return null;
-    }
-
-    public function updateCategory($data)
-    {
-            $this->db->where('category_id', $data->category_id);
-            $this->db->update('category', $data);
-            return ($this->db->affected_rows() != 1) ? false : true;
+            else return false;
            
     }
+
+    public function getSelectContentList()
+    {
+                $result = json_decode(callAPI('GET',PATH_API.'backend/category','')); 
+                //echo PATH_API.'backend/product'.$path.'';
+                //console($result);
+                if($result->header->res_code=='200')
+                {
+                        $object = $result;
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
+    public function getContentList($active_page=1,$limit)
+    {
+                $temp = array();
+                $path = '';
+
+                if($active_page!='') $temp['page'] = $active_page;
+                if($limit!='') $temp['limit'] = $limit;
+
+                $i = 0;
+                foreach($temp as $key => $value)
+                {
+                        if($i==0)
+                        {
+                                $path = '?'.$key.'='.$value;
+                        }
+                        else $path = $path.'&'.$key.'='.$value;
+                        $i++;
+                }
+                
+                $result = json_decode(callAPI('GET',PATH_API.'backend/shelf-product'.$path.'','')); 
+                //echo PATH_API.'backend/product'.$path.'';
+                //console($result);
+                if($result->header->res_code=='200')
+                {
+                        $object = $result;
+                }
+                else $object = NULL;
+                
+                return $object;
+    }
+
+    
+
+    public function delete($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('DEL',PATH_API.'backend/category',$myJSON));  
+            //console($result);
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+           
+    }
+
+    public function getContentDetail($id)
+    {
+           $result = json_decode(callAPI('GET',PATH_API.'backend/category?id='.$id.'',''));  
+           
+           if($result->header->res_code=='200')
+           {
+                    $object = $result->body[0];
+           }
+           else $object = NULL;
+           
+           return $object;
+    }
+
+    public function update($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('PUT',PATH_API.'backend/category',$myJSON)); 
+            //console($result);
+
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+    }
+
+    public function getGallery($id)
+    {
+           $result = json_decode(callAPI('GET',PATH_API.'backend/product-gallery?product_id='.$id.'',''));  
+           
+           if($result->header->res_code=='200')
+           {
+                    $object = $result->body;
+           }
+           else $object = NULL;
+           
+           return $object;
+    }
+
+    public function addGallery($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('POST',PATH_API.'backend/product-gallery',$myJSON));  
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+           
+    }
+
+    public function deletePic($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('DEL',PATH_API.'backend/product-gallery',$myJSON));  
+            //console($result);
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+           
+    }
+
+    public function addProductItem($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('POST',PATH_API.'backend/shelf-product-item',$myJSON));  
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+           
+    }
+
+
+    public function updateOrder($data)
+    {
+            $myJSON = json_encode($data); 
+            $result = json_decode(callAPI('PUT',PATH_API.'backend/category/sorting',$myJSON)); 
+            //console($result);
+
+            if($result->header->res_code=='200')
+            {
+                    return true;
+            }
+            else return false;
+    }
+
+    
 
 
 

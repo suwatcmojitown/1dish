@@ -1,7 +1,7 @@
  <div class="content-body">
             <!-- row -->
 			<div class="container-fluid">
-                <?php //console($paging);?>
+                <?php //console($list);?>
 				<div class="form-head d-flex mb-3 align-items-start">
 					<div class="me-auto d-none d-lg-block ">
 						<h2 class="text-custom font-w600 mb-0"><i class="fa fa-coffee" aria-hidden="true"></i> Product</h2>
