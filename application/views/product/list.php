@@ -60,9 +60,8 @@
                                             <tr>
                                                 <th width="10%"></th>
                                                 <th></th>
-                                                <th>หมวดหมู่</th>
-                                                <th>แบรนด์</th>
                                                 <th>ราคา</th>
+                                                <th>สถานะ</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -76,38 +75,27 @@
                                                 <td>
                                                     <img style="max-height: 70px;" src="<?php echo @$row->image_url?>">
                                                 </td>
-                                                <!--
-                                                <td>
-                                                    <h4 class="text-muted mb-0 name"><strong>เม็ดมะม่วง</strong></h4>
-                                                    <h5 class="text-muted email">sriadmin@gmail.com</h5>
-                                                </td>
-                                                -->
                                                 <td>
                                                     <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->title_th?></h4>
-                                                    <h4 class="text-custom mb-1 name" style="font-weight: 300;"><?php echo @$row->title_en?></h4>
                                                     <normal style="display:block;"> 
-                                                    <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>">
-                                                    <?php 
-                                                    if($row->status==1){
-                                                    ?>
-                                                    <span class="text-success pl-7 pr-7">เปิดใช้งาน</span>
-                                                    <?php }else{?>
-                                                    <span class="text-danger pl-7 pr-7">ไม่เปิดใช้งาน</span>
-                                                    <?php }?>
-                                                    </a>
-                                                    <span class="text-muted">updated : <?php echo @$row->created_at;?></span>
+                                                    <h5 style="font-weight: 400;"><?php echo @$row->category_title_th;?> - <?php echo @$row->car_brand_title_th;?></h5>
                                                     </normal>
+                                                    <normal style="font-weight: 300;color:#3d4465;"><i class="fas fa-pencil-alt"></i> <?php echo @$row->updated_by;?> <i class="lni lni-timer"></i> <?php echo @$row->created_at;?></normal>
                                                     
                                                     
-                                                </td>
-                                                <td>
-                                                    <?php echo @$row->category_title_th;?>
-                                                </td>
-                                                <td>
-                                                    <?php echo @$row->car_brand_title_th;?>
                                                 </td>
                                                 <td>
                                                     <?php echo number_format(@$row->price);?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                    if($row->status==1){
+                                                    ?>
+                                                    <span class="badge bg-success ">เปิดใช้งาน</span>
+                                                    <?php }else{?>
+                                                    <span class="badge bg-danger ">ไม่เปิดใช้งาน</span>
+                                                    <?php }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">

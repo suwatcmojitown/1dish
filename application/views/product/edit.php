@@ -9,7 +9,7 @@
                 </div>
                 <div class="row">
 					<div class="col-12">
-
+                        <?php //console($detail);?>
                         <div class="card">
                             <div class="card-header bg-custom">
                                 <h4 class="card-title text-white" > <i class="fas fa-pencil-alt"></i> แก้ไข Product : <?php echo @$detail->title_th;?></h4>
@@ -251,6 +251,18 @@
                                                 <option value="1" <?php if($detail->status=='1') echo 'selected';?>>เปิดใช้งาน</option>
                                                 <option value="0" <?php if($detail->status=='0') echo 'selected';?>>ไม่เปิดใช้งาน</option>
                                             </select>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="mb-3 col-6">
+                                                <label class="text-custom form-label col-form-label-lg">สร้าง</label>
+                                                <input type="text" class="form-control form-control-lg" value="<?php echo @$detail->created_by.' - '.$detail->created_at;?>" readonly>
+                                        </div>
+
+                                        <div class="mb-3 col-6">
+                                                <label class="text-custom form-label col-form-label-lg">แก้ไขล่าสุด</label>
+                                                <input type="text" class="form-control form-control-lg" value="<?php echo @$detail->updated_by.' - '.$detail->updated_at;?>">
                                         </div>
                                         <div class="mb-3 mt-3">
                                             <a href="<?php echo base_url('product');?>"><button type="button" class="btn btn-danger">ยกเลิก</button></a>

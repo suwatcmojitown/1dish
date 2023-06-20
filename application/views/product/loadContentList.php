@@ -4,9 +4,8 @@
                                             <tr>
                                                 <th width="10%"></th>
                                                 <th></th>
-                                                <th>หมวดหมู่</th>
-                                                <th>แบรนด์</th>
                                                 <th>ราคา</th>
+                                                <th>สถานะ</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -20,55 +19,27 @@
                                                 <td>
                                                     <img style="max-height: 70px;" src="<?php echo @$row->image_url?>">
                                                 </td>
-                                                <!--
-                                                <td>
-                                                    <h4 class="text-muted mb-0 name"><strong>เม็ดมะม่วง</strong></h4>
-                                                    <h5 class="text-muted email">sriadmin@gmail.com</h5>
-                                                </td>
-                                                -->
                                                 <td>
                                                     <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->title_th?></h4>
-                                                    <h4 class="text-custom mb-1 name" style="font-weight: 300;"><?php echo @$row->title_en?></h4>
                                                     <normal style="display:block;"> 
-                                                    <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>">
-                                                    <?php 
-                                                    if($row->status==1){
-                                                    ?>
-                                                    <span class="text-success pl-7 pr-7">เปิดใช้งาน</span>
-                                                    <?php }else{?>
-                                                    <span class="text-danger pl-7 pr-7">ไม่เปิดใช้งาน</span>
-                                                    <?php }?>
-                                                    </a>
-                                                    <span class="text-muted">updated : <?php echo @$row->created_at;?></span>
+                                                    <h5 style="font-weight: 400;"><?php echo @$row->category_title_th;?> - <?php echo @$row->car_brand_title_th;?></h5>
                                                     </normal>
-                                                    <!-- modal danger -->
-                                                        <div class="modal fade modal-danger text-start" id="warning-<?php echo $row->id;?>" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title"><span class="badge badge-lg badge-warning"> <i class="fa fa-exclamation" aria-hidden="true"></i> </span> เปลี่ยนสถานะ <span class="text-warning">#<?php echo $row->name_th;?></span> </h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p>คุณต้องการยืนยันที่จะเปลี่ยนสถานะสินค้านี้ ?</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-warning light" data-bs-dismiss="modal">ยกเลิก</button>
-                                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" value="<?php echo $row->id?>" onclick="changeStatus('<?php echo $row->id;?>','<?php echo $row->status;?>')">ยืนยัน</button>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                    <!-- modal danger -->
+                                                    <normal style="font-weight: 300;color:#3d4465;"><i class="fas fa-pencil-alt"></i> <?php echo @$row->updated_by;?> <i class="lni lni-timer"></i> <?php echo @$row->created_at;?></normal>
+                                                    
                                                     
                                                 </td>
                                                 <td>
-                                                    <?php echo @$row->category_title_th;?>
-                                                </td>
-                                                <td>
-                                                    <?php echo @$row->car_brand_title_th;?>
-                                                </td>
-                                                <td>
                                                     <?php echo number_format(@$row->price);?>
+                                                </td>
+                                                <td>
+                                                    <?php 
+                                                    if($row->status==1){
+                                                    ?>
+                                                    <span class="badge bg-success ">เปิดใช้งาน</span>
+                                                    <?php }else{?>
+                                                    <span class="badge bg-danger ">ไม่เปิดใช้งาน</span>
+                                                    <?php }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
