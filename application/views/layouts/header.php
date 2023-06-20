@@ -179,6 +179,12 @@
                             <span class="nav-text">Category</span>
                         </a>
                     </li>
+
+                    <li><a class="ai-icon" href="<?php echo base_url('subcategory');?>" >
+                            <i class="fa fa-id-badge"></i>
+                            <span class="nav-text">SubCategory</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

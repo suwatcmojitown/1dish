@@ -145,6 +145,12 @@ $route['category/add'] = 'Category/addContent';
 $route['category/deleteContentItem'] = 'Category/deleteContentItem';
 $route['category/edit'] = 'Category/edit';
 $route['category/update'] = 'Category/updateContent';
+
+$route['subcategory'] = 'Subcategory/manageContent';
+$route['subcategory/add'] = 'Subcategory/addContent';
+$route['subcategory/deleteContentItem'] = 'Subcategory/deleteContentItem';
+$route['subcategory/edit'] = 'Subcategory/edit';
+$route['subcategory/update'] = 'Subcategory/updateContent';
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';
