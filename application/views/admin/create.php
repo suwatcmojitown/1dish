@@ -3,22 +3,22 @@
 			<div class="container-fluid">
                 <div class="row page-titles">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a href="<?php echo base_url('admin/list');?>">Admin</a></li>
+                        <li class="breadcrumb-item active text-custom" ><i class="lni lni-android-original" class="text-custom"></i> <a href="<?php echo base_url('admin/list');?>" class="text-custom">Admin</a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Create</a></li>
                     </ol>
                 </div>
-                <div class="row">
+                <div class="row"> 
 					<div class="col-12">
 
                         <div class="card">
-                            <div class="card-header bg-info">
+                            <div class="card-header bg-custom">
                                 <h4 class="card-title text-white" > + เพิ่ม Admin</h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
                                     <form id="addForm">
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">ชื่อ - นามสกุล</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">ชื่อ - นามสกุล</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-lg" name="first_name">
                                             </div>
@@ -27,40 +27,40 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">รูปภาพ</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">รูปภาพ</label>
                                             <div class="col-sm-8">
                                                 <input type="file" class="form-control form-control-lg" name="image" style="padding-top: 14px;">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Email</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Email</label>
                                             <div class="col-sm-8">
                                                 <input type="email" class="form-control form-control-lg" name="email">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">เบอร์โทรศัพท์</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">เบอร์โทรศัพท์</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control form-control-lg" name="telephone">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Username</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Username</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control form-control-lg" name="username" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Password</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Password</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control form-control-lg" name="password" required>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Role</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Role</label>
                                             <div class="col-sm-5">
-                                            <select class="default-select form-control wide mb-3" name="group_admin_id">
+                                            <select class="default-select form-control wide mb-3" name="group_admin_id" id="group_admin_id">
                                                 <option >Choose...</option>
                                                 <?php 
                                                 foreach($adminGroupList as $row){
@@ -155,6 +155,7 @@
                                         contentType: false,
                                         success: function(result) { 
                                             //$('#result').html(result);
+                                            
                                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');
@@ -162,7 +163,6 @@
                                             else{
                                                 $('#result_modal_fail').modal('show');
                                             }
-
 
                                         }
                                     });

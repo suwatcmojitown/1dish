@@ -3,7 +3,7 @@
 			<div class="container-fluid">
                 <div class="row page-titles">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active"><a href="<?php echo base_url('admin/list');?>">Admin</a></li>
+                        <li class="breadcrumb-item active text-custom"><i class="lni lni-android-original"></i> <a href="<?php echo base_url('admin/list');?>" class="text-custom">Admin</a></li>
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Edit</a></li>
                     </ol>
                 </div>
@@ -11,16 +11,16 @@
 					<div class="col-12">
 
                         <div class="card">
-                            <div class="card-header bg-info">
+                            <div class="card-header bg-custom">
                                 <h4 class="card-title text-white" > <i class="fas fa-pencil-alt"></i> แก้ไข Admin : <?php echo @$detail->username;?></h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <?php //console($detail);?>
+                                    <?php console($detail);?>
                                     <form id="addForm">
                                         <input type="hidden" class="form-control" name="id" value="<?php echo @$detail->id;?>">  
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">ชื่อ - นามสกุล</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">ชื่อ - นามสกุล</label>
                                             <div class="col-sm-4">
                                                 <input type="text" class="form-control form-control-lg" name="first_name" value="<?php echo @$detail->first_name;?>">
                                             </div>
@@ -29,42 +29,42 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">รูปภาพ</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">รูปภาพ</label>
                                             <div class="col-sm-5">
                                                 <input type="file" class="form-control form-control-lg" name="image" style="padding-top: 14px;">
                                             </div>
                                             <div class="col-3">
-                                                <img src="<?php echo @$detail->thumbnail_path;?>"></div>
+                                                <img src="<?php echo @$detail->image_url;?>" style="max-height: 140px;"></div>
                                             </div>
-                                            <input type="hidden" class="form-control" name="thumbnail_hidden" placeholder="" value="<?php echo @$detail->thumbnail;?>">  
+                                            <input type="hidden" class="form-control" name="thumbnail_hidden" placeholder="" value="<?php echo @$detail->image;?>">  
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Email</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Email</label>
                                             <div class="col-sm-8">
                                                 <input type="email" class="form-control form-control-lg" name="email" value="<?php echo @$detail->email;?>">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">เบอร์โทรศัพท์</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">เบอร์โทรศัพท์</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control form-control-lg" name="telephone" value="<?php echo @$detail->telephone;?>">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Username</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Username</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control form-control-lg" name="username" disabled="" value="<?php echo @$detail->username;?>">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Password</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Password</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control form-control-lg" name="password" required value="<?php echo @$detail->password;?>">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
-                                            <label class="text-info col-sm-2 col-form-label col-form-label-lg label-custom">Role</label>
+                                            <label class="text-custom col-sm-2 col-form-label col-form-label-lg label-custom">Role</label>
                                             <div class="col-sm-5">
                                             <select class="default-select form-control wide mb-3" name="group_admin_id" id="group_admin_id">
                                                 <option>Choose...</option>
@@ -171,7 +171,6 @@
                                             else{
                                                 $('#result_modal_fail').modal('show');
                                             }
-
 
                                         }
                                     });

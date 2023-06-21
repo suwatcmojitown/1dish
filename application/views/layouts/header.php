@@ -72,7 +72,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img src="<?php echo base_url()?>assets/images/big2-logo.png" alt="" style="width: 195px!important;padding-top: 7px;">
+                <img src="<?php echo base_url()?>assets/images/big2-logo.png" alt="" style="width: 195px!important;padding-top: 7px;margin-top: 21px;">
                 
             </a>
 
@@ -140,49 +140,64 @@
                     <?php 
                     if($_SESSION['group_admin']=='super_admin'){
                     ?>
+                    <!--
                     <li><a class="ai-icon" href="<?php echo base_url('dashboard');?>" >
                             <i class="flaticon-381-networking"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
+                    -->
                     <?php 
                     }
                     ?>
+                    <li style="margin-bottom: :7px;">
+                            <span class="nav-text text-custom" style="padding-left: 14px;font-size: 18px;font-weight: 500;">Menu</span>
+                    </li>
                     <li><a class="ai-icon" href="<?php echo base_url('product');?>" >
-                            <i class="fas fa-car-alt"></i>
+                            <i class="fas fa-car-alt text-custom"></i>
                             <span class="nav-text">Product</span>
                         </a>
                     </li>
                     <li><a class="ai-icon" href="<?php echo base_url('highlight');?>" >
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star text-custom"></i>
                             <span class="nav-text">Top Banner</span>
                         </a>
                     </li>
                     <li><a class="ai-icon" href="<?php echo base_url('bubble');?>" >
-                            <i class="fas fa-pencil-alt"></i>
+                            <i class="fas fa-pencil-alt text-custom"></i>
                             <span class="nav-text">Bubble</span>
                         </a>
                     </li>
                     <li><a class="ai-icon" href="<?php echo base_url('shelf');?>" >
-                            <i class="fas fa-paper-plane"></i>
+                            <i class="fas fa-paper-plane text-custom"></i>
                             <span class="nav-text">Shelf</span>
                         </a>
                     </li>
                     <li><a class="ai-icon" href="<?php echo base_url('content/list');?>" >
-                            <i class="fa fa-id-badge"></i>
+                            <i class="fa fa-id-badge text-custom"></i>
                             <span class="nav-text">Content</span>
                         </a>
                     </li>
 
+                    <li style="margin:7px 0;">
+                            <span class="nav-text text-custom" style="padding-left: 14px;font-size: 18px;font-weight: 500;">Setting</span>
+                    </li>
+
                     <li><a class="ai-icon" href="<?php echo base_url('category');?>" >
-                            <i class="fa fa-id-badge"></i>
+                            <i class="lni lni-cart-full text-custom"></i>
                             <span class="nav-text">Category</span>
                         </a>
                     </li>
 
                     <li><a class="ai-icon" href="<?php echo base_url('subcategory');?>" >
-                            <i class="fa fa-id-badge"></i>
+                            <i class="lni lni-cart text-custom"></i>
                             <span class="nav-text">SubCategory</span>
+                        </a>
+                    </li>
+
+                    <li><a class="ai-icon" href="<?php echo base_url('admin');?>" >
+                            <i class="lni lni-android-original text-custom" ></i>
+                            <span class="nav-text">Admin</span>
                         </a>
                     </li>
                 </ul>

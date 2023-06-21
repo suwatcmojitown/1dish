@@ -6,9 +6,9 @@
             <div class="container-fluid">
                 <div class="form-head d-flex mb-3 align-items-start">
                     <div class="me-auto d-none d-lg-block ">
-                        <h2 class="text-primary font-w600 mb-0"><i class="fa-solid fa-user-secret"></i> Admin</h2>
+                        <h2 class="text-custom font-w600 mb-0"><i class="lni lni-android-original"></i> Admin</h2>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">List</a></li>
+                            <li class="breadcrumb-item active" ><a href="javascript:void(0)"><span class="text-custom">List</span></a></li>
                             <!--<li class="breadcrumb-item"><a href="javascript:void(0)">Accordion</a></li>-->
                         </ol>
                     </div>
@@ -64,15 +64,11 @@
                     <div class="col-12">
 
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Basic</h4>
-                            </div>
                             <div class="card-body" id="_list">
                                 <div class="table-responsive">
                                     <table class="table custom table-responsive-sm">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th></th>
                                                 <th>ชื่อ - นามสกุล</th>
                                                 <th>เบอร์โทรศัพท์</th>
@@ -89,11 +85,12 @@
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
-                                                <th>1</th>
                                                 <th></th>
                                                 <td>
-                                                    <h4 class="text-muted mb-0 name"><strong><?php echo @$row->name;?></strong></h4>
-                                                    <h5 class="text-muted email"><?php echo @$row->email;?></h5>
+                                                    <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->name?></h4>
+                                                    <normal style="display:block;"> 
+                                                    <h5 style="font-weight: 400;"><?php echo @$row->email;?></h5>
+                                                    </normal>
                                                 </td>
                                                 <td><?php echo @$row->telephone;?></td>
                                                 <td><?php echo @$row->username;?></td>

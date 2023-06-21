@@ -2,7 +2,6 @@
                                     <table class="table custom table-responsive-sm">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th></th>
                                                 <th>ชื่อ - นามสกุล</th>
                                                 <th>เบอร์โทรศัพท์</th>
@@ -19,11 +18,12 @@
                                                 foreach($list as $row){
                                             ?>
                                             <tr>
-                                                <th>1</th>
                                                 <th></th>
                                                 <td>
-                                                    <h4 class="text-muted mb-0 name"><strong><?php echo @$row->name;?></strong></h4>
-                                                    <h5 class="text-muted email"><?php echo @$row->email;?></h5>
+                                                    <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->name?></h4>
+                                                    <normal style="display:block;"> 
+                                                    <h5 style="font-weight: 400;"><?php echo @$row->email;?></h5>
+                                                    </normal>
                                                 </td>
                                                 <td><?php echo @$row->telephone;?></td>
                                                 <td><?php echo @$row->username;?></td>
@@ -41,8 +41,26 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                        <a href="<?php echo base_url('admin/edit/').$row->id;?>" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a data-bs-original-title="ลบ" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                        <!-- modal danger -->
+                                                        <div class="modal fade modal-danger text-start" id="warning-<?php echo $row->id;?>" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="myModalLabel120">Delete #<?php echo $row->username;?></h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    ยืนยันที่จะลบรายการนี้ ?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="close" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" value="<?php echo $row->id?>" onclick="confirmDelete('<?php echo $row->id;?>')">ยืนยัน</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- modal danger -->
                                                     </div>
                                                 </td>
                                             </tr>

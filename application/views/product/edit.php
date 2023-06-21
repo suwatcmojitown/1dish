@@ -107,9 +107,9 @@
 
                                         <div class="mb-3 col-4 category" id="_categoryList">
                                         <?php 
-                                        //console($detail);
+                                        console($detail);
                                         //echo $detail->product_category_id;
-                                        //console($categoryList);
+                                        console($categoryList);
                                         ?>
                                         <label class="text-custom form-label col-form-label-lg">หมวดหมู่</label>
                                                 <select class="default-select form-control wide mb-3" id="category_id" name="category_id" onchange="categoryChange()">

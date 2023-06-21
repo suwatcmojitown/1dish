@@ -19,7 +19,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header" style="background-color: #ab0600;">
-                                <h4 class="card-title text-white" > <i class="fas fa-pencil-alt"></i> จัดการ Catgory </h4>
+                                <h4 class="card-title text-white" > <i class="lni lni-cart-full"></i> จัดการ Catgory </h4>
                             </div>
 
                             <div class="cf nestable-lists card-body">

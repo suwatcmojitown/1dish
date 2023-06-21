@@ -100,7 +100,7 @@ class Admin extends MY_Controller {
 		$data = new stdClass(); 
 		
 		//$data->name_title = $_POST['name_title'];
-		$data->id = getUUId($this->session->userdata['token']);
+		//$data->id = getUUId($this->session->userdata['token']);
 		$data->first_name = $_POST['first_name'];
 		$data->last_name = $_POST['last_name'];
 		$data->image = $image;
@@ -109,7 +109,7 @@ class Admin extends MY_Controller {
 		$data->username = $_POST['username'];
 		$data->password = $_POST['password'];
 		$data->group_admin_id = $_POST['group_admin_id'];
-		
+		//console($data);
 		$result = $this->Admin_model->add($data);
 		echo $result;
 	}
@@ -159,6 +159,7 @@ class Admin extends MY_Controller {
 		//$data->username = $_POST['username'];
 		//$data->password = $_POST['password'];
 		$data->group_admin_id = $_POST['group_admin_id'];
+		//console($data);
 		$result = $this->Admin_model->update($data);
 		//console($result);
 		echo $result;
