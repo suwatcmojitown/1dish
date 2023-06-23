@@ -75,7 +75,7 @@
                                         
                                         
                                         <div class="mb-3 mt-3">
-                                            <button type="button" class="btn btn-danger">ยกเลิก</button>
+                                            <button type="reset" class="btn btn-danger">ยกเลิก</button>
                                             <button id="updateBubble_btn" type="button" class="btn btn-success" style="float:right;" data-bs-toggle="modal" data-bs-target=".bd-example-modal-md">ยืนยัน</button>
                                         </div>
                                         </form>
@@ -137,6 +137,9 @@
                                             if(result==true)
                                             {
                                                 $('#result_modal').modal('show');
+                                                setInterval(function() {
+                                                    window.location.reload(true);
+                                                }, 5000);
                                             } 
                                             else{
                                                 $('#result_modal_fail').modal('show');

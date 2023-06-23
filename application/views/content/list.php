@@ -37,7 +37,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="10%"></th>
-                                                <th></th>
+                                                <th width="60%"></th>
+                                                <th>สถานะ</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -59,21 +60,23 @@
                                                 -->
                                                 <td>
                                                     <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->title_th?></h4>
+                                                    <!--
                                                     <h4 class="text-custom mb-1 name" style="font-weight: 300;"><?php echo @$row->title_en?></h4>
-                                                    <normal style="display:block;"> 
-                                                    <a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#warning-<?php echo $row->id;?>">
+                                                    -->
+                                                    
+                                                    <normal style="font-weight: 300;color:#3d4465;"><i class="fas fa-pencil-alt"></i> <?php echo @$row->updated_by;?> <i class="lni lni-timer"></i> <?php echo @$row->created_at;?></normal>
+                                                    
+                                                    
+                                                </td>
+                                                <td>
                                                     <?php 
                                                     if($row->status==1){
                                                     ?>
-                                                    <span class="text-success pl-7 pr-7">เปิดใช้งาน</span>
+                                                    <span class="badge bg-success ">เปิดใช้งาน</span>
                                                     <?php }else{?>
-                                                    <span class="text-danger pl-7 pr-7">ไม่เปิดใช้งาน</span>
-                                                    <?php }?>
-                                                    </a>
-                                                    <span class="text-muted">updated : <?php echo @$row->created_at;?></span>
-                                                    </normal>
-                                                    
-                                                    
+                                                    <span class="badge bg-danger ">ไม่เปิดใช้งาน</span>
+                                                    <?php }
+                                                    ?>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">

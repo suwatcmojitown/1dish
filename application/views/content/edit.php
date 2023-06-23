@@ -74,6 +74,19 @@
                                                 <option value="0" <?php if($detail->status=='0') echo 'selected';?>>ไม่เปิดใช้งาน</option>
                                             </select>
                                         </div>
+
+                                        <hr>
+
+                                        <div class="mb-3 col-6">
+                                                <label class="text-custom form-label col-form-label-lg">สร้าง</label>
+                                                <input type="text" class="form-control form-control-lg" value="<?php echo @$detail->created_by.' - '.$detail->created_at;?>" readonly>
+                                        </div>
+
+                                        <div class="mb-3 col-6">
+                                                <label class="text-custom form-label col-form-label-lg">แก้ไขล่าสุด</label>
+                                                <input type="text" class="form-control form-control-lg" value="<?php echo @$detail->updated_by.' - '.$detail->updated_at;?>">
+                                        </div>
+                                        
                                         <div class="mb-3 mt-3">
                                             <a href="<?php echo base_url('content/list');?>">
                                             <button type="button" class="btn btn-danger">ยกเลิก</button>

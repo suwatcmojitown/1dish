@@ -176,15 +176,16 @@ class Product extends MY_Controller {
 			$data['contentTypeList'] = $contentTypeList->body;
 		}
 
+		$detail = $this->Product_model->getContentDetail($id);
+		$data['detail'] = $detail;
 
-		$categoryList = $this->Filter_model->getCategory(1);
+		$categoryList = $this->Filter_model->getCategory($detail->content_type_id);
 		if($categoryList)
 		{
 			$data['categoryList'] = $categoryList->body;
 		}
 
-		$detail = $this->Product_model->getContentDetail($id);
-		$data['detail'] = $detail;
+		
 		
 		if($detail)
 		{
