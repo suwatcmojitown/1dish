@@ -154,8 +154,8 @@ class User extends MY_Controller
 					  'system_at'    => $result->system_at,
 					  'username' => $result->username,
 					  'group_admin' => $group_admin,
-			  ));
-			  else redirect(base_url());
+			));
+		   redirect(base_url());
 		}	
 		else
 		{
