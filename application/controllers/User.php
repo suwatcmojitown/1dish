@@ -155,9 +155,6 @@ class User extends MY_Controller
 					  'username' => $result->username,
 					  'group_admin' => $group_admin,
 			  ));
-			  if($group_admin=='super_admin'){
-			  	redirect(base_url('dashboard'));
-			  }
 			  else redirect(base_url());
 		}	
 		else
