@@ -10,6 +10,8 @@ class Product extends MY_Controller {
 			redirect(base_url('login'), 'refresh');
         }
 
+
+
     	
 		$this->load->model('Product_model');
 		$this->load->model('Filter_model');
@@ -17,6 +19,8 @@ class Product extends MY_Controller {
 
 	public function list($active_page = 1)
 	{
+		//
+
 		$data['page'] = $active_page;
 		$data['keysearch'] = '';
 		$data['categoryList'] = '';

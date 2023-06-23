@@ -133,14 +133,17 @@ class User extends MY_Controller
 			//7e6b7949-4a35-4057-aea5-e44d1cfad6fc = cashier
 			$temp_group_admin = $result->group_admin_id;
 			switch ($temp_group_admin) {
-			  case "7dff8cfc-595e-4aa8-b24a-83484d640d68":
+			  case "1":
 			    $group_admin = 'super_admin';
 			    break;
-			  case "c0859d8a-d4ab-49da-9ae1-8e5f8e9fd696":
+			  case "2":
 			    $group_admin = 'admin';
 			    break;
-			  case "7e6b7949-4a35-4057-aea5-e44d1cfad6fc":
-			    $group_admin = 'cashier';
+			  case "6":
+			    $group_admin = 'content';
+			    break;
+			  case "7":
+			    $group_admin = 'product';
 			    break;
 			}
 			$this->session->set_userdata(

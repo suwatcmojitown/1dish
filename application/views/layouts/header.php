@@ -137,32 +137,35 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <?php 
-                    if($_SESSION['group_admin']=='super_admin'){
-                    ?>
-                    <!--
-                    <li><a class="ai-icon" href="<?php echo base_url('dashboard');?>" >
-                            <i class="flaticon-381-networking"></i>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    -->
-                    <?php 
-                    }
-                    ?>
+
                     <li style="margin-bottom: :7px;">
                             <span class="nav-text text-custom" style="padding-left: 14px;font-size: 18px;font-weight: 500;">Menu</span>
                     </li>
+                    <?php 
+                    if(($_SESSION['group_admin']!='content')){
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('product');?>" >
                             <i class="fas fa-car-alt text-custom"></i>
                             <span class="nav-text">Product</span>
                         </a>
                     </li>
+                    <?php 
+                    }
+                    ?>
+                    <?php 
+                    if($_SESSION['group_admin']!='product'){
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('highlight');?>" >
                             <i class="fas fa-star text-custom"></i>
                             <span class="nav-text">Top Banner</span>
                         </a>
                     </li>
+                    <?php 
+                    }
+                    ?>
+                    <?php 
+                    if(($_SESSION['group_admin']!='content')){
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('bubble');?>" >
                             <i class="fas fa-pencil-alt text-custom"></i>
                             <span class="nav-text">Bubble</span>
@@ -173,16 +176,26 @@
                             <span class="nav-text">Shelf</span>
                         </a>
                     </li>
+                    <?php 
+                    }
+                    ?>
+                    <?php 
+                    if($_SESSION['group_admin']!='product'){
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('content/list');?>" >
                             <i class="fa fa-id-badge text-custom"></i>
                             <span class="nav-text">Content</span>
                         </a>
                     </li>
-
+                    <?php 
+                    }
+                    ?>
                     <li style="margin:7px 0;">
                             <span class="nav-text text-custom" style="padding-left: 14px;font-size: 18px;font-weight: 500;">Setting</span>
                     </li>
-
+                    <?php 
+                    if(($_SESSION['group_admin']!='content')){
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('category');?>" >
                             <i class="lni lni-cart-full text-custom"></i>
                             <span class="nav-text">Category</span>
@@ -194,12 +207,20 @@
                             <span class="nav-text">SubCategory</span>
                         </a>
                     </li>
-
+                    <?php 
+                    }
+                    ?>
+                    <?php 
+                    if($_SESSION['group_admin']=='super_admin'){
+                    ?>
                     <li><a class="ai-icon" href="<?php echo base_url('admin');?>" >
                             <i class="lni lni-android-original text-custom" ></i>
                             <span class="nav-text">Admin</span>
                         </a>
                     </li>
+                    <?php 
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
