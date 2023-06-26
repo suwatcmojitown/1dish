@@ -159,7 +159,7 @@ class User extends MY_Controller
 		}	
 		else
 		{
-			//redirect(base_url('login?status=error'), 'refresh');
+			redirect(base_url('login?status=error'), 'refresh');
 		}	 	
 		
 	}

@@ -16,7 +16,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-                                    <?php console($detail);?>
+                                    <?php //console($detail);?>
                                     <form id="addForm">
                                         <input type="hidden" class="form-control" name="id" value="<?php echo @$detail->id;?>">  
                                         <div class="mb-3 row">
