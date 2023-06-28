@@ -151,6 +151,18 @@ $route['subcategory/add'] = 'Subcategory/addContent';
 $route['subcategory/deleteContentItem'] = 'Subcategory/deleteContentItem';
 $route['subcategory/edit'] = 'Subcategory/edit';
 $route['subcategory/update'] = 'Subcategory/updateContent';
+
+$route['carbrand'] = 'Carbrand/manageContent';
+$route['carbrand/add'] = 'Carbrand/addContent';
+$route['carbrand/deleteContentItem'] = 'Carbrand/deleteContentItem';
+$route['carbrand/edit'] = 'Carbrand/edit';
+$route['carbrand/update'] = 'Carbrand/updateContent';
+
+$route['carmodel'] = 'Carmodel/manageContent';
+$route['carmodel/add'] = 'Carmodel/addContent';
+$route['carmodel/deleteContentItem'] = 'Carmodel/deleteContentItem';
+$route['carmodel/edit'] = 'Carmodel/edit';
+$route['carmodel/update'] = 'Carmodel/updateContent';
 /*
 $route['user/register'] = 'User/register';
 $route['user/list'] = 'User/listUser';

@@ -37,6 +37,7 @@ class Filter_model extends CI_Model {
                 $path = '';
 
                 if($content_type_id!='') $temp['content_type_id'] = $content_type_id;
+                $temp['limit'] = 50;
 
                 $i = 0;
                 foreach($temp as $key => $value)
@@ -66,6 +67,7 @@ class Filter_model extends CI_Model {
                 $path = '';
 
                 if($category_id!='') $temp['category_id'] = $category_id;
+                $temp['limit'] = 50;
 
                 $i = 0;
                 foreach($temp as $key => $value)
@@ -94,6 +96,19 @@ class Filter_model extends CI_Model {
                 $temp = array();
                 $path = '';
 
+                $temp['limit'] = 50;
+
+                $i = 0;
+                foreach($temp as $key => $value)
+                {
+                        if($i==0)
+                        {
+                                $path = '?'.$key.'='.$value;
+                        }
+                        else $path = $path.'&'.$key.'='.$value;
+                        $i++;
+                }
+
                 $result = json_decode(callAPI('GET',PATH_API.'backend/filter/car-brand'.$path.'',''));  
                 //console($result);
                 if($result->header->res_code=='200')
@@ -111,6 +126,7 @@ class Filter_model extends CI_Model {
                 $path = '';
 
                 if($car_brand_id!='') $temp['car_brand_id'] = $car_brand_id;
+                $temp['limit'] = 150;
 
                 $i = 0;
                 foreach($temp as $key => $value)

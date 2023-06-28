@@ -221,6 +221,28 @@
                     <?php 
                     }
                     ?>
+                    <?php 
+                    if($_SESSION['group_admin']=='super_admin'){
+                    ?>
+                    <li><a class="ai-icon" href="<?php echo base_url('carbrand');?>" >
+                            <i class="lni lni-car  text-custom"></i>
+                            <span class="nav-text">Car Brand</span>
+                        </a>
+                    </li>
+                    <?php 
+                    }
+                    ?>
+                    <?php 
+                    if($_SESSION['group_admin']=='super_admin'){
+                    ?>
+                    <li><a class="ai-icon" href="<?php echo base_url('carmodel');?>" >
+                            <i class="lni lni-car-alt  text-custom"></i>
+                            <span class="nav-text">Car Model</span>
+                        </a>
+                    </li>
+                    <?php 
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
