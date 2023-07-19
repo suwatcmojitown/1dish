@@ -302,7 +302,7 @@
 <script>
         new FroalaEditor('#detail_th',{
         // Set the file upload URL.
-        key: "",
+        key: "8JF3bD3A5A3E4E3B2yrifA-21bjeaoatI1qA-16yiG5G4E3F3A1C8A5D4D4B4==",
         imageUploadURL: '<?php echo base_url('upload_image.php')?>',
         imageUploadParams: {
             id: 'my_editor'
@@ -310,7 +310,7 @@
         });
         new FroalaEditor('#detail_en',{
         // Set the file upload URL.
-        key: "",
+        key: "8JF3bD3A5A3E4E3B2yrifA-21bjeaoatI1qA-16yiG5G4E3F3A1C8A5D4D4B4==",
         imageUploadURL: '<?php echo base_url('upload_image.php')?>',
         imageUploadParams: {
             id: 'my_editor'
