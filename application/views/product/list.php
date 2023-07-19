@@ -102,7 +102,7 @@
                                                         <?php 
                                                         if($_SESSION['group_admin']!='cashier'){
                                                         ?>
-                                                        <a target="_blank" href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a href="<?php echo base_url('product/edit/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
                                                         <?php }?>
                                                         <a target="_blank" href="<?php echo base_url('product/gallery/').$row->id;?>" class="btn btn-info shadow btn-sm sharp me-1">
                                                             <i class="fa fa-image" aria-hidden="true"></i>

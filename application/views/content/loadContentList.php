@@ -49,7 +49,7 @@
                                                         <?php 
                                                         if($_SESSION['group_admin']!='cashier'){
                                                         ?>
-                                                        <a target="_blank" href="<?php echo base_url('content/edit/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
+                                                        <a href="<?php echo base_url('content/edit/').$row->id;?>" class="btn btn-custom shadow btn-sm sharp me-1"><i class="fas fa-pencil-alt"></i></a>
                                                         <?php }?>
                                                         <a href="#" class="btn btn-danger shadow btn-sm sharp me-1" data-bs-toggle="modal" data-bs-target="#del<?php echo $row->id;?>"><i class="fa fa-trash"></i></a>
                                                     </div>
