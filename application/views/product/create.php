@@ -29,19 +29,19 @@
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th" maxlength="255"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="1" name="subtitle_th" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en" maxlength="255"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="1" name="subtitle_en" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_th" maxlength="255"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="1" name="description_th" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_en" maxlength="255"></textarea>
+                                                <textarea class="form-control form-control-lg" rows="1" name="description_en" maxlength="255"></textarea>
                                         </div>
                                         <div class="mb-3 col-5">
                                                 <label class="text-custom form-label col-form-label-lg">ราคา</label>
@@ -302,6 +302,7 @@
 <script>
         new FroalaEditor('#detail_th',{
         // Set the file upload URL.
+        key: "",
         imageUploadURL: '<?php echo base_url('upload_image.php')?>',
         imageUploadParams: {
             id: 'my_editor'
@@ -309,6 +310,7 @@
         });
         new FroalaEditor('#detail_en',{
         // Set the file upload URL.
+        key: "",
         imageUploadURL: '<?php echo base_url('upload_image.php')?>',
         imageUploadParams: {
             id: 'my_editor'
