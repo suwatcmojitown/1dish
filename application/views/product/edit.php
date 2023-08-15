@@ -30,19 +30,19 @@
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_th" maxlength="255"><?php echo @$detail->subtitle_th;?></textarea>
+                                                <input type="text" class="form-control form-control-lg" name="subtitle_th" value="<?php echo @$detail->subtitle_th;?>">
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">อธิบายเพิ่ม <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="subtitle_en" maxlength="255"><?php echo @$detail->subtitle_en;?></textarea>
+                                                <input type="text" class="form-control form-control-lg" name="subtitle_en" value="<?php echo @$detail->subtitle_en;?>">
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด</code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_th" maxlength="255"><?php echo @$detail->description_th;?></textarea>
+                                                <input type="text" class="form-control form-control-lg" name="description_th" value="<?php echo @$detail->description_th;?>">
                                         </div>
                                         <div class="mb-3 col-12">
                                                 <label class="text-custom form-label col-form-label-lg">รายละเอียด <code>EN</code></code></label>
-                                                <textarea class="form-control form-control-lg" rows="4" name="description_en" maxlength="255"><?php echo @$detail->description_en;?></textarea>
+                                                <input type="text" class="form-control form-control-lg" name="description_en" value="<?php echo @$detail->description_en;?>">
                                         </div>
                                         <div class="mb-3 col-5">
                                                 <label class="text-custom form-label col-form-label-lg">ราคา</label>

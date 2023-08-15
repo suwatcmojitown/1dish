@@ -38,10 +38,10 @@
                                                         <li class="dd-item" data-id="<?php echo @$row->product_id;?>" style="z-index: 100;">
                                                             <div class="dd-handle custom ">
                                                                 <div class="row">
-                                                                    <div class="col-2">
-                                                                        <img style="max-height: 70px;display: inline;" src="<?php echo @$row->image_url;?>">
+                                                                    <div class="col-3">
+                                                                        <img style="max-height: 70px;max-width: 140px;display: inline;" src="<?php echo @$row->image_url;?>">
                                                                         </div>
-                                                                    <div class="col-6">
+                                                                    <div class="col-5">
                                                                         <h4 class="text-custom mb-1 name" style="font-weight: 400;"><?php echo @$row->title_th;?></h4>
                                                                         <normal style="display:block;" > 
                                                                         <span class="text-custom" style="font-weight: 300!important;font-size: 1.2rem;"><?php echo @$row->title_en;?></span>
