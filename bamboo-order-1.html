@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ระบบจองสินค้า สำหรับเข้าเยี่ยมชมสวนไผ่มีสุข">
+    <meta name="keywords" content="admin template, Crocs admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="assets/images/logo/meesukbamboo-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <title>จองสินค้า - meesukbamboo</title>
+    <!-- Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/icofont.css">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/themify.css">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/flag-icon.css">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/feather-icon.css">
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/datatables.css">
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link id="color" rel="stylesheet" href="assets/css/color-1.css" media="screen">
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+
+    <style>
+      .prooduct-details-box .close{
+        visibility: hidden!important;
+      }
+      body {
+        font-family: "Kanit"!important;
+      }
+      .prooduct-details-box .product-name a {
+        font-size: 19px!important;
+        color:#61AE41;
+        font-weight: 500;
+      }
+      .prooduct-details-box .price.d-flex {
+        font-size: 17px;
+      }
+
+      .img-75 {
+        width: 75px !important;
+      }
+
+      .product-name{
+        padding-top:7px;
+      }
+
+      .prooduct-details-box .rating {
+        padding-top: 3px;
+      }
+
+      .prooduct-details-box .btn {
+        font-size: 15px;
+      }
+
+      .prooduct-details-box .btn.submit {
+        font-size: 17px;
+        position: relative!important;
+      }
+      .login-card .login-main .theme-form input {
+        background-color: rgba(61, 201, 150, 0.1);
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+      }
+      .green-color{
+        color:#61AE41;
+      }
+
+      .login-card .login-main .theme-form input {
+        font-size: 17px!important;
+        color:#2F2F3B!important;
+      }
+
+      .login-card{
+        background: url(assets/images/login/login_bg_green.jpg)!important;
+      }
+    </style>
+
+  </head>
+  <body>
+    <!-- login page start-->
+    <div class="container-fluid p-0"> 
+      <div class="row m-0">
+        <div class="col-12 p-0">    
+          <div class="login-card login-dark">
+            <div>
+              <div><a class="logo" href="index.html" style="margin-bottom: 42px!important;"><img class="img-fluid for-light" style="width:25%!important;" src="assets/images/logo/meesukbamboo-logo.png" alt="looginpage"><img class="img-fluid for-dark" src="assets/images/logo/meesukbamboo-logo.png" alt="looginpage"></a></div>
+              <div class="login-main"> 
+                <form class="theme-form">
+                  <h4 class="green-color" style="font-weight: 400;font-size: 19px;">ยินดีต้อนรับ สำหรับการเข้าเยี่ยมชมสวนไผ่มีสุข</h4>
+                  <p style="font-size: 17px;">กรุณากรอกข้อมูลสำหรับลงทะเบียนจองสินค้า</p>
+                  <div class="form-group">
+                    <label class="col-form-label pt-0 green-color" style="font-size: 19px;font-weight: 400;">ชื่อเล่น</label>
+                    <div class="row g-2">
+                      <div class="col-12">
+                        <input class="form-control" type="text" required="" name="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label pt-3 green-color" style="font-size: 19px;font-weight: 400;">เบอร์โทรศัพท์</label>
+                    <div class="row g-2">
+                      <div class="col-12">
+                        <input class="form-control" type="text" required="" name="">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-form-label pt-3 green-color" style="font-size: 19px;font-weight: 400;">มาจากที่ไหน</label>
+                    <div class="row g-2">
+                      <div class="col-12">
+                        <input class="form-control" type="text" required="" name="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label pt-3 green-color" style="font-size: 19px;font-weight: 400;">วันเข้าเยี่ยมชม</label>
+                    <small class="text-muted" style="display: block;font-size: 16px;">กดเลือกวันเยี่ยมชมที่ปฏิทินด้านข้าง &nbsp&nbsp >></small>
+                    <div class="form-input position-relative">
+                      <input class="form-control digits" type="date">
+                    </div>
+                  </div>
+                  <div class="form-group mb-0 pt-2">
+                    <a href="bamboo-order-2.html"><button class="btn btn-success btn-block w-100 btn-sm" type="button" style="font-size: 19px;">ลงทะเบียน</button></a>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- latest jquery-->
+      <script src="../assets/js/jquery.min.js"></script>
+      <!-- Bootstrap js-->
+      <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+      <!-- feather icon js-->
+      <script src="../assets/js/icons/feather-icon/feather.min.js"></script>
+      <script src="../assets/js/icons/feather-icon/feather-icon.js"></script>
+      <!-- scrollbar js-->
+      <!-- Sidebar jquery-->
+      <script src="../assets/js/config.js"></script>
+      <!-- Plugins JS start-->
+      <!-- Plugins JS Ends-->
+      <!-- Theme js-->
+      <script src="../assets/js/script.js"></script>
+      <!-- Plugin used-->
+    </div>
+  </body>
+</html>

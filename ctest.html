@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จัดการเนื้อหาเว็บไซต์ - Insurance CMS</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <style>
+        /* ==========================================================================
+           CSS Variables & Base Settings
+           ========================================================================== */
+        :root {
+            --insurance-primary: #397D54;
+            --insurance-primary-dark: #2d6342;
+            --insurance-primary-light: #4a9d6b;
+            --insurance-shadow-light: rgba(0,0,0,0.08);
+            --insurance-shadow-medium: rgba(0,0,0,0.12);
+            --insurance-shadow-primary: rgba(57, 125, 84, 0.3);
+            --insurance-border-radius: 15px;
+            --insurance-border-radius-small: 8px;
+            --insurance-transition: all 0.3s ease;
+        }
+
+        .insurance-body {
+            background-color: #f8f9fa;
+            font-family: 'Prompt', 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* ==========================================================================
+           Header Section
+           ========================================================================== */
+        .insurance-header {
+            background: linear-gradient(135deg, var(--insurance-primary), var(--insurance-primary-light));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px var(--insurance-shadow-light);
+        }
+
+        .insurance-header__title {
+            margin-bottom: 0.5rem;
+        }
+
+        .insurance-header__description {
+            opacity: 0.8;
+        }
+
+        .insurance-header__actions .btn {
+            margin: 0 0.25rem;
+        }
+
+        /* ==========================================================================
+           Navigation Pills (Custom)
+           ========================================================================== */
+        .insurance-nav .nav-link {
+            margin: 5px;
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: #495057;
+            font-weight: 500;
+            transition: var(--insurance-transition);
+            border: 2px solid transparent;
+            background-color: transparent;
+        }
+
+        .insurance-nav .nav-link:hover {
+            background-color: rgba(57, 125, 84, 0.1);
+            border-color: rgba(57, 125, 84, 0.2);
+            transform: translateY(-2px);
+            color: var(--insurance-primary);
+        }
+
+        .insurance-nav .nav-link.active {
+            background-color: var(--insurance-primary);
+            color: white;
+            box-shadow: 0 5px 15px var(--insurance-shadow-primary);
+            border-color: var(--insurance-primary);
+        }
+
+        /* ==========================================================================
+           Cards & Content Areas
+           ========================================================================== */
+        .insurance-card {
+            border: none;
+            border-radius: var(--insurance-border-radius);
+            box-shadow: 0 2px 10px var(--insurance-shadow-light);
+            margin-bottom: 1.5rem;
+            transition: var(--insurance-transition);
+            background: white;
+        }
+
+        .insurance-card:hover {
+            box-shadow: 0 5px 20px var(--insurance-shadow-medium);
+        }
+
+        .insurance-card__header {
+            background-color: white;
+            border-bottom: 2px solid #e9ecef;
+            padding: 1.25rem;
+            font-weight: 600;
+            color: var(--insurance-primary);
+            border-radius: var(--insurance-border-radius) var(--insurance-border-radius) 0 0;
+        }
+
+        .insurance-card__body {
+            padding: 1.5rem;
+        }
+
+        /* ==========================================================================
+           Buttons (Custom Override)
+           ========================================================================== */
+        .insurance-btn-primary {
+            background-color: var(--insurance-primary);
+            border-color: var(--insurance-primary);
+            padding: 10px 25px;
+            font-weight: 500;
+            border-radius: var(--insurance-border-radius-small);
+            transition: var(--insurance-transition);
+            color: white;
+            border: 1px solid var(--insurance-primary);
+        }
+
+        .insurance-btn-primary:hover,
+        .insurance-btn-primary:focus {
+            background-color: var(--insurance-primary-dark);
+            border-color: var(--insurance-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--insurance-shadow-primary);
+            color: white;
+        }
+
+        .insurance-btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            border-radius: var(--insurance-border-radius-small);
+            padding: 8px 20px;
+            transition: var(--insurance-transition);
+        }
+
+        .insurance-btn-outline-danger {
+            border-radius: var(--insurance-border-radius-small);
+            padding: 8px 20px;
+            transition: var(--insurance-transition);
+        }
+
+        /* ==========================================================================
+           Form Controls (Custom)
+           ========================================================================== */
+        .insurance-form-label {
+            font-weight: 500;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+
+        .insurance-form-control,
+        .insurance-form-select {
+            border-radius: var(--insurance-border-radius-small);
+            border: 1px solid #dee2e6;
+            padding: 10px 15px;
+            transition: var(--insurance-transition);
+        }
+
+        .insurance-form-control:focus,
+        .insurance-form-select:focus {
+            border-color: var(--insurance-primary);
+            box-shadow: 0 0 0 0.2rem rgba(57, 125, 84, 0.25);
+        }
+
+        /* ==========================================================================
+           Item Cards (Reusable Components)
+           ========================================================================== */
+        .insurance-item-card {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+            transition: var(--insurance-transition);
+        }
+
+        .insurance-item-card:hover {
+            background-color: white;
+            box-shadow: 0 3px 10px var(--insurance-shadow-light);
+        }
+
+        /* ==========================================================================
+           Preview Boxes & Media
+           ========================================================================== */
+        .insurance-preview-box {
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            color: #6c757d;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .insurance-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--insurance-primary), var(--insurance-primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        /* ==========================================================================
+           Status Indicators
+           ========================================================================== */
+        .insurance-status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .insurance-status-active {
+            background-color: #28a745;
+        }
+
+        .insurance-status-inactive {
+            background-color: #dc3545;
+        }
+
+        /* ==========================================================================
+           Badge Styles
+           ========================================================================== */
+        .insurance-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           Floating Elements
+           ========================================================================== */
+        .insurance-floating-save {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .insurance-floating-save .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px var(--insurance-shadow-medium);
+            transition: var(--insurance-transition);
+        }
+
+        .insurance-floating-save .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px var(--insurance-shadow-primary);
+        }
+
+        /* ==========================================================================
+           Responsive Design
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .insurance-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+            }
+            
+            .insurance-nav .nav-link {
+                white-space: nowrap;
+                margin-right: 10px;
+                padding: 10px 15px;
+            }
+
+            .insurance-header {
+                padding: 1.5rem 0;
+            }
+
+            .insurance-header__actions {
+                margin-top: 1rem;
+            }
+
+            .insurance-card__body {
+                padding: 1rem;
+            }
+
+            .insurance-item-card {
+                padding: 1rem;
+            }
+        }
+
+        /* ==========================================================================
+           Animation Utilities
+           ========================================================================== */
+        .insurance-fade-in {
+            animation: insuranceFadeIn 0.3s ease-in;
+        }
+
+        .insurance-fade-out {
+            animation: insuranceFadeOut 0.3s ease-out;
+        }
+
+        @keyframes insuranceFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes insuranceFadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        /* ==========================================================================
+           Contact Channel Specific Styles
+           ========================================================================== */
+        .insurance-contact-channel {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .insurance-contact-channel--line {
+            background: #06C755;
+        }
+
+        .insurance-contact-channel--facebook {
+            background: #1877F2;
+        }
+
+        .insurance-contact-channel--phone {
+            background: var(--insurance-primary);
+        }
+
+        /* ==========================================================================
+           Team Member Cards
+           ========================================================================== */
+        .insurance-team-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: var(--insurance-border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--insurance-transition);
+        }
+
+        .insurance-team-card:hover {
+            box-shadow: 0 5px 15px var(--insurance-shadow-light);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           Client Review Cards
+           ========================================================================== */
+        .insurance-client-card {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: var(--insurance-border-radius);
+            padding: 1.5rem;
+            transition: var(--insurance-transition);
+            height: 100%;
+        }
+
+        .insurance-client-card:hover {
+            box-shadow: 0 5px 15px var(--insurance-shadow-light);
+        }
+
+        /* ==========================================================================
+           Star Rating
+           ========================================================================== */
+        .insurance-rating {
+            color: #ffc107;
+        }
+
+        /* ==========================================================================
+           Input Groups & Color Pickers
+           ========================================================================== */
+        .insurance-color-group .form-control-color {
+            width: 3rem;
+            height: calc(2.5rem + 2px);
+            border-radius: var(--insurance-border-radius-small) 0 0 var(--insurance-border-radius-small);
+        }
+
+        .insurance-color-group .form-control {
+            border-radius: 0 var(--insurance-border-radius-small) var(--insurance-border-radius-small) 0;
+        }
+
+        /* ==========================================================================
+           Modal Improvements
+           ========================================================================== */
+        .insurance-modal .modal-content {
+            border-radius: var(--insurance-border-radius);
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .insurance-modal .modal-header {
+            border-bottom: 2px solid #e9ecef;
+            background: linear-gradient(135deg, var(--insurance-primary), var(--insurance-primary-light));
+            color: white;
+            border-radius: var(--insurance-border-radius) var(--insurance-border-radius) 0 0;
+        }
+
+        .insurance-modal .btn-close {
+            filter: invert(1);
+        }
+
+        /* ==========================================================================
+           Toast Notifications
+           ========================================================================== */
+        .insurance-toast .toast-header {
+            background: var(--insurance-primary);
+            color: white;
+            border: none;
+        }
+
+        .insurance-toast .btn-close {
+            filter: invert(1);
+        }
+    </style>
+</head>
+<body class="insurance-body">
+    <!-- Page Header -->
+    <div class="insurance-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="insurance-header__title">
+                        <i class="bi bi-gear-fill me-2"></i>
+                        จัดการเนื้อหาเว็บไซต์
+                    </h1>
+                    <p class="mb-0 insurance-header__description">ตั้งค่าและจัดการข้อมูลต่างๆ ของเว็บไซต์ตัวแทนประกัน</p>
+                </div>
+                <div class="col-md-4 text-md-end insurance-header__actions">
+                    <button class="btn btn-light me-2">
+                        <i class="bi bi-eye me-2"></i>ดูตัวอย่างเว็บไซต์
+                    </button>
+                    <button class="btn btn-warning text-white">
+                        <i class="bi bi-box-arrow-right me-2"></i>ออกจากระบบ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container mb-5">
+        <!-- Top Navigation -->
+        <div class="insurance-card">
+            <div class="insurance-card__body">
+                <ul class="nav nav-pills nav-fill insurance-nav" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="pill" data-bs-target="#general" type="button">
+                            <i class="bi bi-house-door me-2"></i>ข้อมูลทั่วไป
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="agent-tab" data-bs-toggle="pill" data-bs-target="#agent" type="button">
+                            <i class="bi bi-person-badge me-2"></i>ข้อมูลตัวแทน
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="banner-tab" data-bs-toggle="pill" data-bs-target="#banner" type="button">
+                            <i class="bi bi-images me-2"></i>แบนเนอร์
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="support-tab" data-bs-toggle="pill" data-bs-target="#support" type="button">
+                            <i class="bi bi-headset me-2"></i>การซัพพอร์ต
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="clients-tab" data-bs-toggle="pill" data-bs-target="#clients" type="button">
+                            <i class="bi bi-people me-2"></i>ลูกค้า
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="team-tab" data-bs-toggle="pill" data-bs-target="#team" type="button">
+                            <i class="bi bi-person-lines-fill me-2"></i>ทีมงาน
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="pill" data-bs-target="#contact" type="button">
+                            <i class="bi bi-chat-dots me-2"></i>ช่องทางติดต่อ
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="tab-content" id="pills-tabContent">
+            
+            <!-- General Settings Tab -->
+            <div class="tab-pane fade show active" id="general">
+                <div class="insurance-card">
+                    <div class="insurance-card__header">
+                        <i class="bi bi-gear me-2"></i>ตั้งค่าเว็บไซต์ทั่วไป
+                    </div>
+                    <div class="insurance-card__body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">ชื่อเว็บไซต์</label>
+                                    <input type="text" class="form-control insurance-form-control" value="InsureLife Pro">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">โลโก้เว็บไซต์</label>
+                                    <input type="file" class="form-control insurance-form-control" accept="image/*">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">สีหลัก (Primary Color)</label>
+                                    <div class="input-group insurance-color-group">
+                                        <input type="color" class="form-control form-control-color" value="#397D54">
+                                        <input type="text" class="form-control insurance-form-control" value="#397D54">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">สีรอง (Secondary Color)</label>
+                                    <div class="input-group insurance-color-group">
+                                        <input type="color" class="form-control form-control-color" value="#f4f7f5">
+                                        <input type="text" class="form-control insurance-form-control" value="#f4f7f5">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h5 class="mb-3">SEO Settings</h5>
+                            <div class="mb-3">
+                                <label class="insurance-form-label">Meta Title</label>
+                                <input type="text" class="form-control insurance-form-control" value="ตัวแทนประกันสุขภาพ - ที่ปรึกษาประกันมืออาชีพ">
+                                <small class="text-muted">แนะนำ 50-60 ตัวอักษร</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="insurance-form-label">Meta Description</label>
+                                <textarea class="form-control insurance-form-control" rows="3">บริการที่ปรึกษาประกันสุขภาพ ประกันชีวิต ประกันออมทรัพย์ โดยตัวแทนมืออาชีพ ดูแลอย่างใกล้ชิด ปรึกษาฟรี 24 ชม.</textarea>
+                                <small class="text-muted">แนะนำ 150-160 ตัวอักษร</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="insurance-form-label">Meta Keywords</label>
+                                <input type="text" class="form-control insurance-form-control" placeholder="ประกันสุขภาพ, ประกันชีวิต, ตัวแทนประกัน">
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h5 class="mb-3">Analytics & Tracking</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">Google Analytics ID</label>
+                                    <input type="text" class="form-control insurance-form-control" placeholder="UA-XXXXXXXXX-X">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">Facebook Pixel ID</label>
+                                    <input type="text" class="form-control insurance-form-control" placeholder="XXXXXXXXXXXXXXXX">
+                                </div>
+                            </div>
+                            
+                            <div class="text-end">
+                                <button type="button" class="btn insurance-btn-primary">
+                                    <i class="bi bi-check-circle me-2"></i>บันทึกการตั้งค่า
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Agent Profile Tab -->
+            <div class="tab-pane fade" id="agent">
+                <div class="insurance-card">
+                    <div class="insurance-card__header">
+                        <i class="bi bi-person-badge me-2"></i>ข้อมูลตัวแทนประกัน
+                    </div>
+                    <div class="insurance-card__body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4 text-center mb-4">
+                                    <div class="insurance-preview-box">
+                                        <div>
+                                            <i class="bi bi-person-circle" style="font-size: 80px;"></i>
+                                            <p class="mt-2 mb-0">คลิกเพื่ออัพโหลดรูปภาพ</p>
+                                        </div>
+                                    </div>
+                                    <input type="file" class="form-control insurance-form-control mt-2" accept="image/*">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="insurance-form-label">ชื่อ-นามสกุล</label>
+                                            <input type="text" class="form-control insurance-form-control" value="คุณสมชาย ใจดี">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="insurance-form-label">รหัสตัวแทน</label>
+                                            <input type="text" class="form-control insurance-form-control" value="AG12345678">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="insurance-form-label">บริษัทประกัน</label>
+                                        <input type="text" class="form-control insurance-form-control" value="บริษัท เมืองไทยประกันชีวิต จำกัด (มหาชน)">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="insurance-form-label">เบอร์โทรศัพท์</label>
+                                            <input type="tel" class="form-control insurance-form-control" value="081-234-5678">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="insurance-form-label">อีเมล</label>
+                                            <input type="email" class="form-control insurance-form-control" value="somchai@insurance.co.th">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="insurance-form-label">คำอธิบายเกี่ยวกับตัวแทน</label>
+                                <textarea class="form-control insurance-form-control" rows="4">ด้วยประสบการณ์กว่า 10 ปีในวงการประกัน ผมพร้อมให้คำปรึกษาและดูแลคุณอย่างใกล้ชิด เพื่อให้คุณได้รับความคุ้มครองที่เหมาะสมที่สุด ในราคาที่คุ้มค่าที่สุด</textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">LINE ID</label>
+                                    <input type="text" class="form-control insurance-form-control" value="@insurancepro">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="insurance-form-label">Facebook URL</label>
+                                    <input type="url" class="form-control insurance-form-control" placeholder="https://facebook.com/yourpage">
+                                </div>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h5 class="mb-3">สถิติ</h5>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label class="insurance-form-label">ประสบการณ์ (ปี)</label>
+                                    <input type="number" class="form-control insurance-form-control" value="10">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="insurance-form-label">จำนวนลูกค้า</label>
+                                    <input type="number" class="form-control insurance-form-control" value="1200">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="insurance-form-label">จำนวนแผนที่ดูแล</label>
+                                    <input type="number" class="form-control insurance-form-control" value="150">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="insurance-form-label">วงเงินคุ้มครองรวม</label>
+                                    <input type="text" class="form-control insurance-form-control" value="500,000,000">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="insurance-form-label">ที่อยู่</label>
+                                <textarea class="form-control insurance-form-control" rows="2">กรุงเทพมหานคร</textarea>
+                            </div>
+                            
+                            <div class="text-end">
+                                <button type="button" class="btn insurance-btn-primary">
+                                    <i class="bi bi-check-circle me-2"></i>บันทึกข้อมูล
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Banner Tab -->
+            <div class="tab-pane fade" id="banner">
+                <div class="insurance-card">
+                    <div class="insurance-card__header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-images me-2"></i>จัดการแบนเนอร์
+                        </div>
+                        <button class="btn insurance-btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addBannerModal">
+                            <i class="bi bi-plus-circle me-1"></i>เพิ่มแบนเนอร์
+                        </button>
+                    </div>
+                    <div class="insurance-card__body">
+                        <!-- Banner Item 1 -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="insurance-preview-box" style="min-height: 80px; padding: 1rem;">
+                                        <i class="bi bi-image" style="font-size: 30px;"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h6 class="mb-1">ประกันสุขภาพ ดูแลคุณทุกช่วงวัย</h6>
+                                    <p class="text-muted mb-1">ที่ปรึกษาประกันมืออาชีพ พร้อมดูแลคุณตลอด 24 ชั่วโมง</p>
+                                    <small class="text-muted">ลิงค์: #contact</small>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <span class="insurance-status-indicator insurance-status-active"></span>
+                                    <span class="badge bg-success insurance-badge me-2">เปิดใช้งาน</span>
+                                    <div class="btn-group mt-2" role="group">
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Banner Item 2 -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="insurance-preview-box" style="min-height: 80px; padding: 1rem;">
+                                        <i class="bi bi-image" style="font-size: 30px;"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h6 class="mb-1">โปรโมชั่นพิเศษ ลด 20%</h6>
+                                    <p class="text-muted mb-1">สมัครวันนี้ รับส่วนลดทันที พร้อมผ่อน 0% นาน 10 เดือน</p>
+                                    <small class="text-muted">ลิงค์: #plans</small>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <span class="insurance-status-indicator insurance-status-active"></span>
+                                    <span class="badge bg-success insurance-badge me-2">เปิดใช้งาน</span>
+                                    <div class="btn-group mt-2" role="group">
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Banner Item 3 -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="insurance-preview-box" style="min-height: 80px; padding: 1rem;">
+                                        <i class="bi bi-image" style="font-size: 30px;"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <h6 class="mb-1">ตัวแทนที่คุณวางใจได้</h6>
+                                    <p class="text-muted mb-1">ประสบการณ์กว่า 10 ปี ดูแลลูกค้ามากกว่า 1,000 ราย</p>
+                                    <small class="text-muted">ลิงค์: #about</small>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <span class="insurance-status-indicator insurance-status-active"></span>
+                                    <span class="badge bg-success insurance-badge me-2">เปิดใช้งาน</span>
+                                    <div class="btn-group mt-2" role="group">
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Support Tab -->
+            <div class="tab-pane fade" id="support">
+                <div class="insurance-card">
+                    <div class="insurance-card__header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-headset me-2"></i>จุดเด่นการซัพพอร์ต
+                        </div>
+                        <button class="btn insurance-btn-success btn-sm">
+                            <i class="bi bi-plus-circle me-1"></i>เพิ่มข้อมูล
+                        </button>
+                    </div>
+                    <div class="insurance-card__body">
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle me-2"></i>
+                            แสดง 3 หัวข้อหลักที่เป็นจุดเด่นในการให้บริการของคุณ
+                        </div>
+                        
+                        <!-- Support Item 1 -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-1 text-center">
+                                    <div style="font-size: 40px;">📞</div>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="ติดต่อได้ตลอด 24 ชม.">
+                                    <textarea class="form-control insurance-form-control" rows="2">พร้อมให้คำปรึกษาและช่วยเหลือคุณทุกเวลา ไม่มีวันหยุด</textarea>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">เปิดใช้งาน</label>
+                                    </div>
+                                    <button class="btn btn-sm insurance-btn-outline-danger">
+                                        <i class="bi bi-trash"></i> ลบ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Support Item 2 -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-1 text-center">
+                                    <div style="font-size: 40px;">💳</div>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="โปร่งใสในการชำระเงิน">
+                                    <textarea class="form-control insurance-form-control" rows="2">ชำระผ่านแอพธนาคารโดยตรง มีหลักฐานการชำระชัดเจน</textarea>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">เปิดใช้งาน</label>
+                                    </div>
+                                    <button class="btn btn-sm insurance-btn-outline-danger">
+                                        <i class="bi bi-trash"></i> ลบ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Support Item 3 -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-1 text-center">
+                                    <div style="font-size: 40px;">💬</div>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="ปรึกษาฟรี ไม่มีค่าใช้จ่าย">
+                                    <textarea class="form-control insurance-form-control" rows="2">สอบถามข้อสงสัย เปรียบเทียบแผน ไม่มีค่าบริการใดๆ</textarea>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">เปิดใช้งาน</label>
+                                    </div>
+                                    <button class="btn btn-sm insurance-btn-outline-danger">
+                                        <i class="bi bi-trash"></i> ลบ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-end mt-3">
+                            <button type="button" class="btn insurance-btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>บันทึกข้อมูล
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Clients Tab -->
+            <div class="tab-pane fade" id="clients">
+                <div class="insurance-card">
+                    <div class="insurance-card__header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-people me-2"></i>รีวิวจากลูกค้า
+                        </div>
+                        <button class="btn insurance-btn-success btn-sm">
+                            <i class="bi bi-plus-circle me-1"></i>เพิ่มรีวิว
+                        </button>
+                    </div>
+                    <div class="insurance-card__body">
+                        <div class="row">
+                            <!-- Client Card 1 -->
+                            <div class="col-md-6 mb-3">
+                                <div class="insurance-client-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div class="insurance-avatar">วร</div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>แก้ไข</a></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>ลบ</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณวรรดา สุขสันต์">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="แผนประกันสุขภาพ IPD" placeholder="แผนที่ใช้">
+                                    <textarea class="form-control insurance-form-control mb-2" rows="3">คุณสมชายดูแลดีมากค่ะ ตอนเคลมก็ช่วยจัดการให้หมด ได้เงินเร็วมาก ประทับใจมากๆ</textarea>
+                                    <div class="insurance-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Client Card 2 -->
+                            <div class="col-md-6 mb-3">
+                                <div class="insurance-client-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div class="insurance-avatar">ปร</div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>แก้ไข</a></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>ลบ</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณประเสริฐ มั่งมี">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="แผนประกันออมทรัพย์" placeholder="แผนที่ใช้">
+                                    <textarea class="form-control insurance-form-control mb-2" rows="3">วางแผนการเงินให้ผมได้ดีมาก ทั้งความคุ้มครองและการออม ได้หย่อนภาษีด้วย คุ้มมากครับ</textarea>
+                                    <div class="insurance-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Client Card 3 -->
+                            <div class="col-md-6 mb-3">
+                                <div class="insurance-client-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div class="insurance-avatar">สุ</div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>แก้ไข</a></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>ลบ</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณสุภาพร ใจงาม">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="แผนประกันโรคร้ายแรง" placeholder="แผนที่ใช้">
+                                    <textarea class="form-control insurance-form-control mb-2" rows="3">ให้คำแนะนำดีมาก อธิบายละเอียด เข้าใจง่าย ไม่ขายแรง เลือกแผนที่เหมาะกับเราจริงๆ</textarea>
+                                    <div class="insurance-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Client Card 4 -->
+                            <div class="col-md-6 mb-3">
+                                <div class="insurance-client-card">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div class="insurance-avatar">อน</div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>แก้ไข</a></li>
+                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>ลบ</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณอนันต์ รักดี">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="แผนประกันการศึกษาบุตร" placeholder="แผนที่ใช้">
+                                    <textarea class="form-control insurance-form-control mb-2" rows="3">ช่วยวางแผนให้ลูกเรียนต่อได้สบายใจ เบี้ยไม่แพง แถมมีความคุ้มครองให้ผู้ปกครองด้วย</textarea>
+                                    <div class="insurance-rating">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-end">
+                            <button type="button" class="btn insurance-btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>บันทึกข้อมูลทั้งหมด
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Tab -->
+            <div class="tab-pane fade" id="team">
+                <div class="insurance-card">
+                    <div class="insurance-card__header d-flex justify-content-between align-items-center">
+                        <div>
+                            <i class="bi bi-person-lines-fill me-2"></i>ทีมงาน
+                        </div>
+                        <button class="btn insurance-btn-success btn-sm">
+                            <i class="bi bi-plus-circle me-1"></i>เพิ่มสมาชิก
+                        </button>
+                    </div>
+                    <div class="insurance-card__body">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            แสดงสมาชิกในทีมของคุณ (ไม่สามารถคลิกดูรายละเอียดได้)
+                        </div>
+                        
+                        <div class="row">
+                            <!-- Team Member 1 -->
+                            <div class="col-md-3 mb-3">
+                                <div class="insurance-team-card">
+                                    <div class="insurance-avatar mx-auto mb-3">👨</div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณวิชัย แก้วใส">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="ที่ปรึกษาประกันชีวิต">
+                                    <div class="mt-2">
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Team Member 2 -->
+                            <div class="col-md-3 mb-3">
+                                <div class="insurance-team-card">
+                                    <div class="insurance-avatar mx-auto mb-3">👩</div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณมาลี รุ่งเรือง">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="ที่ปรึกษาประกันสุขภาพ">
+                                    <div class="mt-2">
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Team Member 3 -->
+                            <div class="col-md-3 mb-3">
+                                <div class="insurance-team-card">
+                                    <div class="insurance-avatar mx-auto mb-3">👨</div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณสมพร ดีงาม">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="ที่ปรึกษาประกันออมทรัพย์">
+                                    <div class="mt-2">
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Team Member 4 -->
+                            <div class="col-md-3 mb-3">
+                                <div class="insurance-team-card">
+                                    <div class="insurance-avatar mx-auto mb-3">👩</div>
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="คุณกานดา สว่างใจ">
+                                    <input type="text" class="form-control insurance-form-control mb-2" value="ที่ปรึกษาประกันเด็ก">
+                                    <div class="mt-2">
+                                        <button class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm insurance-btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-end">
+                            <button type="button" class="btn insurance-btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>บันทึกข้อมูลทีม
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Channels Tab -->
+            <div class="tab-pane fade" id="contact">
+                <div class="insurance-card">
+                    <div class="insurance-card__header">
+                        <i class="bi bi-chat-dots me-2"></i>ช่องทางติดต่อ & Floating Buttons
+                    </div>
+                    <div class="insurance-card__body">
+                        <h5 class="mb-3">Floating Action Buttons (ปุ่มลอยมุมขวาล่าง)</h5>
+                        
+                        <!-- LINE -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-1">
+                                    <div class="insurance-contact-channel insurance-contact-channel--line">
+                                        L
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">ช่องทาง</label>
+                                            <input type="text" class="form-control insurance-form-control" value="LINE" readonly>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">LINE ID</label>
+                                            <input type="text" class="form-control insurance-form-control" value="@insurancepro">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">Tooltip</label>
+                                            <input type="text" class="form-control insurance-form-control" value="แชทผ่าน LINE">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">แสดงปุ่ม</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Facebook -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-1">
+                                    <div class="insurance-contact-channel insurance-contact-channel--facebook">
+                                        f
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">ช่องทาง</label>
+                                            <input type="text" class="form-control insurance-form-control" value="Facebook" readonly>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">Page ID</label>
+                                            <input type="text" class="form-control insurance-form-control" value="insurancepro">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">Tooltip</label>
+                                            <input type="text" class="form-control insurance-form-control" value="แชทผ่าน Facebook">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">แสดงปุ่ม</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="insurance-item-card">
+                            <div class="row align-items-center">
+                                <div class="col-md-1">
+                                    <div class="insurance-contact-channel insurance-contact-channel--phone">
+                                        📞
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">ช่องทาง</label>
+                                            <input type="text" class="form-control insurance-form-control" value="โทรศัพท์" readonly>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">เบอร์โทร</label>
+                                            <input type="text" class="form-control insurance-form-control" value="0812345678">
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <label class="insurance-form-label">Tooltip</label>
+                                            <input type="text" class="form-control insurance-form-control" value="โทรเลย">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-end">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">แสดงปุ่ม</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+                        
+                        <h5 class="mb-3">ช่องทางติดต่ออื่นๆ</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="insurance-form-label">อีเมล</label>
+                                <input type="email" class="form-control insurance-form-control" value="somchai@insurance.co.th">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="insurance-form-label">WhatsApp</label>
+                                <input type="text" class="form-control insurance-form-control" placeholder="เบอร์ WhatsApp (ถ้ามี)">
+                            </div>
+                        </div>
+                        
+                        <div class="text-end">
+                            <button type="button" class="btn insurance-btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>บันทึกการตั้งค่า
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Floating Save Button -->
+    <div class="insurance-floating-save">
+        <button class="btn btn-success btn-lg insurance-btn-success">
+            <i class="bi bi-save"></i>
+        </button>
+    </div>
+    
+    <!-- Modal for Adding Banner -->
+    <div class="modal fade insurance-modal" id="addBannerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">เพิ่มแบนเนอร์ใหม่</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="insurance-form-label">หัวข้อหลัก</label>
+                            <input type="text" class="form-control insurance-form-control" placeholder="กรอกหัวข้อหลัก">
+                        </div>
+                        <div class="mb-3">
+                            <label class="insurance-form-label">หัวข้อรอง</label>
+                            <input type="text" class="form-control insurance-form-control" placeholder="กรอกหัวข้อรอง">
+                        </div>
+                        <div class="mb-3">
+                            <label class="insurance-form-label">อัพโหลดรูปภาพ</label>
+                            <input type="file" class="form-control insurance-form-control" accept="image/*">
+                            <small class="text-muted">แนะนำขนาด 1920x600 pixels</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="insurance-form-label">ลิงค์เมื่อคลิก</label>
+                            <input type="text" class="form-control insurance-form-control" placeholder="เช่น #contact หรือ https://...">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn insurance-btn-primary">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="saveToast" class="toast insurance-toast" role="alert">
+            <div class="toast-header">
+                <i class="bi bi-check-circle me-2"></i>
+                <strong class="me-auto">บันทึกสำเร็จ</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                ข้อมูลได้รับการบันทึกเรียบร้อยแล้ว
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Insurance CMS specific functionality
+        class InsuranceCMS {
+            constructor() {
+                this.initEventHandlers();
+                this.initAutoSave();
+                this.initFormValidation();
+            }
+
+            initEventHandlers() {
+                // Save button functionality
+                document.querySelectorAll('.insurance-btn-primary').forEach(button => {
+                    if (button.textContent.includes('บันทึก')) {
+                        button.addEventListener('click', this.handleSave.bind(this));
+                    }
+                });
+
+                // Floating save button
+                document.querySelector('.insurance-floating-save button')?.addEventListener('click', this.handleFloatingSave.bind(this));
+
+                // Delete confirmation
+                document.querySelectorAll('.insurance-btn-outline-danger').forEach(button => {
+                    button.addEventListener('click', this.handleDelete.bind(this));
+                });
+
+                // Image preview functionality
+                document.querySelectorAll('input[type="file"]').forEach(input => {
+                    input.addEventListener('change', this.handleImagePreview.bind(this));
+                });
+
+                // Reorder functionality for banners
+                document.querySelectorAll('.btn-outline-secondary').forEach(button => {
+                    button.addEventListener('click', this.handleReorder.bind(this));
+                });
+
+                // Tab change tracking
+                document.querySelectorAll('.insurance-nav .nav-link').forEach(tab => {
+                    tab.addEventListener('click', this.handleTabChange.bind(this));
+                });
+
+                // Color picker sync
+                document.querySelectorAll('input[type="color"]').forEach(colorInput => {
+                    this.initColorPicker(colorInput);
+                });
+
+                // Add new item functionality
+                document.querySelectorAll('.insurance-btn-success').forEach(button => {
+                    if (button.textContent.includes('เพิ่ม')) {
+                        button.addEventListener('click', this.handleAddItem.bind(this));
+                    }
+                });
+            }
+
+            handleSave(event) {
+                const button = event.target.closest('button');
+                this.showToast('ข้อมูลได้รับการบันทึกเรียบร้อยแล้ว');
+                
+                // Animate save button
+                const originalText = button.innerHTML;
+                button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>กำลังบันทึก...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="bi bi-check-circle me-2"></i>บันทึกสำเร็จ';
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    }, 2000);
+                }, 1000);
+            }
+
+            handleFloatingSave(event) {
+                const activeTab = document.querySelector('.insurance-nav .nav-link.active').textContent.trim();
+                this.showToast(`บันทึกข้อมูล${activeTab}เรียบร้อยแล้ว`);
+                
+                // Animate button
+                const button = event.target.closest('button');
+                button.classList.add('insurance-btn-success');
+                button.innerHTML = '<i class="bi bi-check"></i>';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="bi bi-save"></i>';
+                }, 2000);
+            }
+
+            handleDelete(event) {
+                event.preventDefault();
+                if (confirm('คุณแน่ใจหรือไม่ที่จะลบข้อมูลนี้?')) {
+                    const card = event.target.closest('.insurance-item-card') || 
+                               event.target.closest('.insurance-client-card') ||
+                               event.target.closest('.insurance-team-card');
+                    if (card) {
+                        this.animateDelete(card);
+                    }
+                }
+            }
+
+            handleImagePreview(event) {
+                const file = event.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        // Find preview box if exists
+                        const previewBox = event.target.closest('.col-md-4')?.querySelector('.insurance-preview-box');
+                        if (previewBox) {
+                            previewBox.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 150px; border-radius: 10px;">`;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            handleReorder(event) {
+                const itemCard = event.target.closest('.insurance-item-card');
+                if (!itemCard) return;
+                
+                if (event.target.closest('button').innerHTML.includes('arrow-up')) {
+                    const prevCard = itemCard.previousElementSibling;
+                    if (prevCard && prevCard.classList.contains('insurance-item-card')) {
+                        itemCard.parentNode.insertBefore(itemCard, prevCard);
+                    }
+                } else if (event.target.closest('button').innerHTML.includes('arrow-down')) {
+                    const nextCard = itemCard.nextElementSibling;
+                    if (nextCard && nextCard.classList.contains('insurance-item-card')) {
+                        itemCard.parentNode.insertBefore(nextCard, itemCard);
+                    }
+                }
+            }
+
+            handleTabChange(event) {
+                // Save current tab to localStorage
+                localStorage.setItem('insurance-cms-active-tab', event.target.id);
+            }
+
+            handleAddItem(event) {
+                const section = event.target.closest('.insurance-card__header').nextElementSibling;
+                if (!section) return;
+                
+                // Clone the first item card as template
+                const firstItem = section.querySelector('.insurance-item-card, .insurance-client-card, .insurance-team-card');
+                if (firstItem) {
+                    const newItem = firstItem.cloneNode(true);
+                    
+                    // Clear input values
+                    newItem.querySelectorAll('input, textarea').forEach(input => {
+                        if (input.type !== 'checkbox' && input.type !== 'file') {
+                            input.value = '';
+                        }
+                    });
+                    
+                    // Add fade-in animation
+                    newItem.classList.add('insurance-fade-in');
+                    
+                    // Insert before the save button
+                    const saveBtn = section.querySelector('.text-end');
+                    if (saveBtn) {
+                        section.insertBefore(newItem, saveBtn);
+                    } else {
+                        section.appendChild(newItem);
+                    }
+                }
+            }
+
+            initColorPicker(colorInput) {
+                const textInput = colorInput.nextElementSibling;
+                if (textInput && textInput.type === 'text') {
+                    colorInput.addEventListener('change', function() {
+                        textInput.value = this.value;
+                    });
+                    
+                    textInput.addEventListener('change', function() {
+                        if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+                            colorInput.value = this.value;
+                        }
+                    });
+                }
+            }
+
+            initAutoSave() {
+                let autoSaveTimer;
+                document.querySelectorAll('.insurance-form-control').forEach(element => {
+                    element.addEventListener('input', () => {
+                        clearTimeout(autoSaveTimer);
+                        
+                        // Show auto-save indicator
+                        this.showAutoSaveIndicator(element);
+                        
+                        autoSaveTimer = setTimeout(() => {
+                            this.hideAutoSaveIndicator();
+                        }, 1500);
+                    });
+                });
+            }
+
+            initFormValidation() {
+                // Character counter for SEO fields
+                document.querySelectorAll('.insurance-form-control').forEach(field => {
+                    if (field.nextElementSibling && field.nextElementSibling.textContent.includes('แนะนำ')) {
+                        field.addEventListener('input', () => this.updateCharacterCounter(field));
+                        this.updateCharacterCounter(field);
+                    }
+                });
+            }
+
+            showAutoSaveIndicator(element) {
+                // Remove existing indicators
+                document.querySelectorAll('.insurance-autosave-indicator').forEach(ind => ind.remove());
+                
+                const indicator = document.createElement('small');
+                indicator.className = 'text-muted ms-2 insurance-autosave-indicator';
+                indicator.textContent = 'กำลังบันทึกอัตโนมัติ...';
+                
+                if (element.parentNode && !element.parentNode.querySelector('.insurance-autosave-indicator')) {
+                    element.parentNode.appendChild(indicator);
+                }
+            }
+
+            hideAutoSaveIndicator() {
+                document.querySelectorAll('.insurance-autosave-indicator').forEach(indicator => {
+                    indicator.textContent = 'บันทึกอัตโนมัติแล้ว';
+                    setTimeout(() => {
+                        indicator.remove();
+                    }, 2000);
+                });
+            }
+
+            updateCharacterCounter(field) {
+                const small = field.parentNode.querySelector('small');
+                if (small && small.textContent.includes('แนะนำ')) {
+                    const length = field.value.length;
+                    const recommended = small.textContent.match(/\d+-\d+/);
+                    if (recommended) {
+                        const [min, max] = recommended[0].split('-').map(Number);
+                        if (length < min) {
+                            small.style.color = '#ffc107';
+                        } else if (length > max) {
+                            small.style.color = '#dc3545';
+                        } else {
+                            small.style.color = '#28a745';
+                        }
+                        small.textContent = small.textContent.replace(/\(\d+\)/, '') + ` (${length})`;
+                    }
+                }
+            }
+
+            animateDelete(element) {
+                element.classList.add('insurance-fade-out');
+                setTimeout(() => {
+                    element.remove();
+                }, 300);
+            }
+
+            showToast(message) {
+                const toastBody = document.querySelector('#saveToast .toast-body');
+                if (toastBody) {
+                    toastBody.textContent = message;
+                }
+                
+                const toastEl = document.getElementById('saveToast');
+                if (toastEl) {
+                    const toast = new bootstrap.Toast(toastEl);
+                    toast.show();
+                }
+            }
+
+            restoreActiveTab() {
+                const lastTab = localStorage.getItem('insurance-cms-active-tab');
+                if (lastTab) {
+                    const tabEl = document.getElementById(lastTab);
+                    if (tabEl) {
+                        const tab = new bootstrap.Tab(tabEl);
+                        tab.show();
+                    }
+                }
+            }
+        }
+        
+        // Initialize Insurance CMS when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const insuranceCMS = new InsuranceCMS();
+            insuranceCMS.restoreActiveTab();
+        });
+    </script>
+</body>
+</html>

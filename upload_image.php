@@ -1,65 +1,69 @@
 <?php
 
 try {
-// File Route.
-//$fileRoute = "/uploads/";
-$fileRoute = "/var/big2/web/prod/static.big2corporation.com/public_html/assets/images/froala/";
+    // กำหนด folder เก็บรูป
+    $date      = date('Y-m-d');
+    $fileRoute = '/uploads/review/' . $date . '/';
+    $fullPath  = dirname(__FILE__) . $fileRoute;
 
-$fieldname = "file";
+    // สร้าง folder ถ้ายังไม่มี
+    if (!is_dir($fullPath)) {
+        mkdir($fullPath, 0777, true);
+    }
 
-// Get filename.
-$filename = explode(".", $_FILES[$fieldname]["name"]);
+    $fieldname = 'file';
 
-// Validate uploaded files.
-// Do not use $_FILES["file"]["type"] as it can be easily forged.
-$finfo = finfo_open(FILEINFO_MIME_TYPE);
+    // Get filename.
+    $filename = explode('.', $_FILES[$fieldname]['name']);
 
-// Get temp file name.
-$tmpName = $_FILES[$fieldname]["tmp_name"];
+    // Validate uploaded files.
+    // Do not use $_FILES["file"]["type"] as it can be easily forged.
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
-// Get mime type.
-$mimeType = finfo_file($finfo, $tmpName);
+    // Get temp file name.
+    $tmpName = $_FILES[$fieldname]['tmp_name'];
 
-// Get extension. You must include fileinfo PHP extension.
-$extension = end($filename);
+    // Get mime type.
+    $mimeType = finfo_file($finfo, $tmpName);
 
-// Allowed extensions.
-$allowedExts = array("gif", "jpeg", "jpg", "png", "svg", "blob");
+    // Get extension. You must include fileinfo PHP extension.
+    $extension = end($filename);
 
-// Allowed mime types.
-$allowedMimeTypes = array("image/gif", "image/jpeg", "image/jpg", "image/pjpeg", "image/x-png", "image/png", "image/svg+xml");
+    // Allowed extensions.
+    $allowedExts = array('gif', 'jpeg', 'jpg', 'png', 'svg', 'blob');
 
-// Validate image.
-if (!in_array(strtolower($mimeType), $allowedMimeTypes) || !in_array(strtolower($extension), $allowedExts)) {
-throw new \Exception("File does not meet the validation.");
-}
+    // Allowed mime types.
+    $allowedMimeTypes = array('image/gif', 'image/jpeg', 'image/jpg', 'image/pjpeg', 'image/x-png', 'image/png', 'image/svg+xml');
 
-// Generate new random name.
-$name = sha1(microtime()) . "." . $extension;
-//$fullNamePath = dirname(__FILE__) . $fileRoute . $name;
-$fullNamePath = $fileRoute . $name;
+    // Validate image.
+    if (!in_array(strtolower($mimeType), $allowedMimeTypes) || !in_array(strtolower($extension), $allowedExts)) {
+        throw new \Exception('File does not meet the validation.');
+    }
 
-// Check server protocol and load resources accordingly.
-if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off") {
-$protocol = "https://";
-} else {
-$protocol = "http://";
-}
+    // Generate new random name.
+    $name         = sha1(microtime()) . '.' . $extension;
+    $fullNamePath = $fullPath . $name;
 
-// Save file in the uploads folder.
-move_uploaded_file($tmpName, $fullNamePath);
+    // Check server protocol and load resources accordingly.
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+        $protocol = 'https://';
+    } else {
+        $protocol = 'http://';
+    }
 
-// Generate response.
-$response = new \StdClass;
-//$response->link = $protocol.$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"]).$fileRoute . $name;
-$response->link = "https://static.big2corporation.com/assets/images/froala/" . $name;
+    // Save file in the uploads folder.
+    move_uploaded_file($tmpName, $fullNamePath);
 
-// Send response.
-echo stripslashes(json_encode($response));
+    // Generate response.
+    $response = new \StdClass;
+    $response->link = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . $fileRoute . $name;
+
+    // Send response.
+    echo stripslashes(json_encode($response));
 
 } catch (Exception $e) {
-// Send error response.
-echo $e->getMessage();
-http_response_code(404);
+    // Send error response.
+    echo $e->getMessage();
+    http_response_code(404);
 }
 ?>

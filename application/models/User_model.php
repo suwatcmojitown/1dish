@@ -1,144 +1,122 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class User_model extends CI_Model
 {
-	public function __construct()
-	{
-		parent::__construct();
-        }
-        
-    public function fetch_user_login($username,$password)
-	{
-                //$password = md5($password);
-                //$password = '81dc9bdb52d04dc20036dbd8313ed055';
-                $data = array (
-                        'username' => $username,
-                        'password' => $password,
-                        'system_at' => 'backoffice',
-                );
-                $myJSON = json_encode($data); 
-
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => PATH_API.'backend/auth',
-                    CURLOPT_TIMEOUT => 20,
-                    CURLOPT_CUSTOMREQUEST => "POST",
-                    CURLOPT_POSTFIELDS => $myJSON,
-                    CURLOPT_HTTPHEADER => array(
-                    "Content-Type: application/json",
-                    "cache-control: no-cache"
-                    ),
-                    CURLOPT_VERBOSE => true,
-                    CURLOPT_RETURNTRANSFER => 1,
-                    CURLOPT_SSL_VERIFYPEER => false,
-                 ));                
-
-                $response = curl_exec($curl);
-                curl_close($curl);
-        
-                $result = json_decode($response); 
-                //console($result);
-                if($result->header->res_code=='200')
-                {
-                        $object = $result->body;
-                }
-                else $object = NULL;
-                return $object;  
-			   
-	}
-
-	public function updatePassword($data)
+    public function __construct()
     {
-			$myJSON = json_encode($data); 
-            $result = json_decode(callAPI('PUT',PATH_API.'changepassword',$myJSON)); 
-            if($result->header->res_code=='200')
-            {
-                    return true;
+        parent::__construct();
+    }
+
+    // สมาชิกทั่วไป
+    public function getMemberList()
+    {
+        $this->db->select('user.*,
+            COUNT(DISTINCT rc.comment_id) as comment_count');
+        $this->db->from('user');
+        $this->db->join('review_comment rc', 'user.user_id = rc.user_id', 'left');
+        $this->db->where('user.role', 'general');
+        $this->db->group_by('user.user_id');
+        $this->db->order_by('user.created_at', 'DESC');
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : null;
+    }
+
+    // ทีมงาน
+    public function getStaffList()
+    {
+        $this->db->from('user');
+        $this->db->where_in('role', array('admin', 'super_admin', 'influencer'));
+        $this->db->order_by('role', 'ASC');
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : null;
+    }
+
+    public function getUserByUsername($username)
+    {
+        $this->db->from('user');
+        $this->db->where('username', $username);
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->row() : null;
+    }
+
+    public function getUserDetail($user_id)
+    {
+        $this->db->from('user');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->row() : null;
+    }
+
+    public function getUserList()
+    {
+        $this->db->from('user');
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : null;
+    }
+
+    public function getBadgeList($user_id)
+    {
+        $this->db->select('badge.*');
+        $this->db->from('user_badge');
+        $this->db->join('badge', 'user_badge.badge_id = badge.badge_id', 'left');
+        $this->db->where('user_badge.user_id', $user_id);
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : null;
+    }
+
+    public function getCommentCount($user_id)
+    {
+        return $this->db->where('user_id', $user_id)->count_all_results('review_comment');
+    }
+
+    public function addUser($data)
+    {
+        $this->db->insert('user', $data);
+        return ($this->db->affected_rows() == 1) ? $this->db->insert_id() : false;
+    }
+
+    private function _sanitize($data)
+    {
+        $nullable = array('avatar', 'display_name', 'email');
+        foreach ($nullable as $field) {
+            if (isset($data->$field) && $data->$field === '') {
+                $data->$field = null;
             }
-            else return false;
+        }
+        return $data;
     }
-
-    public function addUser($data){
-    		$this->db->insert('user', $data);
-
-            return ($this->db->affected_rows() != 1) ? false : true;
-    }
-
-    public function getTotalUser($active_page,$limit)
-    {   
-    			$query = $this->db->query("
-                        SELECT count(user_id) as total
-                        FROM user
-                        ;");       
-                
-                $object = $query->result_array();  
-
-                $total = $object[0]['total'];
-                $offset = ($active_page-1)*$limit;
-                $total_page = ceil($total/$limit);
-
-                $object[0]['total_page'] = $total_page;
-                $object[0]['active_page'] = $active_page;
-                $object[0]['total_content'] = $total;
-
-				return $object[0];
-    }
-
-    public function getUserList($keysearch='',$active_page=1,$limit)
-    {   
-                /*
-                $this->db->select('*');
-                $this->db->from('content');
-                $this->db->where('category_id', $category_id);
-                */
-
-                $offset = ($active_page-1)*$limit;
-                
-                $this->db->select('*');
-                $this->db->from('user');
-				if($keysearch!='')
-                {
-                    $this->db->like('username', $keysearch);
-                }
-                $this->db->order_by('user_id', 'DESC');
-                $this->db->limit($limit, $offset);
-                
-
-
-                $query = $this->db->get();
-
-                if ( $query->num_rows() > 0 )
-                {
-                    $row = $query->result();
-                    return $row;
-                }
-                else return null;
-    }
-
-    
 
     public function updateUser($data)
     {
-        
-            $this->db->where('user_id', $data->user_id);
-            $this->db->update('user', $data);
-            return ($this->db->affected_rows() != 1) ? false : true;
-           
+        $data    = $this->_sanitize($data);
+        $user_id = $data->user_id;
+        unset($data->user_id);
+        $this->db->where('user_id', $user_id);
+        $this->db->update('user', $data);
+        return ($this->db->affected_rows() >= 0) ? true : false;
     }
 
-    public function getDetail($id)
+    public function updateStatus($user_id, $status)
     {
-            $this->db->select('*');
-            $this->db->from('user');
-            $this->db->where('user_id', $id);
-            $this->db->where('status', 1);
-            $query = $this->db->get();
-
-            if ( $query->num_rows() > 0 )
-            {
-                $row = $query->result();
-                return $row[0];
-            }
-            else return null;
+        $this->db->where('user_id', $user_id);
+        $this->db->update('user', array('status' => $status));
+        return ($this->db->affected_rows() >= 0) ? true : false;
     }
-    
+
+    public function updatePassword($user_id, $hash)
+    {
+        $this->db->where('user_id', $user_id);
+        $this->db->update('user', array('password_hash' => $hash));
+        return ($this->db->affected_rows() >= 0) ? true : false;
+    }
+
+    public function updatePoint($user_id, $point)
+    {
+        $this->db->set('point_total', 'point_total + ' . (int)$point, false);
+        $this->db->where('user_id', $user_id);
+        $this->db->update('user');
+        return ($this->db->affected_rows() > 0) ? true : false;
+    }
 }

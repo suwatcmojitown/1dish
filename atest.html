@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตัวแทนประกันสุขภาพ - ที่ปรึกษาประกันมืออาชีพ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #397D54;
+            --primary-dark: #2d6342;
+            --primary-light: #4a9d6b;
+            --secondary-color: #f4f7f5;
+            --accent-color: #ff9800;
+            --text-dark: #1a1a1a;
+            --text-gray: #666666;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Prompt', 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo svg {
+            width: 35px;
+            height: 35px;
+            fill: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Slide Banner Section */
+        .slide-banner {
+            margin-top: 70px;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        }
+
+        .slider-container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(57, 125, 84, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .slide-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-content p {
+            font-size: 24px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--white);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            color: var(--primary-color);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 3;
+        }
+
+        .slider-nav:hover {
+            background: var(--white);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .slider-prev {
+            left: 20px;
+        }
+
+        .slider-next {
+            right: 20px;
+        }
+
+        /* Support Section */
+        .support-section {
+            padding: 60px 0;
+            background: var(--secondary-color);
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .support-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .support-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .support-item:hover .support-icon {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+        }
+
+        .support-item h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .support-item p {
+            color: var(--text-gray);
+            font-size: 15px;
+        }
+
+        /* Insurance Plans Section */
+        .plans-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-gray);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .badge-health {
+            background: var(--primary-color);
+        }
+
+        .badge-savings {
+            background: #2196F3;
+        }
+
+        .badge-popular {
+            background: var(--accent-color);
+        }
+
+        .plan-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .plan-card h3 {
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .plan-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            color: var(--text-gray);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .view-all-plans {
+            text-align: center;
+        }
+
+        .btn-view-all {
+            display: inline-block;
+            padding: 12px 40px;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-view-all:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: var(--secondary-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .agent-profile {
+            text-align: center;
+        }
+
+        .agent-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(57, 125, 84, 0.3);
+        }
+
+        .agent-info h3 {
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .agent-id {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .agent-company {
+            color: var(--text-gray);
+            font-size: 18px;
+        }
+
+        .about-details h2 {
+            font-size: 36px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .about-details p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .agent-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Clients Section */
+        .clients-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .client-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .client-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        .client-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .client-plan {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .client-testimonial {
+            color: var(--text-gray);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 80px 0;
+            background: var(--secondary-color);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--white);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-date {
+            color: var(--primary-color);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .blog-excerpt {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .team-member:hover .member-avatar {
+            transform: scale(1.05);
+        }
+
+        .member-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        /* Floating Action Buttons */
+        .floating-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .fab {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+        }
+
+        .fab-line {
+            background: #06C755;
+        }
+
+        .fab-facebook {
+            background: #1877F2;
+        }
+
+        .fab-phone {
+            background: var(--primary-color);
+        }
+
+        .fab-tooltip {
+            position: absolute;
+            right: 70px;
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            font-size: 14px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .fab:hover .fab-tooltip {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .slide-content h1 {
+                font-size: 32px;
+            }
+
+            .slide-content p {
+                font-size: 18px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .agent-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .plans-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .fab {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                </svg>
+                InsureLife Pro
+            </div>
+            <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">หน้าแรก</a></li>
+                <li><a href="#plans">แผนประกัน</a></li>
+                <li><a href="#about">เกี่ยวกับเรา</a></li>
+                <li><a href="#clients">ลูกค้า</a></li>
+                <li><a href="#blog">บทความ</a></li>
+                <li><a href="#contact" class="nav-cta">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Slide Banner Section -->
+    <section class="slide-banner" id="home">
+        <div class="slider-container" id="slider">
+            <a href="#contact" class="slide" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 500%22><rect fill=%22%23397D54%22 width=%221200%22 height=%22500%22/></svg>');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>ประกันสุขภาพ ดูแลคุณทุกช่วงวัย</h1>
+                    <p>ที่ปรึกษาประกันมืออาชีพ พร้อมดูแลคุณตลอด 24 ชั่วโมง</p>
+                </div>
+            </a>
+            <a href="#plans" class="slide" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 500%22><rect fill=%22%234a9d6b%22 width=%221200%22 height=%22500%22/></svg>');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>โปรโมชั่นพิเศษ ลด 20%</h1>
+                    <p>สมัครวันนี้ รับส่วนลดทันที พร้อมผ่อน 0% นาน 10 เดือน</p>
+                </div>
+            </a>
+            <a href="#about" class="slide" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 500%22><rect fill=%22%232d6342%22 width=%221200%22 height=%22500%22/></svg>');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>ตัวแทนที่คุณวางใจได้</h1>
+                    <p>ประสบการณ์กว่า 10 ปี ดูแลลูกค้ามากกว่า 1,000 ราย</p>
+                </div>
+            </a>
+        </div>
+        <button class="slider-nav slider-prev" onclick="changeSlide(-1)">‹</button>
+        <button class="slider-nav slider-next" onclick="changeSlide(1)">›</button>
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="container">
+            <div class="support-grid">
+                <div class="support-item fade-in">
+                    <div class="support-icon">📞</div>
+                    <h3>ติดต่อได้ตลอด 24 ชม.</h3>
+                    <p>พร้อมให้คำปรึกษาและช่วยเหลือคุณทุกเวลา ไม่มีวันหยุด</p>
+                </div>
+                <div class="support-item fade-in">
+                    <div class="support-icon">💳</div>
+                    <h3>โปร่งใสในการชำระเงิน</h3>
+                    <p>ชำระผ่านแอพธนาคารโดยตรง มีหลักฐานการชำระชัดเจน</p>
+                </div>
+                <div class="support-item fade-in">
+                    <div class="support-icon">💬</div>
+                    <h3>ปรึกษาฟรี ไม่มีค่าใช้จ่าย</h3>
+                    <p>สอบถามข้อสงสัย เปรียบเทียบแผน ไม่มีค่าบริการใดๆ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insurance Plans Section -->
+    <section class="plans-section" id="plans">
+        <div class="container">
+            <div class="section-header">
+                <h2>แผนประกันยอดนิยม</h2>
+                <p>เลือกแผนที่เหมาะกับคุณ ทั้งประกันสุขภาพและแผนออมเงิน</p>
+            </div>
+            <div class="plans-grid">
+                <a href="#" class="plan-card fade-in">
+                    <div class="plan-badge">
+                        <span class="badge badge-health">สุขภาพ</span>
+                        <span class="badge badge-popular">ยอดนิยม</span>
+                    </div>
+                    <div class="plan-icon">🏥</div>
+                    <h3>ประกันสุขภาพ OPD/IPD</h3>
+                    <p>คุ้มครองค่ารักษาพยาบาลทั้งผู้ป่วยในและผู้ป่วยนอก</p>
+                    <ul class="plan-features">
+                        <li>ค่าห้องสูงสุด 10,000 บาท/วัน</li>
+                        <li>ค่าผ่าตัดสูงสุด 300,000 บาท</li>
+                        <li>คุ้มครอง OPD 30,000 บาท/ปี</li>
+                    </ul>
+                </a>
+                <a href="#" class="plan-card fade-in">
+                    <div class="plan-badge">
+                        <span class="badge badge-health">สุขภาพ</span>
+                    </div>
+                    <div class="plan-icon">😷</div>
+                    <h3>ประกันโรคร้ายแรง</h3>
+                    <p>คุ้มครองโรคร้ายแรง 35 โรค จ่ายเงินก้อน</p>
+                    <ul class="plan-features">
+                        <li>คุ้มครองมะเร็ง หัวใจ หลอดเลือดสมอง</li>
+                        <li>จ่ายเงินก้อน 1-5 ล้านบาท</li>
+                        <li>ไม่ต้องใช้ใบเสร็จ</li>
+                    </ul>
+                </a>
+                <a href="#" class="plan-card fade-in">
+                    <div class="plan-badge">
+                        <span class="badge badge-savings">ออมเงิน</span>
+                        <span class="badge badge-popular">ยอดนิยม</span>
+                    </div>
+                    <div class="plan-icon">💰</div>
+                    <h3>ประกันออมทรัพย์ 10/5</h3>
+                    <p>ออมเงิน 10 ปี รับเงินคืน 5 ปี พร้อมความคุ้มครอง</p>
+                    <ul class="plan-features">
+                        <li>รับเงินคืนทุก 2 ปี</li>
+                        <li>ผลตอบแทนรับประกัน 3.5%</li>
+                        <li>ลดหย่อนภาษีได้ 100,000</li>
+                    </ul>
+                </a>
+                <a href="#" class="plan-card fade-in">
+                    <div class="plan-badge">
+                        <span class="badge badge-savings">ออมเงิน</span>
+                    </div>
+                    <div class="plan-icon">🎓</div>
+                    <h3>ประกันการศึกษาบุตร</h3>
+                    <p>วางแผนการศึกษาให้ลูก รับเงินตอนเข้ามหาวิทยาลัย</p>
+                    <ul class="plan-features">
+                        <li>รับเงินก้อนตอนอายุ 18 ปี</li>
+                        <li>คุ้มครองผู้ชำระเบี้ย</li>
+                        <li>เบี้ยเริ่มต้น 1,000 บาท/เดือน</li>
+                    </ul>
+                </a>
+                <a href="#" class="plan-card fade-in">
+                    <div class="plan-badge">
+                        <span class="badge badge-health">สุขภาพ</span>
+                    </div>
+                    <div class="plan-icon">🦷</div>
+                    <h3>ประกันทันตกรรม</h3>
+                    <p>ดูแลสุขภาพฟัน อุดฟัน ถอนฟัน ขูดหินปูน</p>
+                    <ul class="plan-features">
+                        <li>อุดฟัน ถอนฟัน ไม่จำกัดครั้ง</li>
+                        <li>ขูดหินปูน 2 ครั้ง/ปี</li>
+                        <li>วงเงิน 30,000 บาท/ปี</li>
+                    </ul>
+                </a>
+                <a href="#" class="plan-card fade-in">
+                    <div class="plan-badge">
+                        <span class="badge badge-savings">ออมเงิน</span>
+                    </div>
+                    <div class="plan-icon">🏖️</div>
+                    <h3>ประกันบำนาญ</h3>
+                    <p>เตรียมพร้อมเกษียณ รับเงินรายเดือนตลอดชีวิต</p>
+                    <ul class="plan-features">
+                        <li>รับบำนาญตั้งแต่อายุ 55 ปี</li>
+                        <li>รับตลอดชีวิต</li>
+                        <li>ลดหย่อนภาษีได้สูงสุด 500,000</li>
+                    </ul>
+                </a>
+            </div>
+            <div class="view-all-plans">
+                <a href="#" class="btn-view-all">ดูแผนประกันทั้งหมด</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="agent-profile fade-in">
+                    <div class="agent-image">👤</div>
+                    <div class="agent-info">
+                        <h3>คุณสมชาย ใจดี</h3>
+                        <span class="agent-id">รหัสตัวแทน: AG12345678</span>
+                        <p class="agent-company">บริษัท เมืองไทยประกันชีวิต จำกัด (มหาชน)</p>
+                    </div>
+                </div>
+                <div class="about-details fade-in">
+                    <h2>ตัวแทนประกันมืออาชีพ</h2>
+                    <p>ด้วยประสบการณ์กว่า 10 ปีในวงการประกัน ผมพร้อมให้คำปรึกษาและดูแลคุณอย่างใกล้ชิด เพื่อให้คุณได้รับความคุ้มครองที่เหมาะสมที่สุด ในราคาที่คุ้มค่าที่สุด</p>
+                    <p>ผมเชื่อว่าประกันไม่ใช่แค่การขาย แต่เป็นการสร้างความมั่นคงให้กับชีวิต ผมจึงพร้อมที่จะเป็นที่ปรึกษาของคุณในทุกเรื่องที่เกี่ยวกับประกัน</p>
+                    <div class="agent-stats">
+                        <div class="stat-box">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">แผนประกันที่ดูแล</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">1,200+</span>
+                            <span class="stat-label">ลูกค้าที่ไว้วางใจ</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">500M+</span>
+                            <span class="stat-label">วงเงินคุ้มครองรวม</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients-section" id="clients">
+        <div class="container">
+            <div class="section-header">
+                <h2>ลูกค้าของเรา</h2>
+                <p>ความไว้วางใจจากลูกค้าคือความภาคภูมิใจของเรา</p>
+            </div>
+            <div class="clients-grid">
+                <div class="client-card fade-in">
+                    <div class="client-avatar">วร</div>
+                    <h3 class="client-name">คุณวรรณา สุขสันต์</h3>
+                    <p class="client-plan">แผนประกันสุขภาพ IPD</p>
+                    <p class="client-testimonial">"คุณสมชายดูแลดีมากค่ะ ตอนเคลมก็ช่วยจัดการให้หมด ได้เงินเร็วมาก ประทับใจมากๆ"</p>
+                </div>
+                <div class="client-card fade-in">
+                    <div class="client-avatar">ปร</div>
+                    <h3 class="client-name">คุณประเสริฐ มั่งมี</h3>
+                    <p class="client-plan">แผนประกันออมทรัพย์</p>
+                    <p class="client-testimonial">"วางแผนการเงินให้ผมได้ดีมาก ทั้งความคุ้มครองและการออม ได้ลดหย่อนภาษีด้วย คุ้มมากครับ"</p>
+                </div>
+                <div class="client-card fade-in">
+                    <div class="client-avatar">สุ</div>
+                    <h3 class="client-name">คุณสุภาพร ใจงาม</h3>
+                    <p class="client-plan">แผนประกันโรคร้ายแรง</p>
+                    <p class="client-testimonial">"ให้คำแนะนำดีมาก อธิบายละเอียด เข้าใจง่าย ไม่ขายแรง เลือกแผนที่เหมาะกับเราจริงๆ"</p>
+                </div>
+                <div class="client-card fade-in">
+                    <div class="client-avatar">อน</div>
+                    <h3 class="client-name">คุณอนันต์ รักดี</h3>
+                    <p class="client-plan">แผนประกันการศึกษาบุตร</p>
+                    <p class="client-testimonial">"ช่วยวางแผนให้ลูกเรียนต่อได้สบายใจ เบี้ยไม่แพง แถมมีความคุ้มครองให้ผู้ปกครองด้วย"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>บทความน่าสนใจ</h2>
+                <p>อัพเดทความรู้เรื่องประกันและการวางแผนการเงิน</p>
+            </div>
+            <div class="blog-grid">
+                <a href="#" class="blog-card fade-in">
+                    <div class="blog-image">📋</div>
+                    <div class="blog-content">
+                        <p class="blog-date">15 มกราคม 2024</p>
+                        <h3 class="blog-title">5 เหตุผลที่คุณควรมีประกันสุขภาพ</h3>
+                        <p class="blog-excerpt">ค่ารักษาพยาบาลที่แพงขึ้นทุกปี ทำให้การมีประกันสุขภาพเป็นเรื่องจำเป็น มาดูกันว่าทำไม...</p>
+                    </div>
+                </a>
+                <a href="#" class="blog-card fade-in">
+                    <div class="blog-image">💰</div>
+                    <div class="blog-content">
+                        <p class="blog-date">10 มกราคม 2024</p>
+                        <h3 class="blog-title">วิธีเลือกแผนประกันให้เหมาะกับวัย</h3>
+                        <p class="blog-excerpt">แต่ละช่วงวัยมีความเสี่ยงและความต้องการที่แตกต่างกัน มาดูว่าควรเลือกแผนไหน...</p>
+                    </div>
+                </a>
+                <a href="#" class="blog-card fade-in">
+                    <div class="blog-image">🏥</div>
+                    <div class="blog-content">
+                        <p class="blog-date">5 มกราคม 2024</p>
+                        <h3 class="blog-title">รู้จักประกัน OPD คืออะไร คุ้มไหม</h3>
+                        <p class="blog-excerpt">ประกัน OPD คุ้มครองค่ารักษาแบบผู้ป่วยนอก มาดูว่าเหมาะกับใครบ้าง...</p>
+                    </div>
+                </a>
+                <a href="#" class="blog-card fade-in">
+                    <div class="blog-image">🎯</div>
+                    <div class="blog-content">
+                        <p class="blog-date">1 มกราคม 2024</p>
+                        <h3 class="blog-title">ประกันชีวิตลดหย่อนภาษีได้เท่าไหร่</h3>
+                        <p class="blog-excerpt">การซื้อประกันชีวิตนอกจากได้ความคุ้มครองแล้ว ยังช่วยลดหย่อนภาษีได้อีกด้วย...</p>
+                    </div>
+                </a>
+                <a href="#" class="blog-card fade-in">
+                    <div class="blog-image">📊</div>
+                    <div class="blog-content">
+                        <p class="blog-date">28 ธันวาคม 2023</p>
+                        <h3 class="blog-title">เปรียบเทียบประกันโรคร้ายแรง 2024</h3>
+                        <p class="blog-excerpt">รวมเปรียบเทียบแผนประกันโรคร้ายแรงจากทุกบริษัท พร้อมข้อดีข้อเสีย...</p>
+                    </div>
+                </a>
+                <a href="#" class="blog-card fade-in">
+                    <div class="blog-image">✅</div>
+                    <div class="blog-content">
+                        <p class="blog-date">25 ธันวาคม 2023</p>
+                        <h3 class="blog-title">ขั้นตอนการเคลมประกันให้ได้เงินเร็ว</h3>
+                        <p class="blog-excerpt">เคลมประกันยังไงให้ได้เงินเร็ว เอกสารอะไรบ้างที่ต้องเตรียม มาดูกัน...</p>
+                    </div>
+                </a>
+            </div>
+            <div class="view-all-plans">
+                <a href="#" class="btn-view-all">อ่านบทความทั้งหมด</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>ทีมงานของเรา</h2>
+                <p>ทีมที่ปรึกษาประกันมืออาชีพ พร้อมดูแลคุณ</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member fade-in">
+                    <div class="member-avatar">👨</div>
+                    <h3 class="member-name">คุณวิชัย แก้วใส</h3>
+                    <p class="member-role">ที่ปรึกษาประกันชีวิต</p>
+                </div>
+                <div class="team-member fade-in">
+                    <div class="member-avatar">👩</div>
+                    <h3 class="member-name">คุณมาลี รุ่งเรือง</h3>
+                    <p class="member-role">ที่ปรึกษาประกันสุขภาพ</p>
+                </div>
+                <div class="team-member fade-in">
+                    <div class="member-avatar">👨</div>
+                    <h3 class="member-name">คุณสมพร ดีงาม</h3>
+                    <p class="member-role">ที่ปรึกษาประกันออมทรัพย์</p>
+                </div>
+                <div class="team-member fade-in">
+                    <div class="member-avatar">👩</div>
+                    <h3 class="member-name">คุณกานดา สว่างใจ</h3>
+                    <p class="member-role">ที่ปรึกษาประกันเด็ก</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>เกี่ยวกับเรา</h4>
+                    <p>ตัวแทนประกันชีวิตและสุขภาพ มืออาชีพ ให้คำปรึกษาฟรี ดูแลคุณอย่างใกล้ชิด</p>
+                </div>
+                <div class="footer-section">
+                    <h4>บริการของเรา</h4>
+                    <ul>
+                        <li><a href="#">ประกันชีวิต</a></li>
+                        <li><a href="#">ประกันสุขภาพ</a></li>
+                        <li><a href="#">ประกันออมทรัพย์</a></li>
+                        <li><a href="#">ประกันโรคร้ายแรง</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>ข้อมูลติดต่อ</h4>
+                    <p>📞 โทร: 081-234-5678</p>
+                    <p>📧 อีเมล: somchai@insurance.co.th</p>
+                    <p>📍 กรุงเทพมหานคร</p>
+                </div>
+                <div class="footer-section">
+                    <h4>ติดตามเรา</h4>
+                    <p>Facebook: Insurance Pro TH</p>
+                    <p>Line ID: @insurancepro</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 InsureLife Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions">
+        <a href="https://line.me/ti/p/@insurancepro" class="fab fab-line">
+            <span class="fab-tooltip">แชทผ่าน LINE</span>
+            <span>L</span>
+        </a>
+        <a href="https://m.me/insurancepro" class="fab fab-facebook">
+            <span class="fab-tooltip">แชทผ่าน Facebook</span>
+            <span>f</span>
+        </a>
+        <a href="tel:0812345678" class="fab fab-phone">
+            <span class="fab-tooltip">โทรเลย</span>
+            <span>📞</span>
+        </a>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Slider functionality
+        let slideIndex = 1;
+        let slideInterval;
+
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+            resetInterval();
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+            resetInterval();
+        }
+
+        function showSlide(n) {
+            const slider = document.getElementById('slider');
+            const dots = document.getElementsByClassName('dot');
+            const slides = slider.children.length;
+
+            if (n > slides) slideIndex = 1;
+            if (n < 1) slideIndex = slides;
+
+            slider.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
+
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        function autoSlide() {
+            slideIndex++;
+            showSlide(slideIndex);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(autoSlide, 5000);
+        }
+
+        // Start auto slide
+        resetInterval();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate numbers
+        function animateNumber(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current).toLocaleString() + '+';
+            }, 30);
+        }
+
+        // Animate stats when visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = entry.target.querySelectorAll('.stat-number');
+                    numbers.forEach(num => {
+                        const target = parseInt(num.textContent.replace(/[^0-9]/g, ''));
+                        animateNumber(num, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const agentStats = document.querySelector('.agent-stats');
+        if (agentStats) {
+            statsObserver.observe(agentStats);
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>

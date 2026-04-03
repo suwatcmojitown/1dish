@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #005e97;
+  --color-primary-container: #0077be;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #f7f9ff;
+  --color-on-primary-fixed-variant: #004a79;
+  --color-primary-fixed: #cfe5ff;
+  --color-primary-fixed-dim: #9acbff;
+  --color-on-primary-fixed: #001d34;
+  --color-secondary: #9b4500;
+  --color-secondary-container: #fc8a40;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #672c00;
+  --color-tertiary: #00665a;
+  --color-tertiary-container: #008173;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #e4fff8;
+  --color-surface: #f8f9fa;
+  --color-surface-bright: #f8f9fa;
+  --color-surface-dim: #d9dadb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f4f5;
+  --color-surface-container: #edeeef;
+  --color-surface-container-high: #e7e8e9;
+  --color-surface-container-highest: #e1e3e4;
+  --color-surface-variant: #e1e3e4;
+  --color-on-surface: #191c1d;
+  --color-on-surface-variant: #404751;
+  --color-on-background: #191c1d;
+  --color-background: #f8f9fa;
+  --color-outline: #707882;
+  --color-outline-variant: #c0c7d2;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+
+  --font-headline: "Plus Jakarta Sans", "Kanit", sans-serif;
+  --font-body: "Be Vietnam Pro", "Kanit", sans-serif;
+  --font-thai: "Kanit", sans-serif;
+
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+}

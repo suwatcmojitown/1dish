@@ -1,159 +1,49 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Shelf_model extends CI_Model { 
-
-
-    public function add($data)
+class Shelf_model extends CI_Model
+{
+    public function __construct()
     {
-            $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('POST',PATH_API.'backend/shelf-product',$myJSON));  
-            if($result->header->res_code=='200')
-            {
-                    return true;
-            }
-            else return false;
-           
+        parent::__construct();
     }
 
-    public function getSelectContentList($shelf_id)
+    public function getShelf($type = 'hero')
     {
-                $result = json_decode(callAPI('GET',PATH_API.'backend/shelf-product-item?shelf_product_id='.$shelf_id,'')); 
-                //echo PATH_API.'backend/product'.$path.'';
-                //console($result);
-                if($result->header->res_code=='200')
-                {
-                        $object = $result;
-                }
-                else $object = NULL;
-                
-                return $object;
+        $this->db->select('shelf.shelf_id, shelf.place_id, shelf.shelf_type, shelf.sort_order,
+            shelf.is_sponsored,
+            place.name as place_name, place.shop_image,
+            category.name as category_name,
+            MAX(review.cover_image) as cover_image,
+            MAX(review.status) as review_status');
+        $this->db->from('shelf');
+        $this->db->join('place',    'shelf.place_id = place.place_id', 'left');
+        $this->db->join('category', 'place.category_id = category.category_id', 'left');
+        $this->db->join('review',   'place.place_id = review.place_id', 'left');
+        $this->db->where('shelf.shelf_type', $type);
+        $this->db->group_by('shelf.shelf_id, shelf.place_id, shelf.shelf_type,
+            shelf.sort_order, shelf.is_sponsored, place.name, place.shop_image, category.name');
+        $this->db->order_by('shelf.sort_order', 'ASC');
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : array();
     }
 
-    public function getContentList($active_page=1,$limit)
+    public function saveShelf($place_ids, $type = 'hero', $sponsored_ids = array())
     {
-                $temp = array();
-                $path = '';
+        $this->db->where('shelf_type', $type)->delete('shelf');
 
-                if($active_page!='') $temp['page'] = $active_page;
-                if($limit!='') $temp['limit'] = $limit;
+        if (empty($place_ids)) return true;
 
-                $i = 0;
-                foreach($temp as $key => $value)
-                {
-                        if($i==0)
-                        {
-                                $path = '?'.$key.'='.$value;
-                        }
-                        else $path = $path.'&'.$key.'='.$value;
-                        $i++;
-                }
-                
-                $result = json_decode(callAPI('GET',PATH_API.'backend/shelf-product'.$path.'','')); 
-                //echo PATH_API.'backend/product'.$path.'';
-                //console($result);
-                if($result->header->res_code=='200')
-                {
-                        $object = $result;
-                }
-                else $object = NULL;
-                
-                return $object;
+        $data = array();
+        foreach ($place_ids as $i => $place_id) {
+            $data[] = array(
+                'place_id'     => (int)$place_id,
+                'shelf_type'   => $type,
+                'sort_order'   => $i,
+                'is_sponsored' => in_array((int)$place_id, array_map('intval', $sponsored_ids)) ? 1 : 0,
+            );
+        }
+        $this->db->insert_batch('shelf', $data);
+        return true;
     }
-
-    
-
-    public function delete($data)
-    {
-            $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('DEL',PATH_API.'backend/shelf-product-item',$myJSON));  
-            //console($result);
-            if($result->header->res_code=='200')
-            {
-                    return true;
-            }
-            else return false;
-           
-    }
-
-    public function getContentDetail($id)
-    {
-           $result = json_decode(callAPI('GET',PATH_API.'backend/shelf-product?id='.$id.'',''));  
-           
-           if($result->header->res_code=='200')
-           {
-                    $object = $result->body[0];
-           }
-           else $object = NULL;
-           
-           return $object;
-    }
-
-    public function update($data)
-    {
-            $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('PUT',PATH_API.'backend/product',$myJSON)); 
-            //console($result);
-
-            if($result->header->res_code=='200')
-            {
-                    return true;
-            }
-            else return false;
-    }
-
-   
-
-    public function deleteShelf($data)
-    {
-            $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('DEL',PATH_API.'backend/shelf-product',$myJSON));  
-            //console($result);
-            if($result->header->res_code=='200')
-            {
-                    return true;
-            }
-            else return false;
-           
-    }
-
-    public function addProductItem($data)
-    {
-            $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('POST',PATH_API.'backend/shelf-product-item',$myJSON));  
-            if($result->header->res_code=='200')
-            {
-                    return true;
-            }
-            else return false;
-           
-    }
-
-
-    public function updateOrder($data)
-    {
-            $myJSON = json_encode($data); 
-            $result = json_decode(callAPI('PUT',PATH_API.'backend/shelf-product-item/sorting',$myJSON)); 
-            //console($result);
-
-            if($result->header->res_code=='200')
-            {
-                    return true;
-            }
-            else return false;
-    }
-
-    
-
-
-
-
-
-
-
-
-
-    
-
-    
-        
 }

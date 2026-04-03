@@ -1,253 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php $current = $this->uri->segment(1) ?: 'home'; ?>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <meta name="robots" content="" />
-    <meta name="description" content="Davur - Restaurant Bootstrap Admin Dashboard + FrontEnd" />
-    <meta property="og:title" content="Davur - Restaurant Bootstrap Admin Dashboard + FrontEnd" />
-    <meta property="og:description" content="Davur - Restaurant Bootstrap Admin Dashboard + FrontEnd" />
-    <meta property="og:image" content="https://davur.dexignzone.com/dashboard/social-image.png" />
-    <meta name="format-detection" content="telephone=no">
-    <title>CMS - BIG 2 Corporation</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <link href="<?php echo base_url()?>app-assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="<?php echo base_url()?>app-assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url()?>app-assets/vendor/select2/css/select2.min.css">
-    <link href="<?php echo base_url()?>app-assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="<?php echo base_url()?>app-assets/css/style.css" rel="stylesheet">
-    <!--<link href="<?php echo base_url()?>app-assets/css/style3.css" rel="stylesheet">-->
-    <link href="<?php echo base_url()?>app-assets/css/custom.css" rel="stylesheet">
-    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-    <!-- Nestable -->
-    <link href="<?php echo base_url()?>app-assets/vendor/nestable2/css/jquery.nestable.min.css" rel="stylesheet">
-
-
-    <!-- Form step -->
-    <link href="<?php echo base_url()?>app-assets/vendor/jquery-steps/css/jquery.steps.css" rel="stylesheet">
-    <!-- Form step -->
-    <link href="<?php echo base_url()?>app-assets/vendor/jquery-smartwizard/dist/css/smart_wizard.min.css" rel="stylesheet">
-
-    <link href='<?php echo base_url('froala_editor/css/froala_editor.pkgd.min.css')?>' rel='stylesheet' type='text/css' />
-
-    <script type='text/javascript' src='<?php echo base_url('froala_editor')?>/js/froala_editor.pkgd.min.js'></script>
-    <script type="text/javascript" src="<?php echo base_url('froala_editor')?>/js/plugins/image.min.js"></script>
-
-    <script
-  src="https://code.jquery.com/jquery-3.6.1.js"
-  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-  crossorigin="anonymous"></script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-</head>
-<body>
-
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
+<!-- TOP BANNER AD -->
+<div class="w-full bg-surface-container-low flex justify-center py-2 border-b border-outline-variant/20">
+  <div class="w-full max-w-[1280px] h-[80px] rounded-xl overflow-hidden relative cursor-pointer mx-4">
+    <img alt="TAT Rayong" class="w-full h-full object-cover"
+         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXG4g9ZCWbfRTzsGfXUl8M4tY6tnRxL6zVClYc0BcDpdWf4un6CVhdHOtITkDAfmsN61BRJsC6FUhooj0IAD9uVtVq25CNzCBGEhbtmsvFc7BwQM3cW9WnpYgw9XJsiCu5w1zIFwKmiWOZNA8EKmuuvYfG0qelOXW1jsFhw1SoAI2XTIxXiasdpbxXmKAYRVtxOIPF8haGBAAdxAKyQFD1kMi5YaMPb8lA0MC1R_asjSZay08KmG0d1qXx_U6ths4PmEfGzvAI97M4"/>
+    <div class="absolute inset-0 bg-black/40 flex items-center justify-between px-8 text-white">
+      <div>
+        <span class="text-[10px] uppercase tracking-widest font-bold bg-white/20 px-2 py-0.5 rounded mb-1 inline-block">สนับสนุนโดย ททท.</span>
+        <h3 class="text-xl font-thai font-extrabold">เทศกาลผลไม้เมืองระยอง</h3>
+      </div>
+      <p class="text-sm font-medium hidden md:block text-right">ร่วมงานเทศกาลทุเรียนและมังคุด ประจำปี 2567<br/>สัมผัสรสชาติอันเป็นเอกลักษณ์</p>
     </div>
-    <!--*******************
-        Preloader end
-    ********************-->
+  </div>
+</div>
 
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
+<!-- NAVBAR -->
+<nav class="sticky top-0 w-full z-50 bg-slate-50/80 backdrop-blur-xl border-b border-outline-variant/10">
+  <div class="w-full max-w-[1280px] mx-auto flex justify-between items-center px-8 py-3">
+    <div class="flex items-center gap-10">
+      <a href="<?php echo base_url(); ?>" class="text-xl font-black text-blue-900 italic font-thai">Rayong Curator</a>
+      <div class="hidden md:flex gap-6">
+        <a href="<?php echo base_url(); ?>"
+           class="<?php echo $current == 'home' || $current == '' ? 'text-blue-700 border-b-2 border-blue-700 pb-1' : 'text-slate-600 hover:text-blue-600'; ?> text-sm font-medium transition-colors">
+          สำรวจ
+        </a>
+        <a href="#"
+           class="text-slate-600 hover:text-blue-600 transition-colors text-sm font-medium">รสชาติ</a>
+        <a href="#"
+           class="text-slate-600 hover:text-blue-600 transition-colors text-sm font-medium">บันทึกการเดินทาง</a>
+        <a href="#"
+           class="text-slate-600 hover:text-blue-600 transition-colors text-sm font-medium">ท่องเที่ยวสีเขียว</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <form id="search-form" action="<?php echo base_url('explore'); ?>" method="GET"
+            class="hidden lg:flex items-center rounded-xl border border-outline-variant/30 gap-2 overflow-hidden"
+            style="background:rgba(248,249,250,0.9);backdrop-filter:blur(8px);transition:width .35s cubic-bezier(.4,0,.2,1);width:160px"
+            onsubmit="return validateSearch(this)">
+        <input id="search-input" name="q"
+               class="bg-transparent border-none focus:ring-0 text-sm font-thai flex-1"
+               style="padding:7px 0 7px 14px;min-width:0;outline:none;transition:opacity .3s"
+               placeholder="ค้นหาร้าน เมนู..."
+               value="<?php echo htmlspecialchars($this->input->get('q') ?: ''); ?>"
+               type="text"
+               onfocus="expandSearch()" onblur="collapseSearch(this)"/>
+        <button type="submit"
+                style="flex-shrink:0;width:34px;height:34px;margin:2px;border-radius:9px;background:#005e97;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s"
+                onmouseover="this.style.background='#003d66'" onmouseout="this.style.background='#005e97'">
+          <span class="material-symbols-outlined" style="font-size:16px;color:#fff">search</span>
+        </button>
+      </form>
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-        <div class="nav-header">
-            <a href="index.html" class="brand-logo">
-                <img src="<?php echo base_url()?>assets/images/big2-logo.png" alt="" style="width: 195px!important;padding-top: 7px;margin-top: 21px;">
-                
-            </a>
+      <style>
+        #search-form.expanded { width: 280px !important; }
+        #search-form.expanded #search-input { opacity: 1; }
+      </style>
 
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Header start
-        ***********************************-->
-        <div class="header">
-            <div class="header-content">
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                            <!--
-                            <div class="input-group search-area">
-                                <input type="text" class="form-control" placeholder="Search here...">
-                                <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
-                            </div>
-                            -->
-                        </div>
-
-                        <?php 
-                        //console($_SESSION['username']);
-                        ?>
-
-                        <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
-                                    <div class="header-info">
-                                        <span>Hello, <strong><?php echo @$_SESSION['username'];?></strong></span>
-                                    </div>
-                                    <img src="<?php echo base_url()?>app-assets/images/profile/pic1.jpg" width="20" alt=""/>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="<?php echo base_url('logout')?>" class="dropdown-item ai-icon">
-                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                        <span class="ms-2">Logout </span>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
-        <div class="deznav">
-            <div class="deznav-scroll">
-                <ul class="metismenu" id="menu">
-
-                    <li style="margin-bottom: :7px;">
-                            <span class="nav-text text-custom" style="padding-left: 14px;font-size: 18px;font-weight: 500;">Menu</span>
-                    </li>
-                    <?php 
-                    if(($_SESSION['group_admin']!='content')){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('product');?>" >
-                            <i class="fas fa-car-alt text-custom"></i>
-                            <span class="nav-text">Product</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <?php 
-                    if($_SESSION['group_admin']!='product'){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('highlight');?>" >
-                            <i class="fas fa-star text-custom"></i>
-                            <span class="nav-text">Top Banner</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <?php 
-                    if(($_SESSION['group_admin']!='content')){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('bubble');?>" >
-                            <i class="fas fa-pencil-alt text-custom"></i>
-                            <span class="nav-text">Bubble</span>
-                        </a>
-                    </li>
-                    <li><a class="ai-icon" href="<?php echo base_url('shelf');?>" >
-                            <i class="fas fa-paper-plane text-custom"></i>
-                            <span class="nav-text">Shelf</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <?php 
-                    if($_SESSION['group_admin']!='product'){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('content/list');?>" >
-                            <i class="fa fa-id-badge text-custom"></i>
-                            <span class="nav-text">Content</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <li style="margin:7px 0;">
-                            <span class="nav-text text-custom" style="padding-left: 14px;font-size: 18px;font-weight: 500;">Setting</span>
-                    </li>
-                    <?php 
-                    if(($_SESSION['group_admin']!='content')){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('category');?>" >
-                            <i class="lni lni-cart-full text-custom"></i>
-                            <span class="nav-text">Category</span>
-                        </a>
-                    </li>
-
-                    <li><a class="ai-icon" href="<?php echo base_url('subcategory');?>" >
-                            <i class="lni lni-cart text-custom"></i>
-                            <span class="nav-text">SubCategory</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <?php 
-                    if($_SESSION['group_admin']=='super_admin'){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('admin');?>" >
-                            <i class="lni lni-android-original text-custom" ></i>
-                            <span class="nav-text">Admin</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <?php 
-                    if($_SESSION['group_admin']=='super_admin'){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('carbrand');?>" >
-                            <i class="lni lni-car  text-custom"></i>
-                            <span class="nav-text">Car Brand</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                    <?php 
-                    if($_SESSION['group_admin']=='super_admin'){
-                    ?>
-                    <li><a class="ai-icon" href="<?php echo base_url('carmodel');?>" >
-                            <i class="lni lni-car-alt  text-custom"></i>
-                            <span class="nav-text">Car Model</span>
-                        </a>
-                    </li>
-                    <?php 
-                    }
-                    ?>
-                </ul>
-            </div>
-        </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-        
-        
+      <script>
+        function expandSearch() {
+          document.getElementById('search-form').classList.add('expanded');
+        }
+        function collapseSearch(input) {
+          if (!input.value) {
+            document.getElementById('search-form').classList.remove('expanded');
+          }
+        }
+        function validateSearch(form) {
+          var q = form.querySelector('input[name="q"]').value.trim();
+          if (!q) { expandSearch(); form.querySelector('input').focus(); return false; }
+          return true;
+        }
+        // ถ้ามีค่า q อยู่แล้ว ให้ขยายไว้เลย
+        window.addEventListener('DOMContentLoaded', function() {
+          var input = document.getElementById('search-input');
+          if (input && input.value) expandSearch();
+        });
+      </script>
+    </div>
+  </div>
+</nav>

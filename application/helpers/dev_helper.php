@@ -47,6 +47,7 @@ function check_empty($data)
 }
 
 // API
+/*
 function upload_pic($temp_file,$name='thumbnail')
 {
    $CI = get_instance();
@@ -99,12 +100,11 @@ function upload_pic($temp_file,$name='thumbnail')
       echo "Error, Can not upload file.";
    }	
 }
-
+*/
 
 /*
-function upload_pic($temp_file,$file_name,$temp_folder)
+function upload_pic($temp_file,$file_name)
 {
-        date_default_timezone_set('Asia/Bangkok');
                 $date = date('Y-m-d');
 
                 $date = str_replace( ':', '', $date);
@@ -146,6 +146,43 @@ function upload_pic($temp_file,$file_name,$temp_folder)
         return $thumbnail;  
 }
 */
+
+function upload_pic($temp_file, $key = 'image', $temp_folder = 'uploads')
+{
+    $CI =& get_instance();
+
+    if (!isset($temp_file[$key]) || $temp_file[$key]['error'] !== 0) {
+        return null;
+    }
+
+    // สร้าง folder ตามวันที่
+    date_default_timezone_set('Asia/Bangkok');
+    $date        = date('Y-m-d');
+    $folder_path = './' . $temp_folder . '/' . $date;
+
+    if (!is_dir($folder_path)) {
+        mkdir($folder_path, 0777, TRUE);
+    }
+
+    $config['upload_path']   = $folder_path . '/';
+    $config['allowed_types'] = '*';
+    $config['max_size']      = 10240;
+    $config['detect_mime']   = FALSE;
+
+    if (!isset($CI->upload) || !is_object($CI->upload)) {
+        $CI->load->library('upload', $config);
+    } else {
+        $CI->upload->initialize($config);
+    }
+
+    if (!$CI->upload->do_upload($key)) {
+        return null;
+    }
+
+    $data = $CI->upload->data();
+    return $temp_folder . '/' . $date . '/' . $data['file_name'];
+}
+
 
 function upload_pic_multi($temp_file,$name)
 {
@@ -785,16 +822,23 @@ function import_personnel($temp_file)
       $CI->load->view('notification/reject',$data);
     }
 
-    function generateRandomString($length = 10)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
+    function format_datetime($datetime)
+{
+    if (empty($datetime)) return '-';
+    return date('d/m/Y H:i:s', strtotime($datetime));
+}
+
+
+function generateRandomString($length = 10)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
+    return $randomString;
+}
 
 
 
